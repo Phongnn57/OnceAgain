@@ -2,3 +2,6 @@
 platform :ios, '8.0'
 
 pod 'AFNetworking'
+pod 'SWRevealViewController'
+pod 'MBProgressHUD'
+pod 'SDWebImage'

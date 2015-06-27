@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="178" id="KGk-i7-Jjw" customClass="PriceCell" customModule="_Again" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="178"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8e-Nu-nfh">
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="177"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WHAT WOULD YOU LIKE TO DO?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szd-5M-fCb">
+                                <rect key="frame" x="8" y="16" width="264" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="U4x-fo-1GO"/>
+                                    <constraint firstAttribute="width" constant="264" id="dV5-pV-Ouf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-consign" translatesAutoresizingMaskIntoConstraints="NO" id="7kr-At-sXR" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="53" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7kr-At-sXR" secondAttribute="height" multiplier="1:1" id="atq-Qw-V9f"/>
+                                </constraints>
+                            </imageView>
+                            <imageView tag="11" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-donate" translatesAutoresizingMaskIntoConstraints="NO" id="uXb-ow-G6I" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
+                                <rect key="frame" x="120" y="53" width="119" height="120"/>
+                            </imageView>
+                            <imageView tag="12" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-for-sale" translatesAutoresizingMaskIntoConstraints="NO" id="qGU-qC-ypl" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
+                                <rect key="frame" x="239" y="53" width="121" height="120"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qGU-qC-ypl" firstAttribute="bottom" secondItem="uXb-ow-G6I" secondAttribute="bottom" id="3Uy-MR-ggL"/>
+                            <constraint firstItem="Szd-5M-fCb" firstAttribute="leading" secondItem="R8e-Nu-nfh" secondAttribute="leading" constant="8" id="Lbf-jy-8ue"/>
+                            <constraint firstItem="uXb-ow-G6I" firstAttribute="leading" secondItem="7kr-At-sXR" secondAttribute="trailing" id="RQ2-gA-vJt"/>
+                            <constraint firstItem="qGU-qC-ypl" firstAttribute="top" secondItem="uXb-ow-G6I" secondAttribute="top" id="SLp-3Y-Eqb"/>
+                            <constraint firstItem="7kr-At-sXR" firstAttribute="bottom" secondItem="uXb-ow-G6I" secondAttribute="bottom" id="X24-BA-pMu"/>
+                            <constraint firstItem="7kr-At-sXR" firstAttribute="width" secondItem="uXb-ow-G6I" secondAttribute="width" id="czB-wp-9ni"/>
+                            <constraint firstItem="7kr-At-sXR" firstAttribute="top" secondItem="Szd-5M-fCb" secondAttribute="bottom" constant="16" id="hmF-yQ-YCe"/>
+                            <constraint firstItem="7kr-At-sXR" firstAttribute="top" secondItem="uXb-ow-G6I" secondAttribute="top" id="kci-bU-dXw"/>
+                            <constraint firstItem="Szd-5M-fCb" firstAttribute="top" secondItem="R8e-Nu-nfh" secondAttribute="top" constant="16" id="nda-hv-HVQ"/>
+                            <constraint firstItem="qGU-qC-ypl" firstAttribute="leading" secondItem="uXb-ow-G6I" secondAttribute="trailing" id="qDG-nD-OGs"/>
+                            <constraint firstAttribute="width" secondItem="7kr-At-sXR" secondAttribute="width" multiplier="3" constant="1" id="tD5-AQ-H5t"/>
+                            <constraint firstItem="7kr-At-sXR" firstAttribute="leading" secondItem="R8e-Nu-nfh" secondAttribute="leading" id="v3L-wp-KhE"/>
+                            <constraint firstAttribute="trailing" secondItem="qGU-qC-ypl" secondAttribute="trailing" id="ygt-SG-NeP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="R8e-Nu-nfh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IKC-Ab-i9m"/>
+                    <constraint firstAttribute="trailing" secondItem="R8e-Nu-nfh" secondAttribute="trailing" id="eD6-Nv-wVm"/>
+                    <constraint firstAttribute="bottom" secondItem="R8e-Nu-nfh" secondAttribute="bottom" id="oNm-0T-0r9"/>
+                    <constraint firstItem="R8e-Nu-nfh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pei-pk-5j6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="consign" destination="7kr-At-sXR" id="AMG-ZX-nkW"/>
+                <outlet property="donate" destination="uXb-ow-G6I" id="nF8-H8-hwb"/>
+                <outlet property="sale" destination="qGU-qC-ypl" id="MOB-mL-mMm"/>
+            </connections>
+            <point key="canvasLocation" x="530" y="392"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="image:add-item-consign" width="112" height="112"/>
+        <image name="image:add-item-donate" width="112" height="112"/>
+        <image name="image:add-item-for-sale" width="112" height="112"/>
+    </resources>
+</document>
