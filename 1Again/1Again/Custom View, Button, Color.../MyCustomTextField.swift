@@ -17,10 +17,15 @@ class MyCustomTextField: UITextField {
     
     override func textRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectInset(bounds, 10, 10)
-        
     }
     
     override func editingRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectInset(bounds, 10, 10)
+    }
+    
+    override func rightViewRectForBounds(bounds: CGRect) -> CGRect {
+        var textRect = super.rightViewRectForBounds(bounds)
+        textRect.origin.x -= 10
+        return textRect
     }
 }

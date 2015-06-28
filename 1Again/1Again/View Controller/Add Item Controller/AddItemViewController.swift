@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate {
 
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
@@ -18,24 +18,27 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let attributeCellIdentifier = "AttributeCell"
     private let secondPriceCellIdentifier = "SecondPriceCell"
     private let itemInfoCellIdentifier = "ItemDescriptionCell"
+    
     var cellIsHide: Bool = true
-    
     var item: ItemObject!
-    
+    var activeTextfield: UITextField!
     var pickerView: UIPickerView!
+    var toolBar: UIToolbar!
+    var selectedTextfield = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setMenuButtonAction(menuBtn)
-
+        item = ItemObject()
+        initializePickerView()
+        initializeToolbar()
         tableview.registerNib(UINib(nibName: addPhotoCellIdentifier, bundle: nil), forCellReuseIdentifier: addPhotoCellIdentifier)
         tableview.registerNib(UINib(nibName: priceCellIdentifier, bundle: nil), forCellReuseIdentifier: priceCellIdentifier)
         tableview.registerNib(UINib(nibName: attributeCellIdentifier, bundle: nil), forCellReuseIdentifier: attributeCellIdentifier)
         tableview.registerNib(UINib(nibName: secondPriceCellIdentifier, bundle: nil), forCellReuseIdentifier: secondPriceCellIdentifier)
         tableview.registerNib(UINib(nibName: itemInfoCellIdentifier, bundle: nil), forCellReuseIdentifier: itemInfoCellIdentifier)
         tableview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "keyboardWillHide:"))
-        item = ItemObject()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,14 +46,12 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     override func viewWillAppear(animated: Bool) {
-        println(__FUNCTION__)
         super.viewWillAppear(animated)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardDidHideNotification, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
-        println(__FUNCTION__)
         super.viewDidDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
@@ -75,6 +76,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(itemInfoCellIdentifier) as! ItemDescriptionCell
+            
             cell.title.delegate = self
             cell.descriptionItem.delegate = self
             cell.title.text = item.title
@@ -83,6 +85,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         }
         else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(priceCellIdentifier) as! PriceCell
+            
             cell.setImageCell(item)
             cell.donate.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "priceCellClicked:"))
             cell.consign.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "priceCellClicked:"))
@@ -91,17 +94,25 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         } else if indexPath.row == 3 {
             if item.sale != nil || item.consign != nil {
                 let cell = tableView.dequeueReusableCellWithIdentifier(secondPriceCellIdentifier) as! SecondPriceCell
-                cell.price.inputAccessoryView = configPriceInputView()
+                
+                cell.price.inputAccessoryView = toolBar
                 cell.price.delegate = self
                 return cell
             }
         }
         else if indexPath.row == 4 {
             let cell = tableView.dequeueReusableCellWithIdentifier(attributeCellIdentifier) as! AttributeCell
+            
             cell.category.delegate = self
             cell.age.delegate = self
             cell.brand.delegate = self
             cell.condition.delegate = self
+            cell.category.inputAccessoryView = toolBar
+            cell.category.inputView = pickerView
+            cell.condition.inputAccessoryView = toolBar
+            cell.condition.inputView = pickerView
+            cell.age.inputAccessoryView = toolBar
+            cell.age.inputView = pickerView
             return cell
         }
         return UITableViewCell()
@@ -128,37 +139,10 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     //Mark: DONATE , CONSIGN, FOR SALE BUTTON ACTION -----------------------------------
     func priceCellClicked(sender: AnyObject) {
         let image = (sender as! UITapGestureRecognizer).view as! PriceImageView
-        
         var isHide = cellIsHide
-        
-        if image.tag == 10 {
-            if item.consign == nil {
-                item.consign = "1"
-                image.imageName("image:add-item-consign-selected.png")
-            }
-            else {
-                item.consign = nil
-                image.imageName("image:add-item-consign.png")
-            }
-        } else if image.tag == 11 {
-            if item.donate == nil {
-                item.donate = "1"
-                image.imageName("image:add-item-donate-selected.png")
-            }
-            else {
-                item.donate = nil
-                image.imageName("image:add-item-donate.png")
-            }
-        } else if image.tag == 12 {
-            if item.sale == nil {
-                item.sale = "1"
-                image.imageName("image:add-item-for-sale-selected.png")
-            }
-            else {
-                item.sale = nil
-                image.imageName("image:add-item-for-sale.png")
-            }
-        }
+        if image.tag == 10 {item.consign = image.getValueOfItem(item)}
+        else if image.tag == 11 {item.donate = image.getValueOfItem(item)}
+        else if image.tag == 12 {item.sale = image.getValueOfItem(item)}
         
         if item.sale != nil || item.consign != nil {cellIsHide = false}
         else {cellIsHide = true}
@@ -273,14 +257,22 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         } else if textField.tag == Constant.TextFieldTag.addItemDescriptionTextview {
             goToItemInformation(false)
             return false
+        } else if textField.tag == Constant.TextFieldTag.addItemCategoryTextField || textField.tag == Constant.TextFieldTag.addItemConditionTextField || textField.tag == Constant.TextFieldTag.addItemAgeTextField{
+            selectedTextfield = textField.tag
+            activeTextfield = textField
+            pickerView.reloadAllComponents()
+            return true
         }
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField.tag == Constant.TextFieldTag.addItemBrandTextField {
+            println("End update brand: \(textField.text)")
+            item.brand = textField.text
+        }
     }
-    
+
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string == "\n" {
             textField.resignFirstResponder()
@@ -335,14 +327,12 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         reloadRowOfTableViewAtIndex(1)
     }
     
-    func configPriceInputView() -> UIToolbar{
-        var numberToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
-        numberToolbar.barStyle = UIBarStyle.BlackTranslucent
+    func initializeToolbar() {
+        toolBar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
+        toolBar.barStyle = UIBarStyle.BlackTranslucent
 //        var cancelBtn = UIBarButtonItem(title: "Cancel", style: .Bordered, target: self, action: nil)
         var doneBtn = UIBarButtonItem(title: "Done", style: .Bordered, target: self, action: "updatePrice:")
-        numberToolbar.items = NSArray(objects: UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),doneBtn) as [AnyObject]
-        
-        return numberToolbar
+        toolBar.items = NSArray(objects: UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),doneBtn) as [AnyObject]
     }
     
     func updatePrice(sender: AnyObject) {
@@ -385,14 +375,51 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
+        switch selectedTextfield {
+            case Constant.TextFieldTag.addItemCategoryTextField:
+                return CategoryManager.sharedInstance.getCategoryList().count
+            case Constant.TextFieldTag.addItemAgeTextField:
+                return Constant.AgeData.ages.count
+            case Constant.TextFieldTag.addItemConditionTextField:
+                return Constant.ConditionData.conditions.count
+            default: return 0
+        }
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return ""
+        switch selectedTextfield {
+        case Constant.TextFieldTag.addItemCategoryTextField:
+            return CategoryManager.sharedInstance.getCategoryList()[row].catDescription
+        case Constant.TextFieldTag.addItemAgeTextField:
+            return Constant.AgeData.ages[row]
+        case Constant.TextFieldTag.addItemConditionTextField:
+            return Constant.ConditionData.conditions[row]
+        default: return ""
+        }
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        activeTextfield.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+        switch selectedTextfield {
+        case Constant.TextFieldTag.addItemCategoryTextField:
+            item.category = "\(CategoryManager.sharedInstance.getCatIdFromCatDescription(activeTextfield.text))"
+        case Constant.TextFieldTag.addItemAgeTextField:
+            item.age = "\(row + 1)"
+        case Constant.TextFieldTag.addItemConditionTextField:
+            item.condition = "\(row + 1)"
+        default: break
+        }
     }
+    
+    @IBAction func postDataToServer(sender: AnyObject) {
+        item.price = "10.00"
+        item.userId = 95
+        var result = item.pushItemWithActivityIndicator(nil)
+        if result == true {
+            println("Success")
+        } else {
+            println("Fail")
+        }
+    }
+    
 }

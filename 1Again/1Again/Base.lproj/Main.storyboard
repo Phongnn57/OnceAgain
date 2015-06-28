@@ -577,6 +577,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add Item" id="PG0-kO-zwG">
                         <barButtonItem key="leftBarButtonItem" image="btn:menu-bg" id="jip-C9-CQ6"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="plain" id="Ajl-Qf-wEx">
+                            <connections>
+                                <action selector="postDataToServer:" destination="bYa-xc-fps" id="0lI-t5-40e"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

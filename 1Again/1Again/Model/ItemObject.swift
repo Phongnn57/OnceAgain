@@ -14,14 +14,12 @@ class ItemObject {
     var image3: UIImage!
     var image4: UIImage!
     var image5: UIImage!
-    
     var title: String!
     var description: String!
     var donate: String!
     var consign: String!
     var price: String!
     var sale: String!
-    
     var userId: Int!
     var category: String!
     var condition: String!
@@ -29,7 +27,6 @@ class ItemObject {
     var brand: String!
     
     init() {
-        
     }
     
     func setImage(sImage1: UIImage!, sImage2: UIImage!, sImage3: UIImage!, sImage4: UIImage!, sImage5: UIImage!) {
@@ -162,22 +159,23 @@ class ItemObject {
             
             data.appendPartWithFormData("\(self.userId)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "ownerId")
             data.appendPartWithFormData(self.category.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.title.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.condition.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.brand.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.age.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.description.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.donate.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.consign.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.sale.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
-            data.appendPartWithFormData(self.price.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
+            data.appendPartWithFormData(self.title.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "title")
+            data.appendPartWithFormData(self.condition.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "conditionA")
+            data.appendPartWithFormData(self.brand.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "brand")
+            data.appendPartWithFormData(self.age.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "age")
+            data.appendPartWithFormData(self.description.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "description")
+            data.appendPartWithFormData(self.donate.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "donate")
+            data.appendPartWithFormData(self.consign.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "consign")
+            data.appendPartWithFormData(self.sale.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "sale")
+            data.appendPartWithFormData(self.price.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "price")
 
             }, success: { (request: AFHTTPRequestOperation!, obj: AnyObject!) -> Void in
-                hud.hide(true)
+//                hud.hide(true)
                 uploadStatus = true
             }) { (request: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                hud.hide(true)
+//                hud.hide(true)
                 uploadStatus = false
+                println("\(error.description)")
         }
         
         return uploadStatus

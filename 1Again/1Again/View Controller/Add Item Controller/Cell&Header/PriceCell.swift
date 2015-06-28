@@ -53,7 +53,6 @@ class PriceImageView:UIImageView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "changeState:"))
     }
 
     func changeImageTo(imageName: String) {
@@ -81,6 +80,65 @@ class PriceImageView:UIImageView {
     func image(image: UIImage) {
         self.image = image
     }
+
+    func setImagewithTag(tag: Int, item: ItemObject!) -> String! {
+        if tag == 10 {
+            if item.consign == nil {
+                self.imageName("image:add-item-consign-selected.png")
+                return "1"
+            } else {
+                self.imageName("image:add-item-consign.png")
+                return nil
+            }
+        } else if tag == 11 {
+            if item.donate == nil {
+                self.imageName("image:add-item-donate-selected.png")
+                return "1"
+            }
+            else {
+                self.imageName("image:add-item-donate.png")
+                return nil
+            }
+        } else if tag == 12 {
+            if item.sale == nil {
+                self.imageName("image:add-item-for-sale-selected.png")
+                return "1"
+            }
+            else {
+                self.imageName("image:add-item-for-sale.png")
+                return nil
+            }
+        } else { return nil }
+    }
     
+    func getValueOfItem(item: ItemObject!) -> String! {
+        if tag == 10 {
+            if item.consign == nil {
+                self.imageName("image:add-item-consign-selected.png")
+                return "1"
+            } else {
+                self.imageName("image:add-item-consign.png")
+                return nil
+            }
+        } else if tag == 11 {
+            if item.donate == nil {
+                self.imageName("image:add-item-donate-selected.png")
+                return "1"
+            }
+            else {
+                self.imageName("image:add-item-donate.png")
+                return nil
+            }
+        } else if tag == 12 {
+            if item.sale == nil {
+                self.imageName("image:add-item-for-sale-selected.png")
+                return "1"
+            }
+            else {
+                self.imageName("image:add-item-for-sale.png")
+                return nil
+            }
+        } else { return nil }
+    }
     
 }

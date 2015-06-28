@@ -38,4 +38,12 @@ class Constant: NSObject {
         static let addItemAgeTextField = 25
         static let addItemPriceTextField = 26
     }
+    
+    struct ConditionData {
+        static let conditions = ["New with tags", "New", "Like New", "Very Good", "Good", "Satisfactory"]
+    }
+    
+    struct AgeData {
+        static let ages = ["0 - 6 months", "7 - 12 months", "13 - 18 months", "19 - 24 months", "2+ years", "Not Specified"]
+    }
 }
