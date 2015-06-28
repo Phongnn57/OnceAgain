@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate {
+class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
@@ -22,6 +22,8 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     var item: ItemObject!
     
+    var pickerView: UIPickerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +34,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         tableview.registerNib(UINib(nibName: attributeCellIdentifier, bundle: nil), forCellReuseIdentifier: attributeCellIdentifier)
         tableview.registerNib(UINib(nibName: secondPriceCellIdentifier, bundle: nil), forCellReuseIdentifier: secondPriceCellIdentifier)
         tableview.registerNib(UINib(nibName: itemInfoCellIdentifier, bundle: nil), forCellReuseIdentifier: itemInfoCellIdentifier)
-        
+        tableview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "keyboardWillHide:"))
         item = ItemObject()
     }
 
@@ -40,6 +42,20 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         super.didReceiveMemoryWarning()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        println(__FUNCTION__)
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardDidHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        println(__FUNCTION__)
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+    }
+    
     //Mark: TABLEVIEW METHODS -----------------------------------------------------
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -75,12 +91,17 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         } else if indexPath.row == 3 {
             if item.sale != nil || item.consign != nil {
                 let cell = tableView.dequeueReusableCellWithIdentifier(secondPriceCellIdentifier) as! SecondPriceCell
-                
+                cell.price.inputAccessoryView = configPriceInputView()
+                cell.price.delegate = self
                 return cell
             }
         }
         else if indexPath.row == 4 {
             let cell = tableView.dequeueReusableCellWithIdentifier(attributeCellIdentifier) as! AttributeCell
+            cell.category.delegate = self
+            cell.age.delegate = self
+            cell.brand.delegate = self
+            cell.condition.delegate = self
             return cell
         }
         return UITableViewCell()
@@ -256,6 +277,50 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         return true
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            textField.resignFirstResponder()
+            return false
+        }
+        
+        if textField.tag == Constant.TextFieldTag.addItemPriceTextField {
+            if item.price == nil {item.price = ""}
+            println("THE STRING: \(string)")
+            switch string {
+            case "0","1","2","3","4","5","6","7","8","9":
+                item.price  = item.price.stringByAppendingString(string)
+                println("CURRENT STRING: \(item.price)")
+                textField.text =  "$\(formatCurrency(item.price))"
+            default:
+                var array = Array(string)
+                var currentStringarray = Array(item.price)
+                if array.count == 0 && currentStringarray.count != 0 {
+                    currentStringarray.removeLast()
+                    item.price = ""
+                    for character in currentStringarray {
+                        item.price = item.price.stringByAppendingString(String(character))
+                    }
+                    textField.text =  "$\(formatCurrency(item.price))"
+                }
+            }
+            return false
+        }
+        
+        return true
+    }
+    
+    func formatCurrency(string: String) -> Double {
+        
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        var numberFromField = (NSString(string: string).doubleValue)/100
+        return numberFromField
+    }
     
     func goToItemInformation(titleBecomeFirstResponse: Bool) {
         let itemInformationController = ItemInfoController()
@@ -268,5 +333,66 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     func pushItemBack(item: ItemObject!) {
         println(item.description)
         reloadRowOfTableViewAtIndex(1)
+    }
+    
+    func configPriceInputView() -> UIToolbar{
+        var numberToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
+        numberToolbar.barStyle = UIBarStyle.BlackTranslucent
+//        var cancelBtn = UIBarButtonItem(title: "Cancel", style: .Bordered, target: self, action: nil)
+        var doneBtn = UIBarButtonItem(title: "Done", style: .Bordered, target: self, action: "updatePrice:")
+        numberToolbar.items = NSArray(objects: UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),doneBtn) as [AnyObject]
+        
+        return numberToolbar
+    }
+    
+    func updatePrice(sender: AnyObject) {
+        self.view.endEditing(true)
+    }
+    
+    func cancelUpdatePrice(sender: AnyObject) {
+        self.view.endEditing(true)
+    }
+    
+    //KEYBOARD HANDLE
+    func keyboardWillShow(notification: NSNotification) {
+        println(__FUNCTION__)
+        let userInfo = notification.userInfo!
+        var keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        var contentInsets = UIEdgeInsetsMake(0, 0, keyboardSize.size.height, 0)
+        self.tableview.contentInset = contentInsets
+        self.tableview.scrollIndicatorInsets = contentInsets
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        println(__FUNCTION__)
+        self.view.endEditing(true)
+        let contentInsets = UIEdgeInsetsZero
+        self.tableview.contentInset = contentInsets
+        self.tableview.scrollIndicatorInsets = contentInsets
+    }
+    
+    //Mark: PICKER VIEW METHODS
+    func initializePickerView() {
+        pickerView = UIPickerView(frame: CGRectMake(0, 50, 320, 480))
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        pickerView.showsSelectionIndicator = false
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return ""
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
     }
 }

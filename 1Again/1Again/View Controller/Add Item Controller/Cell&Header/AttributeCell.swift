@@ -10,6 +10,12 @@ import UIKit
 
 class AttributeCell: UITableViewCell {
 
+    @IBOutlet weak var category: UITextField!
+    @IBOutlet weak var brand: UITextField!
+    @IBOutlet weak var condition: UITextField!
+    @IBOutlet weak var age: UITextField!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

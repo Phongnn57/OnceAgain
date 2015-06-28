@@ -32,7 +32,10 @@ class Constant: NSObject {
     struct TextFieldTag {
         static let addItemTitleTextfield = 20
         static let addItemDescriptionTextview = 21
+        static let addItemCategoryTextField = 22
+        static let addItemBrandTextField = 23
+        static let addItemConditionTextField = 24
+        static let addItemAgeTextField = 25
+        static let addItemPriceTextField = 26
     }
 }
-
-

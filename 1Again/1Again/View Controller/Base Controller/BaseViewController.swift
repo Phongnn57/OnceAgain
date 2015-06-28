@@ -25,5 +25,7 @@ class BaseViewController: UIViewController {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
     }
+    
+    
 
 }

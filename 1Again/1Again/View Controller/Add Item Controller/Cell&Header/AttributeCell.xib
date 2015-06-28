@@ -39,7 +39,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5FH-Tt-Did">
+                            <textField opaque="NO" clipsSubviews="YES" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5FH-Tt-Did">
                                 <rect key="frame" x="103" y="53" width="197" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9Z7-b3-gFa"/>
@@ -47,7 +47,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1LN-O2-Mxt">
+                            <textField opaque="NO" clipsSubviews="YES" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1LN-O2-Mxt">
                                 <rect key="frame" x="103" y="91" width="197" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="EN2-IV-cYT"/>
@@ -55,7 +55,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-OV-Rii">
+                            <textField opaque="NO" clipsSubviews="YES" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-OV-Rii">
                                 <rect key="frame" x="103" y="129" width="197" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4IR-kt-3Zv"/>
@@ -63,7 +63,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mdt-0y-1D2">
+                            <textField opaque="NO" clipsSubviews="YES" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mdt-0y-1D2">
                                 <rect key="frame" x="103" y="167" width="197" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="edD-fc-m3j"/>
@@ -116,7 +116,13 @@
                     <constraint firstItem="1cz-P3-eo2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mLc-AX-uk9"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="401" y="416.5"/>
+            <connections>
+                <outlet property="age" destination="Mdt-0y-1D2" id="AxE-qh-3fG"/>
+                <outlet property="brand" destination="1LN-O2-Mxt" id="qsp-1M-64e"/>
+                <outlet property="category" destination="5FH-Tt-Did" id="R0y-wa-ZSn"/>
+                <outlet property="condition" destination="cVa-OV-Rii" id="2j8-1E-INh"/>
+            </connections>
+            <point key="canvasLocation" x="96" y="398.5"/>
         </tableViewCell>
     </objects>
 </document>

@@ -10,6 +10,7 @@ import UIKit
 
 class SecondPriceCell: UITableViewCell {
 
+    @IBOutlet weak var price: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
