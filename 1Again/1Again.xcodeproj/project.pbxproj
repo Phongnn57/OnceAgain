@@ -39,6 +39,8 @@
 		688E69D61B3DB60C00030F3E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69D51B3DB60C00030F3E /* BaseViewController.swift */; };
 		688E69DB1B3DC30D00030F3E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69DA1B3DC30D00030F3E /* UIColorExtension.swift */; };
 		688E69DE1B3DC57100030F3E /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69DD1B3DC57100030F3E /* AddItemViewController.swift */; };
+		68A62ADA1B40376700B31317 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A62AD81B40376700B31317 /* CameraController.swift */; };
+		68A62ADB1B40376700B31317 /* CameraController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A62AD91B40376700B31317 /* CameraController.xib */; };
 		68B2998E1B3DA9D6009720BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B2998D1B3DA9D6009720BF /* AppDelegate.swift */; };
 		68B299901B3DA9D6009720BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B2998F1B3DA9D6009720BF /* ViewController.swift */; };
 		68B299931B3DA9D6009720BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68B299911B3DA9D6009720BF /* Main.storyboard */; };
@@ -105,6 +107,8 @@
 		688E69D51B3DB60C00030F3E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		688E69DA1B3DC30D00030F3E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		688E69DD1B3DC57100030F3E /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		68A62AD81B40376700B31317 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		68A62AD91B40376700B31317 /* CameraController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraController.xib; sourceTree = "<group>"; };
 		68B299881B3DA9D6009720BF /* 1Again.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 1Again.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B2998C1B3DA9D6009720BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68B2998D1B3DA9D6009720BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -258,11 +262,21 @@
 		688E69DC1B3DC55000030F3E /* Add Item Controller */ = {
 			isa = PBXGroup;
 			children = (
+				68A62AD71B40375500B31317 /* Camera Controller */,
 				686ABB081B3E9CA000AC80E0 /* Item Information */,
 				6834C6991B3DC90200F7912B /* Cell&Header */,
 				688E69DD1B3DC57100030F3E /* AddItemViewController.swift */,
 			);
 			path = "Add Item Controller";
+			sourceTree = "<group>";
+		};
+		68A62AD71B40375500B31317 /* Camera Controller */ = {
+			isa = PBXGroup;
+			children = (
+				68A62AD81B40376700B31317 /* CameraController.swift */,
+				68A62AD91B40376700B31317 /* CameraController.xib */,
+			);
+			path = "Camera Controller";
 			sourceTree = "<group>";
 		};
 		68B2997F1B3DA9D6009720BF = {
@@ -446,6 +460,7 @@
 				6879D8D31B3E346400F89BAF /* SecondPriceCell.xib in Resources */,
 				686ABB0C1B3E9CB500AC80E0 /* ItemInfoController.xib in Resources */,
 				68B299981B3DA9D6009720BF /* LaunchScreen.xib in Resources */,
+				68A62ADB1B40376700B31317 /* CameraController.xib in Resources */,
 				6879D8D71B3E370E00F89BAF /* ItemDescriptionCell.xib in Resources */,
 				68F21D3F1B3DD6F5004455EC /* AttributeCell.xib in Resources */,
 				68F21D3B1B3DD3F8004455EC /* PriceCell.xib in Resources */,
@@ -545,6 +560,7 @@
 				68B2998E1B3DA9D6009720BF /* AppDelegate.swift in Sources */,
 				68F21D3E1B3DD6F5004455EC /* AttributeCell.swift in Sources */,
 				686ABB061B3E85CC00AC80E0 /* ELCImagePickerController.m in Sources */,
+				68A62ADA1B40376700B31317 /* CameraController.swift in Sources */,
 				688E69DE1B3DC57100030F3E /* AddItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

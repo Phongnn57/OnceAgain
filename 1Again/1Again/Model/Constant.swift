@@ -46,4 +46,18 @@ class Constant: NSObject {
     struct AgeData {
         static let ages = ["0 - 6 months", "7 - 12 months", "13 - 18 months", "19 - 24 months", "2+ years", "Not Specified"]
     }
+    
+    struct FormatCurrency {
+        func formatCurrency(string: String) -> Double {
+            let formatter = NSNumberFormatter()
+            formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+            formatter.locale = NSLocale(localeIdentifier: "en_US")
+            var numberFromField = (NSString(string: string).doubleValue)/100
+            return numberFromField
+        }
+    }
+    
+    struct CustomNotification {
+        static let AddItemWithResult = "addItemResult"
+    }
 }

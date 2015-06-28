@@ -1171,9 +1171,9 @@ const int FrontViewPositionNone = 0xff;
     [self _setFrontViewPosition:FrontViewPositionLeft withDuration:duration];
 }
 
-
 - (void)_handleRevealGesture:(UIPanGestureRecognizer *)recognizer
 {
+    [[self view] endEditing:true];
     switch ( recognizer.state )
     {
         case UIGestureRecognizerStateBegan:

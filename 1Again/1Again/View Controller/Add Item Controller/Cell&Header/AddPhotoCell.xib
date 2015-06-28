@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="height" constant="21" id="oGg-ch-rmR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView tag="14" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="gcW-BJ-f3c" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
@@ -65,6 +65,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:separator-line" translatesAutoresizingMaskIntoConstraints="NO" id="nGt-TA-S2w">
+                                <rect key="frame" x="0.0" y="318" width="400" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Lfs-xW-QtZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -80,6 +86,7 @@
                             <constraint firstItem="Kfo-N8-Nx8" firstAttribute="top" secondItem="3Sq-dH-3QV" secondAttribute="top" constant="16" id="PHi-iv-SyG"/>
                             <constraint firstItem="i3o-wN-f9l" firstAttribute="top" secondItem="CCh-dC-XXb" secondAttribute="bottom" constant="16" id="Vmn-tM-n9K"/>
                             <constraint firstItem="rKP-xs-13M" firstAttribute="leading" secondItem="gcW-BJ-f3c" secondAttribute="trailing" constant="-1" id="Z5h-N4-S1U"/>
+                            <constraint firstAttribute="bottom" secondItem="nGt-TA-S2w" secondAttribute="bottom" id="ZR8-0S-sHx"/>
                             <constraint firstItem="mR1-NN-uiK" firstAttribute="top" secondItem="gcW-BJ-f3c" secondAttribute="bottom" constant="-1" id="dIE-SW-vxy"/>
                             <constraint firstItem="gcW-BJ-f3c" firstAttribute="top" secondItem="rKP-xs-13M" secondAttribute="top" id="fXR-ef-88K"/>
                             <constraint firstItem="mR1-NN-uiK" firstAttribute="bottom" secondItem="CCh-dC-XXb" secondAttribute="bottom" id="gEd-yJ-Wre"/>
@@ -87,10 +94,12 @@
                             <constraint firstItem="7Hk-aD-SOj" firstAttribute="top" secondItem="3Sq-dH-3QV" secondAttribute="top" constant="53" id="ixe-b0-tye"/>
                             <constraint firstItem="7Hk-aD-SOj" firstAttribute="leading" secondItem="3Sq-dH-3QV" secondAttribute="leading" id="oHH-r7-Qfo"/>
                             <constraint firstAttribute="width" secondItem="7Hk-aD-SOj" secondAttribute="width" multiplier="2" constant="1" id="p8h-dL-Wha"/>
+                            <constraint firstAttribute="trailing" secondItem="nGt-TA-S2w" secondAttribute="trailing" id="q2P-x9-ENe"/>
                             <constraint firstItem="gcW-BJ-f3c" firstAttribute="trailing" secondItem="mR1-NN-uiK" secondAttribute="trailing" id="rMB-kv-4Oc"/>
                             <constraint firstAttribute="trailing" secondItem="rKP-xs-13M" secondAttribute="trailing" id="ryk-u2-ljs"/>
                             <constraint firstItem="mR1-NN-uiK" firstAttribute="bottom" secondItem="7Hk-aD-SOj" secondAttribute="bottom" id="uKq-Ic-58P"/>
                             <constraint firstItem="i3o-wN-f9l" firstAttribute="leading" secondItem="3Sq-dH-3QV" secondAttribute="leading" constant="8" id="ub4-sy-Lmo"/>
+                            <constraint firstItem="nGt-TA-S2w" firstAttribute="leading" secondItem="3Sq-dH-3QV" secondAttribute="leading" id="vGe-Kt-Jt5"/>
                             <constraint firstItem="gcW-BJ-f3c" firstAttribute="bottom" secondItem="rKP-xs-13M" secondAttribute="bottom" id="w5Q-8A-ral"/>
                         </constraints>
                     </view>
@@ -116,5 +125,6 @@
     <resources>
         <image name="image:add-item-camera" width="200" height="200"/>
         <image name="image:add-item-default" width="200" height="200"/>
+        <image name="image:separator-line" width="1" height="1"/>
     </resources>
 </document>

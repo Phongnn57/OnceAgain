@@ -35,13 +35,13 @@ class PriceCell: UITableViewCell {
     }
     
     func setImageCell(item: ItemObject!) {
-        if item.consign == nil {consign.imageName("image:add-item-consign.png")}
+        if item.consign == "0" {consign.imageName("image:add-item-consign.png")}
         else {consign.imageName("image:add-item-consign-selected.png")}
         
-        if item.donate == nil {donate.imageName("image:add-item-donate.png")}
+        if item.donate == "0" {donate.imageName("image:add-item-donate.png")}
         else {donate.imageName("image:add-item-donate-selected.png")}
         
-        if item.sale == nil {sale.imageName("image:add-item-for-sale.png")}
+        if item.sale == "0" {sale.imageName("image:add-item-for-sale.png")}
         else {sale.imageName("image:add-item-for-sale-selected.png")}
     }
 }
@@ -81,62 +81,32 @@ class PriceImageView:UIImageView {
         self.image = image
     }
 
-    func setImagewithTag(tag: Int, item: ItemObject!) -> String! {
-        if tag == 10 {
-            if item.consign == nil {
-                self.imageName("image:add-item-consign-selected.png")
-                return "1"
-            } else {
-                self.imageName("image:add-item-consign.png")
-                return nil
-            }
-        } else if tag == 11 {
-            if item.donate == nil {
-                self.imageName("image:add-item-donate-selected.png")
-                return "1"
-            }
-            else {
-                self.imageName("image:add-item-donate.png")
-                return nil
-            }
-        } else if tag == 12 {
-            if item.sale == nil {
-                self.imageName("image:add-item-for-sale-selected.png")
-                return "1"
-            }
-            else {
-                self.imageName("image:add-item-for-sale.png")
-                return nil
-            }
-        } else { return nil }
-    }
-    
     func getValueOfItem(item: ItemObject!) -> String! {
         if tag == 10 {
-            if item.consign == nil {
+            if item.consign == "0" {
                 self.imageName("image:add-item-consign-selected.png")
                 return "1"
             } else {
                 self.imageName("image:add-item-consign.png")
-                return nil
+                return "0"
             }
         } else if tag == 11 {
-            if item.donate == nil {
+            if item.donate == "0" {
                 self.imageName("image:add-item-donate-selected.png")
                 return "1"
             }
             else {
                 self.imageName("image:add-item-donate.png")
-                return nil
+                return "0"
             }
         } else if tag == 12 {
-            if item.sale == nil {
+            if item.sale == "0" {
                 self.imageName("image:add-item-for-sale-selected.png")
                 return "1"
             }
             else {
                 self.imageName("image:add-item-for-sale.png")
-                return nil
+                return "0"
             }
         } else { return nil }
     }

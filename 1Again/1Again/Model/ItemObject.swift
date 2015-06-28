@@ -16,10 +16,10 @@ class ItemObject {
     var image5: UIImage!
     var title: String!
     var description: String!
-    var donate: String!
-    var consign: String!
+    var donate: String = "0"
+    var consign: String = "0"
     var price: String!
-    var sale: String!
+    var sale: String = "0"
     var userId: Int!
     var category: String!
     var condition: String!
@@ -27,6 +27,9 @@ class ItemObject {
     var brand: String!
     
     init() {
+        consign = "0"
+        donate = "0"
+        sale = "0"
     }
     
     func setImage(sImage1: UIImage!, sImage2: UIImage!, sImage3: UIImage!, sImage4: UIImage!, sImage5: UIImage!) {
@@ -126,6 +129,13 @@ class ItemObject {
         }
     }
     
+    func availableToUpload() -> Bool {
+        if image1 != nil && title != "" && description != "" && category != "" && condition != "" && brand != "" && age != "" && (consign != "0" || donate != "0" || sale != "0") {
+            return true
+        }
+        return false
+    }
+    
     func pushItemWithActivityIndicator(hud: MBProgressHUD!) ->Bool {
         var uploadStatus: Bool = false
         let manager = AFHTTPRequestOperationManager()
@@ -167,18 +177,25 @@ class ItemObject {
             data.appendPartWithFormData(self.donate.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "donate")
             data.appendPartWithFormData(self.consign.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "consign")
             data.appendPartWithFormData(self.sale.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "sale")
-            data.appendPartWithFormData(self.price.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "price")
-
+            data.appendPartWithFormData("\(self.formatCurrency(self.price))".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "price")
+            
             }, success: { (request: AFHTTPRequestOperation!, obj: AnyObject!) -> Void in
-//                hud.hide(true)
-                uploadStatus = true
+                hud.hide(true)
+                NSNotificationCenter.defaultCenter().postNotificationName(Constant.CustomNotification.AddItemWithResult, object: nil, userInfo: ["result" : "success"])
             }) { (request: AFHTTPRequestOperation!, error: NSError!) -> Void in
-//                hud.hide(true)
-                uploadStatus = false
-                println("\(error.description)")
+                hud.hide(true)
+                NSNotificationCenter.defaultCenter().postNotificationName(Constant.CustomNotification.AddItemWithResult, object: nil, userInfo: ["result" : "fail"])
         }
         
         return uploadStatus
+    }
+    
+    func formatCurrency(string: String) -> Double {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        var numberFromField = (NSString(string: string).doubleValue)/100
+        return numberFromField
     }
     
     

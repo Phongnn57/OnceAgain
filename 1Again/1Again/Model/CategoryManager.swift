@@ -20,7 +20,6 @@ class CategoryManager {
     init() {
         if categories == nil {
             categories = []
-            println(__FUNCTION__)
             let postURL = Constant.MyUrl.homeURL.stringByAppendingString("categoryJSON.php")
             let catUrl = NSURL(string: postURL)
             

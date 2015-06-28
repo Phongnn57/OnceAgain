@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="width" constant="264" id="dV5-pV-Ouf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-consign" translatesAutoresizingMaskIntoConstraints="NO" id="7kr-At-sXR" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
@@ -41,6 +41,12 @@
                             <imageView tag="12" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-for-sale" translatesAutoresizingMaskIntoConstraints="NO" id="qGU-qC-ypl" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
                                 <rect key="frame" x="239" y="53" width="121" height="120"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:separator-line" translatesAutoresizingMaskIntoConstraints="NO" id="ZGf-aY-as3">
+                                <rect key="frame" x="0.0" y="176" width="360" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="3xh-mJ-8Tg"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -54,8 +60,11 @@
                             <constraint firstItem="7kr-At-sXR" firstAttribute="top" secondItem="uXb-ow-G6I" secondAttribute="top" id="kci-bU-dXw"/>
                             <constraint firstItem="Szd-5M-fCb" firstAttribute="top" secondItem="R8e-Nu-nfh" secondAttribute="top" constant="16" id="nda-hv-HVQ"/>
                             <constraint firstItem="qGU-qC-ypl" firstAttribute="leading" secondItem="uXb-ow-G6I" secondAttribute="trailing" id="qDG-nD-OGs"/>
+                            <constraint firstAttribute="trailing" secondItem="ZGf-aY-as3" secondAttribute="trailing" id="qkv-OK-2f0"/>
                             <constraint firstAttribute="width" secondItem="7kr-At-sXR" secondAttribute="width" multiplier="3" constant="1" id="tD5-AQ-H5t"/>
+                            <constraint firstItem="ZGf-aY-as3" firstAttribute="leading" secondItem="R8e-Nu-nfh" secondAttribute="leading" id="un4-Tw-1Gq"/>
                             <constraint firstItem="7kr-At-sXR" firstAttribute="leading" secondItem="R8e-Nu-nfh" secondAttribute="leading" id="v3L-wp-KhE"/>
+                            <constraint firstAttribute="bottom" secondItem="ZGf-aY-as3" secondAttribute="bottom" id="xY6-eY-Loa"/>
                             <constraint firstAttribute="trailing" secondItem="qGU-qC-ypl" secondAttribute="trailing" id="ygt-SG-NeP"/>
                         </constraints>
                     </view>
@@ -79,5 +88,6 @@
         <image name="image:add-item-consign" width="112" height="112"/>
         <image name="image:add-item-donate" width="112" height="112"/>
         <image name="image:add-item-for-sale" width="112" height="112"/>
+        <image name="image:separator-line" width="1" height="1"/>
     </resources>
 </document>

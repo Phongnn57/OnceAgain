@@ -36,7 +36,7 @@
                                     <constraint firstAttribute="height" constant="21" id="To2-tY-E0P"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="MTE-9G-bhy" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
@@ -50,6 +50,12 @@
                                     <outlet property="delegate" destination="-1" id="pGj-Xs-cic"/>
                                 </connections>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:separator-line" translatesAutoresizingMaskIntoConstraints="NO" id="9aq-vQ-m8D">
+                                <rect key="frame" x="0.0" y="195" width="375" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="pcm-Ow-IiP"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -59,8 +65,11 @@
                             <constraint firstItem="Ggp-yN-Slm" firstAttribute="top" secondItem="g8D-hU-Rqb" secondAttribute="bottom" constant="16" id="Ckr-Il-caF"/>
                             <constraint firstItem="g8D-hU-Rqb" firstAttribute="top" secondItem="aL6-sS-CbD" secondAttribute="top" constant="16" id="Tt2-kv-S7m"/>
                             <constraint firstAttribute="trailing" secondItem="Ggp-yN-Slm" secondAttribute="trailing" constant="8" id="acS-kI-C5S"/>
+                            <constraint firstAttribute="bottom" secondItem="9aq-vQ-m8D" secondAttribute="bottom" id="dRX-fC-at5"/>
+                            <constraint firstItem="9aq-vQ-m8D" firstAttribute="leading" secondItem="aL6-sS-CbD" secondAttribute="leading" id="i2O-4r-cth"/>
                             <constraint firstItem="MTE-9G-bhy" firstAttribute="top" secondItem="Ggp-yN-Slm" secondAttribute="bottom" constant="8" id="kuJ-SW-v9W"/>
                             <constraint firstAttribute="trailing" secondItem="MTE-9G-bhy" secondAttribute="trailing" constant="8" id="shk-x5-q85"/>
+                            <constraint firstAttribute="trailing" secondItem="9aq-vQ-m8D" secondAttribute="trailing" id="wmF-Rj-cAi"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -83,6 +92,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="image:separator-line" width="1" height="1"/>
         <image name="textfield:bg" width="3" height="2"/>
     </resources>
 </document>
