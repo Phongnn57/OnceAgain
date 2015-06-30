@@ -209,8 +209,8 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Rotate Image", style: UIAlertActionStyle.Default, handler: { (alert:UIAlertAction!) -> Void in
-            var tmpImage = self.item.scaleDownImageWith(imageView.image!, newSize: CGSizeMake(imageView.frame.size.width, imageView.frame.size.height))
-            imageView.image = self.item.imageRotateByDegree(90, image: tmpImage)
+            var tmpImage = scaleDownImageWith(imageView.image!, CGSizeMake(imageView.frame.size.width, imageView.frame.size.height))
+            imageView.image = imageRotateByDegree(90, tmpImage)
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -293,15 +293,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         }
         return true
     }
-    
-    func formatCurrency(string: String) -> Double {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
-        var numberFromField = (NSString(string: string).doubleValue)/100
-        return numberFromField
-    }
-    
+
     func goToItemInformation(titleBecomeFirstResponse: Bool) {
         let itemInformationController = ItemInfoController()
         itemInformationController.titleFisrtResponse = titleBecomeFirstResponse
@@ -399,7 +391,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func postDataToServer(sender: AnyObject) {
-        item.userId = 95
+        item.ownerId = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
         
         if item.availableToUpload() {
             let hud = MBProgressHUD(view: self.view)

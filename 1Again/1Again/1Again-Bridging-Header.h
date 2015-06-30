@@ -11,3 +11,5 @@
 #import "ELCAssetPickerFilterDelegate.h"
 #import "ELCImagePickerController.h"
 #import "ELCImagePickerHeader.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "ClickImage.h"

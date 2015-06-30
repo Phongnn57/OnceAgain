@@ -9,14 +9,16 @@
 import UIKit
 
 class UserObject {
-    var userName: String!
     var userId: Int!
     var userType: String!
-
     
     init() {
         userId = -1
-        userName = ""
         userType = ""
+    }
+    
+    init(sUserId: Int, sUserType: String!) {
+        userId = sUserId
+        userType = sUserType
     }
 }

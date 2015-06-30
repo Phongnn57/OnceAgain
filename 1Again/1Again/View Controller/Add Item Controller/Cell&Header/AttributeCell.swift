@@ -30,9 +30,8 @@ class AttributeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configTextfield(textField: UITextField!) {
-        textField.rightViewMode = UITextFieldViewMode.Always
-        textField.rightView = UIImageView(image: UIImage(named: "textfield:add-item-down-arrow.png"))
+    func configTextfield(textField: MyCustomTextField!) {
+        textField.addImageToRightViewWithImage(UIImage(named: "textfield:add-item-down-arrow.png"))
     }
     
 }

@@ -20,41 +20,26 @@ class ItemObject {
     var consign: String = "0"
     var price: String!
     var sale: String = "0"
-    var userId: Int!
+    var ownerId: Int!
     var category: String!
     var condition: String!
     var age: String!
     var brand: String!
+    var compensation: String!
+    var status: String!
+    var timestamp: String!
+    var id: String!
+    
+    var imageStr1: String!
+    var imageStr2: String!
+    var imageStr3: String!
+    var imageStr4: String!
+    var imageStr5: String!
     
     init() {
         consign = "0"
         donate = "0"
         sale = "0"
-    }
-    
-    func setImage(sImage1: UIImage!, sImage2: UIImage!, sImage3: UIImage!, sImage4: UIImage!, sImage5: UIImage!) {
-        self.image1 = sImage1
-        self.image2 = sImage2
-        self.image3 = sImage3
-        self.image4 = sImage4
-        self.image5 = sImage5
-    }
-    
-    func setTitle(sTitle: String!, sDescription: String!, sUserId: Int!, scategory: String!, sCondition: String!, sAge: String!, sBrand: String!) {
-        title = sTitle
-        description = sDescription
-        userId = sUserId
-        category = scategory
-        condition = sCondition
-        age = sAge
-        brand = sBrand
-    }
-    
-    func setDonate(sDonate: String!, sConsign: String!, sSale: String!, sPrice: String) {
-        donate = sDonate
-        condition = sConsign
-        sale = sSale
-        price = sPrice
     }
     
     func getNumberOfEmptyImage() -> Int {
@@ -147,27 +132,27 @@ class ItemObject {
             
             var imageData: NSData = NSData()
             if (self.image1 != nil) {
-                imageData = self.getDataFromImage(self.image1)
+                imageData = getDataFromImage(self.image1)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image1.jpg", mimeType: "image/jpeg")
             }
             if (self.image2 != nil) {
-                imageData = self.getDataFromImage(self.image2)
+                imageData = getDataFromImage(self.image2)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image2.jpg", mimeType: "image/jpeg")
             }
             if (self.image3 != nil) {
-                imageData = self.getDataFromImage(self.image1)
+                imageData = getDataFromImage(self.image1)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image3.jpg", mimeType: "image/jpeg")
             }
             if (self.image4 != nil) {
-                imageData = self.getDataFromImage(self.image1)
+                imageData = getDataFromImage(self.image1)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image4.jpg", mimeType: "image/jpeg")
             }
             if (self.image5 != nil) {
-                imageData = self.getDataFromImage(self.image1)
+                imageData = getDataFromImage(self.image1)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image5.jpg", mimeType: "image/jpeg")
             }
             
-            data.appendPartWithFormData("\(self.userId)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "ownerId")
+            data.appendPartWithFormData("\(self.ownerId)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "ownerId")
             data.appendPartWithFormData(self.category.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "category")
             data.appendPartWithFormData(self.title.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "title")
             data.appendPartWithFormData(self.condition.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "conditionA")
@@ -177,7 +162,7 @@ class ItemObject {
             data.appendPartWithFormData(self.donate.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "donate")
             data.appendPartWithFormData(self.consign.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "consign")
             data.appendPartWithFormData(self.sale.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "sale")
-            data.appendPartWithFormData("\(self.formatCurrency(self.price))".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "price")
+            data.appendPartWithFormData("\(formatCurrency(self.price))".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "price")
             
             }, success: { (request: AFHTTPRequestOperation!, obj: AnyObject!) -> Void in
                 hud.hide(true)
@@ -189,90 +174,61 @@ class ItemObject {
         
         return uploadStatus
     }
-    
-    func formatCurrency(string: String) -> Double {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
-        var numberFromField = (NSString(string: string).doubleValue)/100
-        return numberFromField
-    }
-    
-    
-    //Mark: Image methods
-    func getDataFromImage(image: UIImage) -> NSData! {
-        var resulution = image.size.width * image.size.height
-        var img: UIImage!
-        var mode: String!
-        
-        if (image.size.height > image.size.width) {
-            mode = "P"
-        } else {
-            mode = "L"
-        }
-        if resulution > 60 * 60 {
-            if mode == "P" {
-                img = scaleDownImageWith(image, newSize: Constant.UploadImageSize.uploadImageSizePortrait)
-            } else {
-                img = scaleDownImageWith(image, newSize: Constant.UploadImageSize.uploadImageSizeLandscape)
-            }
-            
-        }
-        
-        var compression = 0.8 as CGFloat
-        var maxCompression = 0.1 as CGFloat
-        var imageData = UIImageJPEGRepresentation(img, compression)
-        //Mark: Compress Image
-        /*
-        while imageData.length > 500 && compression > maxCompression {
-        compression -= 0.1
-        imageData = UIImageJPEGRepresentation(img, compression)
-        }
-        */
-        return imageData
-    }
-    
-    
-    func scaleDownImageWith(image: UIImage, newSize: CGSize) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(newSize, true, 0.0)
-        image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
-        var scaledImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return scaledImage
-    }
-    
-    func imageRotateByDegree(degree: CGFloat, image: UIImage) -> UIImage {
-        var rotatedViewBox = UIView(frame: CGRectMake(0, 0, image.size.width, image.size.height))
-        println(image.size)
-        var t: CGAffineTransform = CGAffineTransformMakeRotation(getRadianFromDegree(degree))
-        rotatedViewBox.transform = t
-        var rotatedSize = rotatedViewBox.frame.size
-        
-        
-        UIGraphicsBeginImageContext(rotatedSize)
-        var bitmap = UIGraphicsGetCurrentContext()
-        
-        CGContextTranslateCTM(bitmap, rotatedSize.width, rotatedSize.height)
-        CGContextRotateCTM(bitmap, getRadianFromDegree(degree))
-        CGContextScaleCTM(bitmap, 1.0, -1.0)
-        CGContextDrawImage(bitmap, CGRectMake(-image.size.width, -image.size.height, image.size.width, image.size.height), image.CGImage!)
-        var newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        println(newImage.size)
-        return newImage
-    }
-    
-    func getRadianFromDegree(degree: CGFloat) -> CGFloat {
-        var returnValue = CGFloat(M_PI / 180) as CGFloat
-        returnValue = CGFloat(degree) * returnValue
-        return returnValue
-    }
-    
-    func rotateImage(image: UIImage) -> UIImage{
-        var rotatedImaged: UIImage = UIImage(CGImage: image.CGImage, scale: CGFloat(1), orientation: UIImageOrientation.DownMirrored)!
-        return rotatedImaged
-    }
-    
 }
+
+func getItemListWithURLstr(str: String, completionClosure: (items :[ItemObject]) ->()) {
+    let url = NSURL(string: str)
+    let data = NSData(contentsOfURL: url!)
+    var itemList: [ItemObject] = []
+    
+    if let jsonData = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as? NSDictionary {
+        println("json: \(jsonData)")
+        if let items = jsonData["items"] as? NSArray {
+            for item in items {
+                var thisItem = ItemObject()
+                thisItem.title = item["title"] as! String
+                thisItem.id = item["id"] as! String
+                thisItem.ownerId = (item["ownerId"] as! String).toInt()
+                thisItem.category = item["category"] as! String
+                thisItem.brand = item["brand"] as! String!
+                thisItem.condition = item["conditionA"] as! String!
+                thisItem.compensation = item["compensation"] as! String!
+                thisItem.description = item["description"] as! String!
+                thisItem.imageStr1 = item["image1"] as! String!
+                thisItem.imageStr2 = item["image2"] as! String!
+                thisItem.imageStr3 = item["image3"] as! String!
+                thisItem.imageStr4 = item["image4"] as! String!
+                thisItem.imageStr5 = item["image5"] as! String!
+                thisItem.status = item["status"] as! String!
+                thisItem.timestamp = item["timestamp"] as! String!
+                itemList.append(thisItem)
+            }
+        }
+    }
+    
+    completionClosure(items: itemList)
+}
+
+func archiveItem(item:String){
+    var postURL = Constant.MyUrl.homeURL.stringByAppendingString("item_update.php?status=I&id=\(item)")
+    
+    var url=NSURL(string:postURL)
+    
+    var data=NSData(contentsOfURL:url!)
+    
+    var datastring: String = NSString(data:data!, encoding:NSUTF8StringEncoding)! as String
+    
+    //  println(datastring)
+    
+    if let json = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as? NSDictionary {
+        //print
+        if let feed = json["return_code"] as? NSArray {
+            
+            if let feed = json["return_code"] as? NSString {
+                //     println(feed )
+            }
+        }
+    }
+}
+
+

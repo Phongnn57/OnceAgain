@@ -11,8 +11,7 @@ import UIKit
 class MyCustomTextField: UITextField {
 
     override func awakeFromNib() {
-        
-        
+
     }
     
     override func textRectForBounds(bounds: CGRect) -> CGRect {
@@ -28,4 +27,11 @@ class MyCustomTextField: UITextField {
         textRect.origin.x -= 10
         return textRect
     }
+    
+    func addImageToRightViewWithImage(image: UIImage!) {
+        self.rightViewMode = UITextFieldViewMode.Always
+        self.rightView = UIImageView(image: image)
+    }
 }
+
+

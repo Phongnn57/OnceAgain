@@ -14,9 +14,8 @@ class ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        println("Home")
         self.setMenuButtonAction(menuBarBtn)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,5 +24,15 @@ class ViewController: BaseViewController {
     }
 
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if !isAuthorized() {
+            let loginController = LoginViewController()
+            self.presentViewController(loginController, animated: true, completion: nil)
+        } else {
+            
+        }
+    }
+    
 }
 
