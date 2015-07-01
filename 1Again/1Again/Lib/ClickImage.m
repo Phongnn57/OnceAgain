@@ -60,7 +60,7 @@ UIViewController* goBackViewController;
         if (!snapView) {
             snapView = clickViewController.view;
         }
-            if(/* DISABLES CODE */ (&UIGraphicsBeginImageContextWithOptions) != NULL)
+            if(/* DISABLES CODE */ (/* DISABLES CODE */ (/* DISABLES CODE */ (&UIGraphicsBeginImageContextWithOptions))) != NULL)
             {
                 UIGraphicsBeginImageContextWithOptions(snapView.frame.size, NO, 0.0);
             } else {
@@ -108,7 +108,7 @@ UIViewController* goBackViewController;
 }
 + (void)dismissClickView {
     UIView *snapView = goBackViewController.view;
-    if(/* DISABLES CODE */ (&UIGraphicsBeginImageContextWithOptions) != NULL)
+    if(/* DISABLES CODE */ (/* DISABLES CODE */ (&UIGraphicsBeginImageContextWithOptions)) != NULL)
     {
         UIGraphicsBeginImageContextWithOptions(snapView.frame.size, NO, 0.0);
     } else {

@@ -25,9 +25,19 @@ class NotificationTableViewController: UITableViewController {
             menuBtn.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        notificationsArray = getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
+        
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.registerNib(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if notificationsArray.count <= 0 {
+            notificationsArray = getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
+            if notificationsArray.count > 0 {
+                tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -152,39 +162,39 @@ class NotificationTableViewController: UITableViewController {
         }
 
         var postURL = Constant.MyUrl.homeURL + "uploads/\(notification.image1)"
-        println(postURL)
-        
-        var image = self.imageCache[postURL]
-        println("\(indexPath.row)")
-        if notification.image1 != "" {
-            println("test")
-            if image == nil {
-                println("jump to download!")
-                var imageURL: NSURL = NSURL(string: postURL)!
-                let request: NSURLRequest = NSURLRequest(URL: imageURL)
-                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-                    if error == nil {
-                        image = UIImage(data: data)
-                        // Store the image in to cache
-                        self.imageCache[postURL] = image
-                        cell.imageView1.image = image
-                        // cell.imageView?.image = image
-                    }
-                    else {
-                        println("Error: \(error.localizedDescription)")
-                    }
-                })
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? NotificationCell {
-                    if image != nil {
-                        cellToUpdate.imageView1.image = image
-                        println("update image")
-                    }
-                }
-            })
-        }
+        cell.imageView1.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(notification.image1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+//        
+//        var image = self.imageCache[postURL]
+//        println("\(indexPath.row)")
+//        if notification.image1 != "" {
+//            println("test")
+//            if image == nil {
+//                println("jump to download!")
+//                var imageURL: NSURL = NSURL(string: postURL)!
+//                let request: NSURLRequest = NSURLRequest(URL: imageURL)
+//                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+//                    if error == nil {
+//                        image = UIImage(data: data)
+//                        // Store the image in to cache
+//                        self.imageCache[postURL] = image
+//                        cell.imageView1.image = image
+//                        // cell.imageView?.image = image
+//                    }
+//                    else {
+//                        println("Error: \(error.localizedDescription)")
+//                    }
+//                })
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue(), {
+//                if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? NotificationCell {
+//                    if image != nil {
+//                        cellToUpdate.imageView1.image = image
+//                        println("update image")
+//                    }
+//                }
+//            })
+//        }
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         

@@ -25,17 +25,25 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
         items = [ItemObject]()
         tmpItems = [ItemObject]()
         setMenuButtonAction(menuBtn)
+        self.edgesForExtendedLayout = UIRectEdge.None;
         tableview.registerNib(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        resultSearchController.searchBar.hidden = false
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        let postUrl = Constant.MyUrl.homeURL.stringByAppendingString("items_listJSON.php?id=\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
-        getItemListWithURLstr(postUrl, { (items) -> () in
-            self.items = items
-            self.tableview.reloadData()
-            self.createSearchBar()
-        })
+        if items.count <= 0 {
+            let postUrl = Constant.MyUrl.homeURL.stringByAppendingString("items_listJSON.php?id=\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
+            getItemListWithURLstr(postUrl, { (items) -> () in
+                self.items = items
+                self.tableview.reloadData()
+                self.createSearchBar()
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,15 +122,13 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        moveToItemDetailFromIndexPath(indexPath)
+    }
+    
+    func moveToItemDetailFromIndexPath(indexpath: NSIndexPath) {
         resultSearchController.resignFirstResponder()
         resultSearchController.searchBar.resignFirstResponder()
         resultSearchController.searchBar.hidden = true
-        
-        moveToItemDetailFromIndexPath(indexPath)
-    }
-
-    
-    func moveToItemDetailFromIndexPath(indexpath: NSIndexPath) {
         var item: ItemObject!
         if self.resultSearchController.active {
             item = self.tmpItems[indexpath.row]
@@ -143,7 +149,7 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
             controller.dimsBackgroundDuringPresentation = false
             controller.hidesNavigationBarDuringPresentation = false
             controller.searchBar.sizeToFit()
-            controller.searchBar.placeholder = "Tìm kiếm"
+            controller.searchBar.placeholder = "Search..."
             
             self.tableview.tableHeaderView = controller.searchBar
             return controller

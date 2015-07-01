@@ -29,7 +29,7 @@ class ItemObject {
     var status: String!
     var timestamp: String!
     var id: String!
-    
+    var miles: String!
     var imageStr1: String!
     var imageStr2: String!
     var imageStr3: String!
@@ -173,6 +173,93 @@ class ItemObject {
         }
         
         return uploadStatus
+    }
+    
+    //Class function for shop local
+    
+    class func getShopLocalDataFromStringURL(str: String!, completionClosure: (resultItems :[ItemObject], totalRecord: String!, nextLink: String!) ->()) {
+        var url = NSURL(string: str)
+        var data: NSData = NSData(contentsOfURL: url!)!
+        var tmpItems: [ItemObject]! = []
+        var tmpTotalRecord: String!
+        var tmpNextLink: String!
+        
+        if let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
+            if let response = jsonData["paging"] as? NSArray {
+                if response.count > 0 {
+                    tmpTotalRecord = response[0]["totalRecords"] as! String!
+                    tmpNextLink = response[0]["next"] as! String
+                }
+            }
+            
+            if let items = jsonData["items"] as? NSArray {
+                for item in items {
+                    var thisItem = ItemObject()
+                    thisItem.miles = item["miles"] as! String
+                    thisItem.id = item["id"] as! String
+                    thisItem.ownerId = (item["ownerId"] as! String).toInt()
+                    thisItem.category = item["category"] as! String
+                    thisItem.title = item["title"] as! String!
+                    thisItem.description = item["description"] as! String!
+                    thisItem.imageStr1 = item["image1"] as! String!
+                    thisItem.timestamp = item["timestamp"] as! String!
+                    thisItem.price = item["price"] as! String!
+                    tmpItems.append(thisItem)
+                }
+            }
+        }
+        
+        completionClosure(resultItems: tmpItems, totalRecord: tmpTotalRecord, nextLink: tmpNextLink)
+    }
+    
+    
+    
+    class func getShopLocalFilteredItems(urlStr: String!, postStr: String!, compleationHandle: (filteredItems: [ItemObject], totalRecord: String!, nextLink: String!) -> ()) {
+        let postURl = NSURL(string: urlStr)
+        let postData: NSData = postStr.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
+        let postlength = String(postData.length)
+        
+        var request: NSMutableURLRequest = NSMutableURLRequest(URL: postURl!)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = postData
+        request.setValue(postlength, forHTTPHeaderField: "Content_Length")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        var reponseError: NSError?
+        var response: NSURLResponse?
+        var tmpItems: [ItemObject]! = []
+        var tmpTotalRecord: String!
+        var tmpNextLink: String!
+        var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+        if urlData != nil {
+            var error: NSError?
+            if let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as? NSDictionary {
+                if let response = jsonData["paging"] as? NSArray {
+                    if response.count > 0 {
+                        tmpTotalRecord = response[0]["totalRecords"] as! String!
+                        tmpNextLink = response[0]["next"] as! String
+                    }
+                }
+                
+                if let items = jsonData["items"] as? NSArray {
+                    for item in items {
+                        var thisItem = ItemObject()
+                        thisItem.miles = item["miles"] as! String
+                        thisItem.id = item["id"] as! String
+                        thisItem.ownerId = (item["ownerId"] as! String).toInt()
+                        thisItem.category = item["category"] as! String
+                        thisItem.title = item["title"] as! String!
+                        thisItem.description = item["description"] as! String!
+                        thisItem.imageStr1 = item["image1"] as! String!
+                        thisItem.timestamp = item["timestamp"] as! String!
+                        thisItem.price = item["price"] as! String!
+                        tmpItems.append(thisItem)
+                    }
+                }
+            }
+        }
+        
+        compleationHandle(filteredItems: tmpItems, totalRecord: tmpTotalRecord, nextLink: tmpNextLink)
     }
 }
 
