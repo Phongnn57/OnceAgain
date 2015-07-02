@@ -51,7 +51,7 @@ class MenuController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (hideNotification == true && indexPath.row == 9) || (hideNotification == false && indexPath.row == 10){
-            removeActiveUser()
+            UserManager.removeActiveUser()
         }
     }
 }

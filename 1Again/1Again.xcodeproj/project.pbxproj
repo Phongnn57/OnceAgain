@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A633FBAA283CCDA6A1EF60C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA38033A5447858D3106822 /* libPods.a */; };
+		68081E8E1B43C8C300F93CFE /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68081E8D1B43C8C300F93CFE /* AboutViewController.swift */; };
 		68120FFF1B3E53B900C2AB49 /* NSNotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68120FFE1B3E53B900C2AB49 /* NSNotificationCenterExtension.swift */; };
 		681210011B3E557A00C2AB49 /* ItemObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681210001B3E557A00C2AB49 /* ItemObject.swift */; };
 		681210031B3E599200C2AB49 /* CategoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681210021B3E599200C2AB49 /* CategoryObject.swift */; };
@@ -24,7 +25,7 @@
 		684BE9B31B42E66F00F1D6E9 /* ItemListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 684BE9B11B42E66F00F1D6E9 /* ItemListCell.xib */; };
 		684BE9B71B43063F00F1D6E9 /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684BE9B51B43063F00F1D6E9 /* ItemDetailController.swift */; };
 		684BE9B81B43063F00F1D6E9 /* ItemDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 684BE9B61B43063F00F1D6E9 /* ItemDetailController.xib */; };
-		684BE9BB1B43080000F1D6E9 /* ClickImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BE9BA1B43080000F1D6E9 /* ClickImage.m */; };
+		684BE9BB1B43080000F1D6E9 /* ClickImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BE9BA1B43080000F1D6E9 /* ClickImage.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		684BE9BE1B4313B300F1D6E9 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684BE9BD1B4313B300F1D6E9 /* MessageTableViewController.swift */; };
 		684BE9C21B43146200F1D6E9 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684BE9C01B43146200F1D6E9 /* MessageCell.swift */; };
 		684BE9C31B43146200F1D6E9 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 684BE9C11B43146200F1D6E9 /* MessageCell.xib */; };
@@ -38,7 +39,7 @@
 		686ABB031B3E85CC00AC80E0 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAF51B3E85CC00AC80E0 /* ELCAssetCell.m */; };
 		686ABB041B3E85CC00AC80E0 /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAF91B3E85CC00AC80E0 /* ELCAssetTablePicker.m */; };
 		686ABB051B3E85CC00AC80E0 /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAFB1B3E85CC00AC80E0 /* ELCConsole.m */; };
-		686ABB061B3E85CC00AC80E0 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAFD1B3E85CC00AC80E0 /* ELCImagePickerController.m */; };
+		686ABB061B3E85CC00AC80E0 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAFD1B3E85CC00AC80E0 /* ELCImagePickerController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		686ABB071B3E85CC00AC80E0 /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABB001B3E85CC00AC80E0 /* ELCOverlayImageView.m */; };
 		686ABB0B1B3E9CB500AC80E0 /* ItemInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686ABB091B3E9CB500AC80E0 /* ItemInfoController.swift */; };
 		686ABB0C1B3E9CB500AC80E0 /* ItemInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686ABB0A1B3E9CB500AC80E0 /* ItemInfoController.xib */; };
@@ -70,7 +71,6 @@
 		68A62AEC1B405AC900B31317 /* NotificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A62AEB1B405AC900B31317 /* NotificationTableViewController.swift */; };
 		68B2998E1B3DA9D6009720BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B2998D1B3DA9D6009720BF /* AppDelegate.swift */; };
 		68B299901B3DA9D6009720BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B2998F1B3DA9D6009720BF /* ViewController.swift */; };
-		68B299931B3DA9D6009720BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68B299911B3DA9D6009720BF /* Main.storyboard */; };
 		68B299951B3DA9D6009720BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B299941B3DA9D6009720BF /* Images.xcassets */; };
 		68B299981B3DA9D6009720BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B299961B3DA9D6009720BF /* LaunchScreen.xib */; };
 		68B299A41B3DA9D6009720BF /* _AgainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B299A31B3DA9D6009720BF /* _AgainTests.swift */; };
@@ -93,6 +93,7 @@
 /* Begin PBXFileReference section */
 		2DA38033A5447858D3106822 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B98E468CE1E1CBAC22FB926 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		68081E8D1B43C8C300F93CFE /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		68120FFE1B3E53B900C2AB49 /* NSNotificationCenterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNotificationCenterExtension.swift; sourceTree = "<group>"; };
 		681210001B3E557A00C2AB49 /* ItemObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemObject.swift; sourceTree = "<group>"; };
 		681210021B3E599200C2AB49 /* CategoryObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryObject.swift; sourceTree = "<group>"; };
@@ -201,6 +202,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68081E8C1B43C8AC00F93CFE /* About Controller */ = {
+			isa = PBXGroup;
+			children = (
+				68081E8D1B43C8C300F93CFE /* AboutViewController.swift */,
+			);
+			path = "About Controller";
+			sourceTree = "<group>";
+		};
 		6834C6991B3DC90200F7912B /* Cell&Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +381,7 @@
 		688E69D01B3DAFC500030F3E /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				68081E8C1B43C8AC00F93CFE /* About Controller */,
 				684BE9C61B431BEB00F1D6E9 /* Shop Local */,
 				684BE9BC1B43139600F1D6E9 /* Message */,
 				684BE9AC1B42E5A100F1D6E9 /* Item List */,
@@ -581,7 +591,7 @@
 				68B299851B3DA9D6009720BF /* Frameworks */,
 				68B299861B3DA9D6009720BF /* Resources */,
 				715DE9A6CF208EECA2BB1946 /* Copy Pods Resources */,
-				B7DB27E002F84293632EF10D /* Find unused imports */,
+				A128E1EAEA76DE886CF77366 /* Find unused imports */,
 			);
 			buildRules = (
 			);
@@ -653,7 +663,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				68A62AE81B4050AB00B31317 /* NotificationCell.xib in Resources */,
-				68B299931B3DA9D6009720BF /* Main.storyboard in Resources */,
 				6879D8D31B3E346400F89BAF /* SecondPriceCell.xib in Resources */,
 				686ECCBD1B416333001A861B /* SignUpViewController.xib in Resources */,
 				686ABB0C1B3E9CB500AC80E0 /* ItemInfoController.xib in Resources */,
@@ -713,7 +722,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7DB27E002F84293632EF10D /* Find unused imports */ = {
+		A128E1EAEA76DE886CF77366 /* Find unused imports */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -784,6 +793,7 @@
 				684BE9B21B42E66F00F1D6E9 /* ItemListCell.swift in Sources */,
 				686ABB061B3E85CC00AC80E0 /* ELCImagePickerController.m in Sources */,
 				68A62ADA1B40376700B31317 /* CameraController.swift in Sources */,
+				68081E8E1B43C8C300F93CFE /* AboutViewController.swift in Sources */,
 				688E69DE1B3DC57100030F3E /* AddItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

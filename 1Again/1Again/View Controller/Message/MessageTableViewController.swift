@@ -70,17 +70,17 @@ class MessageTableViewController: UITableViewController {
         
         switch (msg.status) {
         case ("X"):
-            cell.imageview.image = UIImage(named: "red.x.png")
+            cell.imageview.image = UIImage(named: "image:message-red-delete")
         case ("Y"):
-            cell.imageview.image =  UIImage(named: "green.check.png")
+            cell.imageview.image =  UIImage(named: "image:message-green-check")
         case ("F"):
-            cell.imageview.image =  UIImage(named: "favorite.png")
+            cell.imageview.image =  UIImage(named: "image:message-favorite")
         case ("O"):
-            cell.imageview.image =  UIImage(named: "offer.jpeg")
+            cell.imageview.image =  UIImage(named: "image:message-offer")
         case ("I"):
-            cell.imageview.image =  UIImage(named: "dollar_sign1.jpg")
+            cell.imageview.image =  UIImage(named: "image:message-dollar")
         case ("N"):
-            cell.imageview.image =  UIImage(named: "new2.jpeg")
+            cell.imageview.image =  UIImage(named: "image:message-new")
         default:
             break;
         }

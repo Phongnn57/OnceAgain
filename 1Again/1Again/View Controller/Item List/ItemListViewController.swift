@@ -38,7 +38,7 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
         super.viewDidAppear(animated)
         if items.count <= 0 {
             let postUrl = Constant.MyUrl.homeURL.stringByAppendingString("items_listJSON.php?id=\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
-            getItemListWithURLstr(postUrl, { (items) -> () in
+            ItemObject.getItemListWithURLstr(postUrl, completionClosure: { (items) -> () in
                 self.items = items
                 self.tableview.reloadData()
                 self.createSearchBar()

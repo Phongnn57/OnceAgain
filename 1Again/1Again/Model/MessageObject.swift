@@ -56,7 +56,6 @@ class MessageObject {
         postJSON(paramsData, urlData)
     }
     
-    
     class func getListOfMessages(item:String, completionClosure: (msgObjects: [MessageObject]) -> ()){
         
         var messageArray:[MessageObject] = []

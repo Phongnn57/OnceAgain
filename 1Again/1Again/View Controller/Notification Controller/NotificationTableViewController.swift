@@ -33,10 +33,12 @@ class NotificationTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if notificationsArray.count <= 0 {
-            notificationsArray = getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
-            if notificationsArray.count > 0 {
-                tableView.reloadData()
-            }
+            NotificationObject.getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionHandle: { (notifications) -> () in
+                self.notificationsArray = notifications
+                if self.notificationsArray.count > 0 {
+                    self.tableView.reloadData()
+                }
+            })
         }
     }
 
@@ -51,11 +53,11 @@ class NotificationTableViewController: UITableViewController {
     func refresh(sender:AnyObject)
     {
         // Updating your data here...
-
-        notificationsArray  = getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
-        
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
+        NotificationObject.getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionHandle: { (notifications) -> () in
+            self.notificationsArray = notifications
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        })
     }
     
     
@@ -243,8 +245,7 @@ class NotificationTableViewController: UITableViewController {
             //   println("DELETE•ACTION");
             var notifications = NotificationObject()
             notifications = self.notificationsArray[indexPath.row]
-            
-            deleteNotification(notifications.iid)
+            NotificationObject.deleteNotification(notifications.iid)
             //println("Response: \(responseString)")
             self.notificationsArray.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

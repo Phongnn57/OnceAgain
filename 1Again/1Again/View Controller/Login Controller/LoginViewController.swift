@@ -76,7 +76,7 @@ class LoginViewController: BaseSubViewController, MBProgressHUDDelegate, UITextF
             self.view.addSubview(hud)
             hud.show(true)
             
-            loginWithUsername(email.text, password.text, hud)
+            UserManager.loginWithUsername(email.text, password: password.text, hud: hud)
         } else {
             let alertView = UIAlertView(title: "Error!", message: "Please fill email and password before submit", delegate: self, cancelButtonTitle: "Try again")
             alertView.show()

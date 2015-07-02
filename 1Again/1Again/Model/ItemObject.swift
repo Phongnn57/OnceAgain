@@ -121,6 +121,8 @@ class ItemObject {
         return false
     }
     
+    
+    //UPLOAD NEW ITEM TO WEBSERVICE
     func pushItemWithActivityIndicator(hud: MBProgressHUD!) ->Bool {
         var uploadStatus: Bool = false
         let manager = AFHTTPRequestOperationManager()
@@ -175,8 +177,7 @@ class ItemObject {
         return uploadStatus
     }
     
-    //Class function for shop local
-    
+    //GET LIST OF ITEM IN SHOP LOCAL
     class func getShopLocalDataFromStringURL(str: String!, completionClosure: (resultItems :[ItemObject], totalRecord: String!, nextLink: String!) ->()) {
         var url = NSURL(string: str)
         var data: NSData = NSData(contentsOfURL: url!)!
@@ -211,7 +212,6 @@ class ItemObject {
         
         completionClosure(resultItems: tmpItems, totalRecord: tmpTotalRecord, nextLink: tmpNextLink)
     }
-    
     
     
     class func getShopLocalFilteredItems(urlStr: String!, postStr: String!, compleationHandle: (filteredItems: [ItemObject], totalRecord: String!, nextLink: String!) -> ()) {
@@ -261,40 +261,42 @@ class ItemObject {
         
         compleationHandle(filteredItems: tmpItems, totalRecord: tmpTotalRecord, nextLink: tmpNextLink)
     }
-}
-
-func getItemListWithURLstr(str: String, completionClosure: (items :[ItemObject]) ->()) {
-    let url = NSURL(string: str)
-    let data = NSData(contentsOfURL: url!)
-    var itemList: [ItemObject] = []
     
-    if let jsonData = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as? NSDictionary {
-        println("json: \(jsonData)")
-        if let items = jsonData["items"] as? NSArray {
-            for item in items {
-                var thisItem = ItemObject()
-                thisItem.title = item["title"] as! String
-                thisItem.id = item["id"] as! String
-                thisItem.ownerId = (item["ownerId"] as! String).toInt()
-                thisItem.category = item["category"] as! String
-                thisItem.brand = item["brand"] as! String!
-                thisItem.condition = item["conditionA"] as! String!
-                thisItem.compensation = item["compensation"] as! String!
-                thisItem.description = item["description"] as! String!
-                thisItem.imageStr1 = item["image1"] as! String!
-                thisItem.imageStr2 = item["image2"] as! String!
-                thisItem.imageStr3 = item["image3"] as! String!
-                thisItem.imageStr4 = item["image4"] as! String!
-                thisItem.imageStr5 = item["image5"] as! String!
-                thisItem.status = item["status"] as! String!
-                thisItem.timestamp = item["timestamp"] as! String!
-                itemList.append(thisItem)
+    //GET LIST OF ITEM IN ITEM LIST VIEW
+    class func getItemListWithURLstr(str: String, completionClosure: (items :[ItemObject]) ->()) {
+        let url = NSURL(string: str)
+        let data = NSData(contentsOfURL: url!)
+        var itemList: [ItemObject] = []
+        
+        if let jsonData = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as? NSDictionary {
+            println("json: \(jsonData)")
+            if let items = jsonData["items"] as? NSArray {
+                for item in items {
+                    var thisItem = ItemObject()
+                    thisItem.title = item["title"] as! String
+                    thisItem.id = item["id"] as! String
+                    thisItem.ownerId = (item["ownerId"] as! String).toInt()
+                    thisItem.category = item["category"] as! String
+                    thisItem.brand = item["brand"] as! String!
+                    thisItem.condition = item["conditionA"] as! String!
+                    thisItem.compensation = item["compensation"] as! String!
+                    thisItem.description = item["description"] as! String!
+                    thisItem.imageStr1 = item["image1"] as! String!
+                    thisItem.imageStr2 = item["image2"] as! String!
+                    thisItem.imageStr3 = item["image3"] as! String!
+                    thisItem.imageStr4 = item["image4"] as! String!
+                    thisItem.imageStr5 = item["image5"] as! String!
+                    thisItem.status = item["status"] as! String!
+                    thisItem.timestamp = item["timestamp"] as! String!
+                    itemList.append(thisItem)
+                }
             }
         }
+        
+        completionClosure(items: itemList)
     }
-    
-    completionClosure(items: itemList)
 }
+
 
 func archiveItem(item:String){
     var postURL = Constant.MyUrl.homeURL.stringByAppendingString("item_update.php?status=I&id=\(item)")

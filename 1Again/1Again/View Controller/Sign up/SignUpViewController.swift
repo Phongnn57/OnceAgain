@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: BaseSubViewController, UITextFieldDelegate {
+class SignUpViewController: BaseSubViewController, UITextFieldDelegate, MBProgressHUDDelegate {
 
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
@@ -17,6 +17,8 @@ class SignUpViewController: BaseSubViewController, UITextFieldDelegate {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
+    
+    var keyboardIsShown: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +45,14 @@ class SignUpViewController: BaseSubViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUpTapped(sender: AnyObject) {
-        
+        if isAvailableToSignUp() {
+            let hud = MBProgressHUD(view: self.view)
+            hud.labelText = "Please wait"
+            hud.delegate = self
+            self.view.addSubview(hud)
+            hud.show(true)
+            UserManager.signUpWithFirstName(firstName.text, lastName: lastName.text, address1: address.text, address2: city.text, email: email.text, password: password.text, cPassword: confirmPassword.text, hud: hud)
+        }
     }
     
     @IBAction func backToLogin(sender: AnyObject) {
@@ -74,11 +83,12 @@ class SignUpViewController: BaseSubViewController, UITextFieldDelegate {
             let alert = UIAlertView(title: "Error", message: "Please enter Username, Address1, Address2 and Password", delegate: self, cancelButtonTitle: "Try again")
             alert.show()
             return false
-        } else if !password.isEqual(confirmPassword) {
+        } else if password.text != confirmPassword.text {
             let alert = UIAlertView(title: "Error", message: "Password does not match!", delegate: self, cancelButtonTitle: "Try again")
             alert.show()
             return false
         }
         return true
     }
+
 }

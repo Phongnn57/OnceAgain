@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dackal Signup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zg3-7R-HuN">
-                    <rect key="frame" x="39" y="30" width="296" height="37"/>
+                    <rect key="frame" x="39" y="20" width="296" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="296" id="PIP-kc-kny"/>
                         <constraint firstAttribute="height" constant="37" id="c7K-Os-GZe"/>
@@ -33,10 +33,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FIRST NAME" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="ksT-5h-862" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                    <rect key="frame" x="39" y="87" width="120" height="44"/>
+                    <rect key="frame" x="39" y="73" width="120" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="c1g-2u-PCK"/>
-                        <constraint firstAttribute="height" constant="44" id="t8N-V1-nD1"/>
+                        <constraint firstAttribute="height" constant="40" id="t8N-V1-nD1"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -45,9 +45,9 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="LAST NAME" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="m26-Lt-8ad" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                    <rect key="frame" x="167" y="87" width="168" height="44"/>
+                    <rect key="frame" x="167" y="73" width="168" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="6Ny-0v-l1W"/>
+                        <constraint firstAttribute="height" constant="40" id="6Ny-0v-l1W"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -56,9 +56,9 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="STREET ADDRESS" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="LOz-Jv-MMe" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                    <rect key="frame" x="39" y="139" width="296" height="44"/>
+                    <rect key="frame" x="39" y="121" width="296" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="8ko-48-DBP"/>
+                        <constraint firstAttribute="height" constant="40" id="8ko-48-DBP"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -67,9 +67,9 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CITY,  STATE ZIP" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="ktG-5E-Lkq" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                    <rect key="frame" x="39" y="191" width="296" height="44"/>
+                    <rect key="frame" x="39" y="169" width="296" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="IWL-uh-TZH"/>
+                        <constraint firstAttribute="height" constant="40" id="IWL-uh-TZH"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -78,9 +78,9 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="EMAIL" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="syy-mH-x1X" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                    <rect key="frame" x="39" y="243" width="296" height="44"/>
+                    <rect key="frame" x="39" y="217" width="296" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="X6l-5H-nqu"/>
+                        <constraint firstAttribute="height" constant="40" id="X6l-5H-nqu"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -89,29 +89,29 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PASSWORD" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="WWK-fe-UOZ" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                    <rect key="frame" x="39" y="295" width="296" height="44"/>
+                    <rect key="frame" x="39" y="265" width="296" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="XHY-Ra-dNo"/>
+                        <constraint firstAttribute="height" constant="40" id="XHY-Ra-dNo"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="blW-Un-lzv"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CONFIRM PASSWORD" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="0fH-7d-dD1" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                    <rect key="frame" x="39" y="347" width="296" height="44"/>
+                    <rect key="frame" x="39" y="313" width="296" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="eTs-uF-UQI"/>
+                        <constraint firstAttribute="height" constant="40" id="eTs-uF-UQI"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="jsT-qp-EjW"/>
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FEp-Gq-YtO">
-                    <rect key="frame" x="120" y="399" width="135" height="40"/>
+                    <rect key="frame" x="120" y="361" width="135" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="135" id="so0-l9-ysJ"/>
@@ -132,7 +132,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQg-hU-UPu">
-                    <rect key="frame" x="58" y="447" width="258" height="30"/>
+                    <rect key="frame" x="58" y="409" width="258" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="258" id="h9u-hI-6C8"/>
                         <constraint firstAttribute="height" constant="30" id="p5j-cB-atR"/>
@@ -152,9 +152,9 @@
                 <constraint firstItem="ktG-5E-Lkq" firstAttribute="top" secondItem="LOz-Jv-MMe" secondAttribute="bottom" constant="8" id="2kH-92-ebQ"/>
                 <constraint firstItem="ksT-5h-862" firstAttribute="leading" secondItem="Zg3-7R-HuN" secondAttribute="leading" id="BgZ-ec-2ao"/>
                 <constraint firstItem="WWK-fe-UOZ" firstAttribute="trailing" secondItem="ktG-5E-Lkq" secondAttribute="trailing" id="Cq7-qc-qLs"/>
-                <constraint firstItem="Zg3-7R-HuN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="H56-Kh-LTH"/>
+                <constraint firstItem="Zg3-7R-HuN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="H56-Kh-LTH"/>
                 <constraint firstItem="CQg-hU-UPu" firstAttribute="top" secondItem="FEp-Gq-YtO" secondAttribute="bottom" constant="8" id="Jjz-ah-jEO"/>
-                <constraint firstItem="m26-Lt-8ad" firstAttribute="top" secondItem="Zg3-7R-HuN" secondAttribute="bottom" constant="20" id="PM9-Eo-gae"/>
+                <constraint firstItem="m26-Lt-8ad" firstAttribute="top" secondItem="Zg3-7R-HuN" secondAttribute="bottom" constant="16" id="PM9-Eo-gae"/>
                 <constraint firstAttribute="centerX" secondItem="FEp-Gq-YtO" secondAttribute="centerX" id="PcT-wX-Re4"/>
                 <constraint firstItem="WWK-fe-UOZ" firstAttribute="trailing" secondItem="Zg3-7R-HuN" secondAttribute="trailing" id="PdD-Qj-EFa"/>
                 <constraint firstItem="WWK-fe-UOZ" firstAttribute="leading" secondItem="0fH-7d-dD1" secondAttribute="leading" id="QI1-S9-FS3"/>
@@ -169,7 +169,7 @@
                 <constraint firstItem="WWK-fe-UOZ" firstAttribute="leading" secondItem="syy-mH-x1X" secondAttribute="leading" id="h1f-50-rBC"/>
                 <constraint firstItem="WWK-fe-UOZ" firstAttribute="top" secondItem="syy-mH-x1X" secondAttribute="bottom" constant="8" id="hOg-tg-FIl"/>
                 <constraint firstItem="LOz-Jv-MMe" firstAttribute="top" secondItem="m26-Lt-8ad" secondAttribute="bottom" constant="8" id="k5Q-88-xYi"/>
-                <constraint firstItem="ksT-5h-862" firstAttribute="top" secondItem="Zg3-7R-HuN" secondAttribute="bottom" constant="20" id="lvn-fK-5xd"/>
+                <constraint firstItem="ksT-5h-862" firstAttribute="top" secondItem="Zg3-7R-HuN" secondAttribute="bottom" constant="16" id="lvn-fK-5xd"/>
                 <constraint firstItem="m26-Lt-8ad" firstAttribute="leading" secondItem="ksT-5h-862" secondAttribute="trailing" constant="8" id="nza-Kz-yv8"/>
                 <constraint firstItem="WWK-fe-UOZ" firstAttribute="trailing" secondItem="LOz-Jv-MMe" secondAttribute="trailing" id="qwJ-hr-sTl"/>
                 <constraint firstAttribute="centerX" secondItem="CQg-hU-UPu" secondAttribute="centerX" id="tOU-9f-psg"/>
