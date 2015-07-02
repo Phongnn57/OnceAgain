@@ -9,37 +9,24 @@
 import UIKit
 
 class ItemObject {
-    var image1: UIImage!
-    var image2: UIImage!
-    var image3: UIImage!
-    var image4: UIImage!
-    var image5: UIImage!
-    var title: String!
-    var description: String!
+    var id: String!
+    var ownerId: Int!
+    
+    var image1, image2, image3, image4, image5: UIImage!
+    var imageStr1, imageStr2, imageStr3, imageStr4, imageStr5: String!
+    var title, description: String!
+    
     var donate: String = "0"
     var consign: String = "0"
-    var price: String!
     var sale: String = "0"
-    var ownerId: Int!
-    var category: String!
-    var condition: String!
-    var age: String!
-    var brand: String!
-    var compensation: String!
-    var status: String!
-    var timestamp: String!
-    var id: String!
-    var miles: String!
-    var imageStr1: String!
-    var imageStr2: String!
-    var imageStr3: String!
-    var imageStr4: String!
-    var imageStr5: String!
-    
+    var price: String!
+
+    var category, condition, age, brand: String!
+    var compensation, status, timestamp, miles: String!
+
     init() {
-        consign = "0"
-        donate = "0"
-        sale = "0"
+        id = "0"
+        ownerId = 0
     }
     
     func getNumberOfEmptyImage() -> Int {

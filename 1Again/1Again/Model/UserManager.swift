@@ -57,7 +57,7 @@ class UserManager {
         }
         return false
     }
-    
+
     class func loginWithUsername(username: String, password: String, hud: MBProgressHUD!) {
         var postURL = Constant.MyUrl.homeURL.stringByAppendingString("V5.jsonlogin2.php")
         var paramsData = ["username":"\(username)", "password":"\(password)"] as Dictionary<String, String>
@@ -87,7 +87,7 @@ class UserManager {
                 {
                     let id:NSInteger = jsonData.valueForKey("id") as! NSInteger
                     let userType:String = jsonData.valueForKey("userType") as! String
-                    var activeUser = UserObject(sUserId: id, sUserType: userType)
+                    var activeUser = UserObject(sUserId: id, sUserType: userType, sDisplayname: "", sEmail: "")
                     UserManager.sharedInstance.setUser(activeUser)
                     saveActiveUser(activeUser.userId, userType: activeUser.userType)
                     NSNotificationCenter.postNotificationName(Constant.CustomNotification.LoginResult, userInfo: ["result": "success"])
@@ -109,16 +109,16 @@ class UserManager {
         hud.hide(true)
     }
     
-    class func signUpWithFirstName(firstName: String!, lastName: String!, address1: String!, address2: String!, email: String!, password: String!, cPassword: String!, hud: MBProgressHUD!) {
+    class func signUpWithFirstName(firstName: String, lastName: String, address1: String, address2: String, email: String, password: String, cPassword: String, hud: MBProgressHUD!) {
         let postURL = Constant.MyUrl.homeURL.stringByAppendingString("V6.jsonsignup.php")
-        var paramsData = ["username":"\(email)",
-            "password":"\(password)",
-            "c_password":"\(cPassword)",
-            "address1":"\(address1)",
-            "address2":"\(address2)",
-            "firstname":"\(firstName)",
+        var paramsData = ["username":email,
+            "password":password,
+            "c_password":cPassword,
+            "address1":address1,
+            "address2":address2,
+            "firstname":firstName,
             "displayname":"Tester",
-            "lastname":"\(lastName)"] as Dictionary<String, String>
+            "lastname":lastName] as Dictionary<String, String>
         var request = NSMutableURLRequest(URL: NSURL(string: postURL)!)
         request.HTTPMethod = "POST"
         var err: NSError?
@@ -133,12 +133,15 @@ class UserManager {
         var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
         
         if ( urlData != nil ) {
-            let res = response as! NSHTTPURLResponse!;
+            let res = response as! NSHTTPURLResponse!
+            
+            NSLog("Response code: %ld", res.statusCode);
             if (res.statusCode >= 200 && res.statusCode < 300)
             {
-                var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
+//                var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                 var error: NSError?
                 let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
+                print(jsonData.valueForKey("success"))
                 let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                 if(success > 0)
                 {

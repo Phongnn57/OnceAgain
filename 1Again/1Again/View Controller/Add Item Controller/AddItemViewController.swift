@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate, CameraControllerDelegate {
+class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate, CameraControllerDelegate, AddPhotoCellDelegate {
 
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
@@ -60,6 +60,10 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Constant.CustomNotification.AddItemWithResult, object: nil)
     }
     
+    func clickImage(image: AddPhotoImageView) {
+        choosePhoto(image)
+    }
+    
     //Mark: TABLEVIEW METHODS -----------------------------------------------------
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -68,14 +72,9 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(addPhotoCellIdentifier) as! AddPhotoCell
-            
+            cell.delegate = self
             cell.setImageInCell(item)
             cell.btnUpdateImage.addTarget(self, action: "createActionSheetType1", forControlEvents: UIControlEvents.TouchUpInside)
-            cell.image1.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "choosePhoto:"))
-            cell.image2.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "choosePhoto:"))
-            cell.image3.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "choosePhoto:"))
-            cell.image4.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "choosePhoto:"))
-            cell.image5.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "choosePhoto:"))
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(itemInfoCellIdentifier) as! ItemDescriptionCell
@@ -157,7 +156,8 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
 
     //Mark: ADD PHOTO IMAGE VIEW ACTION
     func choosePhoto(sender: AnyObject) {
-        let imageView = (sender as! UITapGestureRecognizer).view as! AddPhotoImageView
+//        let imageView = (sender as! UITapGestureRecognizer).view as! AddPhotoImageView
+        let imageView = sender as! AddPhotoImageView
         switch imageView.imageMode {
             case Constant.AddItemPhotoMode.ImageViewAlreadyHasImage:
                 createActionSheetType2(imageView)

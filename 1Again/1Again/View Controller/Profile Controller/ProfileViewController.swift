@@ -22,9 +22,9 @@ class ProfileViewController: BaseViewController {
         
         var userIdInt: Int = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
         var url = Constant.MyUrl.homeURL.stringByAppendingString("v5.getUser_JSONV2.php?id=\(userIdInt)")
-        var user =  ProfileObject(urlStr: url) as ProfileObject
+        var user =  UserObject(urlStr: url) as UserObject
         
-        userId.text = "\(user.uId)"
+        userId.text = "\(user.userId)"
         emailAddress.text = user.email
         displayName.text = user.displayName
     }

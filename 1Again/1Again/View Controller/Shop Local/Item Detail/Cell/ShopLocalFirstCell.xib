@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShopLocalFirstCell" rowHeight="522" id="KGk-i7-Jjw" customClass="ShopLocalFirstCell" customModule="_Again" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="522"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycj-rU-Egh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="281"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ycj-rU-Egh" secondAttribute="height" multiplier="4:3" id="7ym-11-Y3s"/>
+                        </constraints>
+                    </scrollView>
+                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="XT2-jO-oxW">
+                        <rect key="frame" x="8" y="281" width="359" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="fka-qm-1xc"/>
+                        </constraints>
+                    </pageControl>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwu-PB-O87">
+                        <rect key="frame" x="8" y="335" width="311" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Adr-a1-zJZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nt6-In-15w">
+                        <rect key="frame" x="327" y="326" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="8ZX-fO-Aee"/>
+                            <constraint firstAttribute="height" constant="40" id="XkU-6Z-UQm"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="image:shop-local-like">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGg-GU-jKU">
+                        <rect key="frame" x="8" y="374" width="359" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyD-jz-rPK">
+                        <rect key="frame" x="8" y="461" width="172" height="45"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="KFu-Ol-dIB"/>
+                        </constraints>
+                        <state key="normal" title="I'll TAKE IT">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="btnTakeItAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kOV-9E-WNW"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KpC-jN-Hpu">
+                        <rect key="frame" x="196" y="461" width="171" height="45"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="mYu-D4-G2R"/>
+                        </constraints>
+                        <state key="normal" title="MAKE OFFER">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="btnMakeOfferAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7ir-0Q-owo"/>
+                        </connections>
+                    </button>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2W-05-XkV">
+                        <rect key="frame" x="8" y="403" width="359" height="50"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Cav-UK-WBb"/>
+                        </constraints>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="I2W-05-XkV" firstAttribute="top" secondItem="yGg-GU-jKU" secondAttribute="bottom" constant="8" id="2LT-ji-olN"/>
+                    <constraint firstItem="XT2-jO-oxW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="8RY-Ja-BTO"/>
+                    <constraint firstItem="yGg-GU-jKU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Eet-P3-j2e"/>
+                    <constraint firstItem="XT2-jO-oxW" firstAttribute="top" secondItem="ycj-rU-Egh" secondAttribute="bottom" id="Eku-eD-PWD"/>
+                    <constraint firstItem="nt6-In-15w" firstAttribute="leading" secondItem="Uwu-PB-O87" secondAttribute="trailing" constant="8" id="FEE-0r-Ug0"/>
+                    <constraint firstItem="KpC-jN-Hpu" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="QMg-ES-xlW"/>
+                    <constraint firstItem="nt6-In-15w" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="WZe-0L-aeP"/>
+                    <constraint firstAttribute="trailing" secondItem="ycj-rU-Egh" secondAttribute="trailing" id="XGG-p2-Egs"/>
+                    <constraint firstItem="KpC-jN-Hpu" firstAttribute="centerY" secondItem="GyD-jz-rPK" secondAttribute="centerY" id="Z0n-mJ-U7O"/>
+                    <constraint firstItem="I2W-05-XkV" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="bNJ-8t-8zS"/>
+                    <constraint firstItem="ycj-rU-Egh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="beU-Y6-6NN"/>
+                    <constraint firstItem="ycj-rU-Egh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="cY0-OP-4Uv"/>
+                    <constraint firstItem="KpC-jN-Hpu" firstAttribute="top" secondItem="I2W-05-XkV" secondAttribute="bottom" constant="8" id="dk8-0b-pJs"/>
+                    <constraint firstItem="nt6-In-15w" firstAttribute="top" secondItem="XT2-jO-oxW" secondAttribute="bottom" constant="8" id="eAg-Q8-zin"/>
+                    <constraint firstItem="GyD-jz-rPK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ehK-4o-9OA"/>
+                    <constraint firstItem="KpC-jN-Hpu" firstAttribute="width" secondItem="GyD-jz-rPK" secondAttribute="width" id="fo4-3d-Fdh"/>
+                    <constraint firstAttribute="trailing" secondItem="XT2-jO-oxW" secondAttribute="trailing" constant="8" id="fzS-Si-HYU"/>
+                    <constraint firstItem="nt6-In-15w" firstAttribute="centerY" secondItem="Uwu-PB-O87" secondAttribute="centerY" id="j9V-u7-Ae0"/>
+                    <constraint firstItem="Uwu-PB-O87" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="o8y-11-uzs"/>
+                    <constraint firstItem="yGg-GU-jKU" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="uEy-ou-8ro"/>
+                    <constraint firstItem="I2W-05-XkV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="uYK-bg-aGK"/>
+                    <constraint firstItem="yGg-GU-jKU" firstAttribute="top" secondItem="nt6-In-15w" secondAttribute="bottom" constant="8" id="vdM-AW-mFc"/>
+                    <constraint firstItem="KpC-jN-Hpu" firstAttribute="leading" secondItem="GyD-jz-rPK" secondAttribute="trailing" constant="16" id="xjb-K2-IJz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="descriptionLB" destination="I2W-05-XkV" id="Str-0S-5xz"/>
+                <outlet property="favorite" destination="nt6-In-15w" id="d9f-u5-IyP"/>
+                <outlet property="pageControl" destination="XT2-jO-oxW" id="HsO-eo-xUA"/>
+                <outlet property="price" destination="Uwu-PB-O87" id="kra-sI-cof"/>
+                <outlet property="scrollView" destination="ycj-rU-Egh" id="4xZ-vT-GHp"/>
+                <outlet property="title" destination="yGg-GU-jKU" id="mtf-Rf-Juv"/>
+            </connections>
+            <point key="canvasLocation" x="710.5" y="285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="image:shop-local-like" width="40" height="40"/>
+    </resources>
+</document>

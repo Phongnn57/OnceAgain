@@ -19,5 +19,16 @@ class ShopLocalCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    func setupCellBasedOnItem(item: ItemObject) {
+        self.title.text = item.title
+        if item.category == "15" {
+            self.price.hidden = true
+        } else {
+            self.price.hidden = false
+            self.price.text = "$\(item.price)"
+        }
+        self.imageview.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+    }
 
 }

@@ -36,6 +36,8 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        println(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))
         ItemObject.getShopLocalDataFromStringURL(Constant.MyUrl.homeURL.stringByAppendingString("forSale_listJSONV4.php?userid=\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))"), completionClosure: { (resultItems, totalRecord, nextLink) -> () in
             self.items = resultItems
             self.totalRecord = totalRecord
@@ -45,15 +47,12 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func loadMoreData() {
-
         if totalRecord.toInt() > items.count {
             var additionData: [ItemObject] = []
-            
             ItemObject.getShopLocalDataFromStringURL(Constant.MyUrl.homeURL + self.nextLink, completionClosure: { (resultItems, totalRecord, nextLink) -> () in
                 additionData = resultItems
                 self.nextLink = nextLink
                 self.totalRecord = totalRecord
-                
                 for item in additionData {
                     self.items.append(item)
                 }
@@ -85,22 +84,24 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! ShopLocalCollectionCell
         
         let item = items[indexPath.row]
-        
-        cell.title.text = item.title
-        if item.category == "15" {
-            cell.price.hidden = true
-        } else {
-            cell.price.hidden = false
-            cell.price.text = "$\(item.price)"
+        cell.setupCellBasedOnItem(item)
+        if indexPath.row == items.count - 1 {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.loadMoreData()
+            })
         }
-        cell.imageview.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
-        
-        if indexPath.row == items.count - 1 {loadMoreData()}
-        
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSize(width: UIScreen.mainScreen().bounds.size.width/2 - 15, height: UIScreen.mainScreen().bounds.size.width/2 + 50)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let item = items[indexPath.row]
+        if item.category != "15" {
+            let shopLocalDetailController = ShopLocalDetailViewController()
+            self.navigationController?.pushViewController(shopLocalDetailController, animated: true)
+        }
     }
 }

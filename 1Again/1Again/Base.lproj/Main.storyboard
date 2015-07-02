@@ -436,7 +436,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="LJV-hS-ypD" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="sQr-fd-ANb"/>
+                                            <segue destination="LJV-hS-ypD" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="3vr-4R-02t"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuController" rowHeight="44" id="B6U-9E-plz">
@@ -917,7 +917,7 @@
             </objects>
             <point key="canvasLocation" x="-369.5" y="3945.5"/>
         </scene>
-        <!--Message-->
+        <!--Messages-->
         <scene sceneID="vf4-xE-N3n">
             <objects>
                 <tableViewController id="pzi-WN-QY6" customClass="MessageTableViewController" customModule="_Again" customModuleProvider="target" sceneMemberID="viewController">
@@ -930,7 +930,7 @@
                             <outlet property="delegate" destination="pzi-WN-QY6" id="3dh-kn-Kg3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Message" id="306-1f-NlG">
+                    <navigationItem key="navigationItem" title="Messages" id="306-1f-NlG">
                         <barButtonItem key="leftBarButtonItem" image="btn:menu-bg" id="mpZ-ej-lCo"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -1033,7 +1033,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="IJa-Ob-XYe" kind="relationship" relationship="rootViewController" id="d5h-Wf-IcQ"/>
+                        <segue destination="IJa-Ob-XYe" kind="relationship" relationship="rootViewController" id="Hze-YV-FVj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n80-mA-2zk" userLabel="First Responder" sceneMemberID="firstResponder"/>

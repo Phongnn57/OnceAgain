@@ -99,5 +99,4 @@ class MessageObject {
         }
         completionClosure(msgObjects: messageArray)
     }
-
 }

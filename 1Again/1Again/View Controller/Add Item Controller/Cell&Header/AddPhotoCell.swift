@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddPhotoCellDelegate {
-    func clickButtonWithTag(tag: Int)
+    func clickImage(image: AddPhotoImageView)
 }
 
 class AddPhotoCell: UITableViewCell {
@@ -25,11 +25,11 @@ class AddPhotoCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        image1.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
-        image2.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
-        image3.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
-        image4.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
-        image5.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
+        self.image1.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
+        self.image2.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
+        self.image3.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
+        self.image4.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
+        self.image5.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -38,7 +38,8 @@ class AddPhotoCell: UITableViewCell {
     
     func updateImage(sender: AnyObject) {
         let imageView = (sender as! UITapGestureRecognizer).view as! AddPhotoImageView
-        delegate?.clickButtonWithTag(imageView.tag)
+        delegate?.clickImage(imageView)
+        
     }
     
     func setImageInCell(item: ItemObject!) {
