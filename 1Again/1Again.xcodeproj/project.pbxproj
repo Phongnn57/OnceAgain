@@ -51,6 +51,7 @@
 		68521DA81B4FEA0A00F1F90C /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68521DA71B4FEA0A00F1F90C /* ModelManager.swift */; };
 		68521DAA1B4FF37400F1F90C /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68521DA91B4FF37400F1F90C /* ItemAPI.swift */; };
 		68521DAC1B5014DA00F1F90C /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68521DAB1B5014DA00F1F90C /* CommentAPI.swift */; };
+		68521DB31B50436D00F1F90C /* StaticDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68521DB21B50436D00F1F90C /* StaticDataTableViewController.m */; };
 		686ABAED1B3E704A00AC80E0 /* MyCustomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAEC1B3E704A00AC80E0 /* MyCustomImage.swift */; };
 		686ABB011B3E85CC00AC80E0 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAF11B3E85CC00AC80E0 /* ELCAlbumPickerController.m */; };
 		686ABB021B3E85CC00AC80E0 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAF31B3E85CC00AC80E0 /* ELCAsset.m */; };
@@ -95,6 +96,8 @@
 		68B299951B3DA9D6009720BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B299941B3DA9D6009720BF /* Images.xcassets */; };
 		68B299981B3DA9D6009720BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B299961B3DA9D6009720BF /* LaunchScreen.xib */; };
 		68B299A41B3DA9D6009720BF /* _AgainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B299A31B3DA9D6009720BF /* _AgainTests.swift */; };
+		68BECDE01B5053010007689E /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BECDDE1B5053010007689E /* MyCollectionViewCell.swift */; };
+		68BECDE11B5053010007689E /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BECDDF1B5053010007689E /* MyCollectionViewCell.xib */; };
 		68F21D3A1B3DD3F8004455EC /* PriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F21D381B3DD3F8004455EC /* PriceCell.swift */; };
 		68F21D3B1B3DD3F8004455EC /* PriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F21D391B3DD3F8004455EC /* PriceCell.xib */; };
 		68F21D3E1B3DD6F5004455EC /* AttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F21D3C1B3DD6F5004455EC /* AttributeCell.swift */; };
@@ -157,6 +160,8 @@
 		68521DA71B4FEA0A00F1F90C /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		68521DA91B4FF37400F1F90C /* ItemAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAPI.swift; sourceTree = "<group>"; };
 		68521DAB1B5014DA00F1F90C /* CommentAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
+		68521DB11B50436D00F1F90C /* StaticDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
+		68521DB21B50436D00F1F90C /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		686ABAEC1B3E704A00AC80E0 /* MyCustomImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomImage.swift; sourceTree = "<group>"; };
 		686ABAF01B3E85CC00AC80E0 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		686ABAF11B3E85CC00AC80E0 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
@@ -216,6 +221,8 @@
 		68B2999D1B3DA9D6009720BF /* 1AgainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 1AgainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B299A21B3DA9D6009720BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68B299A31B3DA9D6009720BF /* _AgainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _AgainTests.swift; sourceTree = "<group>"; };
+		68BECDDE1B5053010007689E /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		68BECDDF1B5053010007689E /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		68C6C89C1B3DAE470075AA2F /* 1Again-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "1Again-Bridging-Header.h"; sourceTree = "<group>"; };
 		68F21D381B3DD3F8004455EC /* PriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceCell.swift; sourceTree = "<group>"; };
 		68F21D391B3DD3F8004455EC /* PriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceCell.xib; sourceTree = "<group>"; };
@@ -283,6 +290,8 @@
 				682EACE21B459E98007F67FB /* CommentCell.xib */,
 				682EACE51B459F4D007F67FB /* AddNewCommentCell.swift */,
 				682EACE61B459F4D007F67FB /* AddNewCommentCell.xib */,
+				68BECDDE1B5053010007689E /* MyCollectionViewCell.swift */,
+				68BECDDF1B5053010007689E /* MyCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -374,6 +383,8 @@
 		686ABAEE1B3E855900AC80E0 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				68521DB11B50436D00F1F90C /* StaticDataTableViewController.h */,
+				68521DB21B50436D00F1F90C /* StaticDataTableViewController.m */,
 				684BE9B91B43080000F1D6E9 /* ClickImage.h */,
 				684BE9BA1B43080000F1D6E9 /* ClickImage.m */,
 				686ABAEF1B3E85B800AC80E0 /* ELCImagePicker */,
@@ -762,6 +773,7 @@
 				6879D8D31B3E346400F89BAF /* SecondPriceCell.xib in Resources */,
 				682EACE81B459F4D007F67FB /* AddNewCommentCell.xib in Resources */,
 				686ECCBD1B416333001A861B /* SignUpViewController.xib in Resources */,
+				68BECDE11B5053010007689E /* MyCollectionViewCell.xib in Resources */,
 				682EACD81B459707007F67FB /* ShopLocalFirstCell.xib in Resources */,
 				686ABB0C1B3E9CB500AC80E0 /* ItemInfoController.xib in Resources */,
 				684BE9CD1B431C8B00F1D6E9 /* ShopLocalCollectionCell.xib in Resources */,
@@ -850,6 +862,7 @@
 				6889D7DD1B413BCA006A176D /* LoginViewController.swift in Sources */,
 				687EF1781B4ED810007DADC0 /* FilterTableView.swift in Sources */,
 				682EACDF1B459D2B007F67FB /* ShopLocalThirdCell.swift in Sources */,
+				68521DB31B50436D00F1F90C /* StaticDataTableViewController.m in Sources */,
 				686ABB031B3E85CC00AC80E0 /* ELCAssetCell.m in Sources */,
 				6834C6A01B3DCDB900F7912B /* AddPhotoCell.swift in Sources */,
 				684BE9CC1B431C8B00F1D6E9 /* ShopLocalCollectionCell.swift in Sources */,
@@ -909,6 +922,7 @@
 				68081E8E1B43C8C300F93CFE /* AboutViewController.swift in Sources */,
 				688E69DE1B3DC57100030F3E /* AddItemViewController.swift in Sources */,
 				68521DAC1B5014DA00F1F90C /* CommentAPI.swift in Sources */,
+				68BECDE01B5053010007689E /* MyCollectionViewCell.swift in Sources */,
 				687EF17A1B4EE014007DADC0 /* DistanceObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

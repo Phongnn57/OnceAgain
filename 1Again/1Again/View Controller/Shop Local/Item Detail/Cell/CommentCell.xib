@@ -16,14 +16,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-camera" translatesAutoresizingMaskIntoConstraints="NO" id="tva-bl-8Pv">
-                        <rect key="frame" x="8" y="10" width="40" height="40"/>
+                        <rect key="frame" x="24" y="10" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="bDi-Aw-ebv"/>
                             <constraint firstAttribute="width" constant="40" id="wf5-R8-9lO"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlJ-z2-ULF">
-                        <rect key="frame" x="56" y="10" width="256" height="21"/>
+                        <rect key="frame" x="72" y="10" width="240" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="cKM-cD-Kxl"/>
                         </constraints>
@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3s-OO-9vl">
-                        <rect key="frame" x="56" y="31" width="256" height="13"/>
+                        <rect key="frame" x="72" y="31" width="240" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="1wc-Hr-wP6"/>
                         </constraints>
@@ -45,7 +45,7 @@
                     <constraint firstItem="dlJ-z2-ULF" firstAttribute="leading" secondItem="tva-bl-8Pv" secondAttribute="trailing" constant="8" id="3cO-xm-TuR"/>
                     <constraint firstItem="h3s-OO-9vl" firstAttribute="leading" secondItem="tva-bl-8Pv" secondAttribute="trailing" constant="8" id="COa-qZ-bL7"/>
                     <constraint firstAttribute="centerY" secondItem="tva-bl-8Pv" secondAttribute="centerY" id="FLg-fU-39s"/>
-                    <constraint firstItem="tva-bl-8Pv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Kci-XN-3zc"/>
+                    <constraint firstItem="tva-bl-8Pv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="Kci-XN-3zc"/>
                     <constraint firstItem="dlJ-z2-ULF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="R0e-3b-315"/>
                     <constraint firstItem="h3s-OO-9vl" firstAttribute="top" secondItem="dlJ-z2-ULF" secondAttribute="bottom" id="aGE-0g-7Kk"/>
                     <constraint firstAttribute="trailing" secondItem="h3s-OO-9vl" secondAttribute="trailing" constant="8" id="b6j-gM-IMa"/>
@@ -56,7 +56,7 @@
                 <outlet property="comment" destination="h3s-OO-9vl" id="iSr-fe-Vae"/>
                 <outlet property="user" destination="dlJ-z2-ULF" id="6Qy-IE-OEt"/>
             </connections>
-            <point key="canvasLocation" x="214" y="306"/>
+            <point key="canvasLocation" x="223" y="305"/>
         </tableViewCell>
     </objects>
     <resources>

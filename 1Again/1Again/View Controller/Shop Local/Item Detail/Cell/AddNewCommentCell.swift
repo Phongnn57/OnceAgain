@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol AddNewCommentCellDelegate {
+    func doPostComment(cell: AddNewCommentCell)
+}
+
 class AddNewCommentCell: UITableViewCell {
     
     @IBOutlet weak var comment: MyCustomTextField!
-    
+    var delegate: AddNewCommentCellDelegate?
     
     @IBAction func doPostComment(sender: AnyObject) {
     }
@@ -24,7 +28,9 @@ class AddNewCommentCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
+    @IBAction func postComment(sender: AnyObject) {
+        self.delegate?.doPostComment(self)
+    }
 }

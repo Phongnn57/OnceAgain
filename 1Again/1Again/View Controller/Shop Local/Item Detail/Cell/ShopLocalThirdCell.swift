@@ -26,11 +26,11 @@ class ShopLocalThirdCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    
     func showDataFromItem(item: ItemObject) {
         self.category.text = item.category
         self.brand.text = item.brand
         self.condition.text = item.condition
-        self.age.text = "Sold by Bobby Jones"
+        self.age.text = item.age
+        self.seller.text = "Sold By \(item.displayName)"
     }
 }

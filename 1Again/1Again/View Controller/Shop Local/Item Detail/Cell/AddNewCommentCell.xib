@@ -34,9 +34,10 @@
                         </state>
                         <connections>
                             <action selector="doPostComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bzh-37-5To"/>
+                            <action selector="postComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qc5-1k-kfu"/>
                         </connections>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eeG-0V-4qR" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="eeG-0V-4qR" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
                         <rect key="frame" x="56" y="7" width="213" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="hYS-Y5-eHZ"/>
@@ -58,10 +59,11 @@
             <connections>
                 <outlet property="comment" destination="eeG-0V-4qR" id="AF6-dS-Cu6"/>
             </connections>
-            <point key="canvasLocation" x="214.5" y="377"/>
+            <point key="canvasLocation" x="185.5" y="366"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="image:add-item-camera" width="200" height="200"/>
+        <image name="textfield:bg" width="3" height="2"/>
     </resources>
 </document>

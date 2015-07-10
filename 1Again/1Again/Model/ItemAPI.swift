@@ -28,7 +28,7 @@ class ItemAPI: NSObject {
             params["distance"] = distance
         }
 
-        ModelManager.shareManager.postRequest(url, params: params, success: { (responseData) -> Void in
+        ModelManager.shareManager.getRequest(url, params: params, success: { (responseData) -> Void in
             print(responseData)
             var senderLink: String = ""
             var senderTotalRecord: String = ""
@@ -69,35 +69,37 @@ class ItemAPI: NSObject {
         var params: Dictionary<String, String> = Dictionary<String, String>()
         params["id"] = itemid
 
-        ModelManager.shareManager.postRequest("V5.forSaleItem_JSONV2.php", params: params, success: { (responseData) -> Void in
+        ModelManager.shareManager.getRequest("V5.forSaleItem_JSONV2.php", params: params, success: { (responseData) -> Void in
             print(responseData)
             
             var senderItem: ItemObject = ItemObject()
-            
-            if let items = responseData["item"] as? NSArray {
-                for item in items {
-                    var thisItem = ItemObject()
-
-                    thisItem.ownerId = (item["ownerId"] as! String).toInt()!
-                    thisItem.id = item["id"] as! String
-                    thisItem.displayName = item["displayName"] as! String
-                    thisItem.category = item["category"] as! String
-                    thisItem.title = item["title"] as! String
-                    thisItem.brand = item["brand"] as! String!
-                    thisItem.condition = item["conditionA"] as! String!
-                    thisItem.age = item["age"] as! String!
-                    thisItem.description = item["description"] as! String!
-                    thisItem.price = item["price"] as! String!
-                    thisItem.imageStr1 = item["image1"] as! String!
-                    thisItem.imageStr2 = item["image2"] as! String!
-                    thisItem.imageStr3 = item["image3"] as! String!
-                    thisItem.imageStr4 = item["image4"] as! String!
-                    thisItem.imageStr5 = item["image5"] as! String!
-                    thisItem.status = item["status"] as! String!
-                    thisItem.timestamp = item["timestamp"] as! String!
-                    senderItem = thisItem
+            if let jsonData = NSJSONSerialization.JSONObjectWithData(responseData as! NSData, options: nil, error: nil) as? NSDictionary {
+                if let items = jsonData["item"] as? NSArray {
+                    for item in items {
+                        var thisItem = ItemObject()
+                        
+                        thisItem.ownerId = (item["ownerId"] as! String).toInt()!
+                        thisItem.id = item["id"] as! String
+                        thisItem.displayName = item["displayName"] as! String
+                        thisItem.category = item["category"] as! String
+                        thisItem.title = item["title"] as! String
+                        thisItem.brand = item["brand"] as! String!
+                        thisItem.condition = item["conditionA"] as! String!
+                        thisItem.age = item["age"] as! String!
+                        thisItem.description = item["description"] as! String!
+                        thisItem.price = item["price"] as! String!
+                        thisItem.imageStr1 = item["image1"] as! String!
+                        thisItem.imageStr2 = item["image2"] as! String!
+                        thisItem.imageStr3 = item["image3"] as! String!
+                        thisItem.imageStr4 = item["image4"] as! String!
+                        thisItem.imageStr5 = item["image5"] as! String!
+                        thisItem.status = item["status"] as! String!
+                        thisItem.timestamp = item["timestamp"] as! String!
+                        senderItem = thisItem
+                    }
                 }
             }
+            
             completion(item: senderItem)
             
             }) { (error) -> Void in

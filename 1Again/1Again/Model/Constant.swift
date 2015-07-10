@@ -70,6 +70,8 @@ class Constant: NSObject {
     }
 }
 
+let USER_ID = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
+
 func formatCurrency(string: String) -> Double {
 //    let formatter = NSNumberFormatter()
 //    formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle

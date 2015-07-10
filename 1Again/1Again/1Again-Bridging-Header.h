@@ -13,3 +13,4 @@
 #import "ELCImagePickerHeader.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ClickImage.h"
+#import "StaticDataTableViewController.h"

@@ -319,6 +319,10 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         if item.category != "15" {
             let shopLocalDetailController = ShopLocalDetailViewController()
             shopLocalDetailController.tmpItemID = item.id
+            
+//            let shopLocalDetailController = ShopLocalDetailTableViewController()
+//            shopLocalDetailController.tmpItemID = item.id
+            
             self.navigationController?.pushViewController(shopLocalDetailController, animated: true)
         } else {
             self.addCountByClickingAds(item.id)

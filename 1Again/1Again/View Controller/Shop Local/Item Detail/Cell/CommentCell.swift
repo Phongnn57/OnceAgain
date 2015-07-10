@@ -26,4 +26,10 @@ class CommentCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    func setupCellWithComment(comment: CommentObject) {
+        let commentTitle = "\(comment.displayName) (\(getDateFromString(comment.timestamp)) days ago)"
+        self.user.text = commentTitle
+        self.comment.text = comment.comment
+    }
 }
