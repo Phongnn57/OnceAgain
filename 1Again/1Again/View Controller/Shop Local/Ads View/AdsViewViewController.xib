@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShopLocalDetailViewController" customModule="_Again" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdsViewViewController" customModule="_Again" customModuleProvider="target">
             <connections>
-                <outlet property="tableview" destination="dAs-L7-CbF" id="pcb-QK-wre"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webview" destination="I4L-bF-cXf" id="Aqo-pr-ZO6"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -16,26 +16,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dAs-L7-CbF">
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4L-bF-cXf">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="Ff2-KW-qX8"/>
-                        <outlet property="delegate" destination="-1" id="6iU-uq-PW6"/>
+                        <outlet property="delegate" destination="-1" id="f2R-Ux-JfE"/>
                     </connections>
-                </tableView>
+                </webView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="dAs-L7-CbF" secondAttribute="trailing" id="1i1-no-lIv"/>
-                <constraint firstItem="dAs-L7-CbF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9qe-VU-RxN"/>
-                <constraint firstItem="dAs-L7-CbF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OCo-MA-5SX"/>
-                <constraint firstAttribute="bottom" secondItem="dAs-L7-CbF" secondAttribute="bottom" id="i53-hG-9ZC"/>
+                <constraint firstItem="I4L-bF-cXf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Mg2-yZ-6WX"/>
+                <constraint firstAttribute="trailing" secondItem="I4L-bF-cXf" secondAttribute="trailing" id="Ujz-qy-L6Q"/>
+                <constraint firstItem="I4L-bF-cXf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wAb-lP-0gm"/>
+                <constraint firstAttribute="bottom" secondItem="I4L-bF-cXf" secondAttribute="bottom" id="wLk-1O-hls"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="208.5" y="72.5"/>
+            <point key="canvasLocation" x="454.5" y="349.5"/>
         </view>
     </objects>
 </document>

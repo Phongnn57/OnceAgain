@@ -10,7 +10,7 @@ import UIKit
 
 class ItemObject {
     var id: String!
-    var ownerId: Int!
+    var ownerId: Int
     
     var image1, image2, image3, image4, image5: UIImage!
     var imageStr1, imageStr2, imageStr3, imageStr4, imageStr5: String!
@@ -22,7 +22,7 @@ class ItemObject {
     var price: String!
 
     var category, condition, age, brand: String!
-    var compensation, status, timestamp, miles: String!
+    var displayName, compensation, status, timestamp, miles: String!
 
     init() {
         id = "0"
@@ -109,6 +109,8 @@ class ItemObject {
     }
     
     
+
+    
     //UPLOAD NEW ITEM TO WEBSERVICE
     func pushItemWithActivityIndicator(hud: MBProgressHUD!) ->Bool {
         var uploadStatus: Bool = false
@@ -185,7 +187,7 @@ class ItemObject {
                     var thisItem = ItemObject()
                     thisItem.miles = item["miles"] as! String
                     thisItem.id = item["id"] as! String
-                    thisItem.ownerId = (item["ownerId"] as! String).toInt()
+                    thisItem.ownerId = (item["ownerId"] as! String).toInt()!
                     thisItem.category = item["category"] as! String
                     thisItem.title = item["title"] as! String!
                     thisItem.description = item["description"] as! String!
@@ -233,7 +235,7 @@ class ItemObject {
                         var thisItem = ItemObject()
                         thisItem.miles = item["miles"] as! String
                         thisItem.id = item["id"] as! String
-                        thisItem.ownerId = (item["ownerId"] as! String).toInt()
+                        thisItem.ownerId = (item["ownerId"] as! String).toInt()!
                         thisItem.category = item["category"] as! String
                         thisItem.title = item["title"] as! String!
                         thisItem.description = item["description"] as! String!
@@ -249,6 +251,38 @@ class ItemObject {
         compleationHandle(filteredItems: tmpItems, totalRecord: tmpTotalRecord, nextLink: tmpNextLink)
     }
     
+    //GET SHOP LOCAL DETAIL
+    class func getItemInDetailWithURL(urlStr: String,completion: (result: ItemObject!) ->()) {
+        var url = NSURL(string: urlStr)
+        var data: NSData = NSData(contentsOfURL: url!)!
+        
+        if let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? Dictionary<String, AnyObject> {
+            println(jsonData)
+            
+            if let item = jsonData["item"] as? Dictionary<String, AnyObject> {
+                    let thisItem = ItemObject()
+                    thisItem.id = item["id"] as! String
+                    thisItem.displayName = item["displayName"] as! String
+                    thisItem.ownerId = (item["ownerId"] as! String).toInt()!
+                    thisItem.category = item["category"] as! String
+                    thisItem.title = item["title"] as! String
+                    thisItem.brand = item["brand"] as! String!
+                    thisItem.condition = item["conditionA"] as! String!
+                    thisItem.age = item["age"] as! String!
+                    thisItem.description = item["description"] as! String!
+                    thisItem.price = item["price"] as! String!
+                    thisItem.imageStr1 = item["image1"] as! String!
+                    thisItem.imageStr2 = item["image2"] as! String!
+                    thisItem.imageStr3 = item["image3"] as! String!
+                    thisItem.imageStr4 = item["image4"] as! String!
+                    thisItem.imageStr5 = item["image5"] as! String!
+                    thisItem.status = item["status"] as! String!
+                    thisItem.timestamp = item["timestamp"] as! String!
+                    completion(result: thisItem)
+            }
+        }
+    }
+    
     //GET LIST OF ITEM IN ITEM LIST VIEW
     class func getItemListWithURLstr(str: String, completionClosure: (items :[ItemObject]) ->()) {
         let url = NSURL(string: str)
@@ -262,7 +296,7 @@ class ItemObject {
                     var thisItem = ItemObject()
                     thisItem.title = item["title"] as! String
                     thisItem.id = item["id"] as! String
-                    thisItem.ownerId = (item["ownerId"] as! String).toInt()
+                    thisItem.ownerId = (item["ownerId"] as! String).toInt()!
                     thisItem.category = item["category"] as! String
                     thisItem.brand = item["brand"] as! String!
                     thisItem.condition = item["conditionA"] as! String!

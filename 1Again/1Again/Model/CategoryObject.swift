@@ -11,14 +11,17 @@ import UIKit
 class CategoryObject {
     var catId: Int!
     var catDescription: String!
+    var selected: Bool
     
     init() {
         catId = -1
         catDescription = ""
+        self.selected = false
     }
     
     init(sCatId: Int!, sCatDescription: String!) {
         catId = sCatId
         catDescription = sCatDescription
+        self.selected = false
     }
 }

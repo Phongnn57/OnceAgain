@@ -41,6 +41,13 @@ class Constant: NSObject {
         static let addItemPriceTextField = 26
     }
     
+    struct ButtonTag {
+        static let Category_Button_Tag = 0
+        static let Distance_Button_Tag = 1
+        static let Condition_Button_Tag = 2
+        
+    }
+    
     struct ConditionData {
         static let conditions = ["New with tags", "New", "Like New", "Very Good", "Good", "Satisfactory"]
     }
@@ -64,11 +71,18 @@ class Constant: NSObject {
 }
 
 func formatCurrency(string: String) -> Double {
-    let formatter = NSNumberFormatter()
-    formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-    formatter.locale = NSLocale(localeIdentifier: "en_US")
+//    let formatter = NSNumberFormatter()
+//    formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+//    formatter.locale = NSLocale(localeIdentifier: "en_US")
     var numberFromField = (NSString(string: string).doubleValue)/100
     return numberFromField
+}
+
+func getFormatCurrency(string: String) -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+    return formatter.stringFromNumber(formatCurrency(string))!
 }
 
 

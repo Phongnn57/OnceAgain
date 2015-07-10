@@ -14,12 +14,13 @@ protocol ShopLocalFirstCellDelegate {
 
 class ShopLocalFirstCell: UITableViewCell {
 
-    @IBOutlet weak var scrollView: UIScrollView!
+
+    @IBOutlet weak var scrollView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var favorite: UIButton!
-    @IBOutlet weak var descriptionLB: UITextView!
+    @IBOutlet weak var descriptionLB: UILabel!
     
     @IBAction func btnTakeItAction(sender: AnyObject) {
     }
@@ -27,15 +28,21 @@ class ShopLocalFirstCell: UITableViewCell {
     @IBAction func btnMakeOfferAction(sender: AnyObject) {
     }
     
+    @IBAction func btnFavoriteAction(sender: AnyObject) {
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    func showDataFromItem(item: ItemObject) {
+        self.price.text = "$\(item.price)"
+        self.title.text = item.title
+        self.descriptionLB.text = item.description
     }
     
 }

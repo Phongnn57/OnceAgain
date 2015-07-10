@@ -48,8 +48,8 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.view.endEditing(true)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardDidHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleUploadResult:", name: Constant.CustomNotification.AddItemWithResult, object: nil)
     }
     
@@ -276,7 +276,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             case "0","1","2","3","4","5","6","7","8","9":
                 item.price  = item.price.stringByAppendingString(string)
                 println("CURRENT STRING: \(item.price)")
-                textField.text =  "$\(formatCurrency(item.price))"
+                textField.text =  "\(getFormatCurrency(item.price))"
             default:
                 var array = Array(string)
                 var currentStringarray = Array(item.price)
@@ -286,9 +286,10 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
                     for character in currentStringarray {
                         item.price = item.price.stringByAppendingString(String(character))
                     }
-                    textField.text =  "$\(formatCurrency(item.price))"
+                    textField.text =  "\(getFormatCurrency(item.price))"
                 }
             }
+            println("The string: \(textField.text)")
             return false
         }
         return true

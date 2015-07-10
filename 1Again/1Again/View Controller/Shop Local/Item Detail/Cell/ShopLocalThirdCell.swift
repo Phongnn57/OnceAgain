@@ -10,7 +10,6 @@ import UIKit
 
 class ShopLocalThirdCell: UITableViewCell {
     
-    
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var brand: UILabel!
     @IBOutlet weak var condition: UILabel!
@@ -21,13 +20,17 @@ class ShopLocalThirdCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    
+    func showDataFromItem(item: ItemObject) {
+        self.category.text = item.category
+        self.brand.text = item.brand
+        self.condition.text = item.condition
+        self.age.text = "Sold by Bobby Jones"
+    }
 }

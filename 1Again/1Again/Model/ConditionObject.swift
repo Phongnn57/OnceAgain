@@ -9,16 +9,19 @@
 import UIKit
 
 class ConditionObject {
-    var conTitle: String!
-    var conId: Int!
+    var conTitle: String
+    var conId: String
+    var selected: Bool
     
     init() {
-        conId = -1
+        conId = ""
         conTitle = ""
+        self.selected = false
     }
     
-    init(sConId: Int, sConTitle: String) {
+    init(sConId: String, sConTitle: String) {
         conId = sConId
         conTitle = sConTitle
+        self.selected = false
     }
 }
