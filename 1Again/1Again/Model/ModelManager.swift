@@ -20,7 +20,7 @@ class ModelManager: NSObject {
         mainManager = AFHTTPRequestOperationManager(baseURL: NSURL(string: baseURL))
 
         mainManager.responseSerializer = AFHTTPResponseSerializer()
-//        mainManager.requestSerializer = AFJSONRequestSerializer()
+        mainManager.requestSerializer = AFJSONRequestSerializer()
 //        mainManager.requestSerializer.setValue("application/json", forHTTPHeaderField: "Accept")
 //        mainManager.requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
 //        mainManager.responseSerializer = AFJSONResponseSerializer(readingOptions: NSJSONReadingOptions.AllowFragments)

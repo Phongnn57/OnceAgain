@@ -9,38 +9,43 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddNewCommentCell" id="KGk-i7-Jjw" customClass="AddNewCommentCell" customModule="_Again" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-camera" translatesAutoresizingMaskIntoConstraints="NO" id="Cxj-hs-Iqa">
-                        <rect key="frame" x="8" y="10" width="40" height="40"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:shop-local-like" translatesAutoresizingMaskIntoConstraints="NO" id="Cxj-hs-Iqa">
+                        <rect key="frame" x="8" y="4" width="35" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="wr2-Z0-8jl"/>
-                            <constraint firstAttribute="height" constant="40" id="z25-hc-381"/>
+                            <constraint firstAttribute="width" constant="35" id="wr2-Z0-8jl"/>
+                            <constraint firstAttribute="height" constant="35" id="z25-hc-381"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B09-RX-6aN">
-                        <rect key="frame" x="277" y="7" width="90" height="45"/>
+                        <rect key="frame" x="277" y="4" width="90" height="35"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="GAB-li-ENG"/>
-                            <constraint firstAttribute="height" constant="45" id="WEx-nG-ZGX"/>
+                            <constraint firstAttribute="height" constant="35" id="WEx-nG-ZGX"/>
                         </constraints>
                         <state key="normal" title="Comment">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <action selector="doPostComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bzh-37-5To"/>
                             <action selector="postComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qc5-1k-kfu"/>
                         </connections>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="eeG-0V-4qR" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                        <rect key="frame" x="56" y="7" width="213" height="45"/>
+                        <rect key="frame" x="51" y="4" width="218" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="45" id="hYS-Y5-eHZ"/>
+                            <constraint firstAttribute="height" constant="35" id="hYS-Y5-eHZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -63,7 +68,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="image:add-item-camera" width="200" height="200"/>
+        <image name="image:shop-local-like" width="40" height="40"/>
         <image name="textfield:bg" width="3" height="2"/>
     </resources>
 </document>

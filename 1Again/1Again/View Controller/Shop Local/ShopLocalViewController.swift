@@ -15,6 +15,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     @IBOutlet weak var menuView: FilterView!
     @IBOutlet weak var applyFilterView: ApplyFilterView!
     
+    var firstLoad: Bool = true
     var searchBar: UISearchBar!
     var tableview: UITableView!
     var hud: MBProgressHUD!
@@ -30,6 +31,8 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     var conditions:[ConditionObject]! = [ConditionObject]()
     var tableData: [AnyObject]! = [AnyObject]()
     
+    var tableHeight: CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initData()
@@ -42,6 +45,9 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         nextLink = String()
         totalRecord = String()
         filterStr = String()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,14 +56,21 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.loadData()
+        if firstLoad {
+            self.firstLoad = !self.firstLoad
+            self.loadData()
+        }
     }
     
     func loadData() {
+        self.showHUD()
+        self.collectionview.alpha = 0
         ItemObject.getShopLocalDataFromStringURL(Constant.MyUrl.homeURL.stringByAppendingString("forSale_listJSONV4.php?userid=\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))"), completionClosure: { (resultItems, totalRecord, nextLink) -> () in
+            self.hideHUD()
             self.items = resultItems
             self.totalRecord = totalRecord
             self.nextLink = nextLink
+            self.collectionview.alpha = 1
             self.collectionview.reloadData()
         })
     }
@@ -76,7 +89,6 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
             self.conditions.append(conditionObj)
         }
         
-
         self.categories = CategoryManager.sharedInstance.categories
         let category = CategoryObject(sCatId: -1, sCatDescription: "All Category")
         self.categories.insert(category, atIndex: 0)
@@ -101,10 +113,10 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func showAllFilter() {
-        self.collectionview.userInteractionEnabled = false
-        self.collectionview.alpha = 0.5
-        self.menuView.showViewFromSuperView()
-        self.applyFilterView.showViewFromSuperView()
+//        self.collectionview.userInteractionEnabled = false
+//        self.collectionview.alpha = 0.5
+        self.menuView.showViewFromSuperView(self.collectionview.frame.origin.y)
+        self.applyFilterView.showViewFromSuperView(UIScreen.mainScreen().bounds.size.height - 30)
     }
     
     @IBAction func doFilterAction(sender: AnyObject) {
@@ -190,16 +202,36 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         return true
     }
     
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = true
+        return true
+    }
+    
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = false
+        return true
+    }
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    
     func hideTableView() {
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.tableview.hidden = true
-            self.tableview.center.y -= 1000
+            self.tableview.center.y = -1000
         })
     }
     
     func didSelectButtonAtIndex(index: Int) {
+        self.menuView.userInteractionEnabled = false
         if index != -1 {
-            let maxHeight = self.applyFilterView.frame.origin.y - self.menuView.frame.origin.y - 45
+            var maxHeight = self.applyFilterView.frame.origin.y - self.menuView.frame.origin.y - 45
+//            if maxHeight > self.tableHeight {
+//                maxHeight = self.tableHeight
+//            }
             var tblHeight = maxHeight
             if index == 1 {
                tblHeight = CGFloat(self.distances.count * 44)
@@ -213,18 +245,22 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
             }
             
             if tblHeight > maxHeight {tblHeight = maxHeight}
-            print(tblHeight)
+
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.menuView.hidden = false
                 self.tableview.hidden = false
                 self.tableview.frame = CGRectMake(0, self.menuView.frame.origin.y + 45, self.view.frame.width, tblHeight)
-                
-                }, completion: { (finished: Bool) -> Void in
                 self.tableview.reloadData()
+                }, completion: { (finished: Bool) -> Void in
+                
             })
+            
+            print(self.menuView.frame)
         } else {
             self.hideTableView()
         }
+        self.menuView.userInteractionEnabled = true
     }
     
     func createSearchBar() {
@@ -254,18 +290,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
                 print(error)
                 self.hideHUD()
             })
-            
 
-//            ItemObject.getShopLocalDataFromStringURL(Constant.MyUrl.homeURL + self.nextLink, completionClosure: { (resultItems, totalRecord, nextLink) -> () in
-//                additionData = resultItems
-//                self.nextLink = nextLink
-//                self.totalRecord = totalRecord
-//                for item in additionData {
-//                    self.items.append(item)
-//                }
-//                additionData.removeAll(keepCapacity: false)
-//                self.collectionview.reloadData()
-//            })
         }
     }
     
@@ -311,18 +336,18 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: UIScreen.mainScreen().bounds.size.width/2 - 15, height: UIScreen.mainScreen().bounds.size.width/2 + 50)
+        let width: CGFloat = UIScreen.mainScreen().bounds.size.width/2 - 15.0
+        return CGSize(width: width, height: width*4/3 + 65)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.searchBar.endEditing(true)
+        self.hideTableView()
+        self.hideAllFilter()
         let item = items[indexPath.row]
         if item.category != "15" {
             let shopLocalDetailController = ShopLocalDetailViewController()
             shopLocalDetailController.tmpItemID = item.id
-            
-//            let shopLocalDetailController = ShopLocalDetailTableViewController()
-//            shopLocalDetailController.tmpItemID = item.id
-            
             self.navigationController?.pushViewController(shopLocalDetailController, animated: true)
         } else {
             self.addCountByClickingAds(item.id)
@@ -386,6 +411,8 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.searchBar.endEditing(true)
+//        self.view.endEditing(true)
         let cell = tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
         
         if self.menuView.selectedIndex == 0 {
@@ -441,4 +468,36 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         
         self.tableview.reloadData()
     }
+    
+
+    func tapGestureAction (sender: AnyObject){
+        self.searchBar.resignFirstResponder()
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        var info = notification.userInfo!
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        self.tableHeight = keyboardFrame.origin.y - self.menuView.frame.origin.y - self.menuView.frame.size.height
+        if self.tableview.hidden == false {
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.tableview.frame = CGRectMake(self.tableview.frame.origin.x, self.tableview.frame.origin.y, self.tableview.frame.size.width, self.tableHeight)
+            })
+        }
+
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        var info = notification.userInfo!
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        self.tableHeight = self.applyFilterView.frame.origin.y - self.menuView.frame.origin.y - self.menuView.frame.size.height
+        if self.tableHeight > CGFloat(self.tableData.count * 44) {
+            self.tableHeight = CGFloat(self.tableData.count * 44)
+        }
+        if self.tableview.hidden == false {
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.tableview.frame = CGRectMake(self.tableview.frame.origin.x, self.tableview.frame.origin.y, self.tableview.frame.size.width, self.tableHeight)
+            })
+        }
+    }
+
 }

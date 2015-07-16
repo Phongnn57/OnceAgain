@@ -10,9 +10,14 @@ import UIKit
 
 class Constant: NSObject {
     struct MyUrl {
-        static let homeURL = "http://www.theconsignmentclub.com/"
-        static let notificationPage = "V5.notifications.ListJSON.php"
-        static let messagePage = "V5.messages.ListJSON.php?id="
+        static let homeURL: String = "http://www.theconsignmentclub.com/"
+        static let notificationPage: String = "V5.notifications.ListJSON.php"
+        static let messagePage: String = "V5.messages.ListJSON.php?id="
+        
+        static let Item_Detail_Favorite: String = "V5.favorite_item_insert_ac.php"
+        static let Item_Get_Item_Detail: String = "V5.forSaleItem_JSONV2.php"
+        static let Item_Take_It: String = "V5.notification_insert_ac.php"
+        static let Item_Add_Comment: String = "forSaleItemAddComment_V2.php"
     }
     
     struct KeyUserDefaults {
@@ -39,6 +44,8 @@ class Constant: NSObject {
         static let addItemConditionTextField = 24
         static let addItemAgeTextField = 25
         static let addItemPriceTextField = 26
+        
+        static let ItemDetailPriceTextField = 27
     }
     
     struct ButtonTag {
@@ -203,7 +210,6 @@ func getDataFromImage(image: UIImage) -> NSData! {
         } else {
             img = scaleDownImageWith(image, Constant.UploadImageSize.uploadImageSizeLandscape)
         }
-        
     }
     
     var compression = 0.8 as CGFloat

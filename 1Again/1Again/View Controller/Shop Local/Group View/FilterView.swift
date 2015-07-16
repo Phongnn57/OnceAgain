@@ -32,9 +32,9 @@ class FilterView: UIView {
     
     func hideViewFromSuperView() {
         if self.hidden == false {
-            UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: { () -> Void in
+            UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.TransitionCurlUp, animations: { () -> Void in
                 self.alpha = 0
-                self.center.y -= 60
+                self.center.y = -40
                 }) { (finished: Bool) -> Void in
                     
                     self.hidden = true
@@ -43,11 +43,11 @@ class FilterView: UIView {
         }
     }
     
-    func showViewFromSuperView() {
+    func showViewFromSuperView(point: CGFloat) {
         if self.hidden == true {
             UIView.animateWithDuration(0.3, delay: 0, options: nil, animations: { () -> Void in
                 self.alpha = 1
-                self.center.y += 60
+                self.frame.origin.y = point
                 }) { (finished: Bool) -> Void in
                     self.hidden = false
             }

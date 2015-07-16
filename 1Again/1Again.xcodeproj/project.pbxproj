@@ -51,7 +51,6 @@
 		68521DA81B4FEA0A00F1F90C /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68521DA71B4FEA0A00F1F90C /* ModelManager.swift */; };
 		68521DAA1B4FF37400F1F90C /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68521DA91B4FF37400F1F90C /* ItemAPI.swift */; };
 		68521DAC1B5014DA00F1F90C /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68521DAB1B5014DA00F1F90C /* CommentAPI.swift */; };
-		68521DB31B50436D00F1F90C /* StaticDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68521DB21B50436D00F1F90C /* StaticDataTableViewController.m */; };
 		686ABAED1B3E704A00AC80E0 /* MyCustomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAEC1B3E704A00AC80E0 /* MyCustomImage.swift */; };
 		686ABB011B3E85CC00AC80E0 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAF11B3E85CC00AC80E0 /* ELCAlbumPickerController.m */; };
 		686ABB021B3E85CC00AC80E0 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 686ABAF31B3E85CC00AC80E0 /* ELCAsset.m */; };
@@ -160,8 +159,6 @@
 		68521DA71B4FEA0A00F1F90C /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		68521DA91B4FF37400F1F90C /* ItemAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAPI.swift; sourceTree = "<group>"; };
 		68521DAB1B5014DA00F1F90C /* CommentAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
-		68521DB11B50436D00F1F90C /* StaticDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
-		68521DB21B50436D00F1F90C /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		686ABAEC1B3E704A00AC80E0 /* MyCustomImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomImage.swift; sourceTree = "<group>"; };
 		686ABAF01B3E85CC00AC80E0 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		686ABAF11B3E85CC00AC80E0 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
@@ -383,8 +380,6 @@
 		686ABAEE1B3E855900AC80E0 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				68521DB11B50436D00F1F90C /* StaticDataTableViewController.h */,
-				68521DB21B50436D00F1F90C /* StaticDataTableViewController.m */,
 				684BE9B91B43080000F1D6E9 /* ClickImage.h */,
 				684BE9BA1B43080000F1D6E9 /* ClickImage.m */,
 				686ABAEF1B3E85B800AC80E0 /* ELCImagePicker */,
@@ -862,7 +857,6 @@
 				6889D7DD1B413BCA006A176D /* LoginViewController.swift in Sources */,
 				687EF1781B4ED810007DADC0 /* FilterTableView.swift in Sources */,
 				682EACDF1B459D2B007F67FB /* ShopLocalThirdCell.swift in Sources */,
-				68521DB31B50436D00F1F90C /* StaticDataTableViewController.m in Sources */,
 				686ABB031B3E85CC00AC80E0 /* ELCAssetCell.m in Sources */,
 				6834C6A01B3DCDB900F7912B /* AddPhotoCell.swift in Sources */,
 				684BE9CC1B431C8B00F1D6E9 /* ShopLocalCollectionCell.swift in Sources */,

@@ -211,6 +211,17 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         actionSheet.addAction(UIAlertAction(title: "Rotate Image", style: UIAlertActionStyle.Default, handler: { (alert:UIAlertAction!) -> Void in
             var tmpImage = scaleDownImageWith(imageView.image!, CGSizeMake(imageView.frame.size.width, imageView.frame.size.height))
             imageView.image = imageRotateByDegree(90, tmpImage)
+            if imageView.tag == 13 {
+                self.item.image1 = imageView.image
+            } else if imageView.tag == 14 {
+                self.item.image2 = imageView.image
+            } else if imageView.tag == 15 {
+                self.item.image3 = imageView.image
+            } else if imageView.tag == 16 {
+                self.item.image4 = imageView.image
+            } else if imageView.tag == 17 {
+                self.item.image5 = imageView.image
+            }
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))

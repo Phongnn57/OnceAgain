@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate, ShopLocalFirstCellDelegate, AddNewCommentCellDelegate, UIScrollViewDelegate {
+class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate, ShopLocalFirstCellDelegate, AddNewCommentCellDelegate, ShopLocalSecondCellDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var tableview: UITableView!
     
@@ -19,17 +19,17 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     private let addnewComment = "AddNewCommentCell"
     private let collectionCellIdentifier = "MyCollectionViewCell"
     
+    var toolBar: UIToolbar!
     var hud: MBProgressHUD!
     var tmpItemID: String!
     var item: ItemObject!
     var comments: [CommentObject]!
     var shouldShowPriceCell: Bool = false
     var imageURLs:[String]! = []
+    var tmpPrice: String! = ""
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableview.registerNib(UINib(nibName: firstCellIdentifier, bundle: nil), forCellReuseIdentifier: firstCellIdentifier)
         self.tableview.registerNib(UINib(nibName: secondCellIdentifier, bundle: nil), forCellReuseIdentifier: secondCellIdentifier)
         self.tableview.registerNib(UINib(nibName: thirdCellIdentifier, bundle: nil), forCellReuseIdentifier: thirdCellIdentifier)
@@ -38,6 +38,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         self.tableview.alpha = 0
         self.tableview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "endEditing"))
         self.comments = [CommentObject]()
+        self.initializeToolbar()
     }
     
     
@@ -63,6 +64,13 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         self.updateComment()
     }
     
+    func initializeToolbar() {
+        toolBar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
+        toolBar.barStyle = UIBarStyle.BlackTranslucent
+        var doneBtn = UIBarButtonItem(title: "Done", style: .Bordered, target: self, action: "endEditing")
+        toolBar.items = NSArray(objects: UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),doneBtn) as [AnyObject]
+    }
+
     func getImageURLs(item: ItemObject) {
         if item.imageStr1 != nil && item.imageStr1 != "" {
             self.imageURLs.append(item.imageStr1)
@@ -83,18 +91,9 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
 
     func endEditing() {
         self.tableview.endEditing(true)
+        self.keyboardWillHide(nil)
     }
     
-    func updateComment() {
-        CommentAPI.getAllComment(self.tmpItemID, completion: { (comments) -> Void in
-            print("Success get comment: \(comments.count)")
-            self.tableview.alpha = 1
-            self.comments = comments
-            self.tableview.reloadSections(NSIndexSet(index: 2), withRowAnimation: .None)
-            }) { (error) -> Void in
-        }
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -110,6 +109,18 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     func hideHUD() {
         self.hud.hide(true)
         self.hud.removeFromSuperview()
+    }
+    
+    
+    //MARK: HANDLE DATA
+    func updateComment() {
+        CommentAPI.getAllComment(self.tmpItemID, completion: { (comments) -> Void in
+            print("Success get comment: \(comments.count)")
+            self.tableview.alpha = 1
+            self.comments = comments
+            self.tableview.reloadSections(NSIndexSet(index: 2), withRowAnimation: .None)
+            }) { (error) -> Void in
+        }
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -141,7 +152,9 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
                 return cell
             } else if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCellWithIdentifier(secondCellIdentifier) as! ShopLocalSecondCell
-                
+                cell.price.inputAccessoryView = self.toolBar
+                cell.delegate = self
+                cell.price.delegate = self
                 return cell
             }
         } else if indexPath.section == 1 {
@@ -162,6 +175,16 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         return UITableViewCell()
     }
 
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "ITEM INFORMATIONS"
+        } else if section == 1 {
+            return "DETAILS"
+        } else {
+            return "REVIEWS"
+        }
+    }
+    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
@@ -173,27 +196,43 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                return UIScreen.mainScreen().bounds.width + 240
+                return UIScreen.mainScreen().bounds.width * 0.75 + 240
             } else {return 66}
         }
         else if indexPath.section == 1 {return 220}
-        else if indexPath.section == 2 {return 60}
+        else if indexPath.section == 2 {return 44}
         return 0
     }
     
     //DELEGATE
+    
+    func didSelectOfferBtn(cell: ShopLocalSecondCell) {
+        var params: Dictionary<String, String> = Dictionary<String, String>()
+        params["userId"] = "\(USER_ID)"
+        params["itemId"] = self.item.id
+        params["ownerId"] = "\(item.ownerId)"
+        params["action"] = "O"
+        params["distance"] = self.item.miles
+        params["price"] = "\(formatCurrency(self.tmpPrice))"
+
+        ItemAPI.PostRequest(Constant.MyUrl.Item_Take_It, params: params, completion: { (object) -> Void in
+            let alertView = UIAlertView(title: "Submitted", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
+            alertView.show()
+        }) { (error) -> Void in
+            print("Error")
+        }
+    }
+    
     func didChangeFavorite(cell: ShopLocalFirstCell) {
         var params: Dictionary<String, String> = Dictionary<String, String>()
-        if cell.like {
-            params["action"] = "1"
-        } else {
-            params["action"] = "0"
+
+        params = ["action": (cell.like == true ? "1" : "0"), "itemId": self.item.id, "userId": "\(USER_ID)", "type": "I"]
+
+        ItemAPI.PostRequest(Constant.MyUrl.Item_Detail_Favorite, params: params, completion: { (object) -> Void in
+            print("SUCCESS")
+        }) { (error) -> Void in
+            print("ERROR: \(error)")
         }
-        params["itemId"] = self.item.id
-        params["userId"] = "\(USER_ID)"
-        params["type"] = "I"
-        
-        self.postToServer("V5.favorite_item_insert_ac.php", params: params)
     }
     
     func didSelectMakeOfferButton(cell: ShopLocalFirstCell) {
@@ -204,16 +243,16 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     }
     
     func doPostComment(cell: AddNewCommentCell) {
-        CommentAPI.postComment(self.tmpItemID, displayName:self.item.displayName, comment: cell.comment.text, completion: { (object) -> Void in
+        CommentAPI.postComment(self.item.id, displayName:self.item.displayName, comment: cell.comment.text, completion: { (object) -> Void in
+            print("SUCCESS")
             self.updateComment()
             cell.comment.text = nil
             }) { (error) -> Void in
-                print(error)
+                print("ERROR: \(error)")
         }
     }
     
     func didSelectIWillTakeItButton(cell: ShopLocalFirstCell) {
-        
         var params: Dictionary<String, String> = Dictionary<String, String>()
         params["userId"] = "\(USER_ID)"
         params["itemId"] = self.item.id
@@ -221,19 +260,46 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         params["action"] = "I"
         params["distance"] = self.item.miles
         
-        self.postToServer("V5.notification_insert_ac.php", params: params)
+        ItemAPI.PostRequest(Constant.MyUrl.Item_Take_It, params: params, completion: { (object) -> Void in
+            let alertView = UIAlertView(title: "Submitted", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
+            alertView.show()
+        }) { (error) -> Void in
+            print("ERROR")
+        }
         
     }
     
-    func postToServer(url: String, params: Dictionary<String, String>) {
-        ModelManager.shareManager.postRequest(url, params: params , success: { (responseData) -> Void in
-            let alertView = UIAlertView(title: "Submitted", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
-            alertView.show()
-            }) { (error) -> Void in
-                print(error)
+    //TEXTFIELD
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            textField.resignFirstResponder()
+            return false
         }
+        if textField.tag == Constant.TextFieldTag.ItemDetailPriceTextField {
+            switch string {
+            case "0","1","2","3","4","5","6","7","8","9":
+                
+                self.tmpPrice  = self.tmpPrice.stringByAppendingString(string)
+                println("CURRENT STRING: \(self.tmpPrice)")
+                textField.text =  "\(getFormatCurrency(self.tmpPrice))"
+            default:
+                var array = Array(string)
+                var currentStringarray = Array(self.tmpPrice)
+                if array.count == 0 && currentStringarray.count != 0 {
+                    currentStringarray.removeLast()
+                    self.tmpPrice = ""
+                    for character in currentStringarray {
+                        self.tmpPrice = self.tmpPrice.stringByAppendingString(String(character))
+                    }
+                    textField.text =  "\(getFormatCurrency(self.tmpPrice))"
+                }
+            }
+            println("The string: \(formatCurrency(self.tmpPrice))")
+            return false
+        }
+        return true
     }
-    
+
     //KEYBOARD HANDLE
     func keyboardWillShow(notification: NSNotification) {
         let userInfo = notification.userInfo!
@@ -254,18 +320,4 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
             self.tableview.scrollIndicatorInsets = contentInsets
         })
     }
-    
-//    //MARK: COLLECTION VIEW
-//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if self.imageURLs != nil {
-//            return self.imageURLs.count
-//        }
-//        return 0
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        let cell: MyCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(collectionCellIdentifier, forIndexPath: indexPath) as! MyCollectionViewCell
-//        cell.imageview.sd_setImageWithURL(NSURL(string: self.imageURLs[indexPath.row]), placeholderImage: UIImage(named: "image:add-item-camera"))
-//        return cell
-//    }
 }

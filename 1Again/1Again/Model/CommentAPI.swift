@@ -27,29 +27,6 @@ class CommentAPI: NSObject {
             }
         }
         completion(comments: senderComments)
-//        var param:Dictionary<String, String> = Dictionary<String, String>()
-//        param["id"] = itemID
-//        
-//        ModelManager.shareManager.getRequest("forSaleItemGetComments_JSONV2.php", params: nil, success: { (responseData) -> Void in
-//            var senderComments: [CommentObject] = []
-//            if let jsonData = NSJSONSerialization.JSONObjectWithData(responseData as! NSData, options: nil, error: nil) as? NSDictionary {
-//                if let items = jsonData["comments"] as? NSArray {
-//                    for comment in items {
-//                        var thisComment = CommentObject()
-//                        thisComment.commentID = comment["commentId"] as! String!
-//                        thisComment.itemID = comment["itemId"] as! String!
-//                        thisComment.displayName = comment["displayName"] as! String!
-//                        thisComment.comment = comment["comment"] as! String!
-//                        thisComment.timestamp = comment["timestamp"] as! String!
-//                        senderComments.append(thisComment)
-//                    }
-//                }
-//            }
-//            
-//            completion(comments: senderComments)
-//        }) { (error) -> Void in
-//            failure(error: error)
-//        }
     }
     
     class func postComment(itemId: String, displayName: String, comment: String, completion: (object: AnyObject!) ->Void, failure: (error: String) -> Void) {
@@ -58,10 +35,12 @@ class CommentAPI: NSObject {
         param["displayName"] = displayName
         param["comment"] = comment
         
-        ModelManager.shareManager.postRequest("forSaleItemAddComment_V2.php", params: param, success: { (responseData) -> Void in
+        var manager = AFHTTPRequestOperationManager()
+        manager.responseSerializer = AFHTTPResponseSerializer()
+        manager.POST(Constant.MyUrl.homeURL + Constant.MyUrl.Item_Add_Comment, parameters: param, success: { (operation: AFHTTPRequestOperation!, responseData: AnyObject!) -> Void in
             completion(object: responseData)
-        }) { (error) -> Void in
-            failure(error: error)
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                failure(error: error.description)
         }
     }
 }

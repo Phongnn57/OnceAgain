@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -9,19 +9,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ShopLocalCollectionCell" customModule="_Again" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="160" height="238"/>
+            <rect key="frame" x="0.0" y="0.0" width="160" height="268"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="160" height="238"/>
+                <rect key="frame" x="0.0" y="0.0" width="160" height="268"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-camera" translatesAutoresizingMaskIntoConstraints="NO" id="tHQ-c7-ATM">
-                        <rect key="frame" x="8" y="8" width="144" height="144"/>
+                        <rect key="frame" x="8" y="8" width="144" height="192"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="tHQ-c7-ATM" secondAttribute="height" multiplier="1:1" id="Nyf-x8-3vO"/>
+                            <constraint firstAttribute="width" secondItem="tHQ-c7-ATM" secondAttribute="height" multiplier="3:4" id="Nyf-x8-3vO"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ow6-aJ-kuS">
-                        <rect key="frame" x="8" y="165" width="144" height="21"/>
+                        <rect key="frame" x="8" y="213" width="144" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="wVi-MC-zxd"/>
                         </constraints>
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJD-6g-YdT">
-                        <rect key="frame" x="8" y="189" width="144" height="21"/>
+                        <rect key="frame" x="8" y="237" width="144" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="IeO-lH-V4f"/>
                         </constraints>
@@ -53,13 +53,13 @@
                 <constraint firstAttribute="trailing" secondItem="tHQ-c7-ATM" secondAttribute="trailing" constant="8" id="kMl-8A-1yV"/>
                 <constraint firstItem="wJD-6g-YdT" firstAttribute="top" secondItem="Ow6-aJ-kuS" secondAttribute="bottom" constant="3" id="ktO-Yr-HMb"/>
             </constraints>
-            <size key="customSize" width="160" height="238"/>
+            <size key="customSize" width="160" height="268"/>
             <connections>
                 <outlet property="imageview" destination="tHQ-c7-ATM" id="mLp-ID-DjF"/>
                 <outlet property="price" destination="wJD-6g-YdT" id="6QD-ZP-iG8"/>
                 <outlet property="title" destination="Ow6-aJ-kuS" id="q5W-kR-1jp"/>
             </connections>
-            <point key="canvasLocation" x="452" y="293"/>
+            <point key="canvasLocation" x="57" y="359"/>
         </collectionViewCell>
     </objects>
     <resources>

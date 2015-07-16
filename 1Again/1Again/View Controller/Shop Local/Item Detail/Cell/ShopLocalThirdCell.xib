@@ -55,11 +55,11 @@
                         <rect key="frame" x="0.0" y="160" width="367" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqm-27-0XT">
-                                <rect key="frame" x="56" y="10" width="265" height="30"/>
+                                <rect key="frame" x="115" y="10" width="221" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="KOe-GW-3xa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -70,11 +70,11 @@
                                     <constraint firstAttribute="height" constant="40" id="gP5-KG-vF9"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tr0-4I-OjF">
-                                <rect key="frame" x="329" y="5" width="30" height="40"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:right-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="tr0-4I-OjF">
+                                <rect key="frame" x="344" y="13" width="15" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="fuv-g1-vVy"/>
-                                    <constraint firstAttribute="width" constant="30" id="yoa-53-86Q"/>
+                                    <constraint firstAttribute="height" constant="25" id="fuv-g1-vVy"/>
+                                    <constraint firstAttribute="width" constant="15" id="yoa-53-86Q"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -83,7 +83,7 @@
                             <constraint firstAttribute="height" constant="50" id="8Ig-78-uoi"/>
                             <constraint firstAttribute="centerY" secondItem="tr0-4I-OjF" secondAttribute="centerY" id="9jY-or-cYF"/>
                             <constraint firstAttribute="centerY" secondItem="sqm-27-0XT" secondAttribute="centerY" id="AK1-Ay-cxz"/>
-                            <constraint firstItem="sqm-27-0XT" firstAttribute="leading" secondItem="CZ4-0e-IdW" secondAttribute="trailing" constant="8" id="O7m-vJ-7mR"/>
+                            <constraint firstItem="sqm-27-0XT" firstAttribute="leading" secondItem="CZ4-0e-IdW" secondAttribute="trailing" constant="67" id="O7m-vJ-7mR"/>
                             <constraint firstItem="CZ4-0e-IdW" firstAttribute="leading" secondItem="grC-X2-0f8" secondAttribute="leading" constant="8" id="hb7-Um-bcy"/>
                             <constraint firstAttribute="trailing" secondItem="tr0-4I-OjF" secondAttribute="trailing" constant="8" id="iyV-Gt-EPS"/>
                             <constraint firstItem="tr0-4I-OjF" firstAttribute="leading" secondItem="sqm-27-0XT" secondAttribute="trailing" constant="8" id="kJf-Yq-RV6"/>
@@ -169,6 +169,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="image:right-arrow" width="26" height="44"/>
         <image name="image:shop-local-like" width="40" height="40"/>
     </resources>
 </document>

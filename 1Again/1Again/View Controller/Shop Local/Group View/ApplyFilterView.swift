@@ -19,20 +19,20 @@ class ApplyFilterView: UIView {
     
     func hideViewFromSuperView() {
         if self.hidden == false {
-            UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: { () -> Void in
+            UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.TransitionCurlDown, animations: { () -> Void in
                 self.alpha = 0
-                self.center.y += 80
+                self.center.y = 1000
                 }) { (finished: Bool) -> Void in
                     self.hidden = true
             }
         }
     }
     
-    func showViewFromSuperView() {
+    func showViewFromSuperView(point: CGFloat) {
         if self.hidden == true {
             UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: { () -> Void in
                 self.alpha = 1
-                self.center.y -= 80
+                self.center.y = point
                 }) { (finished: Bool) -> Void in
                     self.hidden = false
             }

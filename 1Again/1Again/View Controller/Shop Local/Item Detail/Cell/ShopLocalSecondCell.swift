@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol ShopLocalSecondCellDelegate {
+    func didSelectOfferBtn(cell: ShopLocalSecondCell)
+}
+
 class ShopLocalSecondCell: UITableViewCell {
 
     @IBOutlet weak var price: MyCustomTextField!
-    
+    var delegate: ShopLocalSecondCellDelegate?
     
     @IBAction func btnOfferAction(sender: AnyObject) {
+        self.delegate?.didSelectOfferBtn(self)
     }
     
     override func awakeFromNib() {
@@ -26,5 +31,5 @@ class ShopLocalSecondCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

@@ -131,15 +131,15 @@ class ItemObject {
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image2.jpg", mimeType: "image/jpeg")
             }
             if (self.image3 != nil) {
-                imageData = getDataFromImage(self.image1)
+                imageData = getDataFromImage(self.image3)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image3.jpg", mimeType: "image/jpeg")
             }
             if (self.image4 != nil) {
-                imageData = getDataFromImage(self.image1)
+                imageData = getDataFromImage(self.image4)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image4.jpg", mimeType: "image/jpeg")
             }
             if (self.image5 != nil) {
-                imageData = getDataFromImage(self.image1)
+                imageData = getDataFromImage(self.image5)
                 data.appendPartWithFileData(imageData, name: "files[]", fileName: "image5.jpg", mimeType: "image/jpeg")
             }
             

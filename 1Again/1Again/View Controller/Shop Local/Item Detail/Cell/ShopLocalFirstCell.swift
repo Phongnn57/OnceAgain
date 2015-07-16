@@ -36,6 +36,12 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     
     @IBAction func btnMakeOfferAction(sender: AnyObject) {
         self.makeOfferSelected = !self.makeOfferSelected
+        let btn = sender as! UIButton
+        if self.makeOfferSelected {
+            btn.backgroundColor = UIColor.lightGrayColor()
+        } else {
+            btn.backgroundColor = UIColor.darkGrayColor()
+        }
         self.delegate?.didSelectMakeOfferButton(self)
     }
     
@@ -83,12 +89,14 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.pageControl.numberOfPages = self.imageURLs.count
         return self.imageURLs.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(collectionCellIdentifier, forIndexPath: indexPath) as! MyCollectionViewCell
         cell.imageview.sd_setImageWithURL(NSURL(string:Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(self.imageURLs[indexPath.row])") ), placeholderImage: UIImage(named: "image:add-item-camera"))
+        self.pageControl.currentPage = indexPath.row
         return cell
     }
     
