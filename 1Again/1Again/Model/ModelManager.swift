@@ -41,7 +41,7 @@ class ModelManager: NSObject {
         }
     }
     
-    func postRequest(urlStr: String, params: Dictionary<String, String>!, success: (responseData: AnyObject!) -> Void, failure: (error: String!)-> Void) {
+    func postRequest(urlStr: String, params: Dictionary<String, AnyObject>!, success: (responseData: AnyObject!) -> Void, failure: (error: String!)-> Void) {
                 mainManager.POST(urlStr, parameters: params, success: { (operation: AFHTTPRequestOperation!, responseData: AnyObject!) -> Void in
                     success(responseData: responseData)
                     }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in

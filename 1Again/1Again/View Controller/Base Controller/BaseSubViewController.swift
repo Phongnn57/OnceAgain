@@ -8,8 +8,10 @@
 
 import UIKit
 
-class BaseSubViewController: UIViewController {
+class BaseSubViewController: UIViewController, MBProgressHUDDelegate {
 
+    var hud: MBProgressHUD!
+    
     override func loadView() {
         
         let nameSpaceClassName = NSStringFromClass(self.classForCoder)
@@ -28,4 +30,17 @@ class BaseSubViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func showHUD() {
+        self.hud = MBProgressHUD(view: self.view)
+        self.hud.delegate = self
+        self.hud.labelText = "Loading"
+        self.view.addSubview(self.hud)
+        self.hud.show(true)
+    }
+    
+    func hideHUD() {
+        self.hud.hide(true)
+        self.hud.removeFromSuperview()
+    }
+    
 }

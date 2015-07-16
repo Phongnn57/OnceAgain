@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationDetailFirstCell" rowHeight="298" id="KGk-i7-Jjw" customClass="NotificationDetailFirstCell" customModule="_Again" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="298"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kwX-f3-WXf">
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="297"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="Tb5-CT-xYS" customClass="ClickImage">
+                                <rect key="frame" x="0.0" y="0.0" width="181" height="241"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Tb5-CT-xYS" secondAttribute="height" multiplier="3:4" id="v5a-Um-pni"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="XtD-20-Pak" customClass="ClickImage">
+                                <rect key="frame" x="181" y="0.0" width="92" height="123"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XtD-20-Pak" secondAttribute="height" multiplier="3:4" id="esd-hH-zku"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="rDH-fO-IP3" customClass="ClickImage">
+                                <rect key="frame" x="181" y="123" width="92" height="118"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="lix-NJ-Doc" customClass="ClickImage">
+                                <rect key="frame" x="273" y="123" width="87" height="118"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="HTP-PH-vQU" customClass="ClickImage">
+                                <rect key="frame" x="273" y="0.0" width="87" height="123"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsR-Ca-8Nn">
+                                <rect key="frame" x="125" y="249" width="110" height="36"/>
+                                <color key="backgroundColor" red="0.5777386056801006" green="0.72460670334766153" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="RsR-Ca-8Nn" secondAttribute="height" multiplier="3:1" id="pZX-uu-Knv"/>
+                                </constraints>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnSaveClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="M4E-w9-O1d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWs-AS-8sE">
+                                <rect key="frame" x="243" y="249" width="109" height="36"/>
+                                <color key="backgroundColor" red="0.21866884402651499" green="0.7089013036661298" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TWs-AS-8sE" secondAttribute="height" multiplier="3:1" id="C5U-HN-eAg"/>
+                                </constraints>
+                                <state key="normal" title="Interested">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnInterestedClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0gr-8I-7Kj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a92-Vt-N3E">
+                                <rect key="frame" x="8" y="249" width="109" height="36"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="a92-Vt-N3E" secondAttribute="height" multiplier="3:1" id="ZFo-wO-NZb"/>
+                                </constraints>
+                                <state key="normal" title="No Thanks">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnNothankClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Lq7-Ii-BbL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lix-NJ-Doc" firstAttribute="bottom" secondItem="rDH-fO-IP3" secondAttribute="bottom" id="1Fc-mh-tXr"/>
+                            <constraint firstItem="Tb5-CT-xYS" firstAttribute="width" secondItem="kwX-f3-WXf" secondAttribute="width" multiplier="0.5" constant="1" id="2Uo-nL-17d"/>
+                            <constraint firstAttribute="trailing" secondItem="lix-NJ-Doc" secondAttribute="trailing" id="49Y-oD-nXd"/>
+                            <constraint firstItem="Tb5-CT-xYS" firstAttribute="leading" secondItem="kwX-f3-WXf" secondAttribute="leading" id="5Ye-Aq-Vre"/>
+                            <constraint firstItem="Tb5-CT-xYS" firstAttribute="bottom" secondItem="rDH-fO-IP3" secondAttribute="bottom" id="FFZ-8L-qW0"/>
+                            <constraint firstItem="a92-Vt-N3E" firstAttribute="top" secondItem="Tb5-CT-xYS" secondAttribute="bottom" constant="8" id="JGE-AR-yRq"/>
+                            <constraint firstItem="HTP-PH-vQU" firstAttribute="leading" secondItem="XtD-20-Pak" secondAttribute="trailing" id="LgG-CG-68S"/>
+                            <constraint firstItem="lix-NJ-Doc" firstAttribute="top" secondItem="HTP-PH-vQU" secondAttribute="bottom" id="O2H-wG-8iO"/>
+                            <constraint firstAttribute="trailing" secondItem="HTP-PH-vQU" secondAttribute="trailing" id="PVc-ou-EQa"/>
+                            <constraint firstItem="lix-NJ-Doc" firstAttribute="leading" secondItem="rDH-fO-IP3" secondAttribute="trailing" id="SQS-xo-8xw"/>
+                            <constraint firstItem="RsR-Ca-8Nn" firstAttribute="top" secondItem="rDH-fO-IP3" secondAttribute="bottom" constant="8" id="St5-eD-fuj"/>
+                            <constraint firstItem="TWs-AS-8sE" firstAttribute="top" secondItem="lix-NJ-Doc" secondAttribute="bottom" constant="8" id="T4j-6J-gV6"/>
+                            <constraint firstItem="a92-Vt-N3E" firstAttribute="leading" secondItem="kwX-f3-WXf" secondAttribute="leading" constant="8" id="XeJ-b4-JNW"/>
+                            <constraint firstItem="XtD-20-Pak" firstAttribute="top" secondItem="kwX-f3-WXf" secondAttribute="top" id="Xqr-mf-61e"/>
+                            <constraint firstItem="XtD-20-Pak" firstAttribute="bottom" secondItem="HTP-PH-vQU" secondAttribute="bottom" id="ccf-C0-pL8"/>
+                            <constraint firstItem="XtD-20-Pak" firstAttribute="width" secondItem="Tb5-CT-xYS" secondAttribute="width" multiplier="0.5" constant="1" id="e7Q-yT-Nxi"/>
+                            <constraint firstAttribute="trailing" secondItem="TWs-AS-8sE" secondAttribute="trailing" constant="8" id="eeq-NS-N3f"/>
+                            <constraint firstItem="TWs-AS-8sE" firstAttribute="width" secondItem="RsR-Ca-8Nn" secondAttribute="width" id="elY-mq-ypF"/>
+                            <constraint firstItem="TWs-AS-8sE" firstAttribute="leading" secondItem="RsR-Ca-8Nn" secondAttribute="trailing" constant="8" id="gP0-MC-fcY"/>
+                            <constraint firstItem="HTP-PH-vQU" firstAttribute="top" secondItem="kwX-f3-WXf" secondAttribute="top" id="hak-4H-YY8"/>
+                            <constraint firstItem="XtD-20-Pak" firstAttribute="trailing" secondItem="rDH-fO-IP3" secondAttribute="trailing" id="j1z-MJ-uZI"/>
+                            <constraint firstItem="XtD-20-Pak" firstAttribute="leading" secondItem="rDH-fO-IP3" secondAttribute="leading" id="jdd-qU-j52"/>
+                            <constraint firstItem="XtD-20-Pak" firstAttribute="leading" secondItem="Tb5-CT-xYS" secondAttribute="trailing" id="sWO-Sr-eQ3"/>
+                            <constraint firstItem="Tb5-CT-xYS" firstAttribute="top" secondItem="kwX-f3-WXf" secondAttribute="top" id="t8s-k3-v3c"/>
+                            <constraint firstItem="TWs-AS-8sE" firstAttribute="width" secondItem="a92-Vt-N3E" secondAttribute="width" id="tBw-Ww-RiZ"/>
+                            <constraint firstItem="RsR-Ca-8Nn" firstAttribute="leading" secondItem="a92-Vt-N3E" secondAttribute="trailing" constant="8" id="yab-bC-xCp"/>
+                            <constraint firstItem="rDH-fO-IP3" firstAttribute="top" secondItem="XtD-20-Pak" secondAttribute="bottom" id="yeF-al-2Vr"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kwX-f3-WXf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Gk8-rw-EHV"/>
+                    <constraint firstAttribute="trailing" secondItem="kwX-f3-WXf" secondAttribute="trailing" id="K8i-zk-UIZ"/>
+                    <constraint firstAttribute="bottom" secondItem="kwX-f3-WXf" secondAttribute="bottom" id="NVB-LJ-Zve"/>
+                    <constraint firstItem="kwX-f3-WXf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fqH-vy-4on"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imageview1" destination="Tb5-CT-xYS" id="huf-i5-a5t"/>
+                <outlet property="imageview2" destination="XtD-20-Pak" id="BSF-Pi-9ss"/>
+                <outlet property="imageview3" destination="rDH-fO-IP3" id="eb7-7N-Vxd"/>
+                <outlet property="imageview4" destination="HTP-PH-vQU" id="iSp-0W-M2h"/>
+                <outlet property="imageview5" destination="lix-NJ-Doc" id="fes-da-OMv"/>
+            </connections>
+            <point key="canvasLocation" x="239" y="304"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="image:add-item-default" width="200" height="200"/>
+    </resources>
+</document>

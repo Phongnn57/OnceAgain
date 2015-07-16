@@ -20,7 +20,6 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     private let collectionCellIdentifier = "MyCollectionViewCell"
     
     var toolBar: UIToolbar!
-    var hud: MBProgressHUD!
     var tmpItemID: String!
     var item: ItemObject!
     var comments: [CommentObject]!
@@ -96,19 +95,6 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    func showHUD() {
-        self.hud = MBProgressHUD(view: self.view)
-        self.hud.delegate = self
-        self.hud.labelText = "Loading"
-        self.view.addSubview(self.hud)
-        self.hud.show(true)
-    }
-    
-    func hideHUD() {
-        self.hud.hide(true)
-        self.hud.removeFromSuperview()
     }
     
     

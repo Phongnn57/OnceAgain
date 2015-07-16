@@ -27,6 +27,18 @@ class ItemObject {
     init() {
         id = "0"
         ownerId = 0
+        self.brand = ""
+        self.category = ""
+        self.condition = ""
+        self.age = ""
+        self.price = ""
+        self.title = ""
+        self.description = ""
+        self.imageStr1 = ""
+        self.imageStr2 = ""
+        self.imageStr3 = ""
+        self.imageStr4 = ""
+        self.imageStr5 = ""
     }
     
     func getNumberOfEmptyImage() -> Int {
@@ -102,14 +114,12 @@ class ItemObject {
     }
     
     func availableToUpload() -> Bool {
-        if image1 != nil && title != "" && description != "" && category != "" && condition != "" && brand != "" && age != "" && (consign != "0" || donate != "0" || sale != "0") {
+        
+        if image1 != nil && title != "" && description != "" && category != "" && condition != ""  && age != "" && (consign != "0" || donate != "0" || sale != "0" ) {
             return true
         }
         return false
     }
-    
-    
-
     
     //UPLOAD NEW ITEM TO WEBSERVICE
     func pushItemWithActivityIndicator(hud: MBProgressHUD!) ->Bool {

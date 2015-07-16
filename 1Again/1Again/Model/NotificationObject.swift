@@ -59,7 +59,6 @@ class NotificationObject {
         
         if let json = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as? NSDictionary {
             if let feed = json["notifications"] as? NSArray {
-                println(feed)
                 for entry in feed {
                     
                     var notifications = NotificationObject()

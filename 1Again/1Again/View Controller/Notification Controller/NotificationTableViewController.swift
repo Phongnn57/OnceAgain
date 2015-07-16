@@ -165,52 +165,17 @@ class NotificationTableViewController: UITableViewController {
 
         var postURL = Constant.MyUrl.homeURL + "uploads/\(notification.image1)"
         cell.imageView1.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(notification.image1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
-//        
-//        var image = self.imageCache[postURL]
-//        println("\(indexPath.row)")
-//        if notification.image1 != "" {
-//            println("test")
-//            if image == nil {
-//                println("jump to download!")
-//                var imageURL: NSURL = NSURL(string: postURL)!
-//                let request: NSURLRequest = NSURLRequest(URL: imageURL)
-//                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-//                    if error == nil {
-//                        image = UIImage(data: data)
-//                        // Store the image in to cache
-//                        self.imageCache[postURL] = image
-//                        cell.imageView1.image = image
-//                        // cell.imageView?.image = image
-//                    }
-//                    else {
-//                        println("Error: \(error.localizedDescription)")
-//                    }
-//                })
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? NotificationCell {
-//                    if image != nil {
-//                        cellToUpdate.imageView1.image = image
-//                        println("update image")
-//                    }
-//                }
-//            })
-//        }
+
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        
-        
         return cell
         
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        println("You selected cell #\(indexPath.row)!")
-//        self.tempNnotifications = self.notificationsArray[indexPath.row]
-//        self.performSegueWithIdentifier("goto_notification_detail", sender: self)
         let notificationDetailController = NotificationDetailViewController()
+        notificationDetailController.IID = self.notificationsArray[indexPath.row].iid
+        notificationDetailController.itemID = self.notificationsArray[indexPath.row].itemId
         self.navigationController?.pushViewController(notificationDetailController, animated: true)
-        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

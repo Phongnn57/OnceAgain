@@ -804,7 +804,51 @@
                     <view key="view" contentMode="scaleToFill" id="gkG-2B-L9b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ak-Hm-Wtj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2FX-KC-Lxv">
+                                        <rect key="frame" x="8" y="5" width="359" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="RXF-Sk-0kC"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Items"/>
+                                            <segment title="Seller"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentDidChangeIndex:" destination="gp5-YW-oG1" eventType="valueChanged" id="pvo-VX-kTf"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="2FX-KC-Lxv" secondAttribute="centerY" id="Hwo-Kj-0vJ"/>
+                                    <constraint firstItem="2FX-KC-Lxv" firstAttribute="leading" secondItem="3ak-Hm-Wtj" secondAttribute="leading" constant="8" id="I9v-EM-c5K"/>
+                                    <constraint firstAttribute="height" constant="45" id="Psd-cU-3Tn"/>
+                                    <constraint firstAttribute="trailing" secondItem="2FX-KC-Lxv" secondAttribute="trailing" constant="8" id="m3q-BN-0mO"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7qb-80-5L8">
+                                <rect key="frame" x="0.0" y="45" width="375" height="558"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="gp5-YW-oG1" id="PZ0-gU-w0j"/>
+                                    <outlet property="delegate" destination="gp5-YW-oG1" id="Fk2-fQ-f3l"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hDJ-me-At7" firstAttribute="top" secondItem="7qb-80-5L8" secondAttribute="bottom" id="0ey-fv-uri"/>
+                            <constraint firstItem="7qb-80-5L8" firstAttribute="leading" secondItem="gkG-2B-L9b" secondAttribute="leading" id="Wam-eI-CZS"/>
+                            <constraint firstAttribute="trailing" secondItem="7qb-80-5L8" secondAttribute="trailing" id="Y8h-jB-3UK"/>
+                            <constraint firstAttribute="trailing" secondItem="3ak-Hm-Wtj" secondAttribute="trailing" id="ZmM-U0-BAj"/>
+                            <constraint firstItem="3ak-Hm-Wtj" firstAttribute="top" secondItem="ssa-GY-xEr" secondAttribute="bottom" id="qog-OP-ZXX"/>
+                            <constraint firstItem="7qb-80-5L8" firstAttribute="top" secondItem="3ak-Hm-Wtj" secondAttribute="bottom" id="vk2-Db-eHp"/>
+                            <constraint firstItem="3ak-Hm-Wtj" firstAttribute="leading" secondItem="gkG-2B-L9b" secondAttribute="leading" id="zkC-rA-0uG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favorite" id="yek-b5-04t">
                         <barButtonItem key="leftBarButtonItem" image="btn:menu-bg" id="611-8G-y82"/>
@@ -813,6 +857,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="menuBtn" destination="611-8G-y82" id="MK0-hk-6ql"/>
+                        <outlet property="segmentControl" destination="2FX-KC-Lxv" id="2V1-dj-e8H"/>
+                        <outlet property="tableview" destination="7qb-80-5L8" id="yng-pX-mRN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnk-G5-lhy" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -9,16 +9,35 @@
 import UIKit
 
 class UserObject {
+
     var userId: Int!
     var userType: String!
-    var displayName: String!
-    var email: String!
-    
+    var displayName, name: String!
+    var email, phone: String!
+    var address1, address2, city, zipCode, state: String!
+    var usrReviewCount, usrReviewTotal, usrRating: String!
+    var premiumUser: String!
+
     init() {
-        userId = -1
-        userType = ""
-        displayName = ""
-        email = ""
+        self.initialize()
+    }
+    
+    func initialize() {
+        self.userId = -1
+        self.userType = ""
+        self.displayName = ""
+        self.name = ""
+        self.email = ""
+        self.phone = ""
+        self.address1 = ""
+        self.address2 = ""
+        self.city = ""
+        self.zipCode = ""
+        self.state = ""
+        self.usrRating = ""
+        self.usrReviewCount = ""
+        self.usrReviewTotal = ""
+        self.premiumUser = ""
     }
     
     init(sUserId: Int, sUserType: String!, sDisplayname: String!, sEmail: String!) {
