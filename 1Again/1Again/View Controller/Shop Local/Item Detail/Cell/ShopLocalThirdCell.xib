@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="30" id="7aW-3g-shv"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elu-9T-W94">
@@ -30,7 +30,7 @@
                             <constraint firstAttribute="height" constant="30" id="2h4-bN-fDu"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Condition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXi-yk-ZB3">
@@ -39,7 +39,7 @@
                             <constraint firstAttribute="height" constant="30" id="6tj-cg-ky3"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLr-Rd-2Bh">
@@ -48,7 +48,7 @@
                             <constraint firstAttribute="height" constant="30" id="KVZ-BY-SMR"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grC-X2-0f8">
@@ -60,16 +60,9 @@
                                     <constraint firstAttribute="height" constant="30" id="KOe-GW-3xa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:shop-local-like" translatesAutoresizingMaskIntoConstraints="NO" id="CZ4-0e-IdW">
-                                <rect key="frame" x="8" y="5" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="Tcx-tc-sVR"/>
-                                    <constraint firstAttribute="height" constant="40" id="gP5-KG-vF9"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:right-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="tr0-4I-OjF">
                                 <rect key="frame" x="344" y="13" width="15" height="25"/>
                                 <constraints>
@@ -77,17 +70,30 @@
                                     <constraint firstAttribute="width" constant="15" id="yoa-53-86Q"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x35-IR-hhZ">
+                                <rect key="frame" x="8" y="5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hnn-cl-yGj"/>
+                                    <constraint firstAttribute="width" constant="40" id="wSM-6P-oQJ"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="image:shop-local-dislike">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="favAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="J0V-me-w7x"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="8Ig-78-uoi"/>
                             <constraint firstAttribute="centerY" secondItem="tr0-4I-OjF" secondAttribute="centerY" id="9jY-or-cYF"/>
                             <constraint firstAttribute="centerY" secondItem="sqm-27-0XT" secondAttribute="centerY" id="AK1-Ay-cxz"/>
-                            <constraint firstItem="sqm-27-0XT" firstAttribute="leading" secondItem="CZ4-0e-IdW" secondAttribute="trailing" constant="67" id="O7m-vJ-7mR"/>
-                            <constraint firstItem="CZ4-0e-IdW" firstAttribute="leading" secondItem="grC-X2-0f8" secondAttribute="leading" constant="8" id="hb7-Um-bcy"/>
+                            <constraint firstAttribute="centerY" secondItem="x35-IR-hhZ" secondAttribute="centerY" id="TNQ-Kd-zx7"/>
+                            <constraint firstItem="x35-IR-hhZ" firstAttribute="leading" secondItem="grC-X2-0f8" secondAttribute="leading" constant="8" id="Wqz-Wi-fvR"/>
+                            <constraint firstItem="sqm-27-0XT" firstAttribute="leading" secondItem="x35-IR-hhZ" secondAttribute="trailing" constant="67" id="dH6-bH-8Tf"/>
                             <constraint firstAttribute="trailing" secondItem="tr0-4I-OjF" secondAttribute="trailing" constant="8" id="iyV-Gt-EPS"/>
                             <constraint firstItem="tr0-4I-OjF" firstAttribute="leading" secondItem="sqm-27-0XT" secondAttribute="trailing" constant="8" id="kJf-Yq-RV6"/>
-                            <constraint firstAttribute="centerY" secondItem="CZ4-0e-IdW" secondAttribute="centerY" id="wyl-St-VCt"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category  :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhu-PZ-UVv">
@@ -97,7 +103,7 @@
                             <constraint firstAttribute="height" constant="30" id="s2d-J6-gsT"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand       :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yqq-Em-kAO">
@@ -107,7 +113,7 @@
                             <constraint firstAttribute="width" constant="90" id="fNY-NQ-n2X"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age          :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pW-X9-Uf0">
@@ -117,7 +123,7 @@
                             <constraint firstAttribute="width" constant="90" id="IS1-OE-1yd"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Condition :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jP-EV-sZF">
@@ -127,7 +133,7 @@
                             <constraint firstAttribute="height" constant="30" id="Hxn-cv-WOh"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -162,6 +168,7 @@
                 <outlet property="brand" destination="elu-9T-W94" id="HJa-Pc-FQp"/>
                 <outlet property="category" destination="vDY-5h-uuD" id="SGY-hg-ePO"/>
                 <outlet property="condition" destination="tXi-yk-ZB3" id="nl0-LD-cny"/>
+                <outlet property="favButton" destination="x35-IR-hhZ" id="fxr-oO-P6l"/>
                 <outlet property="seller" destination="sqm-27-0XT" id="CW0-ok-ica"/>
                 <outlet property="sellerView" destination="H2p-sc-9uM" id="ziL-ct-A0J"/>
             </connections>
@@ -170,6 +177,6 @@
     </objects>
     <resources>
         <image name="image:right-arrow" width="26" height="44"/>
-        <image name="image:shop-local-like" width="40" height="40"/>
+        <image name="image:shop-local-dislike" width="40" height="40"/>
     </resources>
 </document>

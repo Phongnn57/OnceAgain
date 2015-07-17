@@ -40,7 +40,6 @@ class MessageTableViewController: UITableViewController {
             self.messagesArray = msgObjects
             self.tableView.reloadData()
         })
-
     }
     
     func refresh(sender:AnyObject)
@@ -86,6 +85,14 @@ class MessageTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let chatViewController = ChatViewController()
+//        chatViewController.imd = self.messagesArray[indexPath.row].iid
+        chatViewController.imd = "1307"
+        chatViewController.displayName = self.messagesArray[indexPath.row].name
+        self.navigationController?.pushViewController(chatViewController, animated: true)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

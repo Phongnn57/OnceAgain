@@ -38,22 +38,35 @@ class NotificationAPI: NSObject {
                     completion(result: thisItem)
                 }
             }
-
         }
     }
     
     class func submitWithID(itemID: String, status: String, comment: String, completion: (result: AnyObject!) ->Void, failure: (error: String)-> Void) {
         
-        var url = NSURL(string: Constant.MyUrl.homeURL + Constant.MyUrl.Notification_Submit + "?iid=\(itemID)&status=\(status)&comment=\(comment)")
-        let data = NSData(contentsOfURL: url!)
-        if let jsonData = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as? NSDictionary {
-            if let data = jsonData["return_code"] as? String {
-                if data == "-1" {
-                    completion(result: nil)
-                } else {
-                    failure(error: "Error! Try Again later")
+        var manager: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager(baseURL:NSURL(string: Constant.MyUrl.homeURL))
+        manager.requestSerializer = AFJSONRequestSerializer()
+        manager.responseSerializer = AFJSONResponseSerializer()
+        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+        
+        manager.POST(Constant.MyUrl.Notification_Submit, parameters: nil, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
+            formData.appendPartWithFormData(itemID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "iid")
+            formData.appendPartWithFormData(status.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "status")
+            formData.appendPartWithFormData(comment.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "comment")
+            }, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+                print(response)
+                completion(result: nil)
+                if let jsonData = response as? NSDictionary {
+                    
+                    let statusCode = numberFromJSONAnyObject(jsonData["return_code"])?.integerValue ?? 0
+                        if statusCode == 0 {
+                            completion(result: nil)
+                        } else {
+                            failure(error: "Error")
+                        }
                 }
-            }
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            failure(error: error.description)
         }
-    }
+        
+            }
 }

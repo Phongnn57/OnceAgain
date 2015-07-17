@@ -14,3 +14,4 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ClickImage.h"
 #import <UIView+Toast.h>
+#import <JSQMessagesViewController/JSQMessages.h>

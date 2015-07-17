@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate, CameraControllerDelegate, AddPhotoCellDelegate {
+class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate, CameraControllerDelegate, AddPhotoCellDelegate, UITextViewDelegate {
 
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
@@ -80,9 +80,16 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             let cell = tableView.dequeueReusableCellWithIdentifier(itemInfoCellIdentifier) as! ItemDescriptionCell
             
             cell.title.delegate = self
-            cell.descriptionItem.delegate = self
             cell.title.text = item.title
-            cell.descriptionItem.text = item.description
+            if item.description.isEmpty {
+                cell.descriptionTextview.text = "Description"
+                cell.descriptionTextview.textColor = UIColor.lightGrayColor()
+            } else {
+                cell.descriptionTextview.text = item.description
+                cell.descriptionTextview.textColor = UIColor.blackColor()
+            }
+            
+            cell.descriptionTextview.delegate = self
             return cell
         }
         else if indexPath.row == 2 {
@@ -121,7 +128,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {return 130 + UIScreen.mainScreen().bounds.size.width/2}
+        if indexPath.row == 0 {return 130 + UIScreen.mainScreen().bounds.size.width * 2 / 3}
         else if indexPath.row == 1 {return 200}
         else if indexPath.row == 2 {return 60 + UIScreen.mainScreen().bounds.size.width/3}
         else if indexPath.row == 3 {
@@ -253,9 +260,6 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         if textField.tag == Constant.TextFieldTag.addItemTitleTextfield {
             goToItemInformation(true)
             return false
-        } else if textField.tag == Constant.TextFieldTag.addItemDescriptionTextview {
-            goToItemInformation(false)
-            return false
         } else if textField.tag >= Constant.TextFieldTag.addItemCategoryTextField && textField.tag <= Constant.TextFieldTag.addItemAgeTextField {
             selectedTextfield = textField.tag
             activeTextfield = textField
@@ -267,6 +271,12 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             return true
         }
         return true
+    }
+    
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        self.goToItemInformation(false)
+        return false
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
@@ -304,6 +314,10 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             return false
         }
         return true
+    }
+    
+    func moveToDescription() {
+        self.goToItemInformation(false)
     }
 
     func goToItemInformation(titleBecomeFirstResponse: Bool) {

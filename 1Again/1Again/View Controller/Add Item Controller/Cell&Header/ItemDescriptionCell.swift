@@ -11,13 +11,13 @@ import UIKit
 class ItemDescriptionCell: UITableViewCell {
 
     @IBOutlet weak var title: MyCustomTextField!
-    @IBOutlet weak var descriptionItem: MyCustomTextField!
 
-    
-    
+    @IBOutlet weak var descriptionTextview: UITextView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.descriptionTextview.sizeToFit()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

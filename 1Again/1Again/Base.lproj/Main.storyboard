@@ -796,7 +796,7 @@
         <!--Favorite-->
         <scene sceneID="8SH-V7-NKc">
             <objects>
-                <viewController id="gp5-YW-oG1" customClass="FavoriteViewController" customModule="_Again" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gp5-YW-oG1" customClass="FavoriteViewController" customModule="_Again" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ssa-GY-xEr"/>
                         <viewControllerLayoutGuide type="bottom" id="hDJ-me-At7"/>
@@ -830,9 +830,9 @@
                                     <constraint firstAttribute="trailing" secondItem="2FX-KC-Lxv" secondAttribute="trailing" constant="8" id="m3q-BN-0mO"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7qb-80-5L8">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="7qb-80-5L8">
                                 <rect key="frame" x="0.0" y="45" width="375" height="558"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="gp5-YW-oG1" id="PZ0-gU-w0j"/>
                                     <outlet property="delegate" destination="gp5-YW-oG1" id="Fk2-fQ-f3l"/>

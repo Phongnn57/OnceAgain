@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate, ShopLocalFirstCellDelegate, AddNewCommentCellDelegate, ShopLocalSecondCellDelegate, UITextFieldDelegate {
+class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate, ShopLocalFirstCellDelegate, AddNewCommentCellDelegate, ShopLocalSecondCellDelegate, UITextFieldDelegate , ShopLocalThirdCellDelegate{
     
     @IBOutlet weak var tableview: UITableView!
     
@@ -145,6 +145,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
             }
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(thirdCellIdentifier) as! ShopLocalThirdCell
+            cell.delegate = self
             if self.item != nil {cell.showDataFromItem(self.item)}
             return cell
         } else if indexPath.section == 2 {
@@ -191,6 +192,18 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     }
     
     //DELEGATE
+    
+    func didSelectFavorite(cell: ShopLocalThirdCell) {
+        var params: Dictionary<String, String> = Dictionary<String, String>()
+        
+        params = ["action": (cell.favorite == true ? "1" : "0"), "itemId": self.item.id, "userId": "\(USER_ID)", "type": "U"]
+        
+        ItemAPI.PostRequest(Constant.MyUrl.Item_Detail_Favorite, params: params, completion: { (object) -> Void in
+            print("SUCCESS")
+            }) { (error) -> Void in
+                print("ERROR: \(error)")
+        }
+    }
     
     func didSelectOfferBtn(cell: ShopLocalSecondCell) {
         var params: Dictionary<String, String> = Dictionary<String, String>()

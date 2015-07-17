@@ -95,6 +95,10 @@
 		688E69D61B3DB60C00030F3E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69D51B3DB60C00030F3E /* BaseViewController.swift */; };
 		688E69DB1B3DC30D00030F3E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69DA1B3DC30D00030F3E /* UIColorExtension.swift */; };
 		688E69DE1B3DC57100030F3E /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69DD1B3DC57100030F3E /* AddItemViewController.swift */; };
+		68A1A7391B593A6900C8B5D2 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A1A7371B593A6900C8B5D2 /* ChatViewController.swift */; };
+		68A1A73A1B593A6900C8B5D2 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A1A7381B593A6900C8B5D2 /* ChatViewController.xib */; };
+		68A1A73F1B5941EF00C8B5D2 /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A1A73E1B5941EF00C8B5D2 /* ChatAPI.swift */; };
+		68A1A7411B59448500C8B5D2 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A1A7401B59448500C8B5D2 /* NSDateExtension.swift */; };
 		68A62ADA1B40376700B31317 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A62AD81B40376700B31317 /* CameraController.swift */; };
 		68A62ADB1B40376700B31317 /* CameraController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A62AD91B40376700B31317 /* CameraController.xib */; };
 		68A62AE71B4050AB00B31317 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A62AE51B4050AB00B31317 /* NotificationCell.swift */; };
@@ -108,6 +112,8 @@
 		68B299A41B3DA9D6009720BF /* _AgainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B299A31B3DA9D6009720BF /* _AgainTests.swift */; };
 		68BECDE01B5053010007689E /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BECDDE1B5053010007689E /* MyCollectionViewCell.swift */; };
 		68BECDE11B5053010007689E /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BECDDF1B5053010007689E /* MyCollectionViewCell.xib */; };
+		68E292681B580DE000BDB7E2 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E292661B580DE000BDB7E2 /* FavoriteTableViewCell.swift */; };
+		68E292691B580DE000BDB7E2 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68E292671B580DE000BDB7E2 /* FavoriteTableViewCell.xib */; };
 		68F21D3A1B3DD3F8004455EC /* PriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F21D381B3DD3F8004455EC /* PriceCell.swift */; };
 		68F21D3B1B3DD3F8004455EC /* PriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F21D391B3DD3F8004455EC /* PriceCell.xib */; };
 		68F21D3E1B3DD6F5004455EC /* AttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F21D3C1B3DD6F5004455EC /* AttributeCell.swift */; };
@@ -224,6 +230,10 @@
 		688E69D51B3DB60C00030F3E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		688E69DA1B3DC30D00030F3E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		688E69DD1B3DC57100030F3E /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		68A1A7371B593A6900C8B5D2 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		68A1A7381B593A6900C8B5D2 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		68A1A73E1B5941EF00C8B5D2 /* ChatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
+		68A1A7401B59448500C8B5D2 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
 		68A62AD81B40376700B31317 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		68A62AD91B40376700B31317 /* CameraController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraController.xib; sourceTree = "<group>"; };
 		68A62AE51B4050AB00B31317 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -243,6 +253,8 @@
 		68BECDDE1B5053010007689E /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		68BECDDF1B5053010007689E /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		68C6C89C1B3DAE470075AA2F /* 1Again-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "1Again-Bridging-Header.h"; sourceTree = "<group>"; };
+		68E292661B580DE000BDB7E2 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		68E292671B580DE000BDB7E2 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		68F21D381B3DD3F8004455EC /* PriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceCell.swift; sourceTree = "<group>"; };
 		68F21D391B3DD3F8004455EC /* PriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceCell.xib; sourceTree = "<group>"; };
 		68F21D3C1B3DD6F5004455EC /* AttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeCell.swift; sourceTree = "<group>"; };
@@ -294,6 +306,7 @@
 				68181F831B57F492002FC002 /* ItemAPI.swift */,
 				68181F7F1B57F3D1002FC002 /* NotificationAPI.swift */,
 				68181F871B57F4B2002FC002 /* DataManager.swift */,
+				68A1A73E1B5941EF00C8B5D2 /* ChatAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -390,6 +403,7 @@
 		684BE9BC1B43139600F1D6E9 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				68A1A7361B5939E700C8B5D2 /* ChatViewController */,
 				684BE9BF1B43144F00F1D6E9 /* Cell */,
 				684BE9BD1B4313B300F1D6E9 /* MessageTableViewController.swift */,
 			);
@@ -489,6 +503,7 @@
 		68707CE51B428BC100F99445 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				68E292651B580DC500BDB7E2 /* Cell */,
 				68707CE61B428BD500F99445 /* FavoriteViewController.swift */,
 			);
 			name = Favorite;
@@ -580,6 +595,7 @@
 		688E69D91B3DC2CA00030F3E /* Custom View, Button, Color... */ = {
 			isa = PBXGroup;
 			children = (
+				68A1A7401B59448500C8B5D2 /* NSDateExtension.swift */,
 				688E69DA1B3DC30D00030F3E /* UIColorExtension.swift */,
 				6879D8D81B3E37A900F89BAF /* MyCustomTextField.swift */,
 				68120FFE1B3E53B900C2AB49 /* NSNotificationCenterExtension.swift */,
@@ -597,6 +613,15 @@
 				688E69DD1B3DC57100030F3E /* AddItemViewController.swift */,
 			);
 			path = "Add Item Controller";
+			sourceTree = "<group>";
+		};
+		68A1A7361B5939E700C8B5D2 /* ChatViewController */ = {
+			isa = PBXGroup;
+			children = (
+				68A1A7371B593A6900C8B5D2 /* ChatViewController.swift */,
+				68A1A7381B593A6900C8B5D2 /* ChatViewController.xib */,
+			);
+			path = ChatViewController;
 			sourceTree = "<group>";
 		};
 		68A62AD71B40375500B31317 /* Camera Controller */ = {
@@ -710,6 +735,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		68E292651B580DC500BDB7E2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				68E292661B580DE000BDB7E2 /* FavoriteTableViewCell.swift */,
+				68E292671B580DE000BDB7E2 /* FavoriteTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		BE0F0CF7C7F52BD492E6D8B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -817,6 +851,7 @@
 				6879D8D31B3E346400F89BAF /* SecondPriceCell.xib in Resources */,
 				682EACE81B459F4D007F67FB /* AddNewCommentCell.xib in Resources */,
 				686ECCBD1B416333001A861B /* SignUpViewController.xib in Resources */,
+				68A1A73A1B593A6900C8B5D2 /* ChatViewController.xib in Resources */,
 				68BECDE11B5053010007689E /* MyCollectionViewCell.xib in Resources */,
 				682EACD81B459707007F67FB /* ShopLocalFirstCell.xib in Resources */,
 				686ABB0C1B3E9CB500AC80E0 /* ItemInfoController.xib in Resources */,
@@ -838,6 +873,7 @@
 				684BE9C31B43146200F1D6E9 /* MessageCell.xib in Resources */,
 				68B299951B3DA9D6009720BF /* Images.xcassets in Resources */,
 				682EACD31B45968D007F67FB /* ShopLocalDetailViewController.xib in Resources */,
+				68E292691B580DE000BDB7E2 /* FavoriteTableViewCell.xib in Resources */,
 				68707CEC1B4290CD00F99445 /* NotificationDetailViewController.xib in Resources */,
 				6834C6A11B3DCDB900F7912B /* AddPhotoCell.xib in Resources */,
 				684BE9B81B43063F00F1D6E9 /* ItemDetailController.xib in Resources */,
@@ -940,6 +976,7 @@
 				682EACE31B459E98007F67FB /* CommentCell.swift in Sources */,
 				68181F851B57F492002FC002 /* FavoriteAPI.swift in Sources */,
 				68A62AEA1B40536E00B31317 /* NotificationObject.swift in Sources */,
+				68A1A7411B59448500C8B5D2 /* NSDateExtension.swift in Sources */,
 				6889D7E21B4146B3006A176D /* UserManager.swift in Sources */,
 				68A62AE71B4050AB00B31317 /* NotificationCell.swift in Sources */,
 				684BE9C51B4315E700F1D6E9 /* MessageObject.swift in Sources */,
@@ -948,6 +985,7 @@
 				68707CE41B4233E300F99445 /* ProfileViewController.swift in Sources */,
 				684BE9B71B43063F00F1D6E9 /* ItemDetailController.swift in Sources */,
 				686ABAED1B3E704A00AC80E0 /* MyCustomImage.swift in Sources */,
+				68A1A7391B593A6900C8B5D2 /* ChatViewController.swift in Sources */,
 				68707CE71B428BD500F99445 /* FavoriteViewController.swift in Sources */,
 				686ABB011B3E85CC00AC80E0 /* ELCAlbumPickerController.m in Sources */,
 				688E69DB1B3DC30D00030F3E /* UIColorExtension.swift in Sources */,
@@ -957,9 +995,11 @@
 				686ECCBC1B416333001A861B /* SignUpViewController.swift in Sources */,
 				68181F861B57F492002FC002 /* ItemAPI.swift in Sources */,
 				68164A9D1B46DC7000346F16 /* AdsViewViewController.swift in Sources */,
+				68A1A73F1B5941EF00C8B5D2 /* ChatAPI.swift in Sources */,
 				683D95C81B3E5EB30013B485 /* Constant.swift in Sources */,
 				686ABB051B3E85CC00AC80E0 /* ELCConsole.m in Sources */,
 				684BE9BB1B43080000F1D6E9 /* ClickImage.m in Sources */,
+				68E292681B580DE000BDB7E2 /* FavoriteTableViewCell.swift in Sources */,
 				68F21D3A1B3DD3F8004455EC /* PriceCell.swift in Sources */,
 				6879D8D91B3E37A900F89BAF /* MyCustomTextField.swift in Sources */,
 				681210071B3E5AEB00C2AB49 /* ConditionObject.swift in Sources */,

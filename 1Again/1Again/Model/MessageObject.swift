@@ -8,6 +8,28 @@
 
 import UIKit
 
+class Message {
+    var id: String
+    var im_imd: String
+    var type: String
+    var senderId: String
+    var receiverId: String
+    var message: String
+    var timestamp: String
+    var jsqMessage: JSQMessage!
+    
+    init() {
+        self.id = ""
+        self.im_imd = ""
+        self.type = ""
+        self.senderId = ""
+        self.receiverId = ""
+        self.message = ""
+        self.timestamp = ""
+        self.jsqMessage = nil
+    }
+}
+
 class MessageObject {
     var iid: String = String()
     var itemId: String = String()

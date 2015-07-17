@@ -19,7 +19,7 @@ class DataManager: NSObject {
 
         mainManager = AFHTTPRequestOperationManager(baseURL: NSURL(string: baseURL))
         mainManager.requestSerializer = AFJSONRequestSerializer()
-        mainManager.responseSerializer = AFHTTPResponseSerializer()
+        mainManager.responseSerializer = AFJSONResponseSerializer()
         mainManager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
     }
 }

@@ -29,4 +29,11 @@ class ItemListCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configCellWithItem(item: ItemObject) {
+        self.imageview.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr1), placeholderImage: UIImage(named: ""))
+        self.title.text = item.title
+        self.descriptionLb.text = item.description
+        self.timeStamp.text = "\(getDateFromString(item.timestamp)) days ago"
+    }
+    
 }

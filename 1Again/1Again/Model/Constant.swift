@@ -23,7 +23,7 @@ class Constant: NSObject {
         static let Favorite_GetList: String = "V5.favorite_listget_ac.php"
         
         static let Notification_Detail: String = "V5.forSaleItem_JSONV2.php"
-        static let Notification_Submit: String = "V5.notification_update_acJSONPOST.php"
+        static let Notification_Submit: String = "V5.notification_update_acJSONPOST.v2.php"
     }
     
     struct KEYs {
@@ -148,6 +148,30 @@ func postJSON(params : Dictionary<String, String>, url : String)  {
     })
     
     task.resume()
+}
+
+func numberFromJSONAnyObject(anyValue: AnyObject?) -> NSNumber?{
+    if(anyValue == nil){
+        return nil
+    }
+    
+    if(anyValue is String){
+        let intValue: NSNumber? = NSNumberFormatter().numberFromString((anyValue as! String))
+        if(intValue != nil){
+            return intValue!
+        }
+    }else if(anyValue is NSNumber){
+        return anyValue as? NSNumber
+    }
+    
+    return nil
+}
+
+func getDataFromStr(str: String) -> NSDate {
+    var dateFormater = NSDateFormatter()
+    dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    var date = dateFormater.dateFromString(str)
+    return date!
 }
 
 func getDateFromString(dateStr: String) -> Int{

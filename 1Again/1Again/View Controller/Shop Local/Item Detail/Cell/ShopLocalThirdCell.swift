@@ -8,13 +8,31 @@
 
 import UIKit
 
+protocol ShopLocalThirdCellDelegate {
+    func didSelectFavorite(cell:ShopLocalThirdCell)
+}
+
 class ShopLocalThirdCell: UITableViewCell {
     
+    @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var brand: UILabel!
     @IBOutlet weak var condition: UILabel!
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var seller: UILabel!
+    var delegate: ShopLocalThirdCellDelegate?
+    
+    var favorite: Bool = false
+    
+    @IBAction func favAction(sender: AnyObject) {
+        self.favorite = !self.favorite
+        if self.favorite {
+            favButton.setImage(UIImage(named: "image:shop-local-like"), forState: UIControlState.Normal)
+        } else {
+            favButton.setImage(UIImage(named: "image:shop-local-dislike"), forState: UIControlState.Normal)
+        }
+        self.delegate?.didSelectFavorite(self)
+    }
     
     @IBOutlet weak var sellerView: UIView!
 
@@ -23,6 +41,7 @@ class ShopLocalThirdCell: UITableViewCell {
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
+        
         super.setSelected(selected, animated: animated)
     }
     

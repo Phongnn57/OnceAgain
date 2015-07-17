@@ -142,9 +142,9 @@ class ItemInfoController: BaseSubViewController, UITextViewDelegate {
     }
     
     func saveItemInformation() {
-        if titleTextView.text.isEmpty || titleTextView.text == "Title" {item.title = nil}
+        if titleTextView.text.isEmpty || titleTextView.text == "Title" {item.title = ""}
         else {item.title = titleTextView.text}
-        if descriptionTextView.text.isEmpty || descriptionTextView.text == "Description" {item.description = nil}
+        if descriptionTextView.text.isEmpty || descriptionTextView.text == "Description" {item.description = ""}
         else {item.description = descriptionTextView.text}
         
         delegate.pushItemBack(item)

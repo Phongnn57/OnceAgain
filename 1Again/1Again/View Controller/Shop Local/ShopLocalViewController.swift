@@ -216,6 +216,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        self.applyFilterAction("")
     }
     
     func hideTableView() {

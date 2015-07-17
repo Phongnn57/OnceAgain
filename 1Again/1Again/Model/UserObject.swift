@@ -10,19 +10,30 @@ import UIKit
 
 class UserObject {
 
-    var userId: Int!
-    var userType: String!
-    var displayName, name: String!
+    var userId, id, usrReviewCount, usrReviewTotal: Int!
+    var userType, types: String!
+    var displayName, name, lastName: String!
     var email, phone: String!
     var address1, address2, city, zipCode, state: String!
-    var usrReviewCount, usrReviewTotal, usrRating: String!
+    var usrRating: String!
     var premiumUser: String!
+    var TS, timestamp: String!
+    var favID: String!
+    var latitude, longitude: String!
+    var password: String!
 
     init() {
         self.initialize()
     }
     
     func initialize() {
+        self.id = 0
+        self.types = ""
+        self.password = ""
+        self.latitude = ""
+        self.longitude = ""
+        self.lastName = ""
+        self.favID = ""
         self.userId = -1
         self.userType = ""
         self.displayName = ""
@@ -35,9 +46,11 @@ class UserObject {
         self.zipCode = ""
         self.state = ""
         self.usrRating = ""
-        self.usrReviewCount = ""
-        self.usrReviewTotal = ""
+        self.usrReviewCount = 0
+        self.usrReviewTotal = 0
         self.premiumUser = ""
+        self.TS = ""
+        self.timestamp = ""
     }
     
     init(sUserId: Int, sUserType: String!, sDisplayname: String!, sEmail: String!) {
