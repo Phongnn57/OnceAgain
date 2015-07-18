@@ -45,6 +45,8 @@ class MessageObject {
     var status: String = String()
     var comment: String = String()
     var timestamp: String = String()
+    var entityID: String = String()
+    var senderId: String = String()
     
     init() {
          iid = String()
@@ -109,7 +111,8 @@ class MessageObject {
                     messages.status = entry["status"] as! String
                     messages.comment = entry["comment"] as! String
                     messages.timestamp = entry["timestamp"] as! String
-                    
+                    messages.entityID = entry["entityId"] as! String
+                    messages.senderId = entry["id"] as! String
                     messages.address2 = cityValue + ", " + stateValue + " " + zipValue
                     
                     println(messages.desc)

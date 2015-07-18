@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageTableViewController: UITableViewController {
+class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
 
     
     @IBOutlet weak var menuBtn: UIBarButtonItem!
@@ -16,6 +16,8 @@ class MessageTableViewController: UITableViewController {
     var messagesArray =  [MessageObject]()
     var tempMessages = MessageObject()
     private let cellIdentifier = "MessageCell"
+    var hud: MBProgressHUD!
+    var firstLoad: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +38,31 @@ class MessageTableViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        MessageObject.getListOfMessages("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionClosure: { (msgObjects) -> () in
-            self.messagesArray = msgObjects
-            self.tableView.reloadData()
-        })
+        if self.firstLoad {
+            self.firstLoad = false
+            self.tableView.alpha = 0
+            self.showHUD()
+            MessageObject.getListOfMessages("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionClosure: { (msgObjects) -> () in
+                self.messagesArray = msgObjects
+                self.tableView.reloadData()
+                self.hideHUD()
+                self.tableView.alpha = 1
+            })
+        }
+    }
+    
+    func showHUD() {
+        self.hud = MBProgressHUD(view: self.view)
+        self.hud.delegate = self
+        self.hud.labelText = "Loading"
+        self.view.addSubview(self.hud)
+        self.view.bringSubviewToFront(self.hud)
+        self.hud.show(true)
+    }
+    
+    func hideHUD() {
+        self.hud.hide(true)
+        self.hud.removeFromSuperview()
     }
     
     func refresh(sender:AnyObject)
@@ -89,9 +112,10 @@ class MessageTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let chatViewController = ChatViewController()
-//        chatViewController.imd = self.messagesArray[indexPath.row].iid
-        chatViewController.imd = "1307"
+        chatViewController.imd = self.messagesArray[indexPath.row].iid
+        chatViewController.receiverID = self.messagesArray[indexPath.row].entityID
         chatViewController.displayName = self.messagesArray[indexPath.row].name
+        chatViewController.senderID = self.messagesArray[indexPath.row].senderId
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
     

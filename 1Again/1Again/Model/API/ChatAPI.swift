@@ -37,4 +37,18 @@ class ChatAPI: NSObject {
             failure(error: error.description)
         }
     }
+    
+    class func sendNewMessage(imd: String, senderID: String, receiverID: String, status: String, message: String, completion: (result: AnyObject!) -> Void, failure:(error: String)-> Void) {
+        DataManager.shareManager.mainManager.POST("V5.message_insert_response_ac.v2.php", parameters: nil, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
+            formData.appendPartWithFormData(imd.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "imd")
+            formData.appendPartWithFormData(senderID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "userId")
+            formData.appendPartWithFormData(receiverID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "receiverId")
+            formData.appendPartWithFormData(status.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "status")
+            formData.appendPartWithFormData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "message")
+            }, success: { (operation: AFHTTPRequestOperation!, responseData: AnyObject!) -> Void in
+            completion(result: responseData)
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            failure(error: error.description)
+        }
+    }
 }

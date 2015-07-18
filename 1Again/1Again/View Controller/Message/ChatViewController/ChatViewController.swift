@@ -12,6 +12,8 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     
     var imd: String!
     var displayName: String!
+    var receiverID: String!
+    var senderID: String!
 
     let incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor(red: 10/255, green: 180/255, blue: 230/255, alpha: 1.0))
     let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
@@ -30,9 +32,11 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
         
         self.title = self.displayName
         self.userName = "\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUser))"
-        self.senderId = "\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))"
-
+        
+        self.senderId = self.senderID
         self.senderDisplayName = self.displayName
+        
+        self.collectionView.collectionViewLayout.springinessEnabled = true
         self.collectionView?.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
         self.collectionView?.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
         self.showLoadEarlierMessagesHeader = false
@@ -41,7 +45,7 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        ChatAPI.getAllMessage("1307", completion: { (result) -> Void in
+        ChatAPI.getAllMessage(self.imd, completion: { (result) -> Void in
             self.messages = result
             self.collectionView.reloadData()
         }) { (error) -> Void in
@@ -86,13 +90,19 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     }
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        var newMessage = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text);
-        var tmpMessage = Message()
-        tmpMessage.jsqMessage = newMessage
-        self.messages.append(tmpMessage)
-        self.finishSendingMessage()
+        ChatAPI.sendNewMessage(self.imd, senderID: self.senderId, receiverID: self.receiverID, status: "N", message: text, completion: { (result) -> Void in
+            var newMessage = JSQMessage(senderId: self.senderId, displayName: senderDisplayName, text: text);
+            var tmpMessage = Message()
+            tmpMessage.jsqMessage = newMessage
+            self.messages.append(tmpMessage)
+            self.finishSendingMessage()
+            JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        }) { (error) -> Void in
+            self.view.makeToast("Message not sent")
+        }
     }
-    
+
     override func didPressAccessoryButton(sender: UIButton!) {
+        
     }
 }
