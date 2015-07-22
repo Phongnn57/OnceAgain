@@ -73,6 +73,12 @@
 		686ABB0B1B3E9CB500AC80E0 /* ItemInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686ABB091B3E9CB500AC80E0 /* ItemInfoController.swift */; };
 		686ABB0C1B3E9CB500AC80E0 /* ItemInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686ABB0A1B3E9CB500AC80E0 /* ItemInfoController.xib */; };
 		686ABB0E1B3E9D2300AC80E0 /* BaseSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686ABB0D1B3E9D2300AC80E0 /* BaseSubViewController.swift */; };
+		686E52401B5A35550047D2F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E523F1B5A35550047D2F6 /* User.swift */; };
+		686E52421B5A38710047D2F6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E52411B5A38710047D2F6 /* Item.swift */; };
+		686E52441B5A39A90047D2F6 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E52431B5A39A90047D2F6 /* Category.swift */; };
+		686E52461B5A39F50047D2F6 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E52451B5A39F50047D2F6 /* Condition.swift */; };
+		686E52481B5A3A210047D2F6 /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E52471B5A3A210047D2F6 /* Age.swift */; };
+		686E524A1B5A3A580047D2F6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E52491B5A3A580047D2F6 /* Notification.swift */; };
 		686ECCBC1B416333001A861B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686ECCBA1B416333001A861B /* SignUpViewController.swift */; };
 		686ECCBD1B416333001A861B /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686ECCBB1B416333001A861B /* SignUpViewController.xib */; };
 		68707CE41B4233E300F99445 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68707CE31B4233E300F99445 /* ProfileViewController.swift */; };
@@ -118,6 +124,7 @@
 		68F21D3B1B3DD3F8004455EC /* PriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F21D391B3DD3F8004455EC /* PriceCell.xib */; };
 		68F21D3E1B3DD6F5004455EC /* AttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F21D3C1B3DD6F5004455EC /* AttributeCell.swift */; };
 		68F21D3F1B3DD6F5004455EC /* AttributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F21D3D1B3DD6F5004455EC /* AttributeCell.xib */; };
+		68F545301B5A125F00826677 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F5452F1B5A125F00826677 /* UserAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +215,12 @@
 		686ABB091B3E9CB500AC80E0 /* ItemInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfoController.swift; sourceTree = "<group>"; };
 		686ABB0A1B3E9CB500AC80E0 /* ItemInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemInfoController.xib; sourceTree = "<group>"; };
 		686ABB0D1B3E9D2300AC80E0 /* BaseSubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSubViewController.swift; sourceTree = "<group>"; };
+		686E523F1B5A35550047D2F6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		686E52411B5A38710047D2F6 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		686E52431B5A39A90047D2F6 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		686E52451B5A39F50047D2F6 /* Condition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
+		686E52471B5A3A210047D2F6 /* Age.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
+		686E52491B5A3A580047D2F6 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		686ECCBA1B416333001A861B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		686ECCBB1B416333001A861B /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		68707CE31B4233E300F99445 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +272,7 @@
 		68F21D391B3DD3F8004455EC /* PriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceCell.xib; sourceTree = "<group>"; };
 		68F21D3C1B3DD6F5004455EC /* AttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeCell.swift; sourceTree = "<group>"; };
 		68F21D3D1B3DD6F5004455EC /* AttributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttributeCell.xib; sourceTree = "<group>"; };
+		68F5452F1B5A125F00826677 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		8D7893BE7E344CC5C9B9D55D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,6 +321,7 @@
 				68181F7F1B57F3D1002FC002 /* NotificationAPI.swift */,
 				68181F871B57F4B2002FC002 /* DataManager.swift */,
 				68A1A73E1B5941EF00C8B5D2 /* ChatAPI.swift */,
+				68F5452F1B5A125F00826677 /* UserAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -481,6 +496,19 @@
 				686ABB0A1B3E9CB500AC80E0 /* ItemInfoController.xib */,
 			);
 			path = "Item Information";
+			sourceTree = "<group>";
+		};
+		686E523E1B5A35420047D2F6 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				686E523F1B5A35550047D2F6 /* User.swift */,
+				686E52411B5A38710047D2F6 /* Item.swift */,
+				686E52431B5A39A90047D2F6 /* Category.swift */,
+				686E52451B5A39F50047D2F6 /* Condition.swift */,
+				686E52471B5A3A210047D2F6 /* Age.swift */,
+				686E52491B5A3A580047D2F6 /* Notification.swift */,
+			);
+			path = Object;
 			sourceTree = "<group>";
 		};
 		686ECCB91B4162A2001A861B /* Sign up */ = {
@@ -717,6 +745,7 @@
 		68C6C8A11B3DAE7C0075AA2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				686E523E1B5A35420047D2F6 /* Object */,
 				68181F7E1B57F3BA002FC002 /* API */,
 				681210001B3E557A00C2AB49 /* ItemObject.swift */,
 				681210021B3E599200C2AB49 /* CategoryObject.swift */,
@@ -945,6 +974,7 @@
 				682EACD21B45968D007F67FB /* ShopLocalDetailViewController.swift in Sources */,
 				6889D7DD1B413BCA006A176D /* LoginViewController.swift in Sources */,
 				687EF1781B4ED810007DADC0 /* FilterTableView.swift in Sources */,
+				686E52481B5A3A210047D2F6 /* Age.swift in Sources */,
 				682EACDF1B459D2B007F67FB /* ShopLocalThirdCell.swift in Sources */,
 				686ABB031B3E85CC00AC80E0 /* ELCAssetCell.m in Sources */,
 				6834C6A01B3DCDB900F7912B /* AddPhotoCell.swift in Sources */,
@@ -952,6 +982,7 @@
 				683500C61B578093004B052C /* NotificationDetailDescriptionCell.swift in Sources */,
 				687EF1761B4ECA53007DADC0 /* ApplyFilterView.swift in Sources */,
 				686ABB021B3E85CC00AC80E0 /* ELCAsset.m in Sources */,
+				686E52461B5A39F50047D2F6 /* Condition.swift in Sources */,
 				682EACE71B459F4D007F67FB /* AddNewCommentCell.swift in Sources */,
 				681210051B3E5A1700C2AB49 /* UserObject.swift in Sources */,
 				681210091B3E5B7C00C2AB49 /* AgeObject.swift in Sources */,
@@ -961,8 +992,10 @@
 				682EACD71B459707007F67FB /* ShopLocalFirstCell.swift in Sources */,
 				68181F841B57F492002FC002 /* CommentAPI.swift in Sources */,
 				6812100D1B3E5C1200C2AB49 /* CategoryManager.swift in Sources */,
+				686E52421B5A38710047D2F6 /* Item.swift in Sources */,
 				68B299901B3DA9D6009720BF /* ViewController.swift in Sources */,
 				681210031B3E599200C2AB49 /* CategoryObject.swift in Sources */,
+				686E52441B5A39A90047D2F6 /* Category.swift in Sources */,
 				687EF1741B4EC980007DADC0 /* FilterView.swift in Sources */,
 				68120FFF1B3E53B900C2AB49 /* NSNotificationCenterExtension.swift in Sources */,
 				686ABB071B3E85CC00AC80E0 /* ELCOverlayImageView.m in Sources */,
@@ -970,6 +1003,7 @@
 				682EACDB1B459C15007F67FB /* ShopLocalSecondCell.swift in Sources */,
 				684BE9C81B431C0200F1D6E9 /* ShopLocalViewController.swift in Sources */,
 				6879D8D61B3E370E00F89BAF /* ItemDescriptionCell.swift in Sources */,
+				68F545301B5A125F00826677 /* UserAPI.swift in Sources */,
 				68164AA01B46E2F700346F16 /* CommentObject.swift in Sources */,
 				684BE9C21B43146200F1D6E9 /* MessageCell.swift in Sources */,
 				688E69D61B3DB60C00030F3E /* BaseViewController.swift in Sources */,
@@ -981,6 +1015,7 @@
 				68A62AE71B4050AB00B31317 /* NotificationCell.swift in Sources */,
 				684BE9C51B4315E700F1D6E9 /* MessageObject.swift in Sources */,
 				686ABB041B3E85CC00AC80E0 /* ELCAssetTablePicker.m in Sources */,
+				686E52401B5A35550047D2F6 /* User.swift in Sources */,
 				686ABB0B1B3E9CB500AC80E0 /* ItemInfoController.swift in Sources */,
 				68707CE41B4233E300F99445 /* ProfileViewController.swift in Sources */,
 				684BE9B71B43063F00F1D6E9 /* ItemDetailController.swift in Sources */,
@@ -1015,6 +1050,7 @@
 				68181F801B57F3D1002FC002 /* NotificationAPI.swift in Sources */,
 				68081E8E1B43C8C300F93CFE /* AboutViewController.swift in Sources */,
 				688E69DE1B3DC57100030F3E /* AddItemViewController.swift in Sources */,
+				686E524A1B5A3A580047D2F6 /* Notification.swift in Sources */,
 				683500CA1B5780E7004B052C /* NotificationDetailLastCell.swift in Sources */,
 				68BECDE01B5053010007689E /* MyCollectionViewCell.swift in Sources */,
 				687EF17A1B4EE014007DADC0 /* DistanceObject.swift in Sources */,

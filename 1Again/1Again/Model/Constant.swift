@@ -35,6 +35,7 @@ class Constant: NSObject {
     
     struct KeyUserDefaults {
         static let userName = "username"
+        static let User: String = "UserObject"
     }
     
     struct UploadImageSize {
@@ -80,6 +81,8 @@ class Constant: NSObject {
         static let activeUserId = "activeUserId"
         static let activeUsertype = "activeUserType"
         static let activeUser = "activeUser"
+        
+        static let User: String = "UserObject"
     }
     
     struct CustomNotification {

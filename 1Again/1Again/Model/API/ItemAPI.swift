@@ -9,13 +9,38 @@
 import UIKit
 
 class ItemAPI: NSObject {
-    
-    class func PostRequest(urlStr: String, params: Dictionary<String, AnyObject>, completion: (object: AnyObject!)->Void, failure: (error: String)->Void) {
-        ModelManager.shareManager.postRequest(urlStr, params: params as! Dictionary<String, String>, success: { (responseData) -> Void in
-            completion(object: responseData)
-            }) { (error) -> Void in
-                failure(error: error)
+
+    class func PostRequest(urlStr: String, params: Dictionary<String, String>, completion: (object: AnyObject!)->Void, failure: (error: String)->Void) {
+        
+        DataManager.shareManager.mainManager.POST(urlStr, parameters: nil, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
+            for key in params.keys.array {
+                if let sValue = params[key] {
+                    var value: String = sValue as String
+                    formData.appendPartWithFormData(value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: key)
+                }
+            }
+            
+            }, success: { (operation: AFHTTPRequestOperation!, responseData: AnyObject!) -> Void in
+            print(responseData)
+                
+                if let jsonData = responseData as? NSDictionary {
+                    
+                    let statusCode = numberFromJSONAnyObject(jsonData["return_code"])?.integerValue ?? 0
+                    if statusCode == 0 {
+                        completion(object: responseData)
+                    } else {
+                        failure(error: "Error")
+                    }
+                }
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            failure(error: error.description)
         }
+        
+//        ModelManager.shareManager.postRequest(urlStr, params: params as! Dictionary<String, String>, success: { (responseData) -> Void in
+//            completion(object: responseData)
+//            }) { (error) -> Void in
+//                failure(error: error)
+//        }
     }
     
     //

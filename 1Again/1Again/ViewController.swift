@@ -26,6 +26,12 @@ class ViewController: BaseViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+//        if User.sharedUser.userName.isEmpty {
+//            let loginController = LoginViewController()
+//            self.presentViewController(loginController, animated: true, completion: nil)
+//        }
+        
         if !UserManager.isAuthorized() {
             let loginController = LoginViewController()
             self.presentViewController(loginController, animated: true, completion: nil)

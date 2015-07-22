@@ -196,7 +196,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     func didSelectFavorite(cell: ShopLocalThirdCell) {
         var params: Dictionary<String, String> = Dictionary<String, String>()
         
-        params = ["action": (cell.favorite == true ? "1" : "0"), "itemId": self.item.id, "userId": "\(USER_ID)", "type": "U"]
+        params = ["action": (cell.favorite == true ? "1" : "0"), "itemId": "\(self.item.ownerId)", "userId": "\(USER_ID)", "type": "U"]
         
         ItemAPI.PostRequest(Constant.MyUrl.Item_Detail_Favorite, params: params, completion: { (object) -> Void in
             print("SUCCESS")

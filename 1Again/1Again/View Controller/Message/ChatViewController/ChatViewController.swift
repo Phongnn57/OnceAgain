@@ -31,7 +31,7 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
         super.viewDidLoad()
         
         self.title = self.displayName
-        self.userName = "\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUser))"
+        self.userName = "\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))"
         
         self.senderId = self.senderID
         self.senderDisplayName = self.displayName
@@ -50,6 +50,16 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
             self.collectionView.reloadData()
         }) { (error) -> Void in
             self.view.makeToast(error)
+        }
+    }
+    
+    func getReceivedID() -> String {
+        if self.senderID != self.senderId {
+            return self.senderID
+        } else if self.receiverID != self.senderId {
+            return self.receiverID
+        } else {
+            return ""
         }
     }
 
@@ -90,7 +100,8 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     }
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        ChatAPI.sendNewMessage(self.imd, senderID: self.senderId, receiverID: self.receiverID, status: "N", message: text, completion: { (result) -> Void in
+        print(self.userName)
+        ChatAPI.sendNewMessage(self.imd, senderID: self.userName, receiverID: self.getReceivedID(), status: "N", message: text, completion: { (result) -> Void in
             var newMessage = JSQMessage(senderId: self.senderId, displayName: senderDisplayName, text: text);
             var tmpMessage = Message()
             tmpMessage.jsqMessage = newMessage
