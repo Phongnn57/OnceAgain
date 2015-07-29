@@ -30,10 +30,18 @@ class ItemListCell: UITableViewCell {
     }
     
     func configCellWithItem(item: ItemObject) {
-        self.imageview.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr1), placeholderImage: UIImage(named: ""))
         self.title.text = item.title
         self.descriptionLb.text = item.description
-        self.timeStamp.text = "\(getDateFromString(item.timestamp)) days ago"
+        self.timeStamp.text = "\(getDateFromString(item.timestamp!)) days ago"
+        let url = Constant.MyUrl.homeURL + "uploads/" + item.imageStr1!
+        self.imageview.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "image:add-item-camera.png"))
     }
     
+    func configCellByItem(item: Item) {
+        self.title.text = item.title
+        self.descriptionLb.text = item.description
+        self.timeStamp.text = "\(getDateFromString(item.timestamp!)) days ago"
+        let url = Constant.MyUrl.homeURL + "uploads/" + item.imageStr1!
+        self.imageview.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+    }
 }

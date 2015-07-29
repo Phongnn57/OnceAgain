@@ -33,7 +33,7 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
         self.title = self.displayName
         self.userName = "\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))"
         
-        self.senderId = self.senderID
+        self.senderId = self.userName
         self.senderDisplayName = self.displayName
         
         self.collectionView.collectionViewLayout.springinessEnabled = true
@@ -45,7 +45,7 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        ChatAPI.getAllMessage(self.imd, completion: { (result) -> Void in
+        MessageAPI.getChatHistory(self.imd, completion: { (result) -> Void in
             self.messages = result
             self.collectionView.reloadData()
         }) { (error) -> Void in
@@ -54,9 +54,9 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     }
     
     func getReceivedID() -> String {
-        if self.senderID != self.senderId {
+        if self.senderID != self.userName {
             return self.senderID
-        } else if self.receiverID != self.senderId {
+        } else if self.receiverID != self.userName {
             return self.receiverID
         } else {
             return ""
@@ -100,8 +100,7 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     }
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        print(self.userName)
-        ChatAPI.sendNewMessage(self.imd, senderID: self.userName, receiverID: self.getReceivedID(), status: "N", message: text, completion: { (result) -> Void in
+        MessageAPI.sendNewMessage(self.imd, senderID: self.userName, receiverID: self.getReceivedID(), status: "N", message: text, completion: { (result) -> Void in
             var newMessage = JSQMessage(senderId: self.senderId, displayName: senderDisplayName, text: text);
             var tmpMessage = Message()
             tmpMessage.jsqMessage = newMessage

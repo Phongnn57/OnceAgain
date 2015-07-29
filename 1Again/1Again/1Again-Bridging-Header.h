@@ -15,3 +15,5 @@
 #import "ClickImage.h"
 #import <UIView+Toast.h>
 #import <JSQMessagesViewController/JSQMessages.h>
+#import "MRProgress.h"
+#import <TSCurrencyTextField.h>

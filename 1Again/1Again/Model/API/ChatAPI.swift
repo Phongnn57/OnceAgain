@@ -20,14 +20,14 @@ class ChatAPI: NSObject {
                 var senderMessage: [Message] = [Message]()
                 for _msg in messages {
                     let msg = Message()
-                    msg.im_imd = _msg["IM_imd"] as! String
-                    msg.id = _msg["id"] as! String
-                    msg.message = _msg["message"] as! String
-                    msg.receiverId = _msg["receiverId"] as! String
-                    msg.senderId = _msg["senderId"] as! String
-                    msg.timestamp = _msg["timestamp"] as! String
-                    msg.type = _msg["type"] as! String
-                    msg.jsqMessage = JSQMessage(senderId: msg.senderId, senderDisplayName: "TEST", date: getDataFromStr(msg.timestamp), text: msg.message)
+                    msg.im_imd = _msg["IM_imd"] as? String
+                    msg.id = _msg["id"] as? String
+                    msg.message = _msg["message"] as? String
+                    msg.receiverId = _msg["receiverId"] as? String
+                    msg.senderId = _msg["senderId"] as? String
+                    msg.timestamp = _msg["timestamp"] as? String
+                    msg.type = _msg["type"] as? String
+                    msg.jsqMessage = JSQMessage(senderId: msg.senderId, senderDisplayName: "TEST", date: getDataFromStr(msg.timestamp!), text: msg.message)
                     senderMessage.append(msg)
                 }
                 completion(result: senderMessage)

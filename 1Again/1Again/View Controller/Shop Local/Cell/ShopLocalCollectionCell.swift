@@ -20,15 +20,15 @@ class ShopLocalCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setupCellBasedOnItem(item: ItemObject) {
+    func setupCellBasedOnItem(item: Item) {
         self.title.text = item.title
         if item.category == "15" {
             self.price.hidden = true
         } else {
             self.price.hidden = false
-            self.price.text = "$\(item.price)"
+            self.price.text = "$" + item.price!
         }
-        self.imageview.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+        let url = Constant.MyUrl.homeURL + "uploads/" + item.imageStr1!
+        self.imageview.sd_setImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "image:add-item-camera.png"))
     }
-
 }

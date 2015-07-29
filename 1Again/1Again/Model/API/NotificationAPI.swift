@@ -9,64 +9,124 @@
 import UIKit
 
 class NotificationAPI: NSObject {
-    class func getNotificationDetailWithItem(itemID: String, completion: (result: AnyObject!)-> Void, failure:(error: String)->Void) {
-        var url = NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString(Constant.MyUrl.Notification_Detail) + "?id=\(itemID)")
-        var data: NSData = NSData(contentsOfURL: url!)!
+    
+    class func getNotificationListWithUser(userID: String, completion: (result: [Notification]!)-> Void, failure:(error: String)->Void) {
+        var param: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        param["id"] = userID
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Notification_List_API_URL, params: param, success: { (responseData) -> Void in
+            
+            if let data: Array<AnyObject> = responseData as? Array<AnyObject> {
+                var notifications: [Notification] = [Notification]()
+                for obj in data {
+                    let notification = Notification()
+                    notification.desc = obj["description"] as? String
+                    notification.displayName = obj["displayName"] as? String
+                    notification.iid = obj["iid"] as? String
+                    notification.ownerId = obj["ownerId"] as? String
+                    notification.category = obj["category"] as? String
+                    notification.itemId = obj["itemId"] as? String
+                    notification.image1 = obj["image1"] as? String
+                    notification.title = obj["title"] as? String
+                    notification.status = obj["status"] as? String
+                    notification.comment = obj["comment"] as? String
+                    notification.timestamp = obj["timestamp"] as? String
+                    notifications.append(notification)
+                }
+                completion(result: notifications)
+            }
+            
+        }) { (errorMessage) -> Void in
+            
+        }
+    }
+    
+    class func deleteNotification(itemID: String, completion:() -> Void, failure:(error: String) ->Void) {
         
-        if let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
-            if let items = jsonData["item"] as? NSArray {
-                for item in items {
-                    var thisItem = ItemObject()
-                    thisItem.id = item["id"] as! String
-                    thisItem.displayName = item["displayName"] as! String
-                    thisItem.ownerId = (item["ownerId"] as! String).toInt()!
-                    thisItem.category = item["category"] as! String
-                    thisItem.title = item["title"] as! String
-                    thisItem.brand = item["brand"] as! String!
-                    thisItem.condition = item["conditionA"] as! String!
-                    thisItem.age = item["age"] as! String!
-                    thisItem.description = item["description"] as! String!
-                    thisItem.price = item["price"] as! String!
-                    thisItem.imageStr1 = item["image1"] as! String!
-                    thisItem.imageStr2 = item["image2"] as! String!
-                    thisItem.imageStr3 = item["image3"] as! String!
-                    thisItem.imageStr4 = item["image4"] as! String!
-                    thisItem.imageStr5 = item["image5"] as! String!
-                    thisItem.status = item["status"] as! String!
-                    thisItem.timestamp = item["timestamp"] as! String!
-                    
-                    completion(result: thisItem)
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["status"] = "X"
+        params["iid"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.NOtification_Delete_API_URL, params: params, success: { (responseData) -> Void in
+            completion()
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
+        }
+    }
+
+    class func getNotificationDetailWithItem(itemID: String, completion: (result: AnyObject!)-> Void, failure:(error: String)->Void) {
+        
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["id"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Notification_Detail_API_URL, params: params, success: { (responseData) -> Void in
+            if let arrData:Array<AnyObject> = responseData as? Array<AnyObject> {
+                if let jsonData: Dictionary<String, AnyObject> = arrData[0] as? Dictionary<String, AnyObject> {
+                    let senderObj = Item()
+                    senderObj.age = jsonData["age"] as? String
+                    senderObj.brand = jsonData["brand"] as? String
+                    senderObj.category = jsonData["category"] as? String
+                    senderObj.condition = jsonData["conditionA"] as? String
+                    senderObj.description = jsonData["description"] as? String
+                    senderObj.displayName = jsonData["displayName"] as? String
+                    senderObj.itemID = jsonData["id"] as? String
+                    senderObj.imageStr1 = jsonData["image1"] as? String
+                    senderObj.imageStr2 = jsonData["image2"] as? String
+                    senderObj.imageStr3 = jsonData["image3"] as? String
+                    senderObj.imageStr4 = jsonData["image4"] as? String
+                    senderObj.imageStr5 = jsonData["image5"] as? String
+                    senderObj.ownerID = jsonData["ownerId"] as? String
+                    senderObj.price = jsonData["price"] as? String
+                    senderObj.status = jsonData["status"] as? String
+                    senderObj.timestamp = jsonData["timestamp"] as? String
+                    senderObj.title = jsonData["title"] as? String
+                    completion(result: senderObj)
                 }
             }
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
         }
     }
     
     class func submitWithID(itemID: String, status: String, comment: String, completion: (result: AnyObject!) ->Void, failure: (error: String)-> Void) {
         
-        var manager: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager(baseURL:NSURL(string: Constant.MyUrl.homeURL))
-        manager.requestSerializer = AFJSONRequestSerializer()
-        manager.responseSerializer = AFJSONResponseSerializer()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+        println(itemID)
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["iid"] = itemID
+        params["status"] = status
+        params["comment"] = comment
         
-        manager.POST(Constant.MyUrl.Notification_Submit, parameters: nil, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
-            formData.appendPartWithFormData(itemID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "iid")
-            formData.appendPartWithFormData(status.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "status")
-            formData.appendPartWithFormData(comment.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "comment")
-            }, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                print(response)
-                completion(result: nil)
-                if let jsonData = response as? NSDictionary {
-                    
-                    let statusCode = numberFromJSONAnyObject(jsonData["return_code"])?.integerValue ?? 0
-                        if statusCode == 0 {
-                            completion(result: nil)
-                        } else {
-                            failure(error: "Error")
-                        }
-                }
-            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-            failure(error: error.description)
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Notification_Submit_API_URL, params: params, success: { (responseData) -> Void in
+            completion(result: responseData)
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
         }
         
-            }
+        
+        
+//        var manager: AFHTTPRequestOperationManager = AFHTTPRequestOperationManager(baseURL:NSURL(string: Constant.MyUrl.homeURL))
+//        manager.requestSerializer = AFJSONRequestSerializer()
+//        manager.responseSerializer = AFJSONResponseSerializer()
+//        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+//        
+//        manager.POST(Constant.MyUrl.Notification_Submit, parameters: nil, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
+//            formData.appendPartWithFormData(itemID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "iid")
+//            formData.appendPartWithFormData(status.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "status")
+//            formData.appendPartWithFormData(comment.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "comment")
+//            }, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+//                print(response)
+//                completion(result: nil)
+//                if let jsonData = response as? NSDictionary {
+//                    
+//                    let statusCode = numberFromJSONAnyObject(jsonData["return_code"])?.integerValue ?? 0
+//                        if statusCode == 0 {
+//                            completion(result: nil)
+//                        } else {
+//                            failure(error: "Error")
+//                        }
+//                }
+//            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+//            failure(error: error.description)
+//        }
+        
+    }
 }

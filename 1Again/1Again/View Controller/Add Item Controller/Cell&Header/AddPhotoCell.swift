@@ -9,7 +9,8 @@
 import UIKit
 
 protocol AddPhotoCellDelegate {
-    func clickImage(image: AddPhotoImageView)
+    func clickImage(image: AddPhotoImageView, index: Int)
+    func updateImage()
 }
 
 class AddPhotoCell: UITableViewCell {
@@ -32,79 +33,55 @@ class AddPhotoCell: UITableViewCell {
         self.image5.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "updateImage:"))
     }
 
+    @IBAction func UpdateImageAction(sender: AnyObject) {
+        self.delegate?.updateImage()
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     func updateImage(sender: AnyObject) {
         let imageView = (sender as! UITapGestureRecognizer).view as! AddPhotoImageView
-        delegate?.clickImage(imageView)
-        
-    }
-    
-    func setImageInCell(item: ItemObject!) {
-        if item.image1 == nil {
-            setCameraImage(image1)
-            setDefaultImage(image2)
-            setDefaultImage(image3)
-            setDefaultImage(image4)
-            setDefaultImage(image5)
-        } else if item.image1 != nil && item.image2 == nil {
-            image1.image = item.image1
-            setCameraImage(image2)
-            setDefaultImage(image3)
-            setDefaultImage(image4)
-            setDefaultImage(image5)
-            image1.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-        } else if item.image2 != nil && item.image3 == nil {
-            image1.image = item.image1
-            image2.image = item.image2
-            setCameraImage(image3)
-            setDefaultImage(image4)
-            setDefaultImage(image5)
-            image1.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image2.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-        } else if item.image3 != nil && item.image4 == nil {
-            image1.image = item.image1
-            image2.image = item.image2
-            image3.image = item.image3
-            setCameraImage(image4)
-            setDefaultImage(image5)
-            image1.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image2.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image3.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-        } else if item.image4 != nil && item.image5 == nil {
-            image1.image = item.image1
-            image2.image = item.image2
-            image3.image = item.image3
-            image4.image = item.image4
-            setCameraImage(image5)
-            image1.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image2.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image3.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image4.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-        } else if item.image5 != nil {
-            image1.image = item.image1
-            image2.image = item.image2
-            image3.image = item.image3
-            image4.image = item.image4
-            image5.image = item.image5
-            image1.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image2.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image3.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image4.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
-            image5.imageMode = Constant.AddItemPhotoMode.ImageViewAlreadyHasImage
+        if imageView.isEqual(self.image1) {
+            self.delegate?.clickImage(imageView, index: 0)
+        } else if imageView.isEqual(self.image2) {
+            self.delegate?.clickImage(imageView, index: 1)
+        } else if imageView.isEqual(self.image3) {
+            self.delegate?.clickImage(imageView, index: 2)
+        } else if imageView.isEqual(self.image4) {
+            self.delegate?.clickImage(imageView, index: 3)
+        } else if imageView.isEqual(self.image5) {
+            self.delegate?.clickImage(imageView, index: 4)
         }
     }
     
-    func setCameraImage(image: AddPhotoImageView) {
-        image.imageName("image:add-item-camera.png")
-        image.imageMode = Constant.AddItemPhotoMode.ImageViewHasCameraImage
+    func setImageInCell(item: Item!) {
         
-    }
-    func setDefaultImage(image: AddPhotoImageView) {
-        image.imageName("image:add-item-default.png")
-        image.imageMode = Constant.AddItemPhotoMode.ImageViewHasDefaultImage
+        let imageArr: [UIImage?] = [item.image1, item.image2, item.image3, item.image4, item.image5]
+        let imageViewArr: [AddPhotoImageView!] = [self.image1, self.image2, self.image3, self.image4, self.image5]
+        
+        var currentImage: Int = 5
+        
+        for var i = 0; i < imageArr.count; i++ {
+            if imageArr[i] == nil {
+                currentImage = i
+                break
+            }
+        }
+        
+        for var i = 0; i < imageViewArr.count; i++ {
+            if i < currentImage {
+                imageViewArr[i].image = imageArr[i]
+                imageViewArr[i].tag = 555
+            } else if i == currentImage {
+                imageViewArr[i].image = UIImage(named: "image:add-item-camera.png")
+                imageViewArr[i].tag = 556
+            } else {
+                imageViewArr[i].image = UIImage(named: "image:add-item-default.png")
+                imageViewArr[i].tag = 557
+            }
+        }
     }
 }
 

@@ -9,18 +9,52 @@
 import UIKit
 
 class UserAPI: NSObject {
-    class func login(userName: String, password: String, completion: (result: AnyObject!)->Void, failure:(error: String)-> Void) {
+    
+    // MARK: LOGIN
+    class func login(userName: String, password: String, completion: (Void)->Void, failure:(error: String)-> Void) {
+        var params: Dictionary<String, String> = Dictionary<String, String>()
+        params[Constant.KEYs.User_UserName] = userName
+        params[Constant.KEYs.User_UserPassword] = password
         
-        DataManager.shareManager.mainManager.POST("V5.jsonlogin2.php", parameters: nil, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
-            formData.appendPartWithFormData(userName.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "username")
-            formData.appendPartWithFormData(password.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "password")
-            
-            }, success: { (operation: AFHTTPRequestOperation!, responseData: AnyObject!) -> Void in
-            
-                print(responseData)
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Login_API_URL, params: params, success: { (responseData) -> Void in
+            if let data = responseData as? Dictionary<String, AnyObject> {
+                let userObj = User()
+                userObj.userID = (data["id"] as? String) ?? ""
+                userObj.userType = (data["userType"] as? String) ?? ""
+                userObj.userName = userName
                 
-            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-            failure(error: error.description)
+                userObj.saveOffline()
+                User.sharedUser = userObj
+                completion()
+            } else {
+                failure(error: "Could not login to server")
+            }
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage ?? "Could not login to server")
         }
     }
+    
+    // MARK: SIGN UP
+    class func signup(firstName: String, lastName: String, address1: String, address2: String, email: String, password: String, cPassword: String, completion:(Void)->Void, failure:(error: String)->Void) {
+        var params: Dictionary<String, String> = Dictionary<String, String>()
+        params[Constant.KEYs.User_UserName] = email
+        params[Constant.KEYs.User_UserPassword] = password
+        params[Constant.KEYs.Confirm_Password] = cPassword
+        params[Constant.KEYs.Address1] = address1
+        params[Constant.KEYs.Address2] = address2
+        params[Constant.KEYs.User_FirstName] = firstName
+        params[Constant.KEYs.User_LastName] = lastName
+        params[Constant.KEYs.User_DisplayName] = "Tester"
+        
+        print(params)
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Signup_API_URL, params: params, success: { (responseData) -> Void in
+            print(responseData)
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage ?? "Could not sign up")
+        }
+    }
+    
 }
+
+

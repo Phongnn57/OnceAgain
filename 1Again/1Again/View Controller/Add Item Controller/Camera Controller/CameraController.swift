@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 protocol CameraControllerDelegate {
-    func getIemFromCameraControl(var item: ItemObject!)
+    func getIemFromCameraControl(var item: Item!)
 }
 
 class CameraController: BaseSubViewController, UIGestureRecognizerDelegate {
@@ -23,7 +23,7 @@ class CameraController: BaseSubViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var image5: UIImageView!
     
     var delegate: CameraControllerDelegate!
-    var item: ItemObject!
+    var item: Item!
     var session: AVCaptureSession!
     var stillImageOutput: AVCaptureStillImageOutput!
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -232,7 +232,7 @@ class CameraController: BaseSubViewController, UIGestureRecognizerDelegate {
             if sampleBuffer != nil {
                 var imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
                 var image = UIImage(data: imageData)
-                self.item.passToEmptyImageInOrderWithImage(image)
+                self.item.setItemWithImage(image!)
                 self.configAllImages()
             }
         })
@@ -259,8 +259,7 @@ class CameraController: BaseSubViewController, UIGestureRecognizerDelegate {
         if tag == 3 {item.image3 = nil}
         if tag == 4 {item.image4 = nil}
         if tag == 5 {item.image5 = nil}
-        
-        item.reOrderImageList()
+        self.item.reOrderImageList()
         configAllImages()
     }
 }

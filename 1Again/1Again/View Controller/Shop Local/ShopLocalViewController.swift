@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, FilterViewDelegate, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate {
+class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, FilterViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
@@ -18,11 +18,12 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     var firstLoad: Bool = true
     var searchBar: UISearchBar!
     var tableview: UITableView!
-    var hud: MBProgressHUD!
     private let cellIdentifier = "ShopLocalCollectionCell"
-    var items: [ItemObject]!
+    var items: [Item]!
     var nextLink: String!
-    var totalRecord: String!
+    var totalRecord: Int = 0
+    var counter: String!
+    var page: String!
     var filterStr: String!
     
     //data
@@ -41,10 +42,11 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         self.configTableview()
         setMenuButtonAction(menuBtn)
         configCollectionView()
-        items = [ItemObject]()
+        items = [Item]()
         nextLink = String()
-        totalRecord = String()
         filterStr = String()
+        self.counter = String()
+        self.page = String()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
@@ -63,16 +65,23 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func loadData() {
-        self.showHUD()
         self.collectionview.alpha = 0
-        ItemObject.getShopLocalDataFromStringURL(Constant.MyUrl.homeURL.stringByAppendingString("forSale_listJSONV4.php?userid=\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))"), completionClosure: { (resultItems, totalRecord, nextLink) -> () in
-            self.hideHUD()
-            self.items = resultItems
+        MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
+        
+        ItemAPI.getShopLocal("0", counter: "0", category: nil, search: nil, miles: nil, condition: nil, completion: { (items, nextLink, counter, page, totalRecord) -> Void in
+            self.items = items
             self.totalRecord = totalRecord
             self.nextLink = nextLink
+            self.counter = counter
+            self.page = page
             self.collectionview.alpha = 1
             self.collectionview.reloadData()
-        })
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+        }) { (error) -> Void in
+            self.view.makeToast(error)
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+        }
+
     }
     
     func initData() {
@@ -164,32 +173,23 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         print("distance: \(returnStr)")
         return returnStr
     }
-    
-    func showHUD() {
-        self.hud = MBProgressHUD(view: self.view)
-        self.hud.delegate = self
-        self.hud.labelText = "Loading"
-        self.view.addSubview(self.hud)
-        self.hud.show(true)
-    }
-    
-    func hideHUD() {
-        self.hud.hide(true)
-        self.hud.removeFromSuperview()
-    }
-    
+
     @IBAction func applyFilterAction(sender: AnyObject) {
         if self.menuView.hidden == false {self.hideAllFilter()}
-        self.showHUD()
-        ItemAPI.getItemList("forSale_listJSONV4.php", search: self.searchBar.text, condition: self.getCondition(), category: self.getCategory(), distance: self.getDistance(), completion: { (nextLink, totalRecord, items) -> Void in
+        MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
+        
+        
+        ItemAPI.getShopLocal("0", counter: "0", category: self.getCategory(), search: self.searchBar.text, miles: self.getDistance(), condition: self.getCondition(), completion: { (items, nextLink, counter, page, totalRecord) -> Void in
+            self.page = page
+            self.counter = counter
             self.nextLink = nextLink
             self.totalRecord = totalRecord
             self.items = items
             self.collectionview.reloadData()
-            self.hideHUD()
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
         }) { (error) -> Void in
-            print(error)
-            self.hideHUD()
+            self.view.makeToast(error)
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
         }
     }
     
@@ -216,7 +216,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
-        self.applyFilterAction("")
+        self.loadData()
     }
     
     func hideTableView() {
@@ -273,25 +273,25 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func loadMoreData() {
-        if self.totalRecord.toInt() > self.items.count {
-            var additionData: [ItemObject] = []
-            self.showHUD()
+        if self.totalRecord > self.items.count {
+            var additionData: [Item] = []
             
-            ItemAPI.getItemList(self.nextLink, search:  self.searchBar.text, condition: self.getCondition(), category: self.getCategory(), distance: self.getDistance(), completion: { (nextLink, totalRecord, items) -> Void in
+            
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Load more", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
+            
+            ItemAPI.getShopLocal(self.page, counter: self.counter, category: nil, search: nil, miles: nil, condition: nil, completion: { (items, nextLink, counter, page, totalRecord) -> Void in
                 additionData = items
-                self.nextLink = nextLink
-                self.totalRecord = totalRecord
                 for item in additionData {
                     self.items.append(item)
                 }
-                additionData.removeAll(keepCapacity: false)
+                self.counter = counter
+                self.page = page
                 self.collectionview.reloadData()
-                self.hideHUD()
-            }, failure: { (error) -> Void in
-                print(error)
-                self.hideHUD()
-            })
-
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                }) { (error) -> Void in
+                    self.view.makeToast(error)
+                    MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+            }
         }
     }
     
@@ -310,16 +310,6 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if self.items.count == 0 {
-//            let messageLabel = UILabel(frame: CGRectMake(0, 0, self.collectionview.frame.size.width, self.collectionview.frame.size.height))
-//            messageLabel.text = "No data is currently available."
-//            messageLabel.textColor = UIColor.blackColor()
-//            messageLabel.textAlignment = .Center
-//            messageLabel.sizeToFit()
-//            self.collectionview.backgroundView = messageLabel
-//        } else {
-//            self.collectionview.backgroundView = nil
-//        }
         return items.count
     }
     
@@ -348,10 +338,10 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         let item = items[indexPath.row]
         if item.category != "15" {
             let shopLocalDetailController = ShopLocalDetailViewController()
-            shopLocalDetailController.tmpItemID = item.id
+            shopLocalDetailController.tmpItemID = item.itemID
             self.navigationController?.pushViewController(shopLocalDetailController, animated: true)
         } else {
-            self.addCountByClickingAds(item.id)
+            self.addCountByClickingAds(item.itemID!)
             let adsViewController = AdsViewViewController()
             adsViewController.urlStr = item.description
             self.navigationController?.pushViewController(adsViewController, animated: true)

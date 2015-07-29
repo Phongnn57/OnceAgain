@@ -27,7 +27,7 @@ class NotificationDetailLastCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configCellWithItem(item: ItemObject) {
+    func configCellWithItem(item: Item) {
         self.age.text = item.age
         self.brand.text = item.brand
         self.category.text = item.category

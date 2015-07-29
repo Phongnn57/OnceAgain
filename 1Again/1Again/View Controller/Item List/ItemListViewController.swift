@@ -16,17 +16,18 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     private let cellIdentifier = "ItemListCell"
     var resultSearchController = UISearchController()
-    var items: [ItemObject]!
-    var tmpItems: [ItemObject]!
+    var items: [Item]!
+    var tmpItems: [Item]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        items = [ItemObject]()
-        tmpItems = [ItemObject]()
+        items = [Item]()
+        tmpItems = [Item]()
         setMenuButtonAction(menuBtn)
         self.edgesForExtendedLayout = UIRectEdge.None;
         tableview.registerNib(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,11 +38,15 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if items.count <= 0 {
-            let postUrl = Constant.MyUrl.homeURL.stringByAppendingString("items_listJSON.php?id=\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))")
-            ItemObject.getItemListWithURLstr(postUrl, completionClosure: { (items) -> () in
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
+            ItemAPI.getItemList({ (items) -> Void in
                 self.items = items
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.tableview.reloadData()
                 self.createSearchBar()
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
             })
         }
     }
@@ -60,18 +65,15 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! ItemListCell
         
-        var item: ItemObject!
+        var item: Item!
         
         if resultSearchController.active {
             item = tmpItems[indexPath.row]
         } else {
             item = items[indexPath.row]
         }
+        cell.configCellByItem(item)
         
-        cell.title.text = item.title
-        cell.descriptionLb.text = item.description
-        cell.timeStamp.text = "\(getDateFromString(item.timestamp)) days ago"
-        cell.imageview.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
         return cell
     }
     
@@ -103,7 +105,7 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
         moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
         
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Archive", handler:{action, indexpath in
-            var item: ItemObject!
+            var item: Item = Item()
             if self.resultSearchController.active {
                 item = self.tmpItems[indexPath.row]
                 self.tmpItems.removeAtIndex(indexPath.row)
@@ -111,10 +113,14 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 item = self.items[indexPath.row]
                 self.items.removeAtIndex(indexPath.row)
             }
+            self.tableview.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             
-            archiveItem(item.id)
+            ItemAPI.archiveItem(item.itemID!, completion: { () -> Void in
+                
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+            })
             
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         });
         
         return [deleteRowAction, moreRowAction];
@@ -129,7 +135,7 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
         resultSearchController.resignFirstResponder()
         resultSearchController.searchBar.resignFirstResponder()
         resultSearchController.searchBar.hidden = true
-        var item: ItemObject!
+        var item: Item!
         if self.resultSearchController.active {
             item = self.tmpItems[indexpath.row]
         } else {
@@ -169,7 +175,7 @@ class ItemListViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         if searchText != nil && searchText != "" {
             for item in items {
-                if item.category.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || item.description.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || item.title.lowercaseString.rangeOfString(searchText.lowercaseString) != nil{
+                if item.category!.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || item.description!.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || item.title!.lowercaseString.rangeOfString(searchText.lowercaseString) != nil{
                     tmpItems.append(item)
                 }
             }

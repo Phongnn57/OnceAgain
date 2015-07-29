@@ -46,12 +46,12 @@ class SignUpViewController: BaseSubViewController, UITextFieldDelegate, MBProgre
     
     @IBAction func signUpTapped(sender: AnyObject) {
         if isAvailableToSignUp() {
-            let hud = MBProgressHUD(view: self.view)
-            hud.labelText = "Please wait"
-            hud.delegate = self
-            self.view.addSubview(hud)
-            hud.show(true)
-            UserManager.signUpWithFirstName(firstName.text, lastName: lastName.text, address1: address.text, address2: city.text, email: email.text, password: password.text, cPassword: confirmPassword.text, hud: hud)
+            
+            UserAPI.signup(self.firstName.text, lastName: self.lastName.text, address1: self.address.text, address2: self.city.text, email: self.email.text, password: self.password.text, cPassword: self.confirmPassword.text, completion: { () -> Void in
+                
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+            })
         }
     }
     

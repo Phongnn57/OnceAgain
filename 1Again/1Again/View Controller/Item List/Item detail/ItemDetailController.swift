@@ -16,7 +16,7 @@ class ItemDetailController: BaseSubViewController {
     @IBOutlet weak var image4: ClickImage!
     @IBOutlet weak var image5: ClickImage!
     
-    var item: ItemObject!
+    var item: Item!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +36,13 @@ class ItemDetailController: BaseSubViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        image1.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
-        image2.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr2)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
-        image3.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr3)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
-        image4.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr4)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
-        image5.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(item.imageStr5)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+        let str = Constant.MyUrl.homeURL + "uploads/"
+        
+        image1.sd_setImageWithURL(NSURL(string: str + item.imageStr1!), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+        image2.sd_setImageWithURL(NSURL(string: str + item.imageStr2!), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+        image3.sd_setImageWithURL(NSURL(string: str + item.imageStr3!), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+        image4.sd_setImageWithURL(NSURL(string: str + item.imageStr4!), placeholderImage: UIImage(named: "image:add-item-camera.png"))
+        image5.sd_setImageWithURL(NSURL(string: str + item.imageStr5!), placeholderImage: UIImage(named: "image:add-item-camera.png"))
     }
     
 }

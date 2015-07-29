@@ -16,7 +16,7 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
     private let NotificationDetailLastCellIdentifier = "NotificationDetailLastCell"
     
     var shouldShowMessageCell: Bool = false
-    var item: ItemObject!
+    var item: Item!
     var IID: String!
     var itemID: String!
     
@@ -26,7 +26,7 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.item = ItemObject()
+        self.item = Item()
         self.tableview.alpha = 0
         self.tableview.registerNib(UINib(nibName: NotificationDetailFirstCellIdentifier, bundle: nil), forCellReuseIdentifier: NotificationDetailFirstCellIdentifier)
         self.tableview.registerNib(UINib(nibName: NotificationDetailMessageCellIdentifier, bundle: nil), forCellReuseIdentifier: NotificationDetailMessageCellIdentifier)
@@ -43,15 +43,15 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-        self.showHUD()
+        MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
         NotificationAPI.getNotificationDetailWithItem(self.itemID, completion: { (result) -> Void in
-            self.item = result as! ItemObject
+            self.item = result as! Item
             self.tableview.reloadData()
             self.tableview.alpha = 1
-            self.hideHUD()
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
         }) { (error) -> Void in
             print(error)
-            self.hideHUD()
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
         }
     }
     
@@ -132,22 +132,22 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
     // MARK: DELEGATE METHODS
     func clickButtonAtIndex(index: Int) {
         if index == 0 {
-            self.showHUD()
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
             NotificationAPI.submitWithID(self.IID, status: "X", comment: "", completion: { (result) -> Void in
-                self.hideHUD()
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.view.makeToast("Success")
             }, failure: { (error) -> Void in
                 self.view.makeToast(error)
-                self.hideHUD()
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
             })
         } else if index == 1 {
-            self.showHUD()
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
             NotificationAPI.submitWithID(self.IID, status: "S", comment: "", completion: { (result) -> Void in
-                self.hideHUD()
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.view.makeToast("Success")
                 }, failure: { (error) -> Void in
                     self.view.makeToast(error)
-                    self.hideHUD()
+                    MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
             })
         } else if index == 2 {
             self.shouldShowMessageCell = !self.shouldShowMessageCell
@@ -189,12 +189,13 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
             let alert = UIAlertView(title: "Error", message: "Your message must not be empty", delegate: self, cancelButtonTitle: "OK")
             alert.show()
         } else {
-            self.showHUD()
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
             NotificationAPI.submitWithID(self.IID, status: "Y", comment: textField.text, completion: { (result) -> Void in
-                self.hideHUD()
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.view.makeToast("Success")
             }, failure: { (error) -> Void in
-                self.hideHUD()
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                self.view.makeToast(error)
             })
         }
     }

@@ -24,7 +24,7 @@ class NotificationDetailDescriptionCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configCellWithItem(item: ItemObject) {
+    func configCellWithItem(item: Item) {
         self.title.text = item.title
         self.descriptionLB.text = item.description
         self.descriptionLB.sizeToFit()

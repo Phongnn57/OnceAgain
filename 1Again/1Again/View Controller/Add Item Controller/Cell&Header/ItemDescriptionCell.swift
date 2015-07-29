@@ -26,4 +26,15 @@ class ItemDescriptionCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configCellWithItem(item: Item) {
+        self.title.text = item.title
+        if item.description!.isEmpty {
+            self.descriptionTextview.text = "Description"
+            self.descriptionTextview.textColor = UIColor.lightGrayColor()
+        } else {
+            self.descriptionTextview.text = item.description
+            self.descriptionTextview.textColor = UIColor.blackColor()
+        }
+    }
+    
 }

@@ -47,21 +47,21 @@ class NotificationDetailFirstCell: UITableViewCell {
         self.delegate?.clickButtonAtIndex(2)
     }
     
-    func configCellWithItem(item: ItemObject) {
-        if !item.imageStr1.isEmpty {
-            self.imageview1.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr1), placeholderImage: UIImage(named: "image:add-item-default"))
+    func configCellWithItem(item: Item) {
+        if !item.imageStr1!.isEmpty {
+            self.imageview1.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr1!), placeholderImage: UIImage(named: "image:add-item-default"))
         }
-        if !item.imageStr2.isEmpty {
-            self.imageview2.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr2), placeholderImage: UIImage(named: "image:add-item-default"))
+        if !item.imageStr2!.isEmpty {
+            self.imageview2.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr2!), placeholderImage: UIImage(named: "image:add-item-default"))
         }
-        if !item.imageStr3.isEmpty {
-            self.imageview3.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr3), placeholderImage: UIImage(named: "image:add-item-default"))
+        if !item.imageStr3!.isEmpty {
+            self.imageview3.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr3!), placeholderImage: UIImage(named: "image:add-item-default"))
         }
-        if !item.imageStr4.isEmpty {
-            self.imageview4.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr4), placeholderImage: UIImage(named: "image:add-item-default"))
+        if !item.imageStr4!.isEmpty {
+            self.imageview4.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr4!), placeholderImage: UIImage(named: "image:add-item-default"))
         }
-        if !item.imageStr5.isEmpty {
-            self.imageview5.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr5), placeholderImage: UIImage(named: "image:add-item-default"))
+        if !item.imageStr5!.isEmpty {
+            self.imageview5.sd_setImageWithURL(NSURL(string:Constant.MyUrl.ImageURL + item.imageStr5!), placeholderImage: UIImage(named: "image:add-item-default"))
         }
     }
 }

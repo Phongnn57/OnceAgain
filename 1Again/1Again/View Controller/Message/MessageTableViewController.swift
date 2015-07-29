@@ -13,8 +13,8 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
     
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     
-    var messagesArray =  [MessageObject]()
-    var tempMessages = MessageObject()
+    var messagesArray =  [Message]()
+    var tempMessages = Message()
     private let cellIdentifier = "MessageCell"
     var hud: MBProgressHUD!
     var firstLoad: Bool = true
@@ -41,38 +41,29 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         if self.firstLoad {
             self.firstLoad = false
             self.tableView.alpha = 0
-            self.showHUD()
-            MessageObject.getListOfMessages("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionClosure: { (msgObjects) -> () in
-                self.messagesArray = msgObjects
-                self.tableView.reloadData()
-                self.hideHUD()
-                self.tableView.alpha = 1
-            })
+            
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
+            self.loadData()
         }
     }
     
-    func showHUD() {
-        self.hud = MBProgressHUD(view: self.view)
-        self.hud.delegate = self
-        self.hud.labelText = "Loading"
-        self.view.addSubview(self.hud)
-        self.view.bringSubviewToFront(self.hud)
-        self.hud.show(true)
-    }
-    
-    func hideHUD() {
-        self.hud.hide(true)
-        self.hud.removeFromSuperview()
+    func loadData() {
+        MessageAPI.getMessages({ (result) -> Void in
+            self.messagesArray = result
+            self.tableView.reloadData()
+            self.tableView.alpha = 1
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+            self.refreshControl?.endRefreshing()
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+                self.refreshControl?.endRefreshing()
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+        })
     }
     
     func refresh(sender:AnyObject)
     {
-        // Updating your data here...
-        MessageObject.getListOfMessages("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionClosure: { (msgObjects) -> () in
-            self.messagesArray = msgObjects
-            self.tableView.reloadData()
-        })
-        self.refreshControl?.endRefreshing()
+        self.loadData()
     }
 
     // MARK: - Table view data source
@@ -87,10 +78,10 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         let msg = messagesArray[indexPath.row]
         
         cell.timestamp.text = msg.timestamp
-        cell.user.text = msg.name
+        cell.user.text = msg.displayName
         cell.title.text = msg.title
-        
-        switch (msg.status) {
+        let status: String = msg.status  ?? ""
+        switch (status) {
         case ("X"):
             cell.imageview.image = UIImage(named: "image:message-red-delete")
         case ("Y"):
@@ -113,8 +104,8 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let chatViewController = ChatViewController()
         chatViewController.imd = self.messagesArray[indexPath.row].iid
-        chatViewController.receiverID = self.messagesArray[indexPath.row].entityID
-        chatViewController.displayName = self.messagesArray[indexPath.row].name
+        chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
+        chatViewController.displayName = self.messagesArray[indexPath.row].displayName
         chatViewController.senderID = self.messagesArray[indexPath.row].senderId
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
@@ -140,20 +131,26 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
-            self.tempMessages = self.messagesArray[indexPath.row]
-            self.performSegueWithIdentifier("goto_notification_detail", sender: self)
-            println("MORE•ACTION");
-            
+            let chatViewController = ChatViewController()
+            chatViewController.imd = self.messagesArray[indexPath.row].iid
+            chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
+            chatViewController.displayName = self.messagesArray[indexPath.row].displayName
+            chatViewController.senderID = self.messagesArray[indexPath.row].senderId
+            self.navigationController?.pushViewController(chatViewController, animated: true)
         });
         moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
         
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
             //   println("DELETE•ACTION");
-            var message = MessageObject()
+            var message = Message()
             message  = self.messagesArray[indexPath.row]
-            MessageObject.deleteMessage(message.iid)
-            self.messagesArray.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            MessageAPI.deleteMessage(message.iid!, completion: { (result) -> Void in
+                self.messagesArray.removeAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+            })
         });
         
         return [deleteRowAction, moreRowAction];

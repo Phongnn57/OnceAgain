@@ -21,7 +21,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     
     var toolBar: UIToolbar!
     var tmpItemID: String!
-    var item: ItemObject!
+    var item: Item!
     var comments: [CommentObject]!
     var shouldShowPriceCell: Bool = false
     var imageURLs:[String]! = []
@@ -70,21 +70,21 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         toolBar.items = NSArray(objects: UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),doneBtn) as [AnyObject]
     }
 
-    func getImageURLs(item: ItemObject) {
+    func getImageURLs(item: Item) {
         if item.imageStr1 != nil && item.imageStr1 != "" {
-            self.imageURLs.append(item.imageStr1)
+            self.imageURLs.append(item.imageStr1!)
         }
         if item.imageStr2 != nil && item.imageStr2 != "" {
-            self.imageURLs.append(item.imageStr2)
+            self.imageURLs.append(item.imageStr2!)
         }
         if item.imageStr3 != nil && item.imageStr3 != "" {
-            self.imageURLs.append(item.imageStr3)
+            self.imageURLs.append(item.imageStr3!)
         }
         if item.imageStr4 != nil && item.imageStr4 != "" {
-            self.imageURLs.append(item.imageStr4)
+            self.imageURLs.append(item.imageStr4!)
         }
         if item.imageStr5 != nil && item.imageStr5 != "" {
-            self.imageURLs.append(item.imageStr5)
+            self.imageURLs.append(item.imageStr5!)
         }
     }
 
@@ -194,43 +194,41 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     //DELEGATE
     
     func didSelectFavorite(cell: ShopLocalThirdCell) {
-        var params: Dictionary<String, String> = Dictionary<String, String>()
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params = ["action": (cell.favorite == true ? "1" : "0"), "itemId": self.item.ownerID ?? "", "userId": "\(USER_ID)", "type": "U"]
         
-        params = ["action": (cell.favorite == true ? "1" : "0"), "itemId": "\(self.item.ownerId)", "userId": "\(USER_ID)", "type": "U"]
-        
-        ItemAPI.PostRequest(Constant.MyUrl.Item_Detail_Favorite, params: params, completion: { (object) -> Void in
-            print("SUCCESS")
-            }) { (error) -> Void in
-                print("ERROR: \(error)")
+        ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
+            self.view.makeToast("Success")
+        }) { (error) -> Void in
+            self.view.makeToast(error)
         }
     }
     
     func didSelectOfferBtn(cell: ShopLocalSecondCell) {
         var params: Dictionary<String, String> = Dictionary<String, String>()
         params["userId"] = "\(USER_ID)"
-        params["itemId"] = self.item.id
-        params["ownerId"] = "\(item.ownerId)"
+        params["itemId"] = self.item.itemID ?? ""
+        params["ownerId"] = self.item.ownerID ?? ""
         params["action"] = "O"
         params["distance"] = self.item.miles
         params["price"] = "\(formatCurrency(self.tmpPrice))"
 
-        ItemAPI.PostRequest(Constant.MyUrl.Item_Take_It, params: params, completion: { (object) -> Void in
-            let alertView = UIAlertView(title: "Submitted", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
-            alertView.show()
+        ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
+            self.view.makeToast("Your offer was made. You should hear back shortly.")
         }) { (error) -> Void in
-            print("Error")
+            self.view.makeToast(error)
         }
     }
     
     func didChangeFavorite(cell: ShopLocalFirstCell) {
-        var params: Dictionary<String, String> = Dictionary<String, String>()
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
 
-        params = ["action": (cell.like == true ? "1" : "0"), "itemId": self.item.id, "userId": "\(USER_ID)", "type": "I"]
+        params = ["action": (cell.like == true ? "1" : "0"), "itemId": self.item.itemID ?? "", "userId": "\(USER_ID)", "type": "I"]
 
-        ItemAPI.PostRequest(Constant.MyUrl.Item_Detail_Favorite, params: params, completion: { (object) -> Void in
-            print("SUCCESS")
+        ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
+            self.view.makeToast("SUCCESS")
         }) { (error) -> Void in
-            print("ERROR: \(error)")
+            self.view.makeToast(error)
         }
     }
     
@@ -242,7 +240,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     }
     
     func doPostComment(cell: AddNewCommentCell) {
-        CommentAPI.postComment(self.item.id, displayName:self.item.displayName, comment: cell.comment.text, completion: { (object) -> Void in
+        CommentAPI.postComment(self.item.itemID!, displayName:self.item.displayName!, comment: cell.comment.text, completion: { (object) -> Void in
             print("SUCCESS")
             self.updateComment()
             cell.comment.text = nil
@@ -254,17 +252,23 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     func didSelectIWillTakeItButton(cell: ShopLocalFirstCell) {
         var params: Dictionary<String, String> = Dictionary<String, String>()
         params["userId"] = "\(USER_ID)"
-        params["itemId"] = self.item.id
-        params["ownerId"] = "\(item.ownerId)"
+        params["itemId"] = self.item.itemID ?? ""
+        params["ownerId"] = self.item.ownerID ?? ""
         params["action"] = "I"
         params["distance"] = self.item.miles
         
-        ItemAPI.PostRequest(Constant.MyUrl.Item_Take_It, params: params, completion: { (object) -> Void in
-            let alertView = UIAlertView(title: "Submitted", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
-            alertView.show()
+        ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
+            self.view.makeToast("Your offer was made. You should hear back shortly.")
         }) { (error) -> Void in
-            print("ERROR")
+            self.view.makeToast(error)
         }
+//        
+//        ItemAPI.PostRequest(Constant.MyUrl.Item_Take_It, params: params, completion: { (object) -> Void in
+//            let alertView = UIAlertView(title: "Submitted", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
+//            alertView.show()
+//        }) { (error) -> Void in
+//            print("ERROR")
+//        }
         
     }
     

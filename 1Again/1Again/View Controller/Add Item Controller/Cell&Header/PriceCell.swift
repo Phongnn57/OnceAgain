@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol PriceCellDelegate {
+    func changePriceCell(image: PriceImageView)
+}
+
 class PriceCell: UITableViewCell {
 
     @IBOutlet weak var consign: PriceImageView!
     @IBOutlet weak var donate: PriceImageView!
     @IBOutlet weak var sale: PriceImageView!
+    
+    var delegate: PriceCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,9 +38,10 @@ class PriceCell: UITableViewCell {
     func changeState(sender: AnyObject) {
         let image = (sender as! UITapGestureRecognizer).view as! PriceImageView
         image.changeState(nil)
+        self.delegate?.changePriceCell(image)
     }
     
-    func setImageCell(item: ItemObject!) {
+    func setImageCell(item: Item!) {
         if item.consign == "0" {consign.imageName("image:add-item-consign.png")}
         else {consign.imageName("image:add-item-consign-selected.png")}
         
@@ -81,7 +88,7 @@ class PriceImageView:UIImageView {
         self.image = image
     }
 
-    func getValueOfItem(item: ItemObject!) -> String! {
+    func getValueOfItem(item: Item!) -> String! {
         if tag == 10 {
             if item.consign == "0" {
                 self.imageName("image:add-item-consign-selected.png")

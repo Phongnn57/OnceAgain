@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate, CameraControllerDelegate, AddPhotoCellDelegate, UITextViewDelegate {
+class AddItemViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UITextFieldDelegate, ItemInfoControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate, CameraControllerDelegate, AddPhotoCellDelegate, UITextViewDelegate, PriceCellDelegate {
 
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var menuBtn: UIBarButtonItem!
@@ -20,17 +20,17 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     private let itemInfoCellIdentifier = "ItemDescriptionCell"
     
     var cellIsHide: Bool = true
-    var item: ItemObject!
+    var item: Item!
     var activeTextfield: UITextField!
     var pickerView: UIPickerView!
     var toolBar: UIToolbar!
     var selectedTextfield = -1
+    var selectedImageIndex: Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setMenuButtonAction(menuBtn)
-        item = ItemObject()
+        item = Item()
         initializePickerView()
         initializeToolbar()
         tableview.registerNib(UINib(nibName: addPhotoCellIdentifier, bundle: nil), forCellReuseIdentifier: addPhotoCellIdentifier)
@@ -50,21 +50,15 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.view.endEditing(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleUploadResult:", name: Constant.CustomNotification.AddItemWithResult, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constant.CustomNotification.AddItemWithResult, object: nil)
     }
     
-    func clickImage(image: AddPhotoImageView) {
-        choosePhoto(image)
-    }
-    
-    //Mark: TABLEVIEW METHODS -----------------------------------------------------
+    // MARK: TABLEVIEW METHODS
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -74,36 +68,22 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             let cell = tableView.dequeueReusableCellWithIdentifier(addPhotoCellIdentifier) as! AddPhotoCell
             cell.delegate = self
             cell.setImageInCell(item)
-            cell.btnUpdateImage.addTarget(self, action: "createActionSheetType1", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(itemInfoCellIdentifier) as! ItemDescriptionCell
-            
             cell.title.delegate = self
-            cell.title.text = item.title
-            if item.description.isEmpty {
-                cell.descriptionTextview.text = "Description"
-                cell.descriptionTextview.textColor = UIColor.lightGrayColor()
-            } else {
-                cell.descriptionTextview.text = item.description
-                cell.descriptionTextview.textColor = UIColor.blackColor()
-            }
-            
             cell.descriptionTextview.delegate = self
+            cell.configCellWithItem(self.item)
             return cell
         }
         else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(priceCellIdentifier) as! PriceCell
-            
             cell.setImageCell(item)
-            cell.donate.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "priceCellClicked:"))
-            cell.consign.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "priceCellClicked:"))
-            cell.sale.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "priceCellClicked:"))
+            cell.delegate = self
             return cell
         } else if indexPath.row == 3 {
             if item.sale != "0" || item.consign != "0" {
                 let cell = tableView.dequeueReusableCellWithIdentifier(secondPriceCellIdentifier) as! SecondPriceCell
-                
                 cell.price.inputAccessoryView = toolBar
                 cell.price.delegate = self
                 return cell
@@ -111,7 +91,6 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         }
         else if indexPath.row == 4 {
             let cell = tableView.dequeueReusableCellWithIdentifier(attributeCellIdentifier) as! AttributeCell
-            
             cell.category.delegate = self
             cell.age.delegate = self
             cell.brand.delegate = self
@@ -145,9 +124,9 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.tableview.endUpdates()
     }
     
-    //Mark: DONATE , CONSIGN, FOR SALE BUTTON ACTION -----------------------------------
-    func priceCellClicked(sender: AnyObject) {
-        let image = (sender as! UITapGestureRecognizer).view as! PriceImageView
+    // MARK: DELEGATE
+    
+    func changePriceCell(image: PriceImageView) {
         var isHide = cellIsHide
         
         if image.tag == 10 {item.consign = image.getValueOfItem(item)}
@@ -160,80 +139,60 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         if isHide == cellIsHide && isHide == false {}
         else { reloadRowOfTableViewAtIndex(3)}
     }
-
-    //Mark: ADD PHOTO IMAGE VIEW ACTION
-    func choosePhoto(sender: AnyObject) {
-//        let imageView = (sender as! UITapGestureRecognizer).view as! AddPhotoImageView
-        let imageView = sender as! AddPhotoImageView
-        switch imageView.imageMode {
-            case Constant.AddItemPhotoMode.ImageViewAlreadyHasImage:
-                createActionSheetType2(imageView)
-            case Constant.AddItemPhotoMode.ImageViewHasCameraImage:
-                createActionSheetType1()
-            default: break
+    
+    func clickImage(image: AddPhotoImageView, index: Int) {
+        self.selectedImageIndex = index
+        switch image.tag {
+        case 555:
+            createActionSheetType2(image)
+        case 556:
+            createActionSheetType1()
+        default: break
         }
     }
-    
-    //Mark: CUSTOM ACTION SHEET
+
+    // MARK: ACTIONSHEET
     func createActionSheetType1() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        var actionSheet = UIAlertController(title: "Add Photo", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Take Photo", style: UIAlertActionStyle.Default, handler: { (alert:UIAlertAction!) -> Void in
-            let cameraController = CameraController()
-            cameraController.item = self.item
-            cameraController.delegate = self
-            self.presentViewController(cameraController, animated: true, completion: nil)
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler: { (alert:UIAlertAction!) -> Void in
-            var elcPicker = ELCImagePickerController(imagePicker: ())
-            elcPicker.maximumImagesCount = self.item.getNumberOfEmptyImage()
-            elcPicker.returnsOriginalImage = true
-            elcPicker.returnsImage = true
-            elcPicker.onOrder = true
-            elcPicker.mediaTypes = [kUTTypeImage]
-            elcPicker.imagePickerDelegate = self
-            self.presentViewController(elcPicker, animated: true, completion: nil)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        
-        self.presentViewController(actionSheet, animated: true, completion: nil)
+        let actionSheet = UIActionSheet(title: "Add Photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Take Photo", "Photo Library")
+        actionSheet.tag = 44
+        actionSheet.showInView(self.view)
     }
     
     func createActionSheetType2(imageView: AddPhotoImageView) {
-        var actionSheet = UIAlertController(title: "Select Photo", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        actionSheet.addAction(UIAlertAction(title: "Delete Photo", style: UIAlertActionStyle.Default, handler: { (alert:UIAlertAction!) -> Void in
-            self.item.removeImageAtByTag(imageView.tag)
-            self.item.reOrderImageList()
-            self.reloadRowOfTableViewAtIndex(0)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Make As First Image", style: UIAlertActionStyle.Default, handler: { (alert:UIAlertAction!) -> Void in
-           self.item.exChangeImageByTag(imageView.tag)
-            self.reloadRowOfTableViewAtIndex(0)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Rotate Image", style: UIAlertActionStyle.Default, handler: { (alert:UIAlertAction!) -> Void in
-            var tmpImage = scaleDownImageWith(imageView.image!, CGSizeMake(imageView.frame.size.width, imageView.frame.size.height))
-            imageView.image = imageRotateByDegree(90, tmpImage)
-            if imageView.tag == 13 {
-                self.item.image1 = imageView.image
-            } else if imageView.tag == 14 {
-                self.item.image2 = imageView.image
-            } else if imageView.tag == 15 {
-                self.item.image3 = imageView.image
-            } else if imageView.tag == 16 {
-                self.item.image4 = imageView.image
-            } else if imageView.tag == 17 {
-                self.item.image5 = imageView.image
+        let actionSheet = UIActionSheet(title: "Select Photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Delete Photo", "Make as first photo", "Rotate photo 90 degree")
+        actionSheet.tag = 45
+        actionSheet.showInView(self.view)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if actionSheet.tag == 44 {
+            if buttonIndex == 1 {
+                let cameraController = CameraController()
+                cameraController.item = self.item
+                cameraController.delegate = self
+                self.presentViewController(cameraController, animated: true, completion: nil)
+            } else if buttonIndex == 2 {
+                var elcPicker = ELCImagePickerController(imagePicker: ())
+                elcPicker.maximumImagesCount = 5 - self.item.numberOfImages()
+                elcPicker.returnsOriginalImage = true
+                elcPicker.returnsImage = true
+                elcPicker.onOrder = true
+                elcPicker.mediaTypes = [kUTTypeImage]
+                elcPicker.imagePickerDelegate = self
+                self.presentViewController(elcPicker, animated: true, completion: nil)
             }
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        
-        self.presentViewController(actionSheet, animated: true, completion: nil)
+        } else if actionSheet.tag == 45 {
+            if buttonIndex == 1 {
+                self.item.deleteImageAtIndex(self.selectedImageIndex)
+                self.item.reOrderImageList()
+            } else if buttonIndex == 2 {
+                self.item.exchangeImageList(self.selectedImageIndex)
+            } else if buttonIndex == 3 {
+                var tmpImage = UIImage.imageRotateByDegree(90, image: self.item.getImageAtIndex(self.selectedImageIndex)!)
+                self.item.setItemWithImage(tmpImage, index: self.selectedImageIndex)
+            }
+            self.reloadRowOfTableViewAtIndex(0)
+        }
     }
     
     func elcImagePickerControllerDidCancel(picker: ELCImagePickerController!) {
@@ -248,14 +207,14 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             if dictionary.objectForKey(UIImagePickerControllerMediaType) as? NSString == ALAssetTypePhoto {
                 if (dictionary.objectForKey(UIImagePickerControllerOriginalImage) != nil) {
                     var image: UIImage = dictionary.objectForKey(UIImagePickerControllerOriginalImage) as! UIImage
-                    item.passToEmptyImageInOrderWithImage(image)
+                    item.setItemWithImage(image)
                 }
             }
         }
         reloadRowOfTableViewAtIndex(0)
     }
     
-    //Mark: TEXTFIELD & TEXTVIEW METHODS
+    // MARK: TEXTFIELD & TEXTVIEW METHODS
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField.tag == Constant.TextFieldTag.addItemTitleTextfield {
             goToItemInformation(true)
@@ -282,35 +241,16 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     func textFieldDidEndEditing(textField: UITextField) {
         if textField.tag == Constant.TextFieldTag.addItemBrandTextField {
             item.brand = textField.text
+        } else if textField.tag == Constant.TextFieldTag.addItemPriceTextField {
+            let tf = textField as! TSCurrencyTextField
+            self.item.price = "\(tf.amount.doubleValue)"
+            println(self.item.price)
         }
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string == "\n" {
             textField.resignFirstResponder()
-            return false
-        }
-        
-        if textField.tag == Constant.TextFieldTag.addItemPriceTextField {
-            if item.price == nil {item.price = ""}
-            switch string {
-            case "0","1","2","3","4","5","6","7","8","9":
-                item.price  = item.price.stringByAppendingString(string)
-                println("CURRENT STRING: \(item.price)")
-                textField.text =  "\(getFormatCurrency(item.price))"
-            default:
-                var array = Array(string)
-                var currentStringarray = Array(item.price)
-                if array.count == 0 && currentStringarray.count != 0 {
-                    currentStringarray.removeLast()
-                    item.price = ""
-                    for character in currentStringarray {
-                        item.price = item.price.stringByAppendingString(String(character))
-                    }
-                    textField.text =  "\(getFormatCurrency(item.price))"
-                }
-            }
-            println("The string: \(textField.text)")
             return false
         }
         return true
@@ -320,6 +260,10 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.goToItemInformation(false)
     }
 
+    func updateImage() {
+        self.createActionSheetType1()
+    }
+    
     func goToItemInformation(titleBecomeFirstResponse: Bool) {
         let itemInformationController = ItemInfoController()
         itemInformationController.titleFisrtResponse = titleBecomeFirstResponse
@@ -328,11 +272,12 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.presentViewController(itemInformationController, animated: true, completion: nil)
     }
     
-    func pushItemBack(item: ItemObject!) {
+    func pushItemBack(item: Item!) {
         reloadRowOfTableViewAtIndex(1)
     }
     
-    func getIemFromCameraControl(item: ItemObject!) {
+    func getIemFromCameraControl(item: Item!) {
+        self.item = item
         reloadRowOfTableViewAtIndex(0)
     }
     
@@ -417,31 +362,19 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func postDataToServer(sender: AnyObject) {
-        item.ownerId = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
-        
-        if item.availableToUpload() {
-            let hud = MBProgressHUD(view: self.view)
-            hud.delegate = self
-            hud.labelText = "Uploading"
-            self.view.addSubview(hud)
-            self.view.bringSubviewToFront(hud)
-            hud.show(true)
-            item.pushItemWithActivityIndicator(hud)
+        self.item.ownerID = User.sharedUser.userID
+        self.view.endEditing(true)
+        if self.item.availableForUpload() {
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Uploading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
+            ItemAPI.addNewItem(self.item, completion: { () -> Void in
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                self.view.makeToast("Success!")
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+            })
         } else {
-            let alert = UIAlertView(title: "Alert", message: "Please fill all information before upload!", delegate: self, cancelButtonTitle: "OK")
-            alert.show()
-        }
-    }
-    
-    func handleUploadResult(notification: NSNotification) {
-        let userInfo:Dictionary<String,String!> = notification.userInfo as! Dictionary<String,String!>
-        let messageString = userInfo["result"]
-        if messageString == "success" {
-            let alert = UIAlertView(title: "Success", message: "Your item has been submitted to our partners for consideration", delegate: self, cancelButtonTitle: "OK")
-            alert.show()
-        } else {
-            let alert = UIAlertView(title: "Upload Fail", message: "Fail to upload! Try again later!", delegate: self, cancelButtonTitle: "Try again")
-            alert.show()
+            self.view.makeToast("Please fill all information before upload!")
         }
     }
 }

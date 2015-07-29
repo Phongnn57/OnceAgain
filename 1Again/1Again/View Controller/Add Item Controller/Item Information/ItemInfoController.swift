@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ItemInfoControllerDelegate {
-    func pushItemBack(var item: ItemObject!)
+    func pushItemBack(item: Item!)
 }
 
 class ItemInfoController: BaseSubViewController, UITextViewDelegate {
@@ -19,7 +19,7 @@ class ItemInfoController: BaseSubViewController, UITextViewDelegate {
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
     
-    var item: ItemObject!
+    var item: Item!
     
     var prev:UIBarButtonItem!
     var next:UIBarButtonItem!

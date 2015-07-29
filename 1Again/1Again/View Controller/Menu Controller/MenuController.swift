@@ -24,19 +24,19 @@ class MenuController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if (NSUserDefaults.standardUserDefaults().objectForKey(Constant.UserDefaultKey.activeUsertype) as! String) == "P" {
+        if User.sharedUser.userType == "P" {
             hideNotification = true
-        } else { hideNotification = false}
+        } else {
+            hideNotification = false
+        }
         tableView.reloadData()
     }
-
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hideNotification == true {return 10}
         else {return 11}
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if hideNotification == true {
             if indexPath.row <= 2 {
@@ -51,7 +51,8 @@ class MenuController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (hideNotification == true && indexPath.row == 9) || (hideNotification == false && indexPath.row == 10){
-            UserManager.removeActiveUser()
+            User.sharedUser.userID = ""
+            User.sharedUser.saveOffline()
         }
     }
 }

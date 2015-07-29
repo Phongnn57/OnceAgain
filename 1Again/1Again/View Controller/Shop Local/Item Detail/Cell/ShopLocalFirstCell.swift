@@ -82,7 +82,7 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
         super.setSelected(selected, animated: animated)
     }
     
-    func showDataFromItem(item: ItemObject) {
+    func showDataFromItem(item: Item) {
         self.price.text = "$\(item.price)"
         self.title.text = item.title
         self.descriptionLB.text = item.description

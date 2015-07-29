@@ -14,8 +14,8 @@ class NotificationTableViewController: UITableViewController {
     
     let cellIdentifier = "NotificationCell"
     
-    var notificationsArray =  [NotificationObject]()
-    var tempNnotifications = NotificationObject()
+    var notificationsArray =  [Notification]()
+    var tempNnotifications = Notification()
     var imageCache = [String: UIImage]()
     
     override func viewDidLoad() {
@@ -33,12 +33,7 @@ class NotificationTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if notificationsArray.count <= 0 {
-            NotificationObject.getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionHandle: { (notifications) -> () in
-                self.notificationsArray = notifications
-                if self.notificationsArray.count > 0 {
-                    self.tableView.reloadData()
-                }
-            })
+            self.refresh("")
         }
     }
 
@@ -52,11 +47,13 @@ class NotificationTableViewController: UITableViewController {
     
     func refresh(sender:AnyObject)
     {
-        // Updating your data here...
-        NotificationObject.getListOfNotifications("\(NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId))", completionHandle: { (notifications) -> () in
-            self.notificationsArray = notifications
+        NotificationAPI.getNotificationListWithUser(User.sharedUser.userID, completion: { (result) -> Void in
+            self.notificationsArray = result
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+                self.refreshControl?.endRefreshing()
         })
     }
     
@@ -141,34 +138,8 @@ class NotificationTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! NotificationCell
         
         var notification = notificationsArray[indexPath.row]
-        
-        cell.distanceLabel.text = notification.timestamp
-        cell.displayNameTextfield.text = notification.displayName
-        cell.descriptionLabel.text = notification.title
-        cell.categoryLabel.text = notification.category
-        
-        
-        //If description is more than 75 charaters,this code will truncate after the last word.
-        var myTrimmedDescription: String = notification.desc
-        var lastChar: Character = "A"
-        
-        if (count(myTrimmedDescription) > 75) {
-            myTrimmedDescription =  myTrimmedDescription.substringToIndex(advance(myTrimmedDescription.startIndex, 75))
-            do {
-                lastChar =  myTrimmedDescription[advance(myTrimmedDescription.startIndex, count(myTrimmedDescription)-1)]
-                myTrimmedDescription =  myTrimmedDescription.substringToIndex(myTrimmedDescription.endIndex.predecessor())
-            } while lastChar != " "
-            cell.descriptionTextview.text  = myTrimmedDescription + " ... (more)"
-        } else {
-            cell.descriptionTextview.text  = myTrimmedDescription
-        }
-
-        var postURL = Constant.MyUrl.homeURL + "uploads/\(notification.image1)"
-        cell.imageView1.sd_setImageWithURL(NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("uploads/\(notification.image1)")), placeholderImage: UIImage(named: "image:add-item-camera.png"))
-
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.configCellWithNotification(notification)
         return cell
-        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -201,6 +172,8 @@ class NotificationTableViewController: UITableViewController {
         var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
             self.tempNnotifications = self.notificationsArray[indexPath.row]
             let notificationDetailController = NotificationDetailViewController()
+            notificationDetailController.IID = self.notificationsArray[indexPath.row].iid
+            notificationDetailController.itemID = self.notificationsArray[indexPath.row].itemId
             self.navigationController?.pushViewController(notificationDetailController, animated: true)
             
         });
@@ -208,12 +181,15 @@ class NotificationTableViewController: UITableViewController {
         
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "No Thanks!", handler:{action, indexpath in
             //   println("DELETE•ACTION");
-            var notifications = NotificationObject()
+            var notifications = Notification()
             notifications = self.notificationsArray[indexPath.row]
-            NotificationObject.deleteNotification(notifications.iid)
-            //println("Response: \(responseString)")
-            self.notificationsArray.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            NotificationAPI.deleteNotification(notifications.iid!, completion: { () -> Void in
+                self.notificationsArray.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+            })
+            
         });
         
         return [deleteRowAction, moreRowAction];

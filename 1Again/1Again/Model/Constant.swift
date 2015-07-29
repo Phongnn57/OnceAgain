@@ -10,27 +10,72 @@ import UIKit
 
 class Constant: NSObject {
     struct MyUrl {
+        
+        static let Login_API_URL: String = "V6.jsonlogin2.php"
+        static let Signup_API_URL: String = "V6.jsonsignup.php"
+        
+        static let Add_Item_API_URL: String = "v6.item_insert_ac.v2.php"
+        
+        static let Notification_List_API_URL: String = "V6.notifications.ListJSON.php"
+        static let NOtification_Delete_API_URL: String = "V6.notification_update_acJSONPOST.php"
+        static let Notification_Detail_API_URL: String = "V6.forSaleItem_JSONV2.php"
+        static let Notification_Submit_API_URL: String = "V6.notification_update_acJSONPOST.php"
+        
+        static let Item_List_API_URL: String = "V6.items_listJSON.php"
+        static let Item_UpdateItem_API_URL: String = "V6.item_update.php"
+        static let Item_ShopLocal_Item_URL: String = "v6.forSale_listJSONV4.php"
+        static let Item_GetItemDetail_API_URL: String = "V5.forSaleItem_JSONV2.php"
+        static let Item_Detail_Favorite_API_URL: String = "V5.favorite_item_insert_ac.php"
+        
+        static let Message_GetMessage_List_API_URL: String = "V6.messages.ListJSON.php"
+        static let Message_DeleteMessage_API_URL: String = "V6.message_update_acJSONPOST.php"
+        static let Chat_GetChatHistory_API_URL: String = "V6.messages_get_ac.php"
+        static let Chat_Send_Message_API_URL: String = "V6.message_insert_response_ac.v2.php"
+        
+        static let Favorite_GetList_API_URL: String = "V6.favorite_listget_ac.php"
+        
+        
         static let homeURL: String = "http://www.theconsignmentclub.com/"
         static let notificationPage: String = "V5.notifications.ListJSON.php"
         static let messagePage: String = "V5.messages.ListJSON.php?id="
         static let ImageURL: String = "http://www.theconsignmentclub.com/uploads/"
         
-        static let Item_Detail_Favorite: String = "V5.favorite_item_insert_ac.php"
-        static let Item_Get_Item_Detail: String = "V5.forSaleItem_JSONV2.php"
         static let Item_Take_It: String = "V5.notification_insert_ac.php"
         static let Item_Add_Comment: String = "forSaleItemAddComment_V2.php"
         
-        static let Favorite_GetList: String = "V5.favorite_listget_ac.php"
         
-        static let Notification_Detail: String = "V5.forSaleItem_JSONV2.php"
-        static let Notification_Submit: String = "V5.notification_update_acJSONPOST.v2.php"
     }
     
     struct KEYs {
         static let User_ID: String = "userId"
+        static let User_UserName: String = "username"
+        static let User_UserPassword: String = "password"
+        static let Confirm_Password: String = "c_password"
+        static let Address1: String = "address1"
+        static let Address2: String = "address2"
+        static let User_FirstName: String = "firstname"
+        static let User_LastName: String = "lastname"
+        static let User_DisplayName: String = "displayname"
+        
         static let Type: String = "type"
         static let Time_Stamp: String = "timestamp"
         static let Display_Name: String = "displayName"
+        
+        static let Message: String = "message"
+        static let Status: String = "status"
+        static let Data: String = "data"
+        
+        static let Item_OwnerID: String = "ownerId"
+        static let Item_Category: String = "category"
+        static let Item_Title: String = "title"
+        static let Item_ConditionA: String = "conditionA"
+        static let Item_Brand: String = "brand"
+        static let Item_Age: String = "age"
+        static let Item_Description: String = "description"
+        static let Item_Donate: String = "donate"
+        static let Item_Consign: String = "consign"
+        static let Item_Sale: String = "sale"
+        static let Item_Price: String = "price"
     }
     
     struct KeyUserDefaults {
@@ -96,9 +141,6 @@ class Constant: NSObject {
 let USER_ID = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
 
 func formatCurrency(string: String) -> Double {
-//    let formatter = NSNumberFormatter()
-//    formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-//    formatter.locale = NSLocale(localeIdentifier: "en_US")
     var numberFromField = (NSString(string: string).doubleValue)/100
     return numberFromField
 }

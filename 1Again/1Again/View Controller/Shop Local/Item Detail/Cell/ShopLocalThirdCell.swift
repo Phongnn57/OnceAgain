@@ -45,7 +45,7 @@ class ShopLocalThirdCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func showDataFromItem(item: ItemObject) {
+    func showDataFromItem(item: Item) {
         self.category.text = item.category
         self.brand.text = item.brand
         self.condition.text = item.condition

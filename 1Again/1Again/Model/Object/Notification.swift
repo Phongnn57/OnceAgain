@@ -20,6 +20,8 @@ class Notification {
     var status: String?
     var comment: String?
     var timestamp: String?
+    var address1: String?
+    var city: String?
     
     init() {
         self.iid = ""
@@ -33,5 +35,7 @@ class Notification {
         self.status = ""
         self.comment = ""
         self.timestamp = ""
+        self.address1 = ""
+        self.city = ""
     }
 }

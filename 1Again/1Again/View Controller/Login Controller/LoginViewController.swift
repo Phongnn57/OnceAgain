@@ -47,17 +47,7 @@ class LoginViewController: BaseSubViewController, MBProgressHUDDelegate, UITextF
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleLoginResult:", name: Constant.CustomNotification.LoginResult, object: nil)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constant.CustomNotification.LoginResult, object: nil)
-    }
-    
+
     func endEditingAlltextfield(sender: AnyObject!) {
         email.resignFirstResponder()
         password.resignFirstResponder()
@@ -69,35 +59,26 @@ class LoginViewController: BaseSubViewController, MBProgressHUDDelegate, UITextF
     }
     
     @IBAction func signInAction(sender: AnyObject!) {
+        self.view.endEditing(true)
         if availableToLogin() {
-            let hud = MBProgressHUD(view: self.view)
-            hud.labelText = "Please wait"
-            hud.delegate = self
-            self.view.addSubview(hud)
-            hud.show(true)
             
-            UserManager.loginWithUsername(email.text, password: password.text, hud: hud)
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Logging...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
+            
+            UserAPI.login(email.text, password: password.text, completion: { () -> Void in
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }, failure: { (error) -> Void in
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                self.view.makeToast(error)
+            })
         } else {
-            let alertView = UIAlertView(title: "Error!", message: "Please fill email and password before submit", delegate: self, cancelButtonTitle: "Try again")
-            alertView.show()
+            self.view.makeToast("Please fill email and password before submit")
         }
     }
     
     func availableToLogin() -> Bool {
         if email.text != nil && password.text != nil && email.text != "" && password.text != "" {return true}
         else {return false}
-    }
-    
-    func handleLoginResult(notification: NSNotification!) {
-        let userInfo:Dictionary<String,String!> = notification.userInfo as! Dictionary<String,String!>
-        let result = userInfo["result"]
-        if result == "success" {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            let error = userInfo["error"]
-            let alertView = UIAlertView(title: "Error", message: error, delegate: self, cancelButtonTitle: "Try Again")
-            alertView.show()
-        }
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

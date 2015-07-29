@@ -1692,7 +1692,6 @@ const int FrontViewPositionNone = 0xff;
     return vc;
 }
 
-
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
     [coder encodeDouble:_rearViewRevealWidth forKey:@"_rearViewRevealWidth"];

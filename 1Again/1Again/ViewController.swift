@@ -14,31 +14,23 @@ class ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("Home")
         self.setMenuButtonAction(menuBarBtn)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-//        if User.sharedUser.userName.isEmpty {
-//            let loginController = LoginViewController()
-//            self.presentViewController(loginController, animated: true, completion: nil)
-//        }
+        println("User name: \(User.sharedUser.userName)")
+        println("User type: \(User.sharedUser.userType)")
+        println("User ID: \(User.sharedUser.userID)")
         
-        if !UserManager.isAuthorized() {
+        if User.sharedUser.userID.isEmpty {
             let loginController = LoginViewController()
             self.presentViewController(loginController, animated: true, completion: nil)
-        } else {
-            
         }
     }
-    
 }
-
