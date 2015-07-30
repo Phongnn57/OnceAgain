@@ -341,26 +341,17 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
             shopLocalDetailController.tmpItemID = item.itemID
             self.navigationController?.pushViewController(shopLocalDetailController, animated: true)
         } else {
-            self.addCountByClickingAds(item.itemID!)
-            let adsViewController = AdsViewViewController()
-            adsViewController.urlStr = item.description
-            self.navigationController?.pushViewController(adsViewController, animated: true)
+            
+            ItemAPI.updateAdsClickingCount(item.itemID!, completion: { () -> Void in
+                let adsViewController = AdsViewViewController()
+                adsViewController.urlStr = item.description
+                self.navigationController?.pushViewController(adsViewController, animated: true)
+            }, failure: { (error) -> Void in
+                self.view.makeToast(error)
+            })
         }
     }
-    
-    func addCountByClickingAds(itemId: String) {
-        let url = "http://theconsignmentclub.com/adclickcount_update.php?id=\(itemId)"
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        request.HTTPMethod = "POST"
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            if error == nil {
-                println("SUCCESS UPDATE ADS CLICK COUNT")
-            } else {
-                println("ERROR: \(error)")
-            }
-        }
-    }
-    
+
     //MARK: TABLEVIEW METHODS
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tableData.count
@@ -490,5 +481,4 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
             })
         }
     }
-
 }

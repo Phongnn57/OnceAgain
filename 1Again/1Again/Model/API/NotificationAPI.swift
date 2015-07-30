@@ -57,6 +57,7 @@ class NotificationAPI: NSObject {
         
         var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
         params["id"] = itemID
+        params["userId"] = User.sharedUser.userID
         
         DataManager.shareManager.PostRequest(Constant.MyUrl.Notification_Detail_API_URL, params: params, success: { (responseData) -> Void in
             if let arrData:Array<AnyObject> = responseData as? Array<AnyObject> {

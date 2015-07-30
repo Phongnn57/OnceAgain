@@ -11,9 +11,9 @@ import UIKit
 class FavoriteAPI: NSObject {
     class func getFavoriteListWithType(type: String, completion:(responseData: AnyObject!) -> Void, failure:(error: String) -> Void) {
         var params:Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
-        params[Constant.KEYs.User_ID] = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
+        params[Constant.KEYs.User_ID] = User.sharedUser.userID
         params[Constant.KEYs.Type] = type
-        
+
         
         DataManager.shareManager.PostRequest(Constant.MyUrl.Favorite_GetList_API_URL, params: params, success: { (responseData) -> Void in
             

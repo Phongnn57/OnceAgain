@@ -45,13 +45,34 @@ class UserAPI: NSObject {
         params[Constant.KEYs.User_FirstName] = firstName
         params[Constant.KEYs.User_LastName] = lastName
         params[Constant.KEYs.User_DisplayName] = "Tester"
-        
-        print(params)
-        
+
         DataManager.shareManager.PostRequest(Constant.MyUrl.Signup_API_URL, params: params, success: { (responseData) -> Void in
             print(responseData)
         }) { (errorMessage) -> Void in
             failure(error: errorMessage ?? "Could not sign up")
+        }
+    }
+    
+    // MARK: USER PROFILE
+    class func getUserProfile(completion: (user: User!)->Void, failure:(error: String)-> Void) {
+        var params: Dictionary<String, String> = Dictionary<String, String>()
+        params["id"] = User.sharedUser.userID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.User_Get_Profile_API_URL, params: params, success: { (responseData) -> Void in
+            
+            if let arr: Array<AnyObject> = responseData as? Array<AnyObject> {
+                if arr.count >= 1 {
+                    if let _user : Dictionary<String, String> = arr[0] as? Dictionary<String, String> {
+                        let user = User()
+                        user.userID = _user["id"]! ?? ""
+                        user.displayName = _user["displayName"]! ?? ""
+                        user.email = _user["email"]! ?? ""
+                        completion(user: user)
+                    }
+                }
+            }
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
         }
     }
     

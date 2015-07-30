@@ -194,8 +194,14 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     //DELEGATE
     
     func didSelectFavorite(cell: ShopLocalThirdCell) {
+        if self.item.favOwner == "1" {
+            self.item.favOwner = "0"
+        } else {
+            self.item.favOwner = "1"
+        }
+        cell.showDataFromItem(self.item)
         var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
-        params = ["action": (cell.favorite == true ? "1" : "0"), "itemId": self.item.ownerID ?? "", "userId": "\(USER_ID)", "type": "U"]
+        params = ["action": self.item.favOwner ?? "0", "itemId": self.item.ownerID ?? "", "userId": User.sharedUser.userID, "type": "U"]
         
         ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
             self.view.makeToast("Success")
@@ -206,7 +212,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     
     func didSelectOfferBtn(cell: ShopLocalSecondCell) {
         var params: Dictionary<String, String> = Dictionary<String, String>()
-        params["userId"] = "\(USER_ID)"
+        params["userId"] = User.sharedUser.userID
         params["itemId"] = self.item.itemID ?? ""
         params["ownerId"] = self.item.ownerID ?? ""
         params["action"] = "O"
@@ -221,9 +227,18 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     }
     
     func didChangeFavorite(cell: ShopLocalFirstCell) {
+        
+        if self.item.favItem == "1" {
+            self.item.favItem = "0"
+        } else {
+            self.item.favItem = "1"
+        }
+        
+        cell.showDataFromItem(self.item)
+        
         var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
 
-        params = ["action": (cell.like == true ? "1" : "0"), "itemId": self.item.itemID ?? "", "userId": "\(USER_ID)", "type": "I"]
+        params = ["action": self.item.favItem ?? "0", "itemId": self.item.itemID ?? "", "userId": User.sharedUser.userID, "type": "I"]
 
         ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
             self.view.makeToast("SUCCESS")
@@ -251,7 +266,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     
     func didSelectIWillTakeItButton(cell: ShopLocalFirstCell) {
         var params: Dictionary<String, String> = Dictionary<String, String>()
-        params["userId"] = "\(USER_ID)"
+        params["userId"] = User.sharedUser.userID
         params["itemId"] = self.item.itemID ?? ""
         params["ownerId"] = self.item.ownerID ?? ""
         params["action"] = "I"
@@ -262,14 +277,6 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         }) { (error) -> Void in
             self.view.makeToast(error)
         }
-//        
-//        ItemAPI.PostRequest(Constant.MyUrl.Item_Take_It, params: params, completion: { (object) -> Void in
-//            let alertView = UIAlertView(title: "Submitted", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
-//            alertView.show()
-//        }) { (error) -> Void in
-//            print("ERROR")
-//        }
-        
     }
     
     //TEXTFIELD

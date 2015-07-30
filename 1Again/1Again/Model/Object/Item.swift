@@ -17,6 +17,7 @@ class Item {
     var donate, consign, sale, price: String?
     var category, condition, age, brand: String?
     var displayName, compensation, status, timestamp, miles: String?
+    var favItem, favOwner: String?
 
     
     init() {
@@ -47,7 +48,8 @@ class Item {
         self.status = ""
         self.timestamp = ""
         self.miles = ""
-        
+        self.favItem = ""
+        self.favOwner = ""
     }
     
     func numberOfImages() -> Int{

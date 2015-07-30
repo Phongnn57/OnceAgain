@@ -15,23 +15,30 @@ class ProfileViewController: BaseViewController {
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var emailAddress: UILabel!
     
+    var user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setMenuButtonAction(menuBtn)
-        
-        var userIdInt: Int = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
-        var url = Constant.MyUrl.homeURL.stringByAppendingString("v5.getUser_JSONV2.php?id=\(userIdInt)")
-        var user =  UserObject(urlStr: url) as UserObject
-        
-        userId.text = "\(user.userId)"
-        emailAddress.text = user.email
-        displayName.text = user.displayName
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UserAPI.getUserProfile({ (user) -> Void in
+            self.user = user
+            self.userId.text = self.user.userID
+            self.emailAddress.text = self.user.email
+            self.displayName.text = self.user.displayName
+        }, failure: { (error) -> Void in
+            self.view.makeToast(error)
+        })
     }
 
 }

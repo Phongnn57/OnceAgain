@@ -18,14 +18,14 @@ class Constant: NSObject {
         
         static let Notification_List_API_URL: String = "V6.notifications.ListJSON.php"
         static let NOtification_Delete_API_URL: String = "V6.notification_update_acJSONPOST.php"
-        static let Notification_Detail_API_URL: String = "V6.forSaleItem_JSONV2.php"
+        static let Notification_Detail_API_URL: String = "V6.forSaleItem_JSONV3.php"
         static let Notification_Submit_API_URL: String = "V6.notification_update_acJSONPOST.php"
         
         static let Item_List_API_URL: String = "V6.items_listJSON.php"
         static let Item_UpdateItem_API_URL: String = "V6.item_update.php"
         static let Item_ShopLocal_Item_URL: String = "v6.forSale_listJSONV4.php"
-        static let Item_GetItemDetail_API_URL: String = "V5.forSaleItem_JSONV2.php"
-        static let Item_Detail_Favorite_API_URL: String = "V5.favorite_item_insert_ac.php"
+        static let Item_GetItemDetail_API_URL: String = "V6.forSaleItem_JSONV3.php"
+        static let Item_Detail_Favorite_API_URL: String = "V6.favorite_item_insert_ac.php"
         
         static let Message_GetMessage_List_API_URL: String = "V6.messages.ListJSON.php"
         static let Message_DeleteMessage_API_URL: String = "V6.message_update_acJSONPOST.php"
@@ -34,6 +34,12 @@ class Constant: NSObject {
         
         static let Favorite_GetList_API_URL: String = "V6.favorite_listget_ac.php"
         
+        static let Ads_Clicking_Count_API_URL: String = "v6.adclickcount_update.php"
+        
+        static let Item_GetComment_API_URL: String = "V6.forSaleItemGetComments_JSONV2.php"
+        static let Item_AddComment_API_URL: String = "V6.forSaleItemAddComment_V2.php"
+        
+        static let User_Get_Profile_API_URL: String = "v6.getUser_JSONV2.php"
         
         static let homeURL: String = "http://www.theconsignmentclub.com/"
         static let notificationPage: String = "V5.notifications.ListJSON.php"
@@ -138,7 +144,6 @@ class Constant: NSObject {
     }
 }
 
-let USER_ID = NSUserDefaults.standardUserDefaults().integerForKey(Constant.UserDefaultKey.activeUserId)
 
 func formatCurrency(string: String) -> Double {
     var numberFromField = (NSString(string: string).doubleValue)/100

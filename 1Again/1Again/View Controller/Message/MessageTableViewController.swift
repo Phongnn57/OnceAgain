@@ -40,7 +40,7 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         super.viewDidAppear(animated)
         if self.firstLoad {
             self.firstLoad = false
-            self.tableView.alpha = 0
+//            self.tableView.alpha = 0
             
             MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
             self.loadData()
@@ -114,6 +114,10 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         return 75
     }
     
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.001
+    }
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
@@ -155,6 +159,4 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         
         return [deleteRowAction, moreRowAction];
     }
-
-
 }

@@ -10,23 +10,28 @@ import UIKit
 
 class CommentAPI: NSObject {
     class func getAllComment(itemID: String, completion: (comments: [CommentObject]!) -> Void, failure:(error: String) -> Void) {
-        var url = NSURL(string: Constant.MyUrl.homeURL.stringByAppendingString("forSaleItemGetComments_JSONV2.php?id=\(itemID)"))
-        var data: NSData = NSData(contentsOfURL: url!)!
-        var senderComments: [CommentObject] = []
-        if let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
-            if let items = jsonData["comments"] as? NSArray {
-                for comment in items {
-                    var thisComment = CommentObject()
-                    thisComment.commentID = comment["commentId"] as! String!
-                    thisComment.itemID = comment["itemId"] as! String!
-                    thisComment.displayName = comment["displayName"] as! String!
-                    thisComment.comment = comment["comment"] as! String!
-                    thisComment.timestamp = comment["timestamp"] as! String!
-                    senderComments.append(thisComment)
+        
+        var param:Dictionary<String, String> = Dictionary<String, String>()
+        param["id"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_GetComment_API_URL, params: param, success: { (responseData) -> Void in
+            if let arr: Array<AnyObject> = responseData as? Array<AnyObject> {
+                var senderComments: [CommentObject] = [CommentObject]()
+                for obj in arr {
+                    let comment = CommentObject()
+                    comment.comment = obj["comment"] as! String
+                    comment.commentID = obj["commentId"] as! String
+                    comment.displayName = obj["displayName"] as! String
+                    comment.itemID = obj["itemId"] as! String
+                    comment.timestamp = obj["timestamp"] as! String
+                    senderComments.append(comment)
                 }
+                completion(comments: senderComments)
             }
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
         }
-        completion(comments: senderComments)
+
     }
     
     class func postComment(itemId: String, displayName: String, comment: String, completion: (object: AnyObject!) ->Void, failure: (error: String) -> Void) {
@@ -35,12 +40,11 @@ class CommentAPI: NSObject {
         param["displayName"] = displayName
         param["comment"] = comment
         
-        var manager = AFHTTPRequestOperationManager()
-        manager.responseSerializer = AFHTTPResponseSerializer()
-        manager.POST(Constant.MyUrl.homeURL + Constant.MyUrl.Item_Add_Comment, parameters: param, success: { (operation: AFHTTPRequestOperation!, responseData: AnyObject!) -> Void in
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_AddComment_API_URL, params: param, success: { (responseData) -> Void in
             completion(object: responseData)
-            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                failure(error: error.description)
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
         }
     }
 }

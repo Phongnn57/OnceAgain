@@ -22,15 +22,7 @@ class ShopLocalThirdCell: UITableViewCell {
     @IBOutlet weak var seller: UILabel!
     var delegate: ShopLocalThirdCellDelegate?
     
-    var favorite: Bool = false
-    
     @IBAction func favAction(sender: AnyObject) {
-        self.favorite = !self.favorite
-        if self.favorite {
-            favButton.setImage(UIImage(named: "image:shop-local-like"), forState: UIControlState.Normal)
-        } else {
-            favButton.setImage(UIImage(named: "image:shop-local-dislike"), forState: UIControlState.Normal)
-        }
         self.delegate?.didSelectFavorite(self)
     }
     
@@ -50,6 +42,11 @@ class ShopLocalThirdCell: UITableViewCell {
         self.brand.text = item.brand
         self.condition.text = item.condition
         self.age.text = item.age
-        self.seller.text = "Sold By \(item.displayName)"
+        self.seller.text = "Sold By" + item.displayName!
+        if item.favOwner == "1" {
+            favButton.setImage(UIImage(named: "image:shop-local-like"), forState: UIControlState.Normal)
+        } else {
+            favButton.setImage(UIImage(named: "image:shop-local-dislike"), forState: UIControlState.Normal)
+        }
     }
 }

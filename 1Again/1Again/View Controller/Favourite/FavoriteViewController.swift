@@ -8,15 +8,6 @@
 
 import UIKit
 
-class FavoriteObject {
-    var items: [ItemObject]!
-    var sellers: [UserObject]!
-    
-    init() {
-        self.items = [ItemObject]()
-        self.sellers = [UserObject]()
-    }
-}
 
 class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -27,8 +18,8 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
     var refreshControl: UIRefreshControl!
     
     // DATA
-    var items: [ItemObject]!
-    var sellers: [UserObject]!
+    var items: [Item]!
+    var sellers: [User]!
     
     var itemIsLoaded: Bool = false
     var sellerIsLoaded: Bool = false
@@ -38,8 +29,8 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.items = [ItemObject]()
-        self.sellers = [UserObject]()
+        self.items = [Item]()
+        self.sellers = [User]()
         setMenuButtonAction(menuBtn)
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: "reloadData", forControlEvents: UIControlEvents.ValueChanged)
@@ -56,7 +47,7 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
         if !self.itemIsLoaded {
             self.itemIsLoaded = true
             FavoriteAPI.getFavoriteListWithType("I", completion: { (responseData) -> Void in
-                self.items = responseData as! [ItemObject]
+                self.items = responseData as! [Item]
                 self.tableview.reloadData()
                 }) { (error) -> Void in
                     self.view.makeToast(error)
@@ -67,7 +58,7 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
     func reloadData() {
         if self.segmentControl.selectedSegmentIndex == 0 {
             FavoriteAPI.getFavoriteListWithType("I", completion: { (responseData) -> Void in
-                self.items = responseData as! [ItemObject]
+                self.items = responseData as! [Item]
                 self.tableview.reloadData()
                 self.refreshControl.endRefreshing()
                 }) { (error) -> Void in
@@ -76,7 +67,7 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
             }
         } else {
             FavoriteAPI.getFavoriteListWithType("U", completion: { (responseData) -> Void in
-                self.sellers = responseData as! [UserObject]
+                self.sellers = responseData as! [User]
                 self.tableview.reloadData()
                 self.refreshControl.endRefreshing()
                 }) { (error) -> Void in
@@ -93,7 +84,7 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
             if !self.sellerIsLoaded {
                 self.sellerIsLoaded = true
                 FavoriteAPI.getFavoriteListWithType("U", completion: { (responseData) -> Void in
-                    self.sellers = responseData as! [UserObject]
+                    self.sellers = responseData as! [User]
                     self.tableview.reloadData()
                     }) { (error) -> Void in
                         self.view.makeToast(error)
@@ -115,7 +106,7 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if self.segmentControl.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(ItemListCellIdentifier) as! ItemListCell
-            cell.configCellWithItem(self.items[indexPath.row])
+            cell.configCellByItem(self.items[indexPath.row])
             return cell
         } else {
             return UITableViewCell()
@@ -133,7 +124,7 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.segmentControl.selectedSegmentIndex == 0 {
             let itemDetailViewController = ShopLocalDetailViewController()
-            itemDetailViewController.tmpItemID = self.items[indexPath.row].id
+            itemDetailViewController.tmpItemID = self.items[indexPath.row].itemID
             self.navigationController?.pushViewController(itemDetailViewController, animated: true)
         }
     }

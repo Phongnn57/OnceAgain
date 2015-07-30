@@ -24,8 +24,7 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var descriptionLB: UILabel!
-    
-    var like: Bool = false
+
     var delegate: ShopLocalFirstCellDelegate?
     var makeOfferSelected: Bool = false
     var imageURLs: [String]! = []
@@ -46,8 +45,6 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     }
     
     @IBAction func btnFavoriteAction(sender: AnyObject) {
-        self.like = !self.like
-        self.setupFavoriteButton()
         self.delegate?.didChangeFavorite(self)
     }
     
@@ -63,18 +60,10 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
         self.collectionview.collectionViewLayout = layout
         self.collectionview.registerNib(UINib(nibName: collectionCellIdentifier, bundle: nil), forCellWithReuseIdentifier: collectionCellIdentifier)
     }
-    
-    func setupFavoriteButton() {
-        if self.like {
-            self.favorite.setBackgroundImage(UIImage(named: "image:shop-local-like"), forState: UIControlState.Normal)
-        } else {
-            self.favorite.setBackgroundImage(UIImage(named: "image:shop-local-dislike"), forState: UIControlState.Normal)
-        }
-    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setupFavoriteButton()
         self.configCollectionView()
     }
 
@@ -83,9 +72,14 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     }
     
     func showDataFromItem(item: Item) {
-        self.price.text = "$\(item.price)"
+        self.price.text = "$" + item.price!
         self.title.text = item.title
         self.descriptionLB.text = item.description
+        if item.favItem == "1" {
+            self.favorite.setBackgroundImage(UIImage(named: "image:shop-local-like"), forState: UIControlState.Normal)
+        } else {
+            self.favorite.setBackgroundImage(UIImage(named: "image:shop-local-dislike"), forState: UIControlState.Normal)
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -127,9 +127,21 @@ class ItemAPI: NSObject {
         }
     }
     
+    class func updateAdsClickingCount(itemID: String, completion:()->Void, failure:(error: String)->Void) {
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["id"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Ads_Clicking_Count_API_URL, params: params, success: { (responseData) -> Void in
+            completion()
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
+        }
+    }
+    
     class func getItem(itemid: String , completion: (item: Item!) -> Void, failure:(error: String!)-> Void) {
         var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
         params["id"] = itemid
+        params["userId"] = User.sharedUser.userID
         
         DataManager.shareManager.PostRequest(Constant.MyUrl.Item_GetItemDetail_API_URL, params: params, success: { (responseData) -> Void in
             if let items: Array<AnyObject> = responseData as? Array<AnyObject> {
@@ -152,6 +164,8 @@ class ItemAPI: NSObject {
                     thisItem.imageStr5 = item["image5"] as? String
                     thisItem.status = item["status"] as? String
                     thisItem.timestamp = item["timestamp"] as? String
+                    thisItem.favItem = item["favItem"] as? String
+                    thisItem.favOwner = item["favOwner"] as? String
                     
                     completion(item: thisItem)
                 }
@@ -162,28 +176,10 @@ class ItemAPI: NSObject {
     }
     
     class func postItemWithParams(params: Dictionary<String, AnyObject>, completion: (object: AnyObject!)->Void, failure: (error: String)->Void) {
-        DataManager.shareManager.mainManager.POST(Constant.MyUrl.Item_Detail_Favorite_API_URL, parameters: nil, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
-            for key in params.keys.array {
-                if let sValue: AnyObject = params[key] {
-                    var value: String = (sValue as? String)!
-                    formData.appendPartWithFormData(value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: key)
-                }
-            }
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_Detail_Favorite_API_URL, params: params, success: { (responseData) -> Void in
             
-            }, success: { (operation: AFHTTPRequestOperation!, responseData: AnyObject!) -> Void in
-                print(responseData)
-                
-                if let jsonData = responseData as? NSDictionary {
-                    
-                    let statusCode = numberFromJSONAnyObject(jsonData["return_code"])?.integerValue ?? 0
-                    if statusCode == 0 {
-                        completion(object: responseData)
-                    } else {
-                        failure(error: "Error")
-                    }
-                }
-            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                failure(error: error.description)
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
         }
     }
 }
