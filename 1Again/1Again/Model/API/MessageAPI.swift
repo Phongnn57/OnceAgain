@@ -99,6 +99,7 @@ class MessageAPI: NSObject {
         params["receiverId"] = receiverID
         params["status"] = status
         params["message"] = message
+        println(params)
         
         DataManager.shareManager.PostRequest(Constant.MyUrl.Chat_Send_Message_API_URL, params: params, success: { (responseData) -> Void in
             completion(result: nil)

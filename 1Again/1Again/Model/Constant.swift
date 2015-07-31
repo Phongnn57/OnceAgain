@@ -26,6 +26,7 @@ class Constant: NSObject {
         static let Item_ShopLocal_Item_URL: String = "v6.forSale_listJSONV4.php"
         static let Item_GetItemDetail_API_URL: String = "V6.forSaleItem_JSONV3.php"
         static let Item_Detail_Favorite_API_URL: String = "V6.favorite_item_insert_ac.php"
+        static let Item_Detail_Take_Action_API_URL: String = "V6.notification_insert_ac.php"
         
         static let Message_GetMessage_List_API_URL: String = "V6.messages.ListJSON.php"
         static let Message_DeleteMessage_API_URL: String = "V6.message_update_acJSONPOST.php"
@@ -48,8 +49,6 @@ class Constant: NSObject {
         
         static let Item_Take_It: String = "V5.notification_insert_ac.php"
         static let Item_Add_Comment: String = "forSaleItemAddComment_V2.php"
-        
-        
     }
     
     struct KEYs {

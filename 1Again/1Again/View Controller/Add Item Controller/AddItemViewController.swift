@@ -368,7 +368,8 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
             MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Uploading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
             ItemAPI.addNewItem(self.item, completion: { () -> Void in
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
-                self.view.makeToast("Success!")
+                let alert = UIAlertView(title: "Success", message: "Success create new item", delegate: self, cancelButtonTitle: "OK")
+                alert.show()
             }, failure: { (error) -> Void in
                 self.view.makeToast(error)
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)

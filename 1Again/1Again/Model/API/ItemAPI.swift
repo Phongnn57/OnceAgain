@@ -177,9 +177,17 @@ class ItemAPI: NSObject {
     
     class func postItemWithParams(params: Dictionary<String, AnyObject>, completion: (object: AnyObject!)->Void, failure: (error: String)->Void) {
         DataManager.shareManager.PostRequest(Constant.MyUrl.Item_Detail_Favorite_API_URL, params: params, success: { (responseData) -> Void in
-            
+            completion(object: nil)
         }) { (errorMessage) -> Void in
             failure(error: errorMessage)
+        }
+    }
+    
+    class func takeItem(params: Dictionary<String, AnyObject>, completion: (object: AnyObject!)->Void, failure: (error: String)->Void) {
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_Detail_Take_Action_API_URL, params: params, success: { (responseData) -> Void in
+            completion(object: nil)
+            }) { (errorMessage) -> Void in
+                failure(error: errorMessage)
         }
     }
 }

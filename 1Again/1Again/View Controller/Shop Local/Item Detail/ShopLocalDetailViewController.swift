@@ -219,10 +219,14 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         params["distance"] = self.item.miles
         params["price"] = "\(formatCurrency(self.tmpPrice))"
 
-        ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
-            self.view.makeToast("Your offer was made. You should hear back shortly.")
-        }) { (error) -> Void in
-            self.view.makeToast(error)
+        
+        ItemAPI.takeItem(params, completion: { (object) -> Void in
+            let alert = UIAlertView(title: "Success", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
+            self.shouldShowPriceCell = false
+            self.tableview.reloadData()
+            alert.show()
+            }) { (error) -> Void in
+                self.view.makeToast(error)
         }
     }
     
@@ -271,9 +275,11 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
         params["ownerId"] = self.item.ownerID ?? ""
         params["action"] = "I"
         params["distance"] = self.item.miles
+        println(params)
         
-        ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
-            self.view.makeToast("Your offer was made. You should hear back shortly.")
+        ItemAPI.takeItem(params, completion: { (object) -> Void in
+            let alert = UIAlertView(title: "Success", message: "Your offer was made. You should hear back shortly.", delegate: self, cancelButtonTitle: "OK")
+            alert.show()
         }) { (error) -> Void in
             self.view.makeToast(error)
         }

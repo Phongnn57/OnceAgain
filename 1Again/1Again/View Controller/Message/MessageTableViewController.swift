@@ -10,7 +10,6 @@ import UIKit
 
 class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
 
-    
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     
     var messagesArray =  [Message]()
@@ -106,7 +105,7 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         chatViewController.imd = self.messagesArray[indexPath.row].iid
         chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
         chatViewController.displayName = self.messagesArray[indexPath.row].displayName
-        chatViewController.senderID = self.messagesArray[indexPath.row].senderId
+        chatViewController.senderID = self.messagesArray[indexPath.row].id
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
     
@@ -139,7 +138,7 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
             chatViewController.imd = self.messagesArray[indexPath.row].iid
             chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
             chatViewController.displayName = self.messagesArray[indexPath.row].displayName
-            chatViewController.senderID = self.messagesArray[indexPath.row].senderId
+            chatViewController.senderID = self.messagesArray[indexPath.row].id
             self.navigationController?.pushViewController(chatViewController, animated: true)
         });
         moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
