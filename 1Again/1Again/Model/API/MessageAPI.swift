@@ -38,6 +38,7 @@ class MessageAPI: NSObject {
                     msg.image1 = dic["image1"] as? String
                     msg.distance = dic["distance"] as? String
                     msg.timestamp = dic["timestamp"] as? String
+                    msg.newIndicator = Utilities.numberFromJSONAnyObject(dic["newIndicator"])!.integerValue
                     
                     messages.append(msg)
                 }
@@ -54,6 +55,7 @@ class MessageAPI: NSObject {
         var params: Dictionary<String, String> = Dictionary<String, String>()
         params["status"] = "D"
         params["iid"] = messageID
+        params["userId"] = User.sharedUser.userID
         
         DataManager.shareManager.PostRequest(Constant.MyUrl.Message_DeleteMessage_API_URL, params: params, success: { (responseData) -> Void in
             completion(result: nil)
@@ -65,6 +67,7 @@ class MessageAPI: NSObject {
     class func getChatHistory(imd: String, completion: (result: [Message]!)->Void, failure:(error: String) ->Void) {
         var params: Dictionary<String, String> = Dictionary<String, String>()
         params["imd"] = imd
+        params["userId"] = User.sharedUser.userID
         
         DataManager.shareManager.PostRequest(Constant.MyUrl.Chat_GetChatHistory_API_URL, params: params, success: { (responseData) -> Void in
             

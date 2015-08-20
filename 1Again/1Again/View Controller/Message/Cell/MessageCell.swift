@@ -14,6 +14,7 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var user: UILabel!
     @IBOutlet weak var timestamp: UILabel!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var newLB: UILabel!
     
     
     override func awakeFromNib() {

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol NotificationDetailViewControllerDelegate {
+    func didSelectButton(select: Bool, iid: String)
+}
+
 class NotificationDetailViewController: BaseSubViewController, UITableViewDelegate, UITableViewDataSource, NotificationDetailFirstCellDelegate, UITextFieldDelegate {
 
     private let NotificationDetailFirstCellIdentifier = "NotificationDetailFirstCell"
@@ -19,6 +23,8 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
     var item: Item!
     var IID: String!
     var itemID: String!
+    
+    var delegate: NotificationDetailViewControllerDelegate?
     
     @IBOutlet weak var tableview: UITableView!
 
@@ -106,7 +112,7 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
         } else if indexPath.section == 1{
             return 100
         } else if indexPath.section == 2 {
-            return 160
+            return 250
         } else {
             return 0
         }
@@ -136,6 +142,7 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
             NotificationAPI.submitWithID(self.IID, status: "X", comment: "", completion: { (result) -> Void in
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.view.makeToast("Success")
+                self.delegate?.didSelectButton(true, iid: self.IID)
             }, failure: { (error) -> Void in
                 self.view.makeToast(error)
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
@@ -145,6 +152,7 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
             NotificationAPI.submitWithID(self.IID, status: "S", comment: "", completion: { (result) -> Void in
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.view.makeToast("Success")
+                self.delegate?.didSelectButton(true, iid: self.IID)
                 }, failure: { (error) -> Void in
                     self.view.makeToast(error)
                     MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
@@ -193,6 +201,7 @@ class NotificationDetailViewController: BaseSubViewController, UITableViewDelega
             NotificationAPI.submitWithID(self.IID, status: "Y", comment: textField.text, completion: { (result) -> Void in
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.view.makeToast("Success")
+                self.delegate?.didSelectButton(true, iid: self.IID)
             }, failure: { (error) -> Void in
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.view.makeToast(error)

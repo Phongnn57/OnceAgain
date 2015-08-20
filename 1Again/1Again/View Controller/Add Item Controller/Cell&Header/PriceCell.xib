@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -19,30 +19,32 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8e-Nu-nfh">
                         <rect key="frame" x="0.0" y="0.0" width="360" height="177"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVG-yV-B9Y">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CVG-yV-B9Y">
                                 <rect key="frame" x="0.0" y="0.0" width="360" height="53"/>
-                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="WHAT WOULD YOU LIKE TO DO ?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szd-5M-fCb">
+                                        <rect key="frame" x="8" y="16" width="264" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="U4x-fo-1GO"/>
+                                            <constraint firstAttribute="width" constant="264" id="dV5-pV-Ouf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WHAT WOULD YOU LIKE TO DO?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szd-5M-fCb">
-                                <rect key="frame" x="8" y="16" width="264" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="U4x-fo-1GO"/>
-                                    <constraint firstAttribute="width" constant="264" id="dV5-pV-Ouf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-consign" translatesAutoresizingMaskIntoConstraints="NO" id="7kr-At-sXR" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
+                            <imageView tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="image:add-item-consign" translatesAutoresizingMaskIntoConstraints="NO" id="7kr-At-sXR" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="53" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7kr-At-sXR" secondAttribute="height" multiplier="1:1" id="atq-Qw-V9f"/>
                                 </constraints>
                             </imageView>
-                            <imageView tag="11" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-donate" translatesAutoresizingMaskIntoConstraints="NO" id="uXb-ow-G6I" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
+                            <imageView tag="11" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="image:add-item-donate" translatesAutoresizingMaskIntoConstraints="NO" id="uXb-ow-G6I" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
                                 <rect key="frame" x="120" y="53" width="119" height="120"/>
                             </imageView>
-                            <imageView tag="12" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-for-sale" translatesAutoresizingMaskIntoConstraints="NO" id="qGU-qC-ypl" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
+                            <imageView tag="12" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="image:add-item-for-sale" translatesAutoresizingMaskIntoConstraints="NO" id="qGU-qC-ypl" customClass="PriceImageView" customModule="_Again" customModuleProvider="target">
                                 <rect key="frame" x="239" y="53" width="121" height="120"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:separator-line" translatesAutoresizingMaskIntoConstraints="NO" id="ZGf-aY-as3">
@@ -57,16 +59,13 @@
                             <constraint firstItem="qGU-qC-ypl" firstAttribute="bottom" secondItem="uXb-ow-G6I" secondAttribute="bottom" id="3Uy-MR-ggL"/>
                             <constraint firstAttribute="trailing" secondItem="CVG-yV-B9Y" secondAttribute="trailing" id="9Mf-ND-QfR"/>
                             <constraint firstItem="CVG-yV-B9Y" firstAttribute="top" secondItem="R8e-Nu-nfh" secondAttribute="top" id="HNh-gR-pfp"/>
-                            <constraint firstItem="Szd-5M-fCb" firstAttribute="leading" secondItem="R8e-Nu-nfh" secondAttribute="leading" constant="8" id="Lbf-jy-8ue"/>
                             <constraint firstItem="uXb-ow-G6I" firstAttribute="leading" secondItem="7kr-At-sXR" secondAttribute="trailing" id="RQ2-gA-vJt"/>
                             <constraint firstItem="qGU-qC-ypl" firstAttribute="top" secondItem="uXb-ow-G6I" secondAttribute="top" id="SLp-3Y-Eqb"/>
                             <constraint firstItem="CVG-yV-B9Y" firstAttribute="leading" secondItem="R8e-Nu-nfh" secondAttribute="leading" id="SZd-op-Nzd"/>
                             <constraint firstItem="7kr-At-sXR" firstAttribute="bottom" secondItem="uXb-ow-G6I" secondAttribute="bottom" id="X24-BA-pMu"/>
                             <constraint firstItem="qGU-qC-ypl" firstAttribute="top" secondItem="CVG-yV-B9Y" secondAttribute="bottom" id="aHG-hO-mKb"/>
                             <constraint firstItem="7kr-At-sXR" firstAttribute="width" secondItem="uXb-ow-G6I" secondAttribute="width" id="czB-wp-9ni"/>
-                            <constraint firstItem="7kr-At-sXR" firstAttribute="top" secondItem="Szd-5M-fCb" secondAttribute="bottom" constant="16" id="hmF-yQ-YCe"/>
                             <constraint firstItem="7kr-At-sXR" firstAttribute="top" secondItem="uXb-ow-G6I" secondAttribute="top" id="kci-bU-dXw"/>
-                            <constraint firstItem="Szd-5M-fCb" firstAttribute="top" secondItem="R8e-Nu-nfh" secondAttribute="top" constant="16" id="nda-hv-HVQ"/>
                             <constraint firstItem="qGU-qC-ypl" firstAttribute="leading" secondItem="uXb-ow-G6I" secondAttribute="trailing" id="qDG-nD-OGs"/>
                             <constraint firstAttribute="trailing" secondItem="ZGf-aY-as3" secondAttribute="trailing" id="qkv-OK-2f0"/>
                             <constraint firstAttribute="width" secondItem="7kr-At-sXR" secondAttribute="width" multiplier="3" constant="1" id="tD5-AQ-H5t"/>

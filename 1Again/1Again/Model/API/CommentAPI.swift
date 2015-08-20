@@ -24,6 +24,7 @@ class CommentAPI: NSObject {
                     comment.displayName = obj["displayName"] as! String
                     comment.itemID = obj["itemId"] as! String
                     comment.timestamp = obj["timestamp"] as! String
+                    comment.profileImage = obj["profileImage"] as! String
                     senderComments.append(comment)
                 }
                 completion(comments: senderComments)
@@ -39,6 +40,7 @@ class CommentAPI: NSObject {
         param["id"] = itemId
         param["displayName"] = displayName
         param["comment"] = comment
+        param["userId"] = User.sharedUser.userID
         
         
         DataManager.shareManager.PostRequest(Constant.MyUrl.Item_AddComment_API_URL, params: param, success: { (responseData) -> Void in

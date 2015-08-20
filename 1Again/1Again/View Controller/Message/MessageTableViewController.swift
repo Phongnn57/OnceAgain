@@ -79,6 +79,12 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         cell.timestamp.text = msg.timestamp
         cell.user.text = msg.displayName
         cell.title.text = msg.title
+        if msg.newIndicator == 1 {
+            cell.newLB.hidden = false
+        } else {
+            cell.newLB.hidden = true
+        }
+        
         let status: String = msg.status  ?? ""
         switch (status) {
         case ("X"):
@@ -106,6 +112,7 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
         chatViewController.displayName = self.messagesArray[indexPath.row].displayName
         chatViewController.senderID = self.messagesArray[indexPath.row].id
+        self.messagesArray[indexPath.row].newIndicator = 0
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
     
@@ -139,6 +146,7 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
             chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
             chatViewController.displayName = self.messagesArray[indexPath.row].displayName
             chatViewController.senderID = self.messagesArray[indexPath.row].id
+            self.messagesArray[indexPath.row].newIndicator = 0
             self.navigationController?.pushViewController(chatViewController, animated: true)
         });
         moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);

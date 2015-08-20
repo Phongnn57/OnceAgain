@@ -134,6 +134,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
                 cell.delegate = self
                 cell.imageURLs = self.imageURLs
                 cell.collectionview.reloadData()
+                cell.configMakeOfferButton(self.shouldShowPriceCell)
                 if self.item != nil { cell.showDataFromItem(self.item)}
                 return cell
             } else if indexPath.row == 1 {
@@ -259,7 +260,7 @@ class ShopLocalDetailViewController: BaseSubViewController, UITableViewDelegate,
     }
     
     func doPostComment(cell: AddNewCommentCell) {
-        CommentAPI.postComment(self.item.itemID!, displayName:self.item.displayName!, comment: cell.comment.text, completion: { (object) -> Void in
+        CommentAPI.postComment(self.item.itemID!, displayName:User.sharedUser.displayName!, comment: cell.comment.text, completion: { (object) -> Void in
             print("SUCCESS")
             self.updateComment()
             cell.comment.text = nil

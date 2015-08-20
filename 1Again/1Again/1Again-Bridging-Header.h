@@ -17,3 +17,4 @@
 #import <JSQMessagesViewController/JSQMessages.h>
 #import "MRProgress.h"
 #import <TSCurrencyTextField.h>
+#import <SHMultipleSelect.h>

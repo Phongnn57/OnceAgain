@@ -54,14 +54,14 @@ class DataManager: NSObject {
                         return
             }
             
-            message = message.isEmpty ? "Lỗi không xác định, vui lòng gọi tổng đài để được hỗ trợ." : message
+            message = message.isEmpty ? "Error! Please try again later" : message
             failure(errorMessage: message)
             }) { (response: AFHTTPRequestOperation!, errorRes: NSError!) -> Void in
                 print(errorRes.description)
                 if(errorRes.code == 3840){
-                    failure(errorMessage: "Lỗi 3840. Vui lòng gọi tổng đài để được hỗ trợ.")
+                    failure(errorMessage: "Error 3840! Call 911 for help :D")
                 }else{
-                    failure(errorMessage: "Không thể kết nối đến máy chủ, vui lòng kiểm tra lại đường truyền mạng!")
+                    failure(errorMessage: "Can not connect to server! Please try again later")
                 }
         }
     }
@@ -129,14 +129,14 @@ class DataManager: NSObject {
                             return
                 }
                 
-                message = message.isEmpty ? "Lỗi không xác định, vui lòng gọi tổng đài để được hỗ trợ." : message
+                message = message.isEmpty ? "Error! Please try again later" : message
                 failure(error: message)
             }) { (request: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 println(error.description)
                 if(error.code == 3840){
-                    failure(error: "Lỗi 3840. Vui lòng gọi tổng đài để được hỗ trợ.")
+                    failure(error: "Error 3840! Call 911 for help :D")
                 }else{
-                    failure(error: "Không thể kết nối đến máy chủ, vui lòng kiểm tra lại đường truyền mạng!")
+                    failure(error: "Can not connect to server. Please try again later")
                 }
         }
     }

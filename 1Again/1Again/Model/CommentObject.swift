@@ -14,6 +14,7 @@ class CommentObject {
     var displayName: String
     var comment: String
     var timestamp: String
+    var profileImage: String
     
     init() {
         self.commentID = ""
@@ -22,5 +23,6 @@ class CommentObject {
         self.displayName = ""
         self.comment = ""
         self.timestamp = ""
+        self.profileImage = ""
     }
 }

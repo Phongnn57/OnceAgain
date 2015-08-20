@@ -8,26 +8,31 @@
 
 import UIKit
 
-class NotificationTableViewController: UITableViewController {
+
+class NotificationViewController: BaseViewController, NotificationDetailViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     
     let cellIdentifier = "NotificationCell"
     
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var tableview: UITableView!
     var notificationsArray =  [Notification]()
     var tempNnotifications = Notification()
     var imageCache = [String: UIImage]()
+    var refreshControl: UIRefreshControl!
+    var newNotificationsArray =  [Notification]()
+    var savedNotificationsArray =  [Notification]()
+    var interestedNotificationArray = [Notification]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if self.revealViewController() != nil {
-            menuBtn.target = self.revealViewController()
-            menuBtn.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
+
+        self.setMenuButtonAction(menuBtn)
+        self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.registerNib(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        self.tableview.addSubview(self.refreshControl)
+        self.tableview.registerNib(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -40,21 +45,57 @@ class NotificationTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    // MARK: DELEGATE
+    func didSelectButton(select: Bool, iid: String) {
+        if select {
+            for var i = 0; i < self.notificationsArray.count; i++ {
+                let noti = self.notificationsArray[i]
+                if noti.iid == iid {
+                    self.notificationsArray.removeAtIndex(i)
+                    self.tableview.reloadData()
+                    break
+                }
+            }
+        }
+    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notificationsArray.count
     }
     
     func refresh(sender:AnyObject)
     {
-        NotificationAPI.getNotificationListWithUser(User.sharedUser.userID, completion: { (result) -> Void in
-            self.notificationsArray = result
-            self.tableView.reloadData()
+        NotificationAPI.getNotificationListWithUser(User.sharedUser.userID, completion: { (newNoti, savedNoti, interestedNoti) -> Void in
+            self.newNotificationsArray = newNoti
+            self.savedNotificationsArray = savedNoti
+            self.interestedNotificationArray = interestedNoti
+            if self.segmentControl.selectedSegmentIndex == 0 {
+                self.notificationsArray = self.newNotificationsArray
+            } else if self.segmentControl.selectedSegmentIndex == 1{
+                self.notificationsArray = self.savedNotificationsArray
+            } else {
+                self.notificationsArray = self.interestedNotificationArray
+            }
+            self.tableview.reloadData()
             self.refreshControl?.endRefreshing()
-            }, failure: { (error) -> Void in
-                self.view.makeToast(error)
-                self.refreshControl?.endRefreshing()
-        })
+        }) { (error) -> Void in
+            self.view.makeToast(error)
+            self.refreshControl?.endRefreshing()
+        }
+
+    }
+    
+    
+    @IBAction func didChangeSegment(sender: AnyObject) {
+        if self.segmentControl.selectedSegmentIndex == 0 {
+            self.notificationsArray = self.newNotificationsArray
+        } else if self.segmentControl.selectedSegmentIndex == 1{
+            self.notificationsArray = self.savedNotificationsArray
+        } else {
+            self.notificationsArray = self.interestedNotificationArray
+        }
+        self.tableview.reloadData()
     }
     
     
@@ -129,12 +170,12 @@ class NotificationTableViewController: UITableViewController {
             break;
         }
         
-        tableView.reloadData(); // notify the table view the data has changed
+        tableview.reloadData(); // notify the table view the data has changed
         
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! NotificationCell
         
         var notification = notificationsArray[indexPath.row]
@@ -142,23 +183,28 @@ class NotificationTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let notificationDetailController = NotificationDetailViewController()
         notificationDetailController.IID = self.notificationsArray[indexPath.row].iid
         notificationDetailController.itemID = self.notificationsArray[indexPath.row].itemId
+        notificationDetailController.delegate = self
         self.navigationController?.pushViewController(notificationDetailController, animated: true)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 220
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.001
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             notificationsArray.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -167,13 +213,14 @@ class NotificationTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
             self.tempNnotifications = self.notificationsArray[indexPath.row]
             let notificationDetailController = NotificationDetailViewController()
             notificationDetailController.IID = self.notificationsArray[indexPath.row].iid
             notificationDetailController.itemID = self.notificationsArray[indexPath.row].itemId
+            notificationDetailController.delegate = self
             self.navigationController?.pushViewController(notificationDetailController, animated: true)
             
         });

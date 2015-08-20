@@ -72,7 +72,7 @@ class ItemAPI: NSObject {
     }
     
     
-    class func getShopLocal(page: String, counter: String, category: String!, search: String!, miles: String!, condition: String!, completion:(items: [Item]!, nextLink: String!, counter: String, page: String, totalRecord: Int) ->Void, failure:(error: String)->Void) {
+    class func getShopLocal(page: String, counter: String, category: String!, search: String!, miles: String!, condition: String!, completion:(items: [Item]!, nextLink: String!, counter: String, page: String, totalRecord: Int, loadMore: Bool) ->Void, failure:(error: String)->Void) {
         var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
         params["page"] = page
         params["counter"] = counter
@@ -92,6 +92,7 @@ class ItemAPI: NSObject {
                     var nextLink: String?
                     var counter: String?
                     var totalRecord: Int = 0
+                    var loadMore: Bool = true
                     if let paging: Array<AnyObject> = data["paging"] as? Array<AnyObject> {
                         if let pagingDic = paging[0] as? Dictionary<String, AnyObject> {
                             page = pagingDic["page"] as? String
@@ -102,6 +103,11 @@ class ItemAPI: NSObject {
                     }
                     
                     if let items:Array<AnyObject> = data["items"] as? Array<AnyObject> {
+                        if items.count > 0 {
+                            loadMore = true
+                        } else {
+                            loadMore = false
+                        }
                         for item in items {
                             var thisItem = Item()
                             thisItem.miles = item["miles"] as? String
@@ -116,7 +122,7 @@ class ItemAPI: NSObject {
                             senderItem.append(thisItem)
                         }
                     }
-                    completion(items: senderItem, nextLink: nextLink, counter: counter!, page: page!, totalRecord: totalRecord)
+                    completion(items: senderItem, nextLink: nextLink, counter: counter!, page: page!, totalRecord: totalRecord, loadMore: loadMore)
                 } else {
                     failure(error: "ERROR")
                 }
@@ -188,6 +194,17 @@ class ItemAPI: NSObject {
             completion(object: nil)
             }) { (errorMessage) -> Void in
                 failure(error: errorMessage)
+        }
+    }
+    
+    class func itemWithCount(itemID: String, completion:(data: AnyObject)->Void, failure:(error: String)->Void) {
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["itemId"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_ItemCount_API_URL, params: params, success: { (responseData) -> Void in
+            completion(data: responseData)
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
         }
     }
 }

@@ -128,4 +128,48 @@ class FavoriteViewController: BaseViewController, UITableViewDelegate, UITableVi
             self.navigationController?.pushViewController(itemDetailViewController, animated: true)
         }
     }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            self.items.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        var moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
+            let itemDetailViewController = ShopLocalDetailViewController()
+            itemDetailViewController.tmpItemID = self.items[indexPath.row].itemID
+            self.navigationController?.pushViewController(itemDetailViewController, animated: true)
+            
+        });
+        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+        
+        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+            
+            var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+            
+            params = ["action": "0", "itemId": self.items[indexPath.row].itemID ?? "", "userId": User.sharedUser.userID, "type": "I"]
+            
+            ItemAPI.postItemWithParams(params, completion: { (object) -> Void in
+                self.view.makeToast("SUCCESS")
+                self.items.removeAtIndex(indexPath.row)
+                self.tableview.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                }) { (error) -> Void in
+                    self.view.makeToast(error)
+            }
+
+            
+        });
+        
+        return [deleteRowAction, moreRowAction];
+    }
 }

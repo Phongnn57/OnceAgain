@@ -55,6 +55,7 @@ PODS:
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
+  - SHMultipleSelect (0.2.2)
   - SWRevealViewController (2.3.0)
   - Toast (2.4)
   - TSCurrencyTextField (0.1.0):
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MRProgress
   - SDWebImage
+  - SHMultipleSelect
   - SWRevealViewController
   - Toast
   - TSCurrencyTextField
@@ -78,8 +80,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MRProgress: f4cfe862082418e8f542f077772283f425d6c699
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SHMultipleSelect: 751491f4de21614622c198a760a88272cab62bf3
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
   TSCurrencyTextField: 03f9d4d263d617d1f0e034e4ace12febcfa6fe48
 
-COCOAPODS: 0.38.0
+COCOAPODS: 0.38.2

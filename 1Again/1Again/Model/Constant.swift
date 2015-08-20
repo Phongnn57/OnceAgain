@@ -13,6 +13,10 @@ class Constant: NSObject {
         
         static let Login_API_URL: String = "V6.jsonlogin2.php"
         static let Signup_API_URL: String = "V6.jsonsignup.php"
+        static let Update_Profile: String = "V6.profile_update.php"
+        
+        static let Home_API: String = "V6.userhome.php"
+        static let Interested_Categories: String = "V6.entityCategory_insert_ac.php"
         
         static let Add_Item_API_URL: String = "v6.item_insert_ac.v2.php"
         
@@ -27,6 +31,7 @@ class Constant: NSObject {
         static let Item_GetItemDetail_API_URL: String = "V6.forSaleItem_JSONV3.php"
         static let Item_Detail_Favorite_API_URL: String = "V6.favorite_item_insert_ac.php"
         static let Item_Detail_Take_Action_API_URL: String = "V6.notification_insert_ac.php"
+        static let Item_ItemCount_API_URL: String = "V6.itemCounts.php"
         
         static let Message_GetMessage_List_API_URL: String = "V6.messages.ListJSON.php"
         static let Message_DeleteMessage_API_URL: String = "V6.message_update_acJSONPOST.php"
@@ -40,7 +45,11 @@ class Constant: NSObject {
         static let Item_GetComment_API_URL: String = "V6.forSaleItemGetComments_JSONV2.php"
         static let Item_AddComment_API_URL: String = "V6.forSaleItemAddComment_V2.php"
         
-        static let User_Get_Profile_API_URL: String = "v6.getUser_JSONV2.php"
+        static let User_Get_Profile_API_URL: String = "V6.getProfile_JSONV2.php"
+        static let User_CheckDuplicate: String = "V6.checkdupuser.php"
+        static let User_Update_Password_API_URL: String = "V6.profile_update_password.php"
+        static let User_Update_Address_API_URL: String = "V6.profile_update_address.php"
+        static let User_Update_Photo_API_URL: String = "v6.userpic_upload.v2.php"
         
         static let homeURL: String = "http://www.theconsignmentclub.com/"
         static let notificationPage: String = "V5.notifications.ListJSON.php"
@@ -61,6 +70,12 @@ class Constant: NSObject {
         static let User_FirstName: String = "firstname"
         static let User_LastName: String = "lastname"
         static let User_DisplayName: String = "displayname"
+        static let User_City: String = "city"
+        static let User_State: String = "state"
+        static let User_Zip: String = "zip"
+        static let User_Phone: String = "phone"
+        static let User_UserType: String = "userType"
+        
         
         static let Type: String = "type"
         static let Time_Stamp: String = "timestamp"
@@ -133,6 +148,9 @@ class Constant: NSObject {
         static let activeUser = "activeUser"
         
         static let User: String = "UserObject"
+        
+        static let Number_New_Notification: String = "newNotiCount"
+        static let Number_New_Message: String = "newMessCount"
     }
     
     struct CustomNotification {
@@ -142,6 +160,15 @@ class Constant: NSObject {
         static let SignUpResult = "signUpResult"
     }
 }
+
+
+let DELEGATE: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+let SCREEN_SIZE: CGSize = UIScreen.mainScreen().bounds.size
+let DEVICE_VERSION = (UIDevice.currentDevice().systemVersion as NSString).floatValue
+let SCARE_SCREEN: CGFloat = SCREEN_SIZE.width / 375.0
+let NOTIFICATION_CENTER: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+let USER_DEFAULT: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+let STORYBOARD: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
 
 func formatCurrency(string: String) -> Double {
@@ -278,6 +305,13 @@ func scaleDownImageWith(image: UIImage, newSize: CGSize) -> UIImage {
     UIGraphicsEndImageContext()
     
     return scaledImage
+}
+
+func getDataProfileImage(image: UIImage) ->NSData! {
+    var img: UIImage!
+    img = scaleDownImageWith(image, CGSizeMake(240, 240))
+    var imageData = UIImageJPEGRepresentation(img, 0.8)
+    return imageData
 }
 
 func getDataFromImage(image: UIImage) -> NSData! {

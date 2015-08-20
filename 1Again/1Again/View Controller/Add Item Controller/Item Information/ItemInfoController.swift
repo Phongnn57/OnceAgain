@@ -119,7 +119,7 @@ class ItemInfoController: BaseSubViewController, UITextViewDelegate {
         titleTextView.resignFirstResponder()
         descriptionTextView.becomeFirstResponder()
         if titleTextView.text.isEmpty {
-            setUpTextView(titleTextView, sText: "Description", sColor: UIColor.lightGrayColor())
+            setUpTextView(titleTextView, sText: "Title", sColor: UIColor.lightGrayColor())
         }
     }
     
@@ -127,9 +127,15 @@ class ItemInfoController: BaseSubViewController, UITextViewDelegate {
         if textView.isEqual(titleTextView) {
             prev.enabled = false
             next.enabled = true
+            if descriptionTextView.text.isEmpty {
+                setUpTextView(descriptionTextView, sText: "Description", sColor: UIColor.lightGrayColor())
+            }
         } else if textView.isEqual(descriptionTextView) {
             prev.enabled = true
             next.enabled = false
+            if titleTextView.text.isEmpty {
+                setUpTextView(titleTextView, sText: "Title", sColor: UIColor.lightGrayColor())
+            }
         }
         return true
     }

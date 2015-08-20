@@ -14,6 +14,7 @@ protocol AddNewCommentCellDelegate {
 
 class AddNewCommentCell: UITableViewCell {
     
+    @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var comment: MyCustomTextField!
     var delegate: AddNewCommentCellDelegate?
     
@@ -23,6 +24,7 @@ class AddNewCommentCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.avatar.sd_setImageWithURL(NSURL(string: Constant.MyUrl.ImageURL + User.sharedUser.imageURL), placeholderImage: UIImage(named: "avatar_default"))
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -107,7 +107,7 @@ class AddItemViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {return 130 + UIScreen.mainScreen().bounds.size.width * 2 / 3}
+        if indexPath.row == 0 {return 110 + UIScreen.mainScreen().bounds.size.width * 2 / 3}
         else if indexPath.row == 1 {return 200}
         else if indexPath.row == 2 {return 60 + UIScreen.mainScreen().bounds.size.width/3}
         else if indexPath.row == 3 {

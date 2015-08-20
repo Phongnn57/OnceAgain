@@ -10,10 +10,12 @@ import UIKit
 
 class NotificationDetailLastCell: UITableViewCell {
 
+    @IBOutlet weak var price: UILabel!
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var brand: UILabel!
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var condition: UILabel!
+    @IBOutlet weak var offeredBy: UILabel!
     
     
     override func awakeFromNib() {
@@ -32,6 +34,8 @@ class NotificationDetailLastCell: UITableViewCell {
         self.brand.text = item.brand
         self.category.text = item.category
         self.condition.text = item.condition
+        self.price.text = "$ " + item.price!
+        self.offeredBy.text = item.displayName!
     }
     
 }

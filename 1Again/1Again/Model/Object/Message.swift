@@ -33,6 +33,7 @@ class Message {
     var receiverId: String?
     var message: String?
     var jsqMessage: JSQMessage!
+    var newIndicator: Int
     
     init() {
         self.id = ""
@@ -59,5 +60,6 @@ class Message {
         self.receiverId = ""
         self.message = ""
         self.jsqMessage = nil
+        self.newIndicator = 0
     }
 }

@@ -21,45 +21,42 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-es-wol">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="53"/>
-                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photo(1-5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfo-N8-Nx8">
-                                <rect key="frame" x="8" y="16" width="117" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD PHOTO (1-5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfo-N8-Nx8">
+                                <rect key="frame" x="8" y="16" width="124" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="117" id="Qqb-Y0-2Qm"/>
+                                    <constraint firstAttribute="width" constant="124" id="Qqb-Y0-2Qm"/>
                                     <constraint firstAttribute="height" constant="21" id="oGg-ch-rmR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView tag="14" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="gcW-BJ-f3c" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
+                            <imageView tag="14" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="gcW-BJ-f3c" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
                                 <rect key="frame" x="199" y="53" width="101" height="135"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gcW-BJ-f3c" secondAttribute="height" multiplier="3:4" id="s0t-59-L0y"/>
                                 </constraints>
                             </imageView>
-                            <imageView tag="15" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="mR1-NN-uiK" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
-                                <rect key="frame" x="199" y="187" width="101" height="132"/>
+                            <imageView tag="15" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="mR1-NN-uiK" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
+                                <rect key="frame" x="199" y="187" width="101" height="131"/>
                             </imageView>
-                            <imageView tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="CCh-dC-XXb" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
-                                <rect key="frame" x="299" y="187" width="101" height="132"/>
+                            <imageView tag="17" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="CCh-dC-XXb" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
+                                <rect key="frame" x="299" y="187" width="101" height="131"/>
                             </imageView>
-                            <imageView tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="rKP-xs-13M" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
+                            <imageView tag="16" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:add-item-default" translatesAutoresizingMaskIntoConstraints="NO" id="rKP-xs-13M" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
                                 <rect key="frame" x="299" y="53" width="101" height="135"/>
                             </imageView>
-                            <imageView tag="13" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image:add-item-camera" translatesAutoresizingMaskIntoConstraints="NO" id="7Hk-aD-SOj" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="53" width="200" height="266"/>
+                            <imageView tag="13" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image:add-item-camera" translatesAutoresizingMaskIntoConstraints="NO" id="7Hk-aD-SOj" customClass="AddPhotoImageView" customModule="_Again" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="53" width="200" height="265"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7Hk-aD-SOj" secondAttribute="height" multiplier="3:4" id="7sx-IC-mQ7"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3o-wN-f9l">
-                                <rect key="frame" x="8" y="335" width="384" height="45"/>
-                                <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="NmV-Ij-mot"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3o-wN-f9l">
+                                <rect key="frame" x="8" y="319" width="384" height="76"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Add/Update Image">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -94,7 +91,7 @@
                             <constraint firstItem="Kfo-N8-Nx8" firstAttribute="leading" secondItem="3Sq-dH-3QV" secondAttribute="leading" constant="8" id="MIe-9J-GZ3"/>
                             <constraint firstItem="Kfo-N8-Nx8" firstAttribute="top" secondItem="3Sq-dH-3QV" secondAttribute="top" constant="16" id="PHi-iv-SyG"/>
                             <constraint firstAttribute="trailing" secondItem="ulx-es-wol" secondAttribute="trailing" id="PSw-EV-noE"/>
-                            <constraint firstItem="i3o-wN-f9l" firstAttribute="top" secondItem="CCh-dC-XXb" secondAttribute="bottom" constant="16" id="Vmn-tM-n9K"/>
+                            <constraint firstItem="i3o-wN-f9l" firstAttribute="top" secondItem="CCh-dC-XXb" secondAttribute="bottom" id="Vmn-tM-n9K"/>
                             <constraint firstItem="rKP-xs-13M" firstAttribute="leading" secondItem="gcW-BJ-f3c" secondAttribute="trailing" constant="-1" id="Z5h-N4-S1U"/>
                             <constraint firstAttribute="bottom" secondItem="nGt-TA-S2w" secondAttribute="bottom" id="ZR8-0S-sHx"/>
                             <constraint firstItem="mR1-NN-uiK" firstAttribute="top" secondItem="gcW-BJ-f3c" secondAttribute="bottom" constant="-1" id="dIE-SW-vxy"/>
@@ -102,6 +99,7 @@
                             <constraint firstItem="mR1-NN-uiK" firstAttribute="bottom" secondItem="CCh-dC-XXb" secondAttribute="bottom" id="gEd-yJ-Wre"/>
                             <constraint firstItem="gcW-BJ-f3c" firstAttribute="top" secondItem="7Hk-aD-SOj" secondAttribute="top" id="hAN-uX-No6"/>
                             <constraint firstItem="7Hk-aD-SOj" firstAttribute="top" secondItem="3Sq-dH-3QV" secondAttribute="top" constant="53" id="ixe-b0-tye"/>
+                            <constraint firstItem="nGt-TA-S2w" firstAttribute="top" secondItem="i3o-wN-f9l" secondAttribute="bottom" id="j49-mY-HiR"/>
                             <constraint firstItem="7Hk-aD-SOj" firstAttribute="leading" secondItem="3Sq-dH-3QV" secondAttribute="leading" id="oHH-r7-Qfo"/>
                             <constraint firstAttribute="width" secondItem="7Hk-aD-SOj" secondAttribute="width" multiplier="2" constant="1" id="p8h-dL-Wha"/>
                             <constraint firstAttribute="trailing" secondItem="nGt-TA-S2w" secondAttribute="trailing" id="q2P-x9-ENe"/>

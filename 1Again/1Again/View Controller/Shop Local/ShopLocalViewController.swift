@@ -25,6 +25,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     var counter: String!
     var page: String!
     var filterStr: String!
+    var loadMore: Bool = true
     
     //data
     var categories:[CategoryObject]! = [CategoryObject]()
@@ -48,6 +49,8 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         self.counter = String()
         self.page = String()
         
+        self.navigationController?.navigationBar.translucent = false
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
@@ -68,7 +71,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         self.collectionview.alpha = 0
         MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
         
-        ItemAPI.getShopLocal("0", counter: "0", category: nil, search: nil, miles: nil, condition: nil, completion: { (items, nextLink, counter, page, totalRecord) -> Void in
+        ItemAPI.getShopLocal("0", counter: "0", category: nil, search: nil, miles: nil, condition: nil, completion: { (items, nextLink, counter, page, totalRecord, loadMore) -> Void in
             self.items = items
             self.totalRecord = totalRecord
             self.nextLink = nextLink
@@ -85,6 +88,10 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func initData() {
+        
+        
+//        let categoryArr
+        
         let distanceList = [["< 10 Miles", "10"], ["< 20 Miles", "20"], ["> 50 Miles", "50"], ["< 100 Miles", "100"], ["< 150 Miles", "150"]]
         let conditionList = [["All Conditions", ""], ["New with Tags", "A"], ["New", "B"], ["Like New", "C"], ["Very Good", "D"], ["Good", "E"], ["Satisfactory", "F"]]
         
@@ -125,7 +132,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
 //        self.collectionview.userInteractionEnabled = false
 //        self.collectionview.alpha = 0.5
         self.menuView.showViewFromSuperView(self.collectionview.frame.origin.y)
-        self.applyFilterView.showViewFromSuperView(UIScreen.mainScreen().bounds.size.height - 30)
+        self.applyFilterView.showViewFromSuperView(self.collectionview.frame.height - 30)
     }
     
     @IBAction func doFilterAction(sender: AnyObject) {
@@ -179,7 +186,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
         
         
-        ItemAPI.getShopLocal("0", counter: "0", category: self.getCategory(), search: self.searchBar.text, miles: self.getDistance(), condition: self.getCondition(), completion: { (items, nextLink, counter, page, totalRecord) -> Void in
+        ItemAPI.getShopLocal("0", counter: "0", category: self.getCategory(), search: self.searchBar.text, miles: self.getDistance(), condition: self.getCondition(), completion: { (items, nextLink, counter, page, totalRecord, loadMore) -> Void in
             self.page = page
             self.counter = counter
             self.nextLink = nextLink
@@ -273,13 +280,12 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func loadMoreData() {
-        if self.totalRecord > self.items.count {
+        if self.totalRecord > self.items.count && self.loadMore{
             var additionData: [Item] = []
-            
             
             MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Load more", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
             
-            ItemAPI.getShopLocal(self.page, counter: self.counter, category: nil, search: nil, miles: nil, condition: nil, completion: { (items, nextLink, counter, page, totalRecord) -> Void in
+            ItemAPI.getShopLocal(self.page, counter: self.counter, category: nil, search: nil, miles: nil, condition: nil, completion: { (items, nextLink, counter, page, totalRecord, loadMore) -> Void in
                 additionData = items
                 for item in additionData {
                     self.items.append(item)
@@ -287,6 +293,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
                 self.counter = counter
                 self.page = page
                 self.collectionview.reloadData()
+                self.loadMore = loadMore
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 }) { (error) -> Void in
                     self.view.makeToast(error)
@@ -318,7 +325,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         
         let item = items[indexPath.row]
         cell.setupCellBasedOnItem(item)
-        if indexPath.row == items.count - 1 {
+        if indexPath.row == items.count - 2 {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.loadMoreData()
             })

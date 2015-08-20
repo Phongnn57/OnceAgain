@@ -53,6 +53,8 @@ class MenuController: UITableViewController {
         if (hideNotification == true && indexPath.row == 9) || (hideNotification == false && indexPath.row == 10){
             User.sharedUser.userID = ""
             User.sharedUser.saveOffline()
+            SDWebImageManager.sharedManager().imageCache.clearDisk()
+            SDWebImageManager.sharedManager().imageCache.clearMemory()
         }
     }
 }

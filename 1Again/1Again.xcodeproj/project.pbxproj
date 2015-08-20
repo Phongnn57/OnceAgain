@@ -119,6 +119,10 @@
 		68B299951B3DA9D6009720BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B299941B3DA9D6009720BF /* Images.xcassets */; };
 		68B299981B3DA9D6009720BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B299961B3DA9D6009720BF /* LaunchScreen.xib */; };
 		68B299A41B3DA9D6009720BF /* _AgainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B299A31B3DA9D6009720BF /* _AgainTests.swift */; };
+		68B2AA4A1B7F46D6006B2C4C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B2AA481B7F46D6006B2C4C /* ChangePasswordViewController.swift */; };
+		68B2AA4B1B7F46D6006B2C4C /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B2AA491B7F46D6006B2C4C /* ChangePasswordViewController.xib */; };
+		68B2AA4E1B7F51A6006B2C4C /* ChangeAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B2AA4C1B7F51A6006B2C4C /* ChangeAddressViewController.swift */; };
+		68B2AA4F1B7F51A6006B2C4C /* ChangeAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B2AA4D1B7F51A6006B2C4C /* ChangeAddressViewController.xib */; };
 		68BECDE01B5053010007689E /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BECDDE1B5053010007689E /* MyCollectionViewCell.swift */; };
 		68BECDE11B5053010007689E /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BECDDF1B5053010007689E /* MyCollectionViewCell.xib */; };
 		68CF7AD81B686FC80079AE6E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF7AD71B686FC80079AE6E /* Utilities.swift */; };
@@ -129,6 +133,8 @@
 		68F21D3E1B3DD6F5004455EC /* AttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F21D3C1B3DD6F5004455EC /* AttributeCell.swift */; };
 		68F21D3F1B3DD6F5004455EC /* AttributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F21D3D1B3DD6F5004455EC /* AttributeCell.xib */; };
 		68F545301B5A125F00826677 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F5452F1B5A125F00826677 /* UserAPI.swift */; };
+		68FFE9FC1B73C71B00A5F142 /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FFE9FA1B73C71B00A5F142 /* MIBadgeButton.swift */; };
+		68FFE9FD1B73C71B00A5F142 /* MIBadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FFE9FB1B73C71B00A5F142 /* MIBadgeLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +276,10 @@
 		68B2999D1B3DA9D6009720BF /* 1AgainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 1AgainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B299A21B3DA9D6009720BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68B299A31B3DA9D6009720BF /* _AgainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _AgainTests.swift; sourceTree = "<group>"; };
+		68B2AA481B7F46D6006B2C4C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		68B2AA491B7F46D6006B2C4C /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
+		68B2AA4C1B7F51A6006B2C4C /* ChangeAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAddressViewController.swift; sourceTree = "<group>"; };
+		68B2AA4D1B7F51A6006B2C4C /* ChangeAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeAddressViewController.xib; sourceTree = "<group>"; };
 		68BECDDE1B5053010007689E /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		68BECDDF1B5053010007689E /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		68C6C89C1B3DAE470075AA2F /* 1Again-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "1Again-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -281,6 +291,8 @@
 		68F21D3C1B3DD6F5004455EC /* AttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeCell.swift; sourceTree = "<group>"; };
 		68F21D3D1B3DD6F5004455EC /* AttributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttributeCell.xib; sourceTree = "<group>"; };
 		68F5452F1B5A125F00826677 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		68FFE9FA1B73C71B00A5F142 /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
+		68FFE9FB1B73C71B00A5F142 /* MIBadgeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeLabel.swift; sourceTree = "<group>"; };
 		8D7893BE7E344CC5C9B9D55D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -541,6 +553,10 @@
 			isa = PBXGroup;
 			children = (
 				68707CE31B4233E300F99445 /* ProfileViewController.swift */,
+				68B2AA481B7F46D6006B2C4C /* ChangePasswordViewController.swift */,
+				68B2AA491B7F46D6006B2C4C /* ChangePasswordViewController.xib */,
+				68B2AA4C1B7F51A6006B2C4C /* ChangeAddressViewController.swift */,
+				68B2AA4D1B7F51A6006B2C4C /* ChangeAddressViewController.xib */,
 			);
 			path = "Profile Controller";
 			sourceTree = "<group>";
@@ -640,6 +656,8 @@
 		688E69D91B3DC2CA00030F3E /* Custom View, Button, Color... */ = {
 			isa = PBXGroup;
 			children = (
+				68FFE9FA1B73C71B00A5F142 /* MIBadgeButton.swift */,
+				68FFE9FB1B73C71B00A5F142 /* MIBadgeLabel.swift */,
 				68CF7AD71B686FC80079AE6E /* Utilities.swift */,
 				6898FF6D1B646E100053BF02 /* ArrayExtension.swift */,
 				6898FF6E1B646E100053BF02 /* StringExtension.swift */,
@@ -814,7 +832,6 @@
 				68B299851B3DA9D6009720BF /* Frameworks */,
 				68B299861B3DA9D6009720BF /* Resources */,
 				715DE9A6CF208EECA2BB1946 /* Copy Pods Resources */,
-				A128E1EAEA76DE886CF77366 /* Find unused imports */,
 			);
 			buildRules = (
 			);
@@ -889,6 +906,7 @@
 				682EACC51B456643007F67FB /* Main.storyboard in Resources */,
 				682EACE01B459D2B007F67FB /* ShopLocalThirdCell.xib in Resources */,
 				68A62AE81B4050AB00B31317 /* NotificationCell.xib in Resources */,
+				68B2AA4F1B7F51A6006B2C4C /* ChangeAddressViewController.xib in Resources */,
 				6879D8D31B3E346400F89BAF /* SecondPriceCell.xib in Resources */,
 				682EACE81B459F4D007F67FB /* AddNewCommentCell.xib in Resources */,
 				686ECCBD1B416333001A861B /* SignUpViewController.xib in Resources */,
@@ -911,6 +929,7 @@
 				683500C31B577FEB004B052C /* NotificationDetailMessageCell.xib in Resources */,
 				68F21D3B1B3DD3F8004455EC /* PriceCell.xib in Resources */,
 				684BE9B31B42E66F00F1D6E9 /* ItemListCell.xib in Resources */,
+				68B2AA4B1B7F46D6006B2C4C /* ChangePasswordViewController.xib in Resources */,
 				684BE9C31B43146200F1D6E9 /* MessageCell.xib in Resources */,
 				68B299951B3DA9D6009720BF /* Images.xcassets in Resources */,
 				682EACD31B45968D007F67FB /* ShopLocalDetailViewController.xib in Resources */,
@@ -961,20 +980,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A128E1EAEA76DE886CF77366 /* Find unused imports */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Find unused imports";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"/Users/phongnn/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/phongnn/workspace/Freelance/1Again\"";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -988,6 +993,7 @@
 				687EF1781B4ED810007DADC0 /* FilterTableView.swift in Sources */,
 				686E52481B5A3A210047D2F6 /* Age.swift in Sources */,
 				682EACDF1B459D2B007F67FB /* ShopLocalThirdCell.swift in Sources */,
+				68B2AA4A1B7F46D6006B2C4C /* ChangePasswordViewController.swift in Sources */,
 				686ABB031B3E85CC00AC80E0 /* ELCAssetCell.m in Sources */,
 				6834C6A01B3DCDB900F7912B /* AddPhotoCell.swift in Sources */,
 				684BE9CC1B431C8B00F1D6E9 /* ShopLocalCollectionCell.swift in Sources */,
@@ -1002,6 +1008,7 @@
 				681210091B3E5B7C00C2AB49 /* AgeObject.swift in Sources */,
 				6879D8D21B3E346400F89BAF /* SecondPriceCell.swift in Sources */,
 				686ABB0E1B3E9D2300AC80E0 /* BaseSubViewController.swift in Sources */,
+				68B2AA4E1B7F51A6006B2C4C /* ChangeAddressViewController.swift in Sources */,
 				682EACD71B459707007F67FB /* ShopLocalFirstCell.swift in Sources */,
 				68181F841B57F492002FC002 /* CommentAPI.swift in Sources */,
 				6812100D1B3E5C1200C2AB49 /* CategoryManager.swift in Sources */,
@@ -1029,10 +1036,12 @@
 				686ABB041B3E85CC00AC80E0 /* ELCAssetTablePicker.m in Sources */,
 				686E52401B5A35550047D2F6 /* User.swift in Sources */,
 				686ABB0B1B3E9CB500AC80E0 /* ItemInfoController.swift in Sources */,
+				68FFE9FC1B73C71B00A5F142 /* MIBadgeButton.swift in Sources */,
 				68707CE41B4233E300F99445 /* ProfileViewController.swift in Sources */,
 				6898FF781B646E100053BF02 /* UITextFieldExtension.swift in Sources */,
 				684BE9B71B43063F00F1D6E9 /* ItemDetailController.swift in Sources */,
 				686ABAED1B3E704A00AC80E0 /* MyCustomImage.swift in Sources */,
+				68FFE9FD1B73C71B00A5F142 /* MIBadgeLabel.swift in Sources */,
 				68A1A7391B593A6900C8B5D2 /* ChatViewController.swift in Sources */,
 				68707CE71B428BD500F99445 /* FavoriteViewController.swift in Sources */,
 				68CF7AD81B686FC80079AE6E /* Utilities.swift in Sources */,

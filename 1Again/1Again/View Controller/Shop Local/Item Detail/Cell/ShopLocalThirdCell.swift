@@ -20,6 +20,8 @@ class ShopLocalThirdCell: UITableViewCell {
     @IBOutlet weak var condition: UILabel!
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var seller: UILabel!
+    
+    
     var delegate: ShopLocalThirdCellDelegate?
     
     @IBAction func favAction(sender: AnyObject) {
@@ -48,5 +50,6 @@ class ShopLocalThirdCell: UITableViewCell {
         } else {
             favButton.setImage(UIImage(named: "image:shop-local-dislike"), forState: UIControlState.Normal)
         }
+
     }
 }

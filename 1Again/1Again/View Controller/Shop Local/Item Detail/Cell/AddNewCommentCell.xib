@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,12 +15,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:shop-local-like" translatesAutoresizingMaskIntoConstraints="NO" id="Cxj-hs-Iqa">
-                        <rect key="frame" x="8" y="4" width="35" height="35"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image:shop-local-like" translatesAutoresizingMaskIntoConstraints="NO" id="Cxj-hs-Iqa">
+                        <rect key="frame" x="8" y="4" width="36" height="36"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="35" id="wr2-Z0-8jl"/>
-                            <constraint firstAttribute="height" constant="35" id="z25-hc-381"/>
+                            <constraint firstAttribute="width" constant="36" id="wr2-Z0-8jl"/>
+                            <constraint firstAttribute="height" constant="36" id="z25-hc-381"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="18"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B09-RX-6aN">
                         <rect key="frame" x="277" y="4" width="90" height="35"/>
@@ -30,6 +35,7 @@
                             <constraint firstAttribute="height" constant="35" id="WEx-nG-ZGX"/>
                         </constraints>
                         <state key="normal" title="Comment">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -43,7 +49,7 @@
                         </connections>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textfield:bg" translatesAutoresizingMaskIntoConstraints="NO" id="eeG-0V-4qR" customClass="MyCustomTextField" customModule="_Again" customModuleProvider="target">
-                        <rect key="frame" x="51" y="4" width="218" height="35"/>
+                        <rect key="frame" x="52" y="4" width="217" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="hYS-Y5-eHZ"/>
                         </constraints>
@@ -62,13 +68,14 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatar" destination="Cxj-hs-Iqa" id="9ek-3M-O3w"/>
                 <outlet property="comment" destination="eeG-0V-4qR" id="AF6-dS-Cu6"/>
             </connections>
-            <point key="canvasLocation" x="185.5" y="366"/>
+            <point key="canvasLocation" x="395.5" y="346"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="image:shop-local-like" width="40" height="40"/>
+        <image name="image:shop-local-like" width="64" height="64"/>
         <image name="textfield:bg" width="3" height="2"/>
     </resources>
 </document>

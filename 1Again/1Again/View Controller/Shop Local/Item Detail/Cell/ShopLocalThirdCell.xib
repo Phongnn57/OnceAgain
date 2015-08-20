@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -172,11 +172,11 @@
                 <outlet property="seller" destination="sqm-27-0XT" id="CW0-ok-ica"/>
                 <outlet property="sellerView" destination="H2p-sc-9uM" id="ziL-ct-A0J"/>
             </connections>
-            <point key="canvasLocation" x="477.5" y="303.5"/>
+            <point key="canvasLocation" x="617.5" y="300.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="image:right-arrow" width="26" height="44"/>
-        <image name="image:shop-local-dislike" width="40" height="40"/>
+        <image name="image:shop-local-dislike" width="64" height="64"/>
     </resources>
 </document>

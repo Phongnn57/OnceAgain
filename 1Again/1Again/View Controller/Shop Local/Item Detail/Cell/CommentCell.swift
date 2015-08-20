@@ -12,6 +12,7 @@ class CommentCell: UITableViewCell {
 
     @IBOutlet weak var user: UILabel!
     @IBOutlet weak var comment: UILabel!
+    @IBOutlet weak var avatar: UIImageView!
     
     
     
@@ -26,10 +27,10 @@ class CommentCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
     func setupCellWithComment(comment: CommentObject) {
         let commentTitle = "\(comment.displayName) (\(getDateFromString(comment.timestamp)) days ago)"
         self.user.text = commentTitle
         self.comment.text = comment.comment
+        self.avatar.sd_setImageWithURL(NSURL(string: Constant.MyUrl.ImageURL + comment.profileImage), placeholderImage: UIImage(named: "avatar_default"))
     }
 }

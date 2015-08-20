@@ -24,6 +24,7 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var descriptionLB: UILabel!
+    @IBOutlet weak var btnMakeOffer: UIButton!
 
     var delegate: ShopLocalFirstCellDelegate?
     var makeOfferSelected: Bool = false
@@ -36,11 +37,11 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     @IBAction func btnMakeOfferAction(sender: AnyObject) {
         self.makeOfferSelected = !self.makeOfferSelected
         let btn = sender as! UIButton
-        if self.makeOfferSelected {
-            btn.backgroundColor = UIColor.lightGrayColor()
-        } else {
-            btn.backgroundColor = UIColor.darkGrayColor()
-        }
+//        if self.makeOfferSelected {
+//            btn.backgroundColor = UIColor.lightGrayColor()
+//        } else {
+//            btn.backgroundColor = UIColor.darkGrayColor()
+//        }
         self.delegate?.didSelectMakeOfferButton(self)
     }
     
@@ -60,7 +61,14 @@ class ShopLocalFirstCell: UITableViewCell, UICollectionViewDelegate, UICollectio
         self.collectionview.collectionViewLayout = layout
         self.collectionview.registerNib(UINib(nibName: collectionCellIdentifier, bundle: nil), forCellWithReuseIdentifier: collectionCellIdentifier)
     }
-
+    
+    func configMakeOfferButton(selected: Bool) {
+        if selected {
+            self.btnMakeOffer.backgroundColor = UIColor.lightGrayColor()
+        } else {
+            self.btnMakeOffer.backgroundColor = UIColor(rgba: "#616161")
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

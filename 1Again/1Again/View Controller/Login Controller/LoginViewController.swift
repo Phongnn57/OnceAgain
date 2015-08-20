@@ -31,7 +31,7 @@ class LoginCustomTextfield: MyCustomTextField {
 }
 
 
-class LoginViewController: BaseSubViewController, MBProgressHUDDelegate, UITextFieldDelegate {
+class LoginViewController: BaseSubViewController, MBProgressHUDDelegate, UITextFieldDelegate, SignUpViewControllerDelegate {
     
     @IBOutlet weak var email: LoginCustomTextfield!
     @IBOutlet weak var password: LoginCustomTextfield!
@@ -55,6 +55,7 @@ class LoginViewController: BaseSubViewController, MBProgressHUDDelegate, UITextF
 
     @IBAction func goToSignUp(sender: AnyObject) {
         let signUpController = SignUpViewController()
+        signUpController.delegate = self
         self.presentViewController(signUpController, animated: true, completion: nil)
     }
     
@@ -92,5 +93,9 @@ class LoginViewController: BaseSubViewController, MBProgressHUDDelegate, UITextF
             return false
         }
         return true
+    }
+    
+    func didFinishSignupWithEmail(email: String) {
+        self.email.text = email
     }
 }

@@ -10,13 +10,15 @@ import UIKit
 
 class NotificationAPI: NSObject {
     
-    class func getNotificationListWithUser(userID: String, completion: (result: [Notification]!)-> Void, failure:(error: String)->Void) {
+    class func getNotificationListWithUser(userID: String, completion: (newNoti: [Notification]!, savedNoti: [Notification]!, interestedNoti: [Notification]!)-> Void, failure:(error: String)->Void) {
         var param: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
         param["id"] = userID
         DataManager.shareManager.PostRequest(Constant.MyUrl.Notification_List_API_URL, params: param, success: { (responseData) -> Void in
             
             if let data: Array<AnyObject> = responseData as? Array<AnyObject> {
-                var notifications: [Notification] = [Notification]()
+                var newNotifications: [Notification] = [Notification]()
+                var savedNotifications: [Notification] = [Notification]()
+                var interestedNotifications: [Notification] = [Notification]()
                 for obj in data {
                     let notification = Notification()
                     notification.desc = obj["description"] as? String
@@ -30,9 +32,17 @@ class NotificationAPI: NSObject {
                     notification.status = obj["status"] as? String
                     notification.comment = obj["comment"] as? String
                     notification.timestamp = obj["timestamp"] as? String
-                    notifications.append(notification)
+                    notification.status = obj["status"] as? String
+                    
+                    if notification.status == "N" {
+                        newNotifications.append(notification)
+                    } else if notification.status == "S" {
+                        savedNotifications.append(notification)
+                    } else if notification.status == "Y" {
+                        interestedNotifications.append(notification)
+                    }
                 }
-                completion(result: notifications)
+                completion(newNoti: newNotifications, savedNoti: savedNotifications, interestedNoti: interestedNotifications)
             }
             
         }) { (errorMessage) -> Void in
