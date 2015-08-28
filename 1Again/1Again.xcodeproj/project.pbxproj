@@ -92,10 +92,16 @@
 		687EF17A1B4EE014007DADC0 /* DistanceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687EF1791B4EE014007DADC0 /* DistanceObject.swift */; };
 		6889D7DD1B413BCA006A176D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6889D7DB1B413BCA006A176D /* LoginViewController.swift */; };
 		6889D7DE1B413BCA006A176D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6889D7DC1B413BCA006A176D /* LoginViewController.xib */; };
+		688D22221B8EF98800E0B3B2 /* MessageItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688D22201B8EF98800E0B3B2 /* MessageItemViewController.swift */; };
+		688D22231B8EF98800E0B3B2 /* MessageItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688D22211B8EF98800E0B3B2 /* MessageItemViewController.xib */; };
 		688E69D31B3DAFDD00030F3E /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69D21B3DAFDD00030F3E /* MenuController.swift */; };
 		688E69D61B3DB60C00030F3E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69D51B3DB60C00030F3E /* BaseViewController.swift */; };
 		688E69DB1B3DC30D00030F3E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69DA1B3DC30D00030F3E /* UIColorExtension.swift */; };
 		688E69DE1B3DC57100030F3E /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688E69DD1B3DC57100030F3E /* AddItemViewController.swift */; };
+		6898441D1B88260F0080BE8C /* ItemActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6898441B1B88260F0080BE8C /* ItemActionViewController.swift */; };
+		6898441E1B88260F0080BE8C /* ItemActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6898441C1B88260F0080BE8C /* ItemActionViewController.xib */; };
+		689844201B8832CC0080BE8C /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6898441F1B8832CC0080BE8C /* Seller.swift */; };
+		689844221B8833370080BE8C /* SellerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689844211B8833370080BE8C /* SellerManager.swift */; };
 		6898FF741B646E100053BF02 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6898FF6D1B646E100053BF02 /* ArrayExtension.swift */; };
 		6898FF751B646E100053BF02 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6898FF6E1B646E100053BF02 /* StringExtension.swift */; };
 		6898FF761B646E100053BF02 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6898FF6F1B646E100053BF02 /* UIButtonExtension.swift */; };
@@ -244,10 +250,16 @@
 		687EF1791B4EE014007DADC0 /* DistanceObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DistanceObject.swift; path = ../DistanceObject.swift; sourceTree = "<group>"; };
 		6889D7DB1B413BCA006A176D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6889D7DC1B413BCA006A176D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		688D22201B8EF98800E0B3B2 /* MessageItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageItemViewController.swift; sourceTree = "<group>"; };
+		688D22211B8EF98800E0B3B2 /* MessageItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageItemViewController.xib; sourceTree = "<group>"; };
 		688E69D21B3DAFDD00030F3E /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		688E69D51B3DB60C00030F3E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		688E69DA1B3DC30D00030F3E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		688E69DD1B3DC57100030F3E /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		6898441B1B88260F0080BE8C /* ItemActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemActionViewController.swift; sourceTree = "<group>"; };
+		6898441C1B88260F0080BE8C /* ItemActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemActionViewController.xib; sourceTree = "<group>"; };
+		6898441F1B8832CC0080BE8C /* Seller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
+		689844211B8833370080BE8C /* SellerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerManager.swift; sourceTree = "<group>"; };
 		6898FF6D1B646E100053BF02 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		6898FF6E1B646E100053BF02 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		6898FF6F1B646E100053BF02 /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -349,6 +361,7 @@
 				681210061B3E5AEB00C2AB49 /* ConditionObject.swift */,
 				6812100C1B3E5C1200C2AB49 /* CategoryManager.swift */,
 				681210081B3E5B7C00C2AB49 /* AgeObject.swift */,
+				689844211B8833370080BE8C /* SellerManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -438,6 +451,8 @@
 			children = (
 				684BE9B51B43063F00F1D6E9 /* ItemDetailController.swift */,
 				684BE9B61B43063F00F1D6E9 /* ItemDetailController.xib */,
+				688D22201B8EF98800E0B3B2 /* MessageItemViewController.swift */,
+				688D22211B8EF98800E0B3B2 /* MessageItemViewController.xib */,
 			);
 			path = "Item detail";
 			sourceTree = "<group>";
@@ -536,6 +551,7 @@
 				686E52491B5A3A580047D2F6 /* Notification.swift */,
 				68164A9F1B46E2F700346F16 /* CommentObject.swift */,
 				68AF5B131B667D06009FF782 /* Message.swift */,
+				6898441F1B8832CC0080BE8C /* Seller.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -691,6 +707,8 @@
 			children = (
 				68A1A7371B593A6900C8B5D2 /* ChatViewController.swift */,
 				68A1A7381B593A6900C8B5D2 /* ChatViewController.xib */,
+				6898441B1B88260F0080BE8C /* ItemActionViewController.swift */,
+				6898441C1B88260F0080BE8C /* ItemActionViewController.xib */,
 			);
 			path = ChatViewController;
 			sourceTree = "<group>";
@@ -918,7 +936,9 @@
 				68164A9E1B46DC7000346F16 /* AdsViewViewController.xib in Resources */,
 				68B299981B3DA9D6009720BF /* LaunchScreen.xib in Resources */,
 				682EACDC1B459C15007F67FB /* ShopLocalSecondCell.xib in Resources */,
+				6898441E1B88260F0080BE8C /* ItemActionViewController.xib in Resources */,
 				683500C71B578093004B052C /* NotificationDetailDescriptionCell.xib in Resources */,
+				688D22231B8EF98800E0B3B2 /* MessageItemViewController.xib in Resources */,
 				68A62ADB1B40376700B31317 /* CameraController.xib in Resources */,
 				683500CB1B5780E7004B052C /* NotificationDetailLastCell.xib in Resources */,
 				6879D8D71B3E370E00F89BAF /* ItemDescriptionCell.xib in Resources */,
@@ -1009,15 +1029,18 @@
 				6879D8D21B3E346400F89BAF /* SecondPriceCell.swift in Sources */,
 				686ABB0E1B3E9D2300AC80E0 /* BaseSubViewController.swift in Sources */,
 				68B2AA4E1B7F51A6006B2C4C /* ChangeAddressViewController.swift in Sources */,
+				6898441D1B88260F0080BE8C /* ItemActionViewController.swift in Sources */,
 				682EACD71B459707007F67FB /* ShopLocalFirstCell.swift in Sources */,
 				68181F841B57F492002FC002 /* CommentAPI.swift in Sources */,
 				6812100D1B3E5C1200C2AB49 /* CategoryManager.swift in Sources */,
+				689844221B8833370080BE8C /* SellerManager.swift in Sources */,
 				686E52421B5A38710047D2F6 /* Item.swift in Sources */,
 				68B299901B3DA9D6009720BF /* ViewController.swift in Sources */,
 				681210031B3E599200C2AB49 /* CategoryObject.swift in Sources */,
 				686E52441B5A39A90047D2F6 /* Category.swift in Sources */,
 				68AF5B161B667ED1009FF782 /* MessageAPI.swift in Sources */,
 				687EF1741B4EC980007DADC0 /* FilterView.swift in Sources */,
+				689844201B8832CC0080BE8C /* Seller.swift in Sources */,
 				68120FFF1B3E53B900C2AB49 /* NSNotificationCenterExtension.swift in Sources */,
 				686ABB071B3E85CC00AC80E0 /* ELCOverlayImageView.m in Sources */,
 				68707CEB1B4290CD00F99445 /* NotificationDetailViewController.swift in Sources */,
@@ -1029,6 +1052,7 @@
 				6898FF741B646E100053BF02 /* ArrayExtension.swift in Sources */,
 				684BE9C21B43146200F1D6E9 /* MessageCell.swift in Sources */,
 				688E69D61B3DB60C00030F3E /* BaseViewController.swift in Sources */,
+				688D22221B8EF98800E0B3B2 /* MessageItemViewController.swift in Sources */,
 				682EACE31B459E98007F67FB /* CommentCell.swift in Sources */,
 				68181F851B57F492002FC002 /* FavoriteAPI.swift in Sources */,
 				68A1A7411B59448500C8B5D2 /* NSDateExtension.swift in Sources */,

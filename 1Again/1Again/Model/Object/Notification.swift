@@ -22,6 +22,9 @@ class Notification {
     var timestamp: String?
     var address1: String?
     var city: String?
+    var id: String?
+    var distance: String?
+    var profileImage: String?
     
     init() {
         self.iid = ""
@@ -37,5 +40,8 @@ class Notification {
         self.timestamp = ""
         self.address1 = ""
         self.city = ""
+        self.id = ""
+        self.distance = ""
+        self.profileImage = ""
     }
 }

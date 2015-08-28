@@ -103,6 +103,8 @@ class ProfileViewController: BaseViewController, UIActionSheetDelegate, UIImageP
             UserAPI.updatePhotoProfile(image, completion: { () -> Void in
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                 self.avatar.image = image
+                let urlStr = Constant.MyUrl.ImageURL + User.sharedUser.imageURL
+//                self.avatar.sd_setImageWithURL(NSURL(string: urlStr), placeholderImage: UIImage(named: "avatar_default"))
                 }) { (error) -> Void in
                     MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
                     self.view.makeToast(error)

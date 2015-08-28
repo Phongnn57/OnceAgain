@@ -21,6 +21,7 @@ class Message {
     var type: String?
     var comment: String?
     var ownerstatus: String?
+    var entityStatus: String?
     var lat: String?
     var title: String?
     var city: String?
@@ -34,8 +35,11 @@ class Message {
     var message: String?
     var jsqMessage: JSQMessage!
     var newIndicator: Int
+    var newIndicatorEntity: Int
+    var itemId: String?
     
     init() {
+        self.itemId = ""
         self.id = ""
         self.iid = ""
         self.state = ""
@@ -48,6 +52,7 @@ class Message {
         self.type = ""
         self.comment = ""
         self.ownerstatus = ""
+        self.entityStatus = ""
         self.lat = ""
         self.title = ""
         self.city = ""
@@ -61,5 +66,6 @@ class Message {
         self.message = ""
         self.jsqMessage = nil
         self.newIndicator = 0
+        self.newIndicatorEntity = 0
     }
 }

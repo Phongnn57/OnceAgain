@@ -18,15 +18,12 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
     var hud: MBProgressHUD!
     var firstLoad: Bool = true
     
+    var itemID: String!
+    var oneItem: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if self.revealViewController() != nil {
-            menuBtn.target = self.revealViewController()
-            menuBtn.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
         tableView.registerNib(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
@@ -36,6 +33,11 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        if self.revealViewController() != nil {
+            menuBtn.target = self.revealViewController()
+            menuBtn.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         super.viewDidAppear(animated)
         if self.firstLoad {
             self.firstLoad = false
@@ -44,20 +46,35 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
             MRProgressOverlayView.showOverlayAddedTo(self.view, title: "Loading...", mode: MRProgressOverlayViewMode.IndeterminateSmall, animated: true)
             self.loadData()
         }
+        self.tableView.reloadData()
     }
     
     func loadData() {
-        MessageAPI.getMessages({ (result) -> Void in
-            self.messagesArray = result
-            self.tableView.reloadData()
-            self.tableView.alpha = 1
-            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
-            self.refreshControl?.endRefreshing()
+        if self.oneItem {
+            MessageAPI.getMessageOfItem(self.itemID, completion: { (result) -> Void in
+                self.messagesArray = result
+                self.tableView.reloadData()
+                self.tableView.alpha = 1
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                self.refreshControl?.endRefreshing()
             }, failure: { (error) -> Void in
                 self.view.makeToast(error)
                 self.refreshControl?.endRefreshing()
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
-        })
+            })
+        } else {
+            MessageAPI.getMessages({ (result) -> Void in
+                self.messagesArray = result
+                self.tableView.reloadData()
+                self.tableView.alpha = 1
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                self.refreshControl?.endRefreshing()
+                }, failure: { (error) -> Void in
+                    self.view.makeToast(error)
+                    self.refreshControl?.endRefreshing()
+                    MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+            })
+        }
     }
     
     func refresh(sender:AnyObject)
@@ -79,6 +96,9 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         cell.timestamp.text = msg.timestamp
         cell.user.text = msg.displayName
         cell.title.text = msg.title
+        
+        cell.image1.sd_setImageWithURL(NSURL(string: Constant.MyUrl.ImageURL + msg.image1!), placeholderImage: UIImage(named: "demo_avatar"))
+        
         if msg.newIndicator == 1 {
             cell.newLB.hidden = false
         } else {
@@ -112,6 +132,7 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
         chatViewController.displayName = self.messagesArray[indexPath.row].displayName
         chatViewController.senderID = self.messagesArray[indexPath.row].id
+        chatViewController.itemID = self.messagesArray[indexPath.row].itemId
         self.messagesArray[indexPath.row].newIndicator = 0
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
@@ -146,6 +167,7 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
             chatViewController.receiverID = self.messagesArray[indexPath.row].entityId
             chatViewController.displayName = self.messagesArray[indexPath.row].displayName
             chatViewController.senderID = self.messagesArray[indexPath.row].id
+            chatViewController.itemID = self.messagesArray[indexPath.row].itemId
             self.messagesArray[indexPath.row].newIndicator = 0
             self.navigationController?.pushViewController(chatViewController, animated: true)
         });

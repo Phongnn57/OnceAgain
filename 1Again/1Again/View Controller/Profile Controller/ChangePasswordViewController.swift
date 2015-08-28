@@ -14,6 +14,10 @@ class ChangePasswordViewController: BaseSubViewController, UITextFieldDelegate {
     @IBOutlet weak var newPass: UITextField!
     @IBOutlet weak var confirmPass: UITextField!
     
+    @IBOutlet weak var passContainNumber: UIButton!
+    @IBOutlet weak var passLengthCOndition: UIButton!
+    @IBOutlet weak var passMatchConfirmPass: UIButton!
+    
     var saveButton: UIBarButtonItem!
     
     
@@ -25,11 +29,18 @@ class ChangePasswordViewController: BaseSubViewController, UITextFieldDelegate {
         self.saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "changePasswordAction")
         self.navigationItem.rightBarButtonItem = self.saveButton
         self.navigationController?.navigationBar.translucent = false
+        self.checkCondition()
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "endEdit"))
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "checkCondition", name: UITextFieldTextDidChangeNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func endEdit() {
+        self.view.endEditing(true)
     }
     
     func changePasswordAction() {
@@ -75,6 +86,24 @@ class ChangePasswordViewController: BaseSubViewController, UITextFieldDelegate {
             return false
         }
         return true
+    }
+    
+    func checkCondition() {
+        if self.newPass.text.length < 7 {
+            self.passLengthCOndition.setImage(UIImage(named: "unavailable"), forState: .Normal)
+        } else {
+            self.passLengthCOndition.setImage(UIImage(named: "tick"), forState: .Normal)
+        }
+        if self.containNumber() {
+            self.passContainNumber.setImage(UIImage(named: "tick"), forState: .Normal)
+        } else {
+            self.passContainNumber.setImage(UIImage(named: "unavailable"), forState: .Normal)
+        }
+        if self.newPass.text == self.confirmPass.text && self.newPass.text.length >= 7 {
+            self.passMatchConfirmPass.setImage(UIImage(named: "tick"), forState: .Normal)
+        } else {
+            self.passMatchConfirmPass.setImage(UIImage(named: "unavailable"), forState: .Normal)
+        }
     }
 
 }

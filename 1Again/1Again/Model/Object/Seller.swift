@@ -8,6 +8,17 @@
 
 import UIKit
 
-class Seller: NSObject {
+class Seller {
+    var displayName: String?
+    var id: String?
+    var distance: String?
+    var selected: Bool
+    
+    init() {
+        self.displayName = ""
+        self.id = ""
+        self.distance = ""
+        self.selected = false
+    }
    
 }

@@ -8,28 +8,47 @@
 
 import UIKit
 
-class ItemActionViewController: UIViewController {
+class ItemActionViewController: BaseSubViewController, UIActionSheetDelegate {
 
+    @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var seller: UILabel!
+    @IBOutlet weak var buyer: UILabel!
+    @IBOutlet weak var itemName: UILabel!
+    @IBOutlet weak var addedTime: UILabel!
+    @IBOutlet weak var btnAction: UIButton!
+    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var btnSubmit: UIButton!
+
+    var actionID: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.btnAction.imageEdgeInsets = UIEdgeInsetsMake(0, SCREEN_SIZE.width - 130, 0, 0)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func submitAction(sender: AnyObject) {
+        
     }
-    */
+    
+    @IBAction func didSelectActionButton(sender: AnyObject) {
+        let actionSheet = UIActionSheet(title: "Select action", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Offered", "Consigned", "Sold")
+        actionSheet.showInView(self.view)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            self.actionID = "A"
+        } else if buttonIndex == 2 {
+            self.actionID = "C"
+        } else if buttonIndex == 3 {
+            self.actionID = "S"
+        }
+    }
 
 }

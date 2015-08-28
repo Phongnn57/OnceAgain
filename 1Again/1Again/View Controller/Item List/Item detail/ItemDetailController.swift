@@ -29,7 +29,6 @@ class ItemDetailController: BaseSubViewController {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    
     var item: Item!
     
     override func viewDidLoad() {
@@ -89,4 +88,19 @@ class ItemDetailController: BaseSubViewController {
             }
         }
     }
+    
+    // MARK: BUTTON ACTION
+    
+    @IBAction func gotoItemMessages(sender: AnyObject) {
+        let messageViewController = MessageTableViewController()
+        messageViewController.itemID = self.item.itemID
+        messageViewController.oneItem = true
+        self.navigationController?.pushViewController(messageViewController, animated: true)
+    }
+    
+    @IBAction func gotoItemNotifications(sender: AnyObject) {
+        
+    }
+    
+    
 }

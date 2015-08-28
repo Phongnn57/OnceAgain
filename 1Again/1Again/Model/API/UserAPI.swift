@@ -26,6 +26,8 @@ class UserAPI: NSObject {
                 
                 userObj.saveOffline()
                 User.sharedUser = userObj
+                
+                SellerManager.sharedInstance.getAllSellers()
                 completion()
             } else {
                 failure(error: "Could not login to server")
@@ -183,12 +185,15 @@ class UserAPI: NSObject {
             formData.appendPartWithFileData(imageData, name: "files[]", fileName: User.sharedUser.userID + "image.jpg", mimeType: "image/jpeg")
             formData.appendPartWithFormData(User.sharedUser.userID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), name: "userId")
             }, success: { (operation: AFHTTPRequestOperation!, result: AnyObject!) -> Void in
+                println(result)
                 if let responseData:Array<AnyObject> = result["data"] as? Array<AnyObject> {
                     if let img:Dictionary<String, String> = responseData[0] as? Dictionary<String, String> {
                         User.sharedUser.imageURL = img["profileImage"]!
                         User.sharedUser.saveOffline()
-                        SDImageCache.sharedImageCache().removeImageForKey(Constant.MyUrl.ImageURL + User.sharedUser.imageURL)
-                        SDImageCache.sharedImageCache().storeImage(image, forKey: Constant.MyUrl.ImageURL + User.sharedUser.imageURL)
+
+                        SDImageCache.sharedImageCache().removeImageForKey(Constant.MyUrl.ImageURL + User.sharedUser.imageURL, fromDisk: true)
+//                        SDImageCache.sharedImageCache().storeImage(image, forKey: Constant.MyUrl.ImageURL + User.sharedUser.imageURL)
+                        SDImageCache.sharedImageCache().storeImage(image, recalculateFromImage: false, imageData: UIImageJPEGRepresentation(image, 1), forKey: Constant.MyUrl.ImageURL + User.sharedUser.imageURL, toDisk: true)
                         completion()
                     }
                 }
@@ -229,5 +234,3 @@ class UserAPI: NSObject {
         }
     }
 }
-
-

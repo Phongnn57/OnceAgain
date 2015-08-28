@@ -72,14 +72,14 @@ class ItemAPI: NSObject {
     }
     
     
-    class func getShopLocal(page: String, counter: String, category: String!, search: String!, miles: String!, condition: String!, completion:(items: [Item]!, nextLink: String!, counter: String, page: String, totalRecord: Int, loadMore: Bool) ->Void, failure:(error: String)->Void) {
+    class func getShopLocal(page: String, counter: String, category: String!, search: String!, miles: String!, condition: [String]!, completion:(items: [Item]!, nextLink: String!, counter: String, page: String, totalRecord: Int, loadMore: Bool) ->Void, failure:(error: String)->Void) {
         var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
         params["page"] = page
         params["counter"] = counter
         params["category"] = category
         params["search"] = search
         params["miles"] = miles
-        params["condition"] = condition
+        params["seller"] = condition
         params["userId"] = User.sharedUser.userID
         
         
@@ -205,6 +205,84 @@ class ItemAPI: NSObject {
             completion(data: responseData)
         }) { (errorMessage) -> Void in
             failure(error: errorMessage)
+        }
+    }
+    
+    // MARK: Item Detail
+    class func getNotificationOfItem(itemID: String, completion:(notifications: [Notification]!)->Void, failure:(error: String)->Void) {
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["userId"] = User.sharedUser.userID
+        params["itemId"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_NotificationItem_API_URL, params: params, success: { (responseData) -> Void in
+            if let arr:Array<AnyObject> = responseData as? Array<AnyObject> {
+                var senderArr: [Notification] = []
+                for obj in arr {
+                    let noti = Notification()
+                    noti.displayName = obj["displayName"] as? String ?? ""
+                    noti.id = obj["id"] as? String ?? ""
+                    noti.comment = obj["comment"] as? String ?? ""
+                    noti.status = obj["status"] as? String ?? ""
+                    noti.iid = obj["iid"] as? String ?? ""
+                    noti.itemId = obj["itemId"] as? String ?? ""
+                    noti.title = obj["title"] as? String ?? ""
+                    noti.distance = obj["distance"] as? String ?? ""
+                    noti.timestamp = obj["timestamp"] as? String ?? ""
+                    noti.profileImage = obj["profileImage"] as? String ?? ""
+                    
+                    senderArr.append(noti)
+                }
+                completion(notifications: senderArr)
+            }
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
+        }
+    }
+    
+    class func getMessageOfItem(itemID: String, completion:(messages: [Message]!)->Void, failure:(error: String)->Void) {
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["userId"] = User.sharedUser.userID
+        params["itemId"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_MessageItem_API_URL, params: params, success: { (responseData) -> Void in
+            if let arr:Array<AnyObject> = responseData as? Array<AnyObject> {
+                var senderArr: [Message] = []
+                for obj in arr {
+                    let mess = Message()
+
+                    mess.displayName = obj["displayName"] as? String
+                    mess.id = obj["id"] as? String
+                    mess.type = obj["type"] as? String
+                    mess.comment = obj["comment"] as? String
+                    mess.status = obj["status"] as? String
+                    mess.ownerstatus = obj["ownerstatus"] as? String
+                    mess.entityStatus = obj["entitystatus"] as? String
+                    mess.iid = obj["iid"] as? String
+                    mess.entityId = obj["entityId"] as? String
+                    mess.lng = obj["lng"] as? String
+                    mess.lat = obj["lat"] as? String
+                    mess.address1 = obj["address1"] as? String
+                    mess.city = obj["city"] as? String
+                    mess.state = obj["state"] as? String
+                    mess.zip = obj["zip"] as? String
+                    mess.itemId = obj["itemId"] as? String
+                    mess.image1 = obj["image1"] as? String
+                    mess.title = obj["title"] as? String
+                    mess.descrip = obj["description"] as? String
+                    mess.distance = obj["distance"] as? String
+                    mess.senderId = obj["senderId"] as? String
+                    mess.message = obj["message"] as? String
+                    mess.newIndicator = Utilities.numberFromJSONAnyObject(obj["newIndicator"])!.integerValue
+                    mess.newIndicatorEntity = Utilities.numberFromJSONAnyObject(obj["newIndicatorEntity"])!.integerValue
+                    mess.timestamp = obj["timestamp"] as? String
+                    mess.jsqMessage = JSQMessage(senderId: mess.senderId, senderDisplayName: "TEST", date: getDataFromStr(mess.timestamp!), text: mess.message)
+                    
+                    senderArr.append(mess)
+                }
+                completion(messages: senderArr)
+            }
+            }) { (errorMessage) -> Void in
+                failure(error: errorMessage)
         }
     }
 }

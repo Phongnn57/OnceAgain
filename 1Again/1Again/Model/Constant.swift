@@ -32,6 +32,8 @@ class Constant: NSObject {
         static let Item_Detail_Favorite_API_URL: String = "V6.favorite_item_insert_ac.php"
         static let Item_Detail_Take_Action_API_URL: String = "V6.notification_insert_ac.php"
         static let Item_ItemCount_API_URL: String = "V6.itemCounts.php"
+        static let Item_NotificationItem_API_URL: String = "V6.notifications.ListJSON_byItemId.php"
+        static let Item_MessageItem_API_URL: String = "V6.messages.ListJSON_byItemId.php"
         
         static let Message_GetMessage_List_API_URL: String = "V6.messages.ListJSON.php"
         static let Message_DeleteMessage_API_URL: String = "V6.message_update_acJSONPOST.php"
@@ -309,7 +311,10 @@ func scaleDownImageWith(image: UIImage, newSize: CGSize) -> UIImage {
 
 func getDataProfileImage(image: UIImage) ->NSData! {
     var img: UIImage!
-    img = scaleDownImageWith(image, CGSizeMake(240, 240))
+    
+    let ratio = image.size.width / 400
+    
+    img = scaleDownImageWith(image, CGSizeMake(400, image.size.height/ratio))
     var imageData = UIImageJPEGRepresentation(img, 0.8)
     return imageData
 }

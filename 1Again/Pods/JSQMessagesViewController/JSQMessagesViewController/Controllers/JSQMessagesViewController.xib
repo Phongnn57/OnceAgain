@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JSQMessagesViewController">
             <connections>
                 <outlet property="collectionView" destination="l9u-2b-4LK" id="bLP-6g-CkO"/>
                 <outlet property="inputToolbar" destination="BoD-Az-3DM" id="w74-g9-1qA"/>
+                <outlet property="itemAvatar" destination="Jaj-bt-Apt" id="qps-Gn-hUJ"/>
+                <outlet property="itemTitle" destination="ojR-TP-DQw" id="Pfc-zE-B26"/>
                 <outlet property="toolbarBottomLayoutGuide" destination="rHs-6q-NX4" id="d6h-iu-VMX"/>
                 <outlet property="toolbarHeightConstraint" destination="HIk-02-qcW" id="jE8-xC-1eD"/>
                 <outlet property="view" destination="mUa-cS-ru4" id="nki-T1-RTI"/>
@@ -19,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l9u-2b-4LK" customClass="JSQMessagesCollectionView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="60" width="320" height="508"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewLayout key="collectionViewLayout" id="dZl-7C-LHR" customClass="JSQMessagesCollectionViewFlowLayout"/>
                     <cells/>
@@ -31,18 +33,50 @@
                     </constraints>
                     <items/>
                 </toolbar>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiA-6g-xsm">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                    <subviews>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jaj-bt-Apt">
+                            <rect key="frame" x="267" y="8" width="45" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="APf-gD-QwF"/>
+                                <constraint firstAttribute="width" constant="45" id="vSe-sK-CSg"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojR-TP-DQw">
+                            <rect key="frame" x="8" y="8" width="251" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="0T0-zr-Zfp"/>
+                        <constraint firstAttribute="centerY" secondItem="Jaj-bt-Apt" secondAttribute="centerY" id="0pf-cO-4G7"/>
+                        <constraint firstAttribute="trailing" secondItem="Jaj-bt-Apt" secondAttribute="trailing" constant="8" id="1Qi-Xi-NVb"/>
+                        <constraint firstItem="Jaj-bt-Apt" firstAttribute="leading" secondItem="ojR-TP-DQw" secondAttribute="trailing" constant="8" id="Kdi-Xj-v55"/>
+                        <constraint firstItem="ojR-TP-DQw" firstAttribute="leading" secondItem="PiA-6g-xsm" secondAttribute="leading" constant="8" id="aST-eD-me2"/>
+                        <constraint firstItem="ojR-TP-DQw" firstAttribute="top" secondItem="PiA-6g-xsm" secondAttribute="top" constant="8" id="eeU-Fz-Myf"/>
+                        <constraint firstAttribute="bottom" secondItem="ojR-TP-DQw" secondAttribute="bottom" constant="8" id="igh-S4-2WE"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="BoD-Az-3DM" secondAttribute="trailing" id="7xc-Ha-asg"/>
+                <constraint firstItem="l9u-2b-4LK" firstAttribute="top" secondItem="PiA-6g-xsm" secondAttribute="bottom" id="GVg-Y2-c1G"/>
+                <constraint firstAttribute="trailing" secondItem="PiA-6g-xsm" secondAttribute="trailing" id="KDA-x6-nIb"/>
                 <constraint firstItem="l9u-2b-4LK" firstAttribute="leading" secondItem="mUa-cS-ru4" secondAttribute="leading" id="MmF-oh-Y75"/>
                 <constraint firstAttribute="trailing" secondItem="l9u-2b-4LK" secondAttribute="trailing" id="O9u-TA-A0e"/>
                 <constraint firstAttribute="bottom" secondItem="l9u-2b-4LK" secondAttribute="bottom" id="Re7-WW-UmS"/>
-                <constraint firstItem="l9u-2b-4LK" firstAttribute="top" secondItem="mUa-cS-ru4" secondAttribute="top" id="dCQ-DM-Wdj"/>
+                <constraint firstItem="PiA-6g-xsm" firstAttribute="leading" secondItem="mUa-cS-ru4" secondAttribute="leading" id="aDU-Os-pcl"/>
                 <constraint firstAttribute="bottom" secondItem="BoD-Az-3DM" secondAttribute="bottom" id="rHs-6q-NX4"/>
+                <constraint firstItem="PiA-6g-xsm" firstAttribute="top" secondItem="mUa-cS-ru4" secondAttribute="top" id="s44-B7-Rv6"/>
                 <constraint firstItem="BoD-Az-3DM" firstAttribute="leading" secondItem="mUa-cS-ru4" secondAttribute="leading" id="ts7-8f-0lH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="285" y="235"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

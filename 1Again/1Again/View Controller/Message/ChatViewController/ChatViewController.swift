@@ -14,20 +14,14 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     var displayName: String!
     var receiverID: String!
     var senderID: String!
+    var itemID: String!
 
     
     let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor(red: 10/255, green: 180/255, blue: 230/255, alpha: 1.0))
     let incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
     var userName = ""
     var messages = [Message]()
-    
-    override func loadView() {
-        
-        let nameSpaceClassName = NSStringFromClass(self.classForCoder)
-        let className = nameSpaceClassName.componentsSeparatedByString(".").last! as String
-        NSBundle.mainBundle().loadNibNamed(className, owner:self, options:nil)
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,19 +34,36 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
         self.collectionView.collectionViewLayout.springinessEnabled = true
         self.collectionView?.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
         self.collectionView?.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+        print(self.collectionView.frame)
         self.showLoadEarlierMessagesHeader = false
+        self.navigationController?.navigationBar.translucent = false
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        MessageAPI.getChatHistory(self.imd, completion: { (result) -> Void in
+        MessageAPI.getChatHistory(self.imd, itemID: self.itemID, completion: { (result, title, imageLink) -> Void in
             self.messages = result
             self.collectionView.reloadData()
             self.scrollToBottomAnimated(true)
+
+            self.itemAvatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "moveToItem"))
+            
+            if imageLink != nil {
+                self.itemAvatar.sd_setImageWithURL(NSURL(string: Constant.MyUrl.ImageURL + imageLink!))
+            }
+            if title != nil {
+                self.itemTitle.text = title
+            }
+            
         }) { (error) -> Void in
             self.view.makeToast(error)
         }
+    }
+    
+    func moveToItem() {
+        let itemActionView = ItemActionViewController()
+        self.navigationController?.pushViewController(itemActionView, animated: true)
     }
     
     func getReceivedID() -> String {

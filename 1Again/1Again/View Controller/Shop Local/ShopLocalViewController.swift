@@ -30,7 +30,7 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     //data
     var categories:[CategoryObject]! = [CategoryObject]()
     var distances:[DistanceObject]! = [DistanceObject]()
-    var conditions:[ConditionObject]! = [ConditionObject]()
+    var conditions:[Seller]! = [Seller]()
     var tableData: [AnyObject]! = [AnyObject]()
     
     var tableHeight: CGFloat = 0
@@ -88,22 +88,18 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
     }
     
     func initData() {
-        
-        
-//        let categoryArr
-        
         let distanceList = [["< 10 Miles", "10"], ["< 20 Miles", "20"], ["> 50 Miles", "50"], ["< 100 Miles", "100"], ["< 150 Miles", "150"]]
-        let conditionList = [["All Conditions", ""], ["New with Tags", "A"], ["New", "B"], ["Like New", "C"], ["Very Good", "D"], ["Good", "E"], ["Satisfactory", "F"]]
-        
+
         for str in distanceList {
             let distanceObj = DistanceObject(sTitle: str[0], sId: str[1])
             self.distances.append(distanceObj)
         }
-        
-        for str in conditionList {
-            let conditionObj = ConditionObject(sConId: str[1], sConTitle: str[0])
-            self.conditions.append(conditionObj)
-        }
+
+        self.conditions = SellerManager.sharedInstance.sellers
+        var allSeller = Seller()
+        allSeller.id = "-1"
+        allSeller.displayName = "All Seller"
+        self.conditions.insert(allSeller, atIndex: 0)
         
         self.categories = CategoryManager.sharedInstance.categories
         let category = CategoryObject(sCatId: -1, sCatDescription: "All Category")
@@ -155,17 +151,16 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
         return returnStr
     }
     
-    func getCondition() -> String {
+    func getCondition() -> [String]! {
         if self.conditions[0].selected {
-            return ""
+            return []
         } else {
-            var returnStr = ""
+            var returnStr: [String] = []
             for condition in self.conditions {
                 if condition.selected {
-                    returnStr = returnStr.stringByAppendingString(condition.conId)
+                    returnStr.append(condition.id!)
                 }
             }
-            print("condition: \(returnStr)")
             return returnStr
         }
     }
@@ -388,7 +383,12 @@ class ShopLocalViewController: BaseViewController, UICollectionViewDataSource, U
                 cell.accessoryType = UITableViewCellAccessoryType.None
             }
         } else {
-            cell.textLabel?.text = self.conditions[indexPath.row].conTitle
+            if indexPath.row == 0 {
+                cell.textLabel?.text = self.conditions[indexPath.row].displayName!
+            } else {
+                cell.textLabel?.text = self.conditions[indexPath.row].displayName! + "(" + self.conditions[indexPath.row].distance! + " miles )"
+            }
+            
             if self.conditions[indexPath.row].selected == true {
                 cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             } else {
