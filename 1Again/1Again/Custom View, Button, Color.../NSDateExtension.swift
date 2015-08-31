@@ -11,6 +11,14 @@ import Foundation
 
 public extension NSDate {
     
+    func toString() -> String {
+        let year = self.year
+        let month = self.month
+        let day = self.days
+        
+        return "\(month)-\(day)-\(year)"
+    }
+    
     // MARK:  NSDate Manipulation
     
     /**

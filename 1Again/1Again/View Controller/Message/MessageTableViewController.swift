@@ -119,6 +119,12 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
             cell.imageview.image =  UIImage(named: "image:message-dollar")
         case ("N"):
             cell.imageview.image =  UIImage(named: "image:message-new")
+        case ("C"):
+            cell.imageview.image =  UIImage(named: "image:message-star")
+        case ("R"):
+            cell.imageview.image =  UIImage(named: "image:message-star")
+        case ("A"):
+            cell.imageview.image =  UIImage(named: "image:message-star")
         default:
             break;
         }

@@ -35,6 +35,7 @@
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *itemAvatar;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *itemTitle;
+@property (unsafe_unretained, nonatomic) IBOutlet UIView *itemBar;
 
 /**
  *  Returns the collection view object managed by this view controller.

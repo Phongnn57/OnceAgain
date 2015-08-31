@@ -92,14 +92,15 @@ class ItemDetailController: BaseSubViewController {
     // MARK: BUTTON ACTION
     
     @IBAction func gotoItemMessages(sender: AnyObject) {
-        let messageViewController = MessageTableViewController()
-        messageViewController.itemID = self.item.itemID
-        messageViewController.oneItem = true
-        self.navigationController?.pushViewController(messageViewController, animated: true)
+        let messageItem = MessageItemViewController()
+        messageItem.itemID = self.item.itemID
+        self.navigationController?.pushViewController(messageItem, animated: true)
     }
     
     @IBAction func gotoItemNotifications(sender: AnyObject) {
-        
+        let notificationItem = NotificationItemViewController()
+        notificationItem.itemID = self.item.itemID
+        self.navigationController?.pushViewController(notificationItem, animated: true)
     }
     
     

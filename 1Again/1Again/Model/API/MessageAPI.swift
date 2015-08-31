@@ -57,7 +57,7 @@ class MessageAPI: NSObject {
         params["userId"] = User.sharedUser.userID
         params["itemId"] = itemID
         
-        DataManager.shareManager.PostRequest(Constant.MyUrl.Message_GetMessage_List_API_URL, params: params, success: { (responseData) -> Void in
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_MessageItem_API_URL, params: params, success: { (responseData) -> Void in
             if let arr: Array<AnyObject> = responseData as? Array<AnyObject> {
                 var messages: [Message] = [Message]()
                 for dic in arr {

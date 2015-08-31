@@ -228,7 +228,7 @@ class ItemAPI: NSObject {
                     noti.title = obj["title"] as? String ?? ""
                     noti.distance = obj["distance"] as? String ?? ""
                     noti.timestamp = obj["timestamp"] as? String ?? ""
-                    noti.profileImage = obj["profileImage"] as? String ?? ""
+                    noti.image1 = obj["profileImage"] as? String ?? ""
                     
                     senderArr.append(noti)
                 }
@@ -284,5 +284,70 @@ class ItemAPI: NSObject {
             }) { (errorMessage) -> Void in
                 failure(error: errorMessage)
         }
+    }
+    
+    class func itemActionInfo(imd: String, completion: (profileImage: String, sellerName: String, buyerName: String, title: String, image1: String, ownerID: String, buyerID: String, status: String, itemID: String, date: String)->Void, failure:(error: String)->Void) {
+        var param: Dictionary<String, AnyObject> = Dictionary<String,AnyObject>()
+        param["imd"] = imd
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_ItemAction_API_URL, params: param, success: { (responseData) -> Void in
+            
+            if let dataArr: Array<AnyObject> = responseData as? Array<AnyObject> {
+                if let response:Dictionary<String, AnyObject> = dataArr.first as? Dictionary<String, AnyObject> {
+                    let profileImage = response["profileImage"] as! String
+                    let sellerName = response["sellerName"] as! String
+                    let buyerName = response["buyerName"] as! String
+                    let title = response["title"] as! String
+                    let image1 = response["image1"] as! String
+                    let ownerID = response["ownerId"] as! String
+                    let buyerID = response["buyerId"] as! String
+                    let status = response["status"] as! String
+                    let itemID = response["id"] as! String
+                    let timeStamp = response["timestamp"] as! String
+                    let dateTime = timeStamp.toDate(format: "yyyy-MM-dd HH:mm:ss")
+                    let senderTime = dateTime?.toString()
+                    
+                    completion(profileImage: profileImage, sellerName: sellerName, buyerName: buyerName, title: title, image1: image1, ownerID: ownerID, buyerID: buyerID, status: status, itemID: itemID, date: senderTime!)
+                } else {
+                    failure(error: "Error while loading data")
+                    
+                }
+            } else {
+                failure(error: "Error while loading data")
+            }
+            
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
+        }
+        
+    }
+    
+    class func updateItemStatus(status: String, imd: String, receivedID: String, itemID: String, comment: String, completion: ()->Void, failure: (error: String)->Void) {
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["imd"] = imd
+        params["userId"] = User.sharedUser.userID
+        params["receiverId"] = receivedID
+        params["itemId"] = itemID
+        params["status"] = status
+        params["comment"] = comment
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_UpdateItemAction, params: params, success: { (responseData) -> Void in
+            completion()
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
+        }
+    }
+    
+    class func getNotification(itemID: String, completion: (messages: [Message]!)->Void, failure:(error: String)->Void) {
+        var params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        params["userId"] = User.sharedUser.userID
+        params["itemId"] = itemID
+        
+        DataManager.shareManager.PostRequest(Constant.MyUrl.Item_NotificationItem_API_URL, params: params, success: { (responseData) -> Void in
+            
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
+        }
+        
     }
 }

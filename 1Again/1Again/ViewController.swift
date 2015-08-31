@@ -12,7 +12,6 @@ class ViewController: BaseViewController {
 
     @IBOutlet weak var menuBarBtn: UIBarButtonItem!
     
-    
     @IBOutlet weak var btnShopLocal: MIBadgeButton!
     @IBOutlet weak var btnMyFavorites: MIBadgeButton!
     @IBOutlet weak var btnMyItems: MIBadgeButton!
@@ -21,6 +20,8 @@ class ViewController: BaseViewController {
     @IBOutlet weak var btnProfile: MIBadgeButton!
     @IBOutlet weak var btnNotifications: MIBadgeButton!
     @IBOutlet weak var btnMyStore: MIBadgeButton!
+    @IBOutlet weak var notificationView: UIView!
+    @IBOutlet weak var myStoreView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +41,11 @@ class ViewController: BaseViewController {
         super.viewDidAppear(animated)
 
         if User.sharedUser.userType == "B" {
-            self.btnNotifications.hidden = false
-            self.btnMyStore.hidden = false
+            self.notificationView.hidden = false
+            self.myStoreView.hidden = false
         } else if User.sharedUser.userType == "P" {
-            self.btnNotifications.hidden = true
-            self.btnMyStore.hidden = true
+            self.notificationView.hidden = true
+            self.myStoreView.hidden = true
         }
         
         if User.sharedUser.userID.isEmpty {

@@ -37,6 +37,7 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
         print(self.collectionView.frame)
         self.showLoadEarlierMessagesHeader = false
         self.navigationController?.navigationBar.translucent = false
+        self.itemBar.alpha = 0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,6 +57,9 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
                 self.itemTitle.text = title
             }
             
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.itemBar.alpha = 1
+            }) 
         }) { (error) -> Void in
             self.view.makeToast(error)
         }
@@ -63,6 +67,7 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     
     func moveToItem() {
         let itemActionView = ItemActionViewController()
+        itemActionView.IMD = self.messages.first?.im_imd
         self.navigationController?.pushViewController(itemActionView, animated: true)
     }
     

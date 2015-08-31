@@ -34,6 +34,9 @@ class Constant: NSObject {
         static let Item_ItemCount_API_URL: String = "V6.itemCounts.php"
         static let Item_NotificationItem_API_URL: String = "V6.notifications.ListJSON_byItemId.php"
         static let Item_MessageItem_API_URL: String = "V6.messages.ListJSON_byItemId.php"
+        static let Item_ItemAction_API_URL: String = "V6.item_actions.php"
+        static let Item_UpdateItemAction: String = "V6.item_status_update.php"
+
         
         static let Message_GetMessage_List_API_URL: String = "V6.messages.ListJSON.php"
         static let Message_DeleteMessage_API_URL: String = "V6.message_update_acJSONPOST.php"
