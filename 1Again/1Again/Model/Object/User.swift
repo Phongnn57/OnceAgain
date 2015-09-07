@@ -16,7 +16,7 @@ class User: NSObject, NSCoding {
     var userID: String = ""
     var userType: String = ""
     var userName: String = ""
-    var id, usrReviewCount, usrReviewTotal, usrRating: String?
+    var id, star, usrReviewCount, usrReviewTotal, usrRating: String?
     var type: String?
     var name, lastName, displayName: String?
     var email, phone, address1, address2, city, zipcode, state: String?
@@ -40,7 +40,8 @@ class User: NSObject, NSCoding {
         aCoder.encodeObject(self.phone, forKey: "phone")
         aCoder.encodeObject(self.email, forKey: "email")
         aCoder.encodeObject(self.imageURL, forKey: "imageURL")
-
+        aCoder.encodeObject(self.usrReviewCount, forKey: "usrReviewCount")
+        aCoder.encodeObject(self.star, forKey: "star")
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -80,6 +81,12 @@ class User: NSObject, NSCoding {
         }
         if let imageURL = aDecoder.decodeObjectForKey("imageURL") as? String {
             self.imageURL = imageURL
+        }
+        if let reviewCount = aDecoder.decodeObjectForKey("usrReviewCount") as? String {
+            self.usrReviewCount = reviewCount
+        }
+        if let star = aDecoder.decodeObjectForKey("star") as? String {
+            self.star = star
         }
     }
     

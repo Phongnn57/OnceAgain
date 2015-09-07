@@ -350,4 +350,19 @@ class ItemAPI: NSObject {
         }
         
     }
+    
+    class func postNewReviewForItem(itemID: String, ratedID: String, star: Double, comment: String, completion:()->Void, failure:(error: String)->Void) {
+        var params: Dictionary<String, AnyObject> = Dictionary<String,AnyObject>()
+        params["userId"] = User.sharedUser.userID
+        params["ratedId"] = ratedID
+        params["stars"] = star
+        params["comment"] = comment
+        params["itemId"] = itemID
+        
+        DataManager.shareManager.PostRequest("V6.review_insert.php", params: params, success: { (responseData) -> Void in
+            completion()
+        }) { (errorMessage) -> Void in
+            failure(error: errorMessage)
+        }
+    }
 }

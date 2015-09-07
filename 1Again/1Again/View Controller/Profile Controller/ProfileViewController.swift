@@ -11,7 +11,8 @@ import UIKit
 class ProfileViewController: BaseViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var menuBtn: UIBarButtonItem!
-    
+    @IBOutlet weak var star: HCSStarRatingView!
+    @IBOutlet weak var reviewCount: UIButton!
     @IBOutlet weak var changePhoto: UIButton!
     @IBOutlet weak var changePassword: UIButton!
     @IBOutlet weak var changeAddress: UIButton!
@@ -31,9 +32,11 @@ class ProfileViewController: BaseViewController, UIActionSheetDelegate, UIImageP
         self.changePhoto.imageEdgeInsets = UIEdgeInsetsMake(0, SCREEN_SIZE.width - 30, 0, 0)
         self.changePassword.imageEdgeInsets = UIEdgeInsetsMake(0, SCREEN_SIZE.width - 30, 0, 0)
         self.changeAddress.imageEdgeInsets = UIEdgeInsetsMake(0, SCREEN_SIZE.width - 30, 0, 0)
-        self.username.imageEdgeInsets = UIEdgeInsetsMake(0, SCREEN_SIZE.width - 30, 0, 0)
-        
+        self.username.imageEdgeInsets = UIEdgeInsetsMake(0, SCREEN_SIZE.width - 180, 0, 0)
+        self.reviewCount.imageEdgeInsets = UIEdgeInsetsMake(0, SCREEN_SIZE.width - 180, 0, 0)
         self.avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "choosePhoto"))
+        self.star.maximumValue = 5
+        self.star.minimumValue = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +54,8 @@ class ProfileViewController: BaseViewController, UIActionSheetDelegate, UIImageP
                 let urlStr = Constant.MyUrl.ImageURL + User.sharedUser.imageURL
                 self.avatar.sd_setImageWithURL(NSURL(string: urlStr), placeholderImage: UIImage(named: "avatar_default"))
                 self.firstLoad = false
+                self.reviewCount.setTitle(User.sharedUser.usrReviewCount! + " reviews", forState: .Normal)
+                self.star.value = CGFloat(Utilities.numberFromJSONAnyObject(User.sharedUser.star)!.floatValue)
                 }, failure: { (error) -> Void in
                     self.view.makeToast(error)
             })

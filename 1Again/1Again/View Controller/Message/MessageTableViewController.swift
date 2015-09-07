@@ -139,6 +139,9 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
         chatViewController.displayName = self.messagesArray[indexPath.row].displayName
         chatViewController.senderID = self.messagesArray[indexPath.row].id
         chatViewController.itemID = self.messagesArray[indexPath.row].itemId
+        if self.messagesArray[indexPath.row].status == "R" {
+            chatViewController.shouldshowRate = true
+        }
         self.messagesArray[indexPath.row].newIndicator = 0
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
@@ -174,6 +177,9 @@ class MessageTableViewController: UITableViewController, MBProgressHUDDelegate {
             chatViewController.displayName = self.messagesArray[indexPath.row].displayName
             chatViewController.senderID = self.messagesArray[indexPath.row].id
             chatViewController.itemID = self.messagesArray[indexPath.row].itemId
+            if self.messagesArray[indexPath.row].status == "R" {
+                chatViewController.shouldshowRate = true
+            }
             self.messagesArray[indexPath.row].newIndicator = 0
             self.navigationController?.pushViewController(chatViewController, animated: true)
         });

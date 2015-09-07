@@ -113,7 +113,8 @@ class UserAPI: NSObject {
                         User.sharedUser.displayName = _user["displayName"]! ?? ""
                         User.sharedUser.email = _user["email"]! ?? ""
                         User.sharedUser.imageURL = _user["profileImage"]! ?? ""
-                        
+                        User.sharedUser.usrReviewCount = _user["usrReviewCount"]! ?? ""
+                        User.sharedUser.star = _user["stars"]! ?? ""
                         User.sharedUser.saveOffline()
                         completion()
                     }

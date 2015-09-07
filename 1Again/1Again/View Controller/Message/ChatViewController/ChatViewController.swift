@@ -15,13 +15,14 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
     var receiverID: String!
     var senderID: String!
     var itemID: String!
-
+    var shouldshowRate: Bool = false
     
     let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor(red: 10/255, green: 180/255, blue: 230/255, alpha: 1.0))
     let incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.lightGrayColor())
     var userName = ""
     var messages = [Message]()
-
+    var rightButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +39,11 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
         self.showLoadEarlierMessagesHeader = false
         self.navigationController?.navigationBar.translucent = false
         self.itemBar.alpha = 0
+        
+        if self.shouldshowRate {
+            self.rightButton = UIBarButtonItem(image: UIImage(named: "rate"), style: UIBarButtonItemStyle.Plain, target: self, action: "rateItem")
+            self.navigationItem.rightBarButtonItem = self.rightButton
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -63,6 +69,11 @@ class ChatViewController: JSQMessagesViewController, JSQMessagesCollectionViewDe
         }) { (error) -> Void in
             self.view.makeToast(error)
         }
+    }
+    
+    func rateItem() {
+        let rateUserViewController = RateItemViewController()
+        self.navigationController?.pushViewController(rateUserViewController, animated: true)
     }
     
     func moveToItem() {

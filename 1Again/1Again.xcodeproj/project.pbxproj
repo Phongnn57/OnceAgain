@@ -142,6 +142,9 @@
 		68FFE9FD1B73C71B00A5F142 /* MIBadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FFE9FB1B73C71B00A5F142 /* MIBadgeLabel.swift */; };
 		A4234BFE1B90AF9A005854A2 /* NotificationItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4234BFC1B90AF9A005854A2 /* NotificationItemViewController.swift */; };
 		A4234BFF1B90AF9A005854A2 /* NotificationItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4234BFD1B90AF9A005854A2 /* NotificationItemViewController.xib */; };
+		A4D2F3E51B9A7D3A00CFBAD6 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D2F3E41B9A7D3A00CFBAD6 /* HCSStarRatingView.m */; };
+		A4D9953A1B9A11AD006E7708 /* RateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D995381B9A11AD006E7708 /* RateItemViewController.swift */; };
+		A4D9953B1B9A11AD006E7708 /* RateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D995391B9A11AD006E7708 /* RateItemViewController.xib */; };
 		A4F72F401B906C2000A3CF06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F72F3F1B906C2000A3CF06 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -309,6 +312,10 @@
 		8D7893BE7E344CC5C9B9D55D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A4234BFC1B90AF9A005854A2 /* NotificationItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationItemViewController.swift; sourceTree = "<group>"; };
 		A4234BFD1B90AF9A005854A2 /* NotificationItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationItemViewController.xib; sourceTree = "<group>"; };
+		A4D2F3E31B9A7D3A00CFBAD6 /* HCSStarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSStarRatingView.h; sourceTree = "<group>"; };
+		A4D2F3E41B9A7D3A00CFBAD6 /* HCSStarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSStarRatingView.m; sourceTree = "<group>"; };
+		A4D995381B9A11AD006E7708 /* RateItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateItemViewController.swift; sourceTree = "<group>"; };
+		A4D995391B9A11AD006E7708 /* RateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateItemViewController.xib; sourceTree = "<group>"; };
 		A4F72F3F1B906C2000A3CF06 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = 1Again/ViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -670,6 +677,7 @@
 		688E69D91B3DC2CA00030F3E /* Custom View, Button, Color... */ = {
 			isa = PBXGroup;
 			children = (
+				A4D2F3E21B9A7D2A00CFBAD6 /* Star Rating */,
 				68FFE9FA1B73C71B00A5F142 /* MIBadgeButton.swift */,
 				68FFE9FB1B73C71B00A5F142 /* MIBadgeLabel.swift */,
 				68CF7AD71B686FC80079AE6E /* Utilities.swift */,
@@ -707,6 +715,8 @@
 				68A1A7381B593A6900C8B5D2 /* ChatViewController.xib */,
 				6898441B1B88260F0080BE8C /* ItemActionViewController.swift */,
 				6898441C1B88260F0080BE8C /* ItemActionViewController.xib */,
+				A4D995381B9A11AD006E7708 /* RateItemViewController.swift */,
+				A4D995391B9A11AD006E7708 /* RateItemViewController.xib */,
 			);
 			path = ChatViewController;
 			sourceTree = "<group>";
@@ -817,6 +827,15 @@
 				68E292671B580DE000BDB7E2 /* FavoriteTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		A4D2F3E21B9A7D2A00CFBAD6 /* Star Rating */ = {
+			isa = PBXGroup;
+			children = (
+				A4D2F3E31B9A7D3A00CFBAD6 /* HCSStarRatingView.h */,
+				A4D2F3E41B9A7D3A00CFBAD6 /* HCSStarRatingView.m */,
+			);
+			path = "Star Rating";
 			sourceTree = "<group>";
 		};
 		BE0F0CF7C7F52BD492E6D8B5 /* Frameworks */ = {
@@ -948,6 +967,7 @@
 				683500C31B577FEB004B052C /* NotificationDetailMessageCell.xib in Resources */,
 				68F21D3B1B3DD3F8004455EC /* PriceCell.xib in Resources */,
 				684BE9B31B42E66F00F1D6E9 /* ItemListCell.xib in Resources */,
+				A4D9953B1B9A11AD006E7708 /* RateItemViewController.xib in Resources */,
 				68B2AA4B1B7F46D6006B2C4C /* ChangePasswordViewController.xib in Resources */,
 				684BE9C31B43146200F1D6E9 /* MessageCell.xib in Resources */,
 				68B299951B3DA9D6009720BF /* Images.xcassets in Resources */,
@@ -1070,6 +1090,7 @@
 				68CF7AD81B686FC80079AE6E /* Utilities.swift in Sources */,
 				686ABB011B3E85CC00AC80E0 /* ELCAlbumPickerController.m in Sources */,
 				688E69DB1B3DC30D00030F3E /* UIColorExtension.swift in Sources */,
+				A4D2F3E51B9A7D3A00CFBAD6 /* HCSStarRatingView.m in Sources */,
 				688E69D31B3DAFDD00030F3E /* MenuController.swift in Sources */,
 				683500BE1B577FD2004B052C /* NotificationDetailFirstCell.swift in Sources */,
 				68181F881B57F4B2002FC002 /* DataManager.swift in Sources */,
@@ -1083,6 +1104,7 @@
 				68E292681B580DE000BDB7E2 /* FavoriteTableViewCell.swift in Sources */,
 				6898FF791B646E100053BF02 /* UITextViewExtension.swift in Sources */,
 				68F21D3A1B3DD3F8004455EC /* PriceCell.swift in Sources */,
+				A4D9953A1B9A11AD006E7708 /* RateItemViewController.swift in Sources */,
 				6879D8D91B3E37A900F89BAF /* MyCustomTextField.swift in Sources */,
 				681210071B3E5AEB00C2AB49 /* ConditionObject.swift in Sources */,
 				A4F72F401B906C2000A3CF06 /* ViewController.swift in Sources */,
